@@ -20,6 +20,8 @@
 [Bb]in/
 [Dd]ebug*/
 [Dd]ebug/SQLCommand/
+[Bb]in/SQLDAL.dll
+[Bb]in/SQLDAL.pdb
 
 *.lib
 *.sbr

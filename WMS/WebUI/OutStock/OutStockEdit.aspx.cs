@@ -57,11 +57,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         this.ddlAreaCode.DataSource = dtArea;
         this.ddlAreaCode.DataBind();
 
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and IsFixed='0'") });
-        this.ddlTrainTypeCode.DataValueField = "CategoryCode";
-        this.ddlTrainTypeCode.DataTextField = "CategoryName";
-        this.ddlTrainTypeCode.DataSource = ProductType;
-        this.ddlTrainTypeCode.DataBind();
+        
 
         DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType", new DataParameter[] { new DataParameter("{0}", "Flag=2") });
         this.ddlBillTypeCode.DataValueField = "BillTypeCode";
@@ -80,14 +76,9 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             this.txtBillDate.DateValue = dt.Rows[0]["BillDate"];
             this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
             this.ddlBillTypeCode.SelectedValue = dt.Rows[0]["BillTypeCode"].ToString();
-            this.ddlTrainTypeCode.SelectedValue = dt.Rows[0]["TrainTypeCode"].ToString();
-            this.txtTrainNo.Text = dt.Rows[0]["TrainNo"].ToString();
-            this.txtAxieLocation.Text = dt.Rows[0]["AxieLocation"].ToString();
-            this.txtXc.Text = dt.Rows[0]["XC"].ToString();
-            this.txtCcnz.Text = dt.Rows[0]["Ccnz"].ToString();
-            this.txtCcwz.Text = dt.Rows[0]["Ccwz"].ToString();
-            this.txtFccnz.Text = dt.Rows[0]["Fccnz"].ToString();
-            this.txtFccwz.Text = dt.Rows[0]["Fccwz"].ToString();
+            this.txtBatchNo.Text = dt.Rows[0]["BatchNo"].ToString();
+            this.txtSourceBillNo.Text = dt.Rows[0]["SourceBillNo"].ToString();
+       
             this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
             this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
             this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);
@@ -118,6 +109,8 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             ((TextBox)e.Row.FindControl("ProductName")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ProductName")].ToString();
             ((TextBox)e.Row.FindControl("Quantity")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Quantity")].ToString();
             ((TextBox)e.Row.FindControl("SubMemo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Memo")].ToString();
+            ((TextBox)e.Row.FindControl("Barcode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Barcode")].ToString();
+            ((TextBox)e.Row.FindControl("Weight")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Weight")].ToString();
         }
     }
 
@@ -245,6 +238,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             dr["BillID"] = this.txtID.Text.Trim();
             dr["ProductCode"] = dt1.Rows[i]["ProductCode"];
             dr["ProductName"] = dt1.Rows[i]["ProductName"];
+            
             dr["Quantity"] = 1;
 
         }
@@ -263,7 +257,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         if (dt1.Rows.Count == 0)
         {
             this.ddlAreaCode.Enabled = true;
-            this.ddlTrainTypeCode.Enabled = true;
+            
             return;
         }
         DataRow dr;
@@ -277,6 +271,8 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             dr["ProductCode"] = ((TextBox)dgv.Rows[i].FindControl("ProductCode")).Text;
             dr["ProductName"] = ((TextBox)dgv.Rows[i].FindControl("ProductName")).Text;
             dr["Quantity"] = ((TextBox)dgv.Rows[i].FindControl("Quantity")).Text;
+            dr["Weight"] = ((TextBox)dgv.Rows[i].FindControl("Weight")).Text.Trim() == "" ? 0 : decimal.Parse(((TextBox)dgv.Rows[i].FindControl("Weight")).Text.Trim());
+            dr["Barcode"] = ((TextBox)dgv.Rows[i].FindControl("Barcode")).Text;
             dr["Memo"] = ((TextBox)dgv.Rows[i].FindControl("SubMemo")).Text;
             dr.EndEdit();
         }
@@ -284,7 +280,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         if (dt1.Rows.Count > 0)
         {
             this.ddlAreaCode.Enabled = false;
-            this.ddlTrainTypeCode.Enabled = false;
+         
         }
 
         object o = dt1.Compute("SUM(Quantity)", "");
@@ -346,14 +342,9 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
-                                             new DataParameter("@TrainTypeCode",this.ddlTrainTypeCode.SelectedValue),
-                                             new DataParameter("@TrainNo",this.txtTrainNo.Text),
-                                             new DataParameter("@AxieLocation",this.txtAxieLocation.Text),
-                                             new DataParameter("@Xc",this.txtXc.Text),
-                                             new DataParameter("@Ccnz",this.txtCcnz.Text),
-                                             new DataParameter("@Ccwz",this.txtCcwz.Text),
-                                             new DataParameter("@Fccnz",this.txtFccnz.Text),
-                                             new DataParameter("@Fccwz",this.txtFccwz.Text),
+                                             new DataParameter("@SourceBillNo",this.txtSourceBillNo.Text),
+                                             new DataParameter("@BatchNo",this.txtBatchNo.Text),
+                                            
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString())
@@ -366,17 +357,10 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         {
             para = new DataParameter[] { 
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
-                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
-                                             new DataParameter("@TrainTypeCode",this.ddlTrainTypeCode.SelectedValue),
-                                             new DataParameter("@TrainNo",this.txtTrainNo.Text),
-                                             new DataParameter("@AxieLocation",this.txtAxieLocation.Text),
-                                             new DataParameter("@Xc",this.txtXc.Text),
-                                             new DataParameter("@Ccnz",this.txtCcnz.Text),
-                                             new DataParameter("@Ccwz",this.txtCcwz.Text),
-                                             new DataParameter("@Fccnz",this.txtFccnz.Text),
-                                             new DataParameter("@Fccwz",this.txtFccwz.Text),
+                                             new DataParameter("@SourceBillNo",this.txtSourceBillNo.Text),
+                                             new DataParameter("@BatchNo",this.txtBatchNo.Text),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
                                              new DataParameter("{0}",string.Format("BillID='{0}'", this.txtID.Text.Trim())) };
@@ -385,7 +369,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         try
         {
             Commands[1] = "WMS.DeleteBillDetail";
-            Commands[2] = "WMS.InsertInStockDetail";
+            Commands[2] = "WMS.InsertOutStockDetail";
             bll.ExecTran(Commands, para, "BillID", new DataTable[] { dt });
         }
         catch (Exception ex)
@@ -428,16 +412,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
     #endregion
 
-    protected void ddlAreaCode_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        string AreaCode = ddlAreaCode.SelectedValue;
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='" + AreaCode + "' and ProductTypeCode<>'0001'") });
-        this.ddlTrainTypeCode.DataValueField = "ProductTypeCode";
-        this.ddlTrainTypeCode.DataTextField = "ProductTypeName";
-        this.ddlTrainTypeCode.DataSource = ProductType;
-        this.ddlTrainTypeCode.DataBind();
-        SetGridViewEmptyRow(this.dgViewSub1, "Edit");
-    }
+    
 
 }
 

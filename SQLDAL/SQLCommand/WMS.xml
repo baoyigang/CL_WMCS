@@ -76,20 +76,20 @@
   <!--出库单-->
   <Command ID="InsertOutStockBill">
     <CommandString>
-      insert into WMS_BillMaster(BillID,BillDate,BillTypeCode,AreaCode,TrainTypeCode,TrainNo,AxieLocation,Xc,Ccnz,Ccwz,Fccnz,Fccwz,Memo,Creator,CreateDate,Updater,UpdateDate)
-      values(@BillID,@BillDate,@BillTypeCode,@AreaCode,@TrainTypeCode,@TrainNo,@AxieLocation,@Xc,@Ccnz,@Ccwz,@Fccnz,@Fccwz,@Memo,@Creator,getdate(),@Updater,getdate())
+      insert into WMS_BillMaster(BillID,BillDate,BillTypeCode,AreaCode,SourceBillNo,BatchNo,Memo,Creator,CreateDate,Updater,UpdateDate)
+      values(@BillID,@BillDate,@BillTypeCode,@AreaCode,@SourceBillNo,@BatchNo,@Memo,@Creator,getdate(),@Updater,getdate())
     </CommandString>
   </Command>
   <Command ID="UpdateOutStock">
     <CommandString>
-      update WMS_BillMaster set BillDate=@BillDate, AreaCode=@AreaCode,BillTypeCode=@BillTypeCode,TrainTypeCode=@TrainTypeCode,TrainNo=@TrainNo,
-      AxieLocation=@AxieLocation,Xc=@Xc,Ccnz=@Ccnz,Ccwz=@Ccwz,Fccnz=@Fccnz,Fccwz=@Fccwz,Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where {0}
+      update WMS_BillMaster set BillDate=@BillDate, AreaCode=@AreaCode,BillTypeCode=@BillTypeCode,SourceBillNo=@SourceBillNo,BatchNo=@BatchNo,
+      Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where {0}
     </CommandString>
   </Command>
   <Command ID="InsertOutStockDetail">
     <CommandString>
-      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Memo)
-      values(@BillID,@RowID,@ProductCode,@Quantity,@Memo)
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Barcode,Weight,Memo)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@Barcode,@Weight,@Memo)
     </CommandString>
   </Command>
   <Command ID="SpOutstockTask">

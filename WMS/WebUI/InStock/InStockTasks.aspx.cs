@@ -156,6 +156,7 @@ public partial class WebUI_InStock_InStockTasks : BasePage
     protected void btnReload_Click(object sender, EventArgs e)
     {
         BtnReloadSub(Convert.ToInt32(this.hdnRowIndex.Value), this.hdnRowValue.Value, this.GridView1);
+        ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "SetScroll", "GetResultFromServer();", true);
     }
     #endregion
 
