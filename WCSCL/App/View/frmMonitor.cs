@@ -42,7 +42,6 @@ namespace App.View
             InitializeComponent();
         }
 
-
         private void btnStop_Click(object sender, EventArgs e)
         {
             Point P1 = picCrane11.Location;
