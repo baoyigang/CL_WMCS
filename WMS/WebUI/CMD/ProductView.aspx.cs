@@ -80,7 +80,9 @@ public partial class WebUI_CMD_ProductView : BasePage
             this.txtMaterial.Text = dt.Rows[0]["Material"].ToString();
             this.txtColor.Text = dt.Rows[0]["Color"].ToString();
             this.txtValidPeriod.Text = dt.Rows[0]["ValidPeriod"].ToString();
-            this.txtAreaName.Text = dt.Rows[0]["AreaName"].ToString();
+
+            this.txtPartNo.Text = dt.Rows[0]["PartNo"].ToString();
+            this.txtStandardNo.Text = dt.Rows[0]["StandardNo"].ToString();
              
             this.ddlFactory.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
 
@@ -116,7 +118,8 @@ public partial class WebUI_CMD_ProductView : BasePage
         this.txtMaterial.Text = "";
         this.txtColor.Text = "";
         this.txtValidPeriod.Text = "";
-        this.txtAreaName.Text = "";
+        this.txtStandardNo.Text = "";
+        this.txtPartNo.Text = "";
 
         this.ddlFactory.SelectedValue = "";
 

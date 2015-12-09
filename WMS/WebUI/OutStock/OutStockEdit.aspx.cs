@@ -296,17 +296,14 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
         //判断库存
         DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
-
-        DataTable dtProduct = dt.DefaultView.ToTable("Product", true, new string[] { "ProductCode", "ProductName" });
-
+        DataTable dtProduct = dt.DefaultView.ToTable("Product", true, new string[] { "ProductCode", "ProductName","BarCode" });
         for (int i = 0; i < dtProduct.Rows.Count; i++)
         {
-            object o = dt.Compute("Sum(Quantity)", string.Format("ProductCode='{0}'", dtProduct.Rows[i]["ProductCode"]));
+            object o = dt.Compute("Sum(Quantity)", string.Format("ProductCode='{0}' and BarCode='{1}'", dtProduct.Rows[i]["ProductCode"], dtProduct.Rows[i]["BarCode"]));
             if (o != null)
             {
                 int Qty = int.Parse(o.ToString());
-
-                DataTable dtProductQty = bll.FillDataTable("WMS.SelectProductQty", new DataParameter[] { new DataParameter("@BillID", this.txtID.Text), new DataParameter("@ProductCode", dtProduct.Rows[i]["ProductCode"].ToString()) });
+                DataTable dtProductQty = bll.FillDataTable("WMS.SelectProductQty", new DataParameter[] { new DataParameter("@BillID", this.txtID.Text), new DataParameter("@ProductCode", dtProduct.Rows[i]["ProductCode"].ToString()), new DataParameter("@BarCode", dtProduct.Rows[i]["BarCode"].ToString()) });
                 int StockQty = 0;
                 bool blnvalue = false;
                 if (dtProductQty.Rows.Count == 0)
@@ -321,7 +318,6 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
                 }
                 if (blnvalue)
                 {
-
                     JScript.Instance.ShowMessage(this.updatePanel1, dtProduct.Rows[i]["ProductName"].ToString() + "现有库存数量为：" + StockQty.ToString() + ", 库存不足，请修改出库数量。");
                     return;
 
@@ -344,11 +340,9 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
                                              new DataParameter("@SourceBillNo",this.txtSourceBillNo.Text),
                                              new DataParameter("@BatchNo",this.txtBatchNo.Text),
-                                            
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString())
-                                             
                                               };
             Commands[0] = "WMS.InsertOutStockBill";
 

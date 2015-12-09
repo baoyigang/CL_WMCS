@@ -160,6 +160,14 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="Barcode" HeaderText="熔次卷号" SortExpression="Barcode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Weight" HeaderText="重量" SortExpression="Weight">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
                             
                             <asp:BoundField DataField="Memo" HeaderText="备注" SortExpression="Memo">
                                 <ItemStyle HorizontalAlign="Left" Width="38%" Wrap="False" />

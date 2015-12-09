@@ -193,21 +193,22 @@
                             CssClass="TextRead" MaxLength="20" ReadOnly="True"></asp:TextBox> 
 
                     </td>
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                           有效期 
-                    </td>
-                    <td width="21%">
-                            &nbsp;<asp:TextBox ID="txtValidPeriod" runat="server"  Width="90%" 
-                                CssClass="TextRead" MaxLength="25" ReadOnly="True"></asp:TextBox> 
-
-                    </td>
+                   
                     <td align="center" class="smalltitle" style="width:12%;">
-                        库区</td>
+                        标准号</td>
                     <td width="21%">
-                        &nbsp;<asp:TextBox ID="txtAreaName" runat="server"   Width="90%" 
+                        &nbsp;<asp:TextBox ID="txtStandardNo" runat="server"   Width="90%" 
                             CssClass="TextRead" MaxLength="25" ReadOnly="True"></asp:TextBox> 
 
                     </td>
+                     <td align="center" class="smalltitle" style="width:12%;">
+                        部品号</td>
+                    <td width="21%">
+                        &nbsp;<asp:TextBox ID="txtPartNo" runat="server"   Width="90%" 
+                            CssClass="TextRead" MaxLength="25" ReadOnly="True"></asp:TextBox> 
+
+                    </td>
+
                 </tr>
                  
                  
@@ -217,10 +218,18 @@
                  
                    <td align="center"  class="smalltitle" style="width:12%;">
                        描述</td>
-                  <td colspan="3">
+                  <td>
                       &nbsp;<asp:TextBox ID="txtDescription" runat="server"  CssClass="TextRead" 
-                          Width="96%" ReadOnly="True"  ></asp:TextBox> 
+                          Width="90%" ReadOnly="True"  ></asp:TextBox> 
                   </td>
+                   <td align="center" class="smalltitle" style="width:12%;"  >
+                           有效期 
+                    </td>
+                    <td width="21%">
+                            &nbsp;<asp:TextBox ID="txtValidPeriod" runat="server"  Width="90%" 
+                                CssClass="TextRead" MaxLength="25" ReadOnly="True"></asp:TextBox> 
+
+                    </td>
                    
                   <td align="center"  class="smalltitle" style="width:12%;">
                         建单人员

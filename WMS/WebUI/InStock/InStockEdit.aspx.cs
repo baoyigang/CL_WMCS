@@ -110,8 +110,9 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             ((Label)e.Row.FindControl("RowID")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("RowID")].ToString();
             ((TextBox)e.Row.FindControl("ProductCode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ProductCode")].ToString();
             ((TextBox)e.Row.FindControl("ProductName")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ProductName")].ToString();
-
             ((TextBox)e.Row.FindControl("Quantity")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Quantity")].ToString();
+            ((TextBox)e.Row.FindControl("Barcode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Barcode")].ToString();
+            ((TextBox)e.Row.FindControl("Weight")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Weight")].ToString();
             ((TextBox)e.Row.FindControl("SubMemo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Memo")].ToString();
         }
     }
@@ -267,7 +268,10 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             dr["ProductCode"] = ((TextBox)dgv.Rows[i].FindControl("ProductCode")).Text;
             dr["ProductName"] = ((TextBox)dgv.Rows[i].FindControl("ProductName")).Text;
             dr["Quantity"] = ((TextBox)dgv.Rows[i].FindControl("Quantity")).Text;
-           
+
+            dr["Weight"] = ((TextBox)dgv.Rows[i].FindControl("Weight")).Text.Trim() == "" ? 0 : decimal.Parse(((TextBox)dgv.Rows[i].FindControl("Weight")).Text.Trim());
+            dr["Barcode"] = ((TextBox)dgv.Rows[i].FindControl("Barcode")).Text;
+
             dr["Memo"] = ((TextBox)dgv.Rows[i].FindControl("SubMemo")).Text;
             dr.EndEdit();
         }

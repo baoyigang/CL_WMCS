@@ -188,7 +188,37 @@
                             CssClass="TextBox" MaxLength="20"></asp:TextBox> 
 
                     </td>
-                    <td align="center" class="smalltitle" style="width:12%;"  >
+                    <td  align="center" class="smalltitle" style="width:12%;" >
+                        标准号</td>
+                    <td>
+                        &nbsp;<asp:TextBox ID="txtStandardNo" 
+                                runat="server"   Width="90%" 
+                                CssClass="TextBox"  MaxLength="25"></asp:TextBox> 
+
+                    </td>
+                   <td  align="center" class="smalltitle" style="width:12%;" >
+                       部品号</td>
+                    <td>
+                       &nbsp;<asp:TextBox ID="txtPartNo" 
+                                runat="server"   Width="90%" 
+                                CssClass="TextBox"  MaxLength="25"></asp:TextBox> 
+
+                     </td>
+                </tr>
+                 
+                 
+                 <tr>
+                  
+                   
+                 
+                  <td align="center"  class="smalltitle" style="width:12%;">
+                       描述</td>
+                  <td>
+                      &nbsp;<asp:TextBox ID="txtDescription" runat="server"  CssClass="TextBox" 
+                          Width="90%"  ></asp:TextBox> 
+                  </td>
+
+                  <td align="center" class="smalltitle" style="width:12%;"  >
                            有效期 
                     </td>
                     <td width="21%">
@@ -197,22 +227,6 @@
                                 CssClass="TextBox" MaxLength="25"></asp:TextBox> 
 
                     </td>
-                   
-                    <td  colspan="2">
-                        &nbsp;</td>
-                </tr>
-                 
-                 
-                 <tr>
-                  
-                   
-                 
-                   <td align="center"  class="smalltitle" style="width:12%;">
-                       描述</td>
-                  <td colspan="3">
-                      &nbsp;<asp:TextBox ID="txtDescription" runat="server"  CssClass="TextBox" 
-                          Width="96%"  ></asp:TextBox> 
-                  </td>
                    
                   <td align="center"  class="smalltitle" style="width:12%;">
                         建单人员

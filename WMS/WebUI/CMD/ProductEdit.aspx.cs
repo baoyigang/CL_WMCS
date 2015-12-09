@@ -78,6 +78,8 @@ public partial class WebUI_CMD_ProductEdit : BasePage
             this.txtMaterial.Text = dt.Rows[0]["Material"].ToString();
             this.txtColor.Text = dt.Rows[0]["Color"].ToString();
             this.txtValidPeriod.Text = dt.Rows[0]["ValidPeriod"].ToString();
+            this.txtPartNo.Text = dt.Rows[0]["PartNo"].ToString();
+            this.txtStandardNo.Text = dt.Rows[0]["StandardNo"].ToString();
             
 
             this.ddlFactory.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
@@ -139,6 +141,8 @@ public partial class WebUI_CMD_ProductEdit : BasePage
                             new DataParameter("@Material", this.txtMaterial.Text.Trim()),
                             new DataParameter("@Weight", this.txtWeight.Text.Trim()),
                             new DataParameter("@Color", this.txtColor.Text.Trim()),
+                            new DataParameter("StandardNo",this.txtStandardNo.Text.Trim()),
+                            new DataParameter("PartNo",this.txtPartNo.Text.Trim()),
                             new DataParameter("@ValidPeriod", this.txtValidPeriod.Text.Trim()),
                             new DataParameter("@Description", this.txtDescription.Text.Trim()),
                             new DataParameter("@AreaCode", bll.GetFieldValue("CMD_ProductCategory","AreaCode","CategoryCode='"+this.ddlCategoryCode.SelectedValue+"'")),
@@ -175,6 +179,8 @@ public partial class WebUI_CMD_ProductEdit : BasePage
                             new DataParameter("@Material", this.txtMaterial.Text.Trim()),
                             new DataParameter("@Weight", this.txtWeight.Text.Trim()),
                             new DataParameter("@Color", this.txtColor.Text.Trim()),
+                            new DataParameter("StandardNo",this.txtStandardNo.Text.Trim()),
+                            new DataParameter("PartNo",this.txtPartNo.Text.Trim()),
                             new DataParameter("@ValidPeriod", this.txtValidPeriod.Text.Trim()),
                             new DataParameter("@Description", this.txtDescription.Text.Trim()),
                             new DataParameter("@AreaCode", bll.GetFieldValue("CMD_ProductCategory","AreaCode","CategoryCode='"+this.ddlCategoryCode.SelectedValue+"'")),

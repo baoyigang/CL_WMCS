@@ -58,8 +58,8 @@
   </Command>
   <Command ID="InsertInStockDetail">
     <CommandString>
-      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Memo)
-      values(@BillID,@RowID,@ProductCode,@Quantity,@Memo)
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Weight,Barcode,Memo)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@Weight,@Barcode,@Memo)
     </CommandString>
   </Command>
   <Command ID="SpInstockTask">
@@ -106,7 +106,7 @@
   <Command ID="SelectProductQty">
     <CommandString>
       select ProductCode,(InstockQty-isnull((select SUM(UnStockQty) from View_ProductQty  where billid!=@BillID and  ProductCode=tmp.ProductCode ),0)) as StockQty from View_ProductQTy tmp
-      where ProductCode=@ProductCode
+      where ProductCode=@ProductCode and BarCode=@BarCode
     </CommandString>
   </Command>
   
