@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="InStocks.aspx.cs" Inherits="WebUI_InStock_InStocks" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="InStocks.aspx.cs" Inherits="WebUI_InStock_InStocks"  culture="auto" uiculture="auto" MaintainScrollPositionOnPostback="true" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -17,7 +17,7 @@
         });
         function resize() {
             var h = document.documentElement.clientHeight - 260;
-            $("#table-container").css("height", h);
+            $("#divMain").css("height", h);
         }
     </script>
 </head>
@@ -78,7 +78,7 @@
                 </table>
                     
                 </div>
-                <div id="table-container" style="overflow: auto; WIDTH: 100%; HEIGHT: 200px">
+                <div id="divMain" style="overflow: auto; WIDTH: 100%; HEIGHT: 200px" onscroll="javascript:RecordPostion(this);">
                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="100%" OnRowDataBound="GridView1_RowDataBound">
                         <Columns>
                             <asp:TemplateField >
@@ -118,7 +118,10 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-
+                            <asp:BoundField DataField="SourceBillNo" HeaderText="来源单号" SortExpression="SourceBillNo">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="FactoryName" HeaderText="工厂" SortExpression="FactoryName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
@@ -210,10 +213,7 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                             <asp:BoundField DataField="StateName" HeaderText="产品状态" SortExpression="StateName">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
+                             
                             <asp:BoundField DataField="Memo" HeaderText="备注" 
                                 SortExpression="Memo" >
                                 <ItemStyle HorizontalAlign="Left" Width="38%" Wrap="False" />
@@ -244,6 +244,8 @@
                     <asp:Button ID="btnReload" runat="server" Text="" OnClick="btnReload_Click"  CssClass="HiddenControl" />
                     <asp:HiddenField ID="hdnRowIndex" runat="server" Value="0" />
                     <asp:HiddenField ID="hdnRowValue" runat="server"  />
+                    <input type="hidden" id="dvscrollX" runat="server" />
+                    <input type="hidden" id="dvscrollY" runat="server" /> 
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

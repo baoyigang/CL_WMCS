@@ -23,14 +23,14 @@
             }
             function SelectProduct() {
                 var tableName = 'CMD_Product';
-                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') ";
+                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsFixed='0' ";
 
                 return GetMulSelectValue(tableName, 'hdnMulSelect', where);
             }
             function BindEvent() {
                 $("[ID$='ProductCode']").bind("change", function () {
                     var txtID = this.id;
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "' and ProductCode not in ('0001','0002')";
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "' and IsFixed='0'";
 
                     getWhereBaseData('CMD_Product', txtID + "," + txtID.replace("ProductCode", "ProductName"), 'ProductCode,ProductName', where);
                 });
@@ -71,6 +71,10 @@
             }
            
         </script>
+    <style type="text/css">
+        .MultiLineTextBox
+        {}
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -103,42 +107,57 @@
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 入库日期
                         </td>
-                        <td  width="25%">
+                        <td  width="17%">
                                 &nbsp;<uc1:Calendar ID="txtBillDate" runat="server"  /></td>
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 入库单号
                         </td>
-                        <td width="25%">
+                        <td width="17%">
                                 &nbsp;<asp:TextBox ID="txtID" 
                                     runat="server"  CssClass="TextBox" Width="90%" 
                                     MaxLength="20" ></asp:TextBox> 
                         </td>
                             <td align="center" class="musttitle" style="width:8%;">
                                 入库类型</td>
-                        <td width="26%">
+                        <td width="17%">
                             &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%">
                             </asp:DropDownList>
                     
                         </td>
-                    </tr>
-                    <tr>
-                        <td align="center" class="musttitle" style="width:8%;"  >
-                                库区</td>
-                        <td  width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%">
+                        <td  align="center" class="musttitle"   style="width:8%;">
+                            库区
+                        </td>
+                        <td  style="width:17%;">
+                         &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%">
                             </asp:DropDownList>
                         </td>
-                        <td align="center" class="musttitle" style="width:8%;"  >
-                                工厂
+                    </tr>
+                    <tr>
+                        <td align="center" class="smalltitle" style="width:8%;"  >
+                              来源单号  
                         </td>
-                        <td width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%">
+                        <td  width="17%">
+                             &nbsp;<asp:TextBox ID="txtSourceBillNo" runat="server"  CssClass="TextBox" Width="90%" 
+                                MaxLength="20" ></asp:TextBox>
+                        </td>
+                        <td align="center" class="smalltitle" style="width:8%;"  >
+                             入库批次   
+                        </td>
+                        <td width="17%">
+                            &nbsp;<asp:TextBox ID="txtBatchNo" runat="server"  CssClass="TextBox" Width="90%" 
+                                MaxLength="20" ></asp:TextBox>  
+                                
+                        </td>
+                        <td align="center" class="smalltitle"   style="width:8%;">
+                            工厂
+                        </td>
+                        <td width="17%">
+                            &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%">
                                 </asp:DropDownList>
                         </td>
-                        <td align="center"   style="width:8%;">
+                        <td  align="center" style="width:8%;">
                         </td>
-                        <td width="26%">
-                        &nbsp;
+                        <td  style="width:17%;">
                         </td>
                     </tr>
               
@@ -146,9 +165,9 @@
                         <td align="center" class="smalltitle"  >
                             备注
                         </td>
-                        <td colspan="5"  valign="middle" >
+                        <td colspan="7"  valign="middle" >
                             &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
-                                TextMode="MultiLine" Height="45px" Width="97%"></asp:TextBox>
+                                TextMode="MultiLine" Height="45px" Width="98%"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -210,14 +229,7 @@
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="10%" />
                             </asp:TemplateField>
-                             <asp:TemplateField HeaderText="产品状态">
-                                <ItemTemplate>
-                                    <asp:DropDownList ID="ddlStateNo" runat="server" Width="90%">
-                                    </asp:DropDownList>
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="25%" />
-                            </asp:TemplateField>
+                             
                             <asp:TemplateField HeaderText="备注">
                                 <ItemTemplate>
                                     <asp:TextBox ID="SubMemo" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
@@ -235,7 +247,7 @@
                             数量合计
                         </td>
                         <td style="width:17%">
-                            &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead" Height="16px" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
                         </td>
                           
                         <td align="right">

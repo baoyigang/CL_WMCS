@@ -72,7 +72,9 @@ public partial class WebUI_InStock_InStockView : BasePage
             this.txtUpdateDate.Text = ToYMD(dt.Rows[0]["UpdateDate"]);
             this.txtChecker.Text = dt.Rows[0]["Checker"].ToString();
             this.txtCheckDate.Text = ToYMD(dt.Rows[0]["CheckDate"]);
+            this.txtBatchNo.Text = dt.Rows[0]["BatchNo"].ToString();
             hdnState.Value = dt.Rows[0]["State"].ToString();
+            this.txtSourceBillNo.Text = dt.Rows[0]["SourceBillNo"].ToString();
             if (this.txtChecker.Text.Trim() != "")
             {
                 this.btnCheck.Text = "反审";
@@ -139,7 +141,7 @@ public partial class WebUI_InStock_InStockView : BasePage
     private void BindDataSub()
     {
         DataTable dt = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text)) });
-        Session[FormID + "_View_dgViewSub1"] = dt;
+        ViewState[FormID + "_View_dgViewSub1"] = dt;
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         object o = dt.Compute("SUM(Quantity)", "");

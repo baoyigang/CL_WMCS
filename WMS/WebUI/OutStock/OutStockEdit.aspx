@@ -24,14 +24,14 @@
             }
             function SelectProduct() {
                 var tableName = 'CMD_ProductInStock';
-                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') and ProductTypeCode='" + $('#ddlTrainTypeCode').val() + "'";
+                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsFixed='0' and CategoryCode='" + $('#ddlTrainTypeCode').val() + "'";
 
                 return GetMulSelectValue(tableName, 'hdnMulSelect', where);
             }
             function BindEvent() {
                 $("[ID$='ProductCode']").bind("change", function () {
                     var txtID = this.id;
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "'  and ProductCode not in ('0001','0002') and ProductTypeCode='" + $('#ddlTrainTypeCode').val() + "'";
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "'  and IsFixed='0' and CategoryCode='" + $('#ddlTrainTypeCode').val() + "'";
 
                     getWhereBaseData('CMD_Product', txtID + "," + txtID.replace("ProductCode", "ProductName"), 'ProductCode,ProductName', where);
                 });

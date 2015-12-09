@@ -132,36 +132,36 @@
   </Command>
 
   <!--产品类别-->
-  <Command ID="SelectProductType">
+  <Command ID="SelectProductCategory">
     <CommandString>
-      select cmd.*, house.WarehouseName,area.AreaName from CMD_ProductType cmd
+      select cmd.*, house.WarehouseName,area.AreaName from CMD_ProductCategory cmd
       inner join CMD_Area area on cmd.AreaCode=area.AreaCode
       inner join CMD_Warehouse house on area.WarehouseCode=house.WarehouseCode
-      where {0} order by ProductTypeCode
+      where {0} order by CategoryCode
     </CommandString>
   </Command>
 
-  <Command ID="InsertProductType">
+  <Command ID="InsertProductCategory">
     <CommandString>
-      insert into CMD_ProductType(ProductTypeCode,ProductTypeName,WarehouseCode,AreaCode,Memo,Creator,CreateDate,Updater,UpdateDate)
-      values(@ProductTypeCode,@ProductTypeName,@WarehouseCode,@AreaCode,@Memo,@Creator,getdate(),@Updater,getdate())
+      insert into CMD_ProductCategory(CategoryCode,CategoryName,WarehouseCode,AreaCode,Memo,Creator,CreateDate,Updater,UpdateDate)
+      values(@CategoryCode,@CategoryName,@WarehouseCode,@AreaCode,@Memo,@Creator,getdate(),@Updater,getdate())
     </CommandString>
   </Command>
 
-  <Command ID="UpdateProductType">
+  <Command ID="UpdateProductCategory">
     <CommandString>
-      update CMD_ProductType set ProductTypeName=@ProductTypeName,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where ProductTypeCode=@ProductTypeCode
+      update CMD_ProductCategory set CategoryName=@CategoryName,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where CategoryCode=@CategoryCode
     </CommandString>
   </Command>
-  <Command ID="DeleteProductType">
+  <Command ID="DeleteProductCategory">
     <CommandString>
-      delete from CMD_ProductType where ProductTypeCode in({0})
+      delete from CMD_ProductCategory where CategoryCode in({0})
     </CommandString>
   </Command>
 
   <Command ID="UpdateProductAreaCode">
     <CommandString>
-      update CMD_Product set AreaCode=@AreaCode where ProductTypeCode=@ProductTypeCode
+      update CMD_Product set AreaCode=@AreaCode where CategoryCode=@CategoryCode
     </CommandString>
   </Command>
 
@@ -289,21 +289,24 @@
   </Command>
   <Command ID="InsertProduct">
     <CommandString>
-      INSERT INTO CMD_PRODUCT(ProductCode, ProductName, ProductTypeCode, TrainTypeCode, AxieNo, WheelDiameter, CCZ_Diameter, FCCZ_Diameter, CCD_Diameter,
-      FCCD_Diameter, CCXPBZW_Size, FCCXPBZW_Size, GearNo, CCLX_Flag, FCCLX_Flag, CCLX_Year, FCCLX_Year, CCLX_FactoryID, FCCLX_FactoryID, CX_FactoryID, CCLG_Flag,
-      FCCLG_Flag, Memo, WarehouseCode, AreaCode, Creator, CreateDate, Updater, UpdateDate, LDXC, CX_DateTime,IsTemp)
-      values(@ProductCode,@ProductName,@ProductTypeCode,@TrainTypeCode,@AxieNo,@WheelDiameter,@CCZ_Diameter,@FCCZ_Diameter,@CCD_Diameter,@FCCD_Diameter,
-      @CCXPBZW_Size,@FCCXPBZW_Size,@GearNo,@CCLX_Flag,@FCCLX_Flag,@CCLX_Year,@FCCLX_Year,@CCLX_Factory,@FCCLX_Factory,@CX_Factory,@CCLG_Flag,
-      @FCCLG_Flag,@Memo,@WarehouseCode,@AreaCode,@Creator,getDate(),@Updater, getDate(),@LDXC, @CX_DateTime,@IsTemp)
+      INSERT INTO CMD_PRODUCT(ProductCode, ProductName, ProductEName, CategoryCode, FactoryID, ModelNo, Spec, Barcode, Propertity, Unit, Length, Width, Height, Material, Weight,
+      Color, ValidPeriod, Description, Memo, Creator, CreateDate, Updater, UpdateDate, AreaCode)
+      values(@ProductCode, @ProductName, @ProductEName, @CategoryCode, @FactoryID, @ModelNo, @Spec, @Barcode, @Propertity, @Unit, @Length, @Width, @Height, @Material, @Weight,
+      @Color, @ValidPeriod, @Description, @Memo, @Creator, getdate(), Updater, getdate(), @AreaCode)
     </CommandString>
   </Command>
   <Command ID="UpdateProduct">
     <CommandString>
-      Update CMD_PRODUCT Set ProductName=@ProductName,ProductTypeCode=@ProductTypeCode,TrainTypeCode=@TrainTypeCode,AxieNo=@AxieNo,WheelDiameter=@WheelDiameter,
-      CCZ_Diameter=@CCZ_Diameter,FCCZ_Diameter=@FCCZ_Diameter,CCD_Diameter=@CCD_Diameter,FCCD_Diameter=@FCCD_Diameter,CCXPBZW_Size=@CCXPBZW_Size,FCCXPBZW_Size=@FCCXPBZW_Size,
-      GearNo=@GearNo,CCLX_Flag=@CCLX_Flag,FCCLX_Flag=@FCCLX_Flag,CCLX_Year=@CCLX_Year,FCCLX_Year=@FCCLX_Year,CCLX_FactoryID=@CCLX_Factory,FCCLX_FactoryID=@FCCLX_Factory,CX_FactoryID=@CX_Factory,
-      CCLG_Flag=@CCLG_Flag,FCCLG_Flag=@FCCLG_Flag,Memo=@Memo,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,Updater=@Updater,UpdateDate=getdate(),LDXC=@LDXC,CX_DateTime=@CX_DateTime,IsTemp=@IsTemp
+      Update CMD_PRODUCT Set ProductName=@ProductName, ProductEName=@ProductEName, CategoryCode=@CategoryCode, FactoryID=@FactoryID, ModelNo=@ModelNo, Spec=@Spec, Barcode=@Barcode,
+      Propertity=@Propertity, Unit=@Unit, Length=@Length, Width=@Width, Height=@Height, Material=@Material, Weight=@Weight,
+      Color=@Color, ValidPeriod=@ValidPeriod, Description=@Description, Memo=@Memo,Updater=@Updater,UpdateDate=getdate(), AreaCode=@AreaCode
       where ProductCode=@ProductCode
+    </CommandString>
+  </Command>
+
+  <Command ID="spBatchChangeProductNo">
+    <CommandString>
+      sp_BatchChangeProductNo
     </CommandString>
   </Command>
 

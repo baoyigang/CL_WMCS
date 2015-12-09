@@ -57,9 +57,9 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         this.ddlAreaCode.DataSource = dtArea;
         this.ddlAreaCode.DataBind();
 
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and ProductTypeCode<>'0001'") });
-        this.ddlTrainTypeCode.DataValueField = "ProductTypeCode";
-        this.ddlTrainTypeCode.DataTextField = "ProductTypeName";
+        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and IsFixed='0'") });
+        this.ddlTrainTypeCode.DataValueField = "CategoryCode";
+        this.ddlTrainTypeCode.DataTextField = "CategoryName";
         this.ddlTrainTypeCode.DataSource = ProductType;
         this.ddlTrainTypeCode.DataBind();
 
@@ -100,7 +100,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
     private void BindDataSub()
     {
         DataTable dt = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text)) });
-        Session[FormID + "_Edit_dgViewSub1"] = dt;
+        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         MovePage("Edit", this.dgViewSub1, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
@@ -124,7 +124,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
     protected void btnAddDetail_Click(object sender, EventArgs e)
     {
         UpdateTempSub(this.dgViewSub1);
-        DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
         DataTable dt1 = Util.JsonHelper.Json2Dtb(hdnMulSelect.Value);
 
         DataView dv = dt.DefaultView;
@@ -151,7 +151,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
-        Session[FormID + "_Edit_dgViewSub1"] = dt;
+        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
         MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
 
 
@@ -159,7 +159,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
         //int pagecount = this.dgViewSub1.PageCount;
 
-        //DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+        //DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
         //if (dt.Rows.Count > 0)
         //{
         //    if (dt.Rows[dt.Rows.Count - 1]["ProductCode"].ToString() == "")
@@ -175,13 +175,13 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         //dt.Rows.Add(dr);
         //this.dgViewSub1.DataSource = dt;
         //this.dgViewSub1.DataBind();
-        //Session[FormID + "_Edit_dgViewSub1"] = dt;
+        //ViewState[FormID + "_Edit_dgViewSub1"] = dt;
         //MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageCount, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
     }
     protected void btnDelDetail_Click(object sender, EventArgs e)
     {
         UpdateTempSub(this.dgViewSub1);
-        DataTable dt = (DataTable)Session[FormID + "_Edit_" + dgViewSub1.ID];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_" + dgViewSub1.ID];
         int RowID = 0;
         for (int i = 0; i < this.dgViewSub1.Rows.Count; i++)
         {
@@ -198,7 +198,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         }
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
-        Session[FormID + "_Edit_" + dgViewSub1.ID] = dt;
+        ViewState[FormID + "_Edit_" + dgViewSub1.ID] = dt;
         MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
 
     }
@@ -210,7 +210,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
     protected void btnProduct_Click(object sender, EventArgs e)
     {
         UpdateTempSub(this.dgViewSub1);
-        DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
         DataTable dt1 = Util.JsonHelper.Json2Dtb(hdnMulSelect.Value);
         int cur = int.Parse(((Button)sender).ClientID.Split('_')[1].Replace("ctl", "")) - 2 + this.dgViewSub1.PageSize * dgViewSub1.PageIndex;
         if (dt1.Rows.Count > 0)
@@ -251,7 +251,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
-        Session[FormID + "_Edit_dgViewSub1"] = dt;
+        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
         MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
     }
 
@@ -259,7 +259,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
     public override void UpdateTempSub(GridView dgv)
     {
-        DataTable dt1 = (DataTable)Session[FormID + "_Edit_" + dgv.ID];
+        DataTable dt1 = (DataTable)ViewState[FormID + "_Edit_" + dgv.ID];
         if (dt1.Rows.Count == 0)
         {
             this.ddlAreaCode.Enabled = true;
@@ -289,7 +289,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
         object o = dt1.Compute("SUM(Quantity)", "");
         this.txtTotalQty.Text = o.ToString();
-        Session[FormID + "_Edit_" + dgv.ID] = dt1;
+        ViewState[FormID + "_Edit_" + dgv.ID] = dt1;
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -299,7 +299,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         DataParameter[] para;
 
         //判断库存
-        DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
 
         DataTable dtProduct = dt.DefaultView.ToTable("Product", true, new string[] { "ProductCode", "ProductName" });
 

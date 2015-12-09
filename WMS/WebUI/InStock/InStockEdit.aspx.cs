@@ -43,7 +43,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
 
         ScriptManager.RegisterStartupScript(this.updatePanel1, this.updatePanel1.GetType(), "Resize", "resize();BindEvent();", true);
         writeJsvar(FormID, SqlCmd, strID);
-        SetTextReadOnly(this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate);
+        SetTextReadOnly(this.txtTotalQty, this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate);
 
 
     }
@@ -81,10 +81,12 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             this.ddlBillTypeCode.SelectedValue = dt.Rows[0]["BillTypeCode"].ToString();
             this.ddlFactoryID.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
             this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
+            this.txtBatchNo.Text = dt.Rows[0]["BatchNo"].ToString();
             this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
             this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);
             this.txtUpdater.Text = dt.Rows[0]["Updater"].ToString();
             this.txtUpdateDate.Text = ToYMD(dt.Rows[0]["UpdateDate"]);
+            this.txtSourceBillNo.Text = dt.Rows[0]["SourceBillNo"].ToString();
         }
         BindDataSub();
     }
@@ -92,7 +94,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
     private void BindDataSub()
     {
         DataTable dt = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text)) });
-        Session[FormID + "_Edit_dgViewSub1"] = dt;
+        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         MovePage("Edit", this.dgViewSub1, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
@@ -109,14 +111,6 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             ((TextBox)e.Row.FindControl("ProductCode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ProductCode")].ToString();
             ((TextBox)e.Row.FindControl("ProductName")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ProductName")].ToString();
 
-            DropDownList ddl = (DropDownList)e.Row.FindControl("ddlStateNo");
-            DataTable dtStateNo = bll.FillDataTable("Cmd.SelectProductState");
-            ddl.DataValueField = "StateNo";
-            ddl.DataTextField = "StateName";
-            ddl.DataSource = dtStateNo;
-            ddl.DataBind();
-            ddl.SelectedValue = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("StateNo")].ToString();
-
             ((TextBox)e.Row.FindControl("Quantity")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Quantity")].ToString();
             ((TextBox)e.Row.FindControl("SubMemo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Memo")].ToString();
         }
@@ -125,7 +119,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
     protected void btnAddDetail_Click(object sender, EventArgs e)
     {
         UpdateTempSub(this.dgViewSub1);
-        DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
         DataTable dt1 = Util.JsonHelper.Json2Dtb(hdnMulSelect.Value);
 
         DataView dv = dt.DefaultView;
@@ -152,11 +146,11 @@ public partial class WebUI_InStock_InStockEdit : BasePage
 
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
-        Session[FormID + "_Edit_dgViewSub1"] = dt;
+        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
         MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
         //int pagecount = this.dgViewSub1.PageCount;
 
-        //DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+        //DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
         //if (dt.Rows.Count > 0)
         //{
         //    if (dt.Rows[dt.Rows.Count - 1]["ProductCode"].ToString() == "")
@@ -172,13 +166,13 @@ public partial class WebUI_InStock_InStockEdit : BasePage
         //dt.Rows.Add(dr);
         //this.dgViewSub1.DataSource = dt;
         //this.dgViewSub1.DataBind();
-        //Session[FormID + "_Edit_dgViewSub1"] = dt;
+        //ViewState[FormID + "_Edit_dgViewSub1"] = dt;
         //MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageCount, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
     }
     protected void btnDelDetail_Click(object sender, EventArgs e)
     {
         UpdateTempSub(this.dgViewSub1);
-        DataTable dt = (DataTable)Session[FormID + "_Edit_" + dgViewSub1.ID];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_" + dgViewSub1.ID];
         int RowID = 0;
         for (int i = 0; i < this.dgViewSub1.Rows.Count; i++)
         {
@@ -195,7 +189,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
         }
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
-        Session[FormID + "_Edit_" + dgViewSub1.ID] = dt;
+        ViewState[FormID + "_Edit_" + dgViewSub1.ID] = dt;
         MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
 
     }
@@ -207,7 +201,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
     protected void btnProduct_Click(object sender, EventArgs e)
     {
         UpdateTempSub(this.dgViewSub1);
-        DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
         DataTable dt1 = Util.JsonHelper.Json2Dtb(hdnMulSelect.Value);
         int cur = int.Parse(((Button)sender).ClientID.Split('_')[1].Replace("ctl", "")) - 2 + this.dgViewSub1.PageSize * dgViewSub1.PageIndex;
         if (dt1.Rows.Count > 0)
@@ -248,7 +242,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
 
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
-        Session[FormID + "_Edit_dgViewSub1"] = dt;
+        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
         MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
     }
 
@@ -256,7 +250,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
 
     public override void UpdateTempSub(GridView dgv)
     {
-        DataTable dt1 = (DataTable)Session[FormID + "_Edit_" + dgv.ID];
+        DataTable dt1 = (DataTable)ViewState[FormID + "_Edit_" + dgv.ID];
         if (dt1.Rows.Count == 0)
         {
             this.ddlAreaCode.Enabled = true;
@@ -273,7 +267,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             dr["ProductCode"] = ((TextBox)dgv.Rows[i].FindControl("ProductCode")).Text;
             dr["ProductName"] = ((TextBox)dgv.Rows[i].FindControl("ProductName")).Text;
             dr["Quantity"] = ((TextBox)dgv.Rows[i].FindControl("Quantity")).Text;
-            dr["StateNo"] = ((DropDownList)dgv.Rows[i].FindControl("ddlStateNo")).SelectedValue;
+           
             dr["Memo"] = ((TextBox)dgv.Rows[i].FindControl("SubMemo")).Text;
             dr.EndEdit();
         }
@@ -284,7 +278,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
 
         object o = dt1.Compute("SUM(Quantity)", "");
         this.txtTotalQty.Text = o.ToString();
-        Session[FormID + "_Edit_" + dgv.ID] = dt1;
+        ViewState[FormID + "_Edit_" + dgv.ID] = dt1;
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -308,6 +302,8 @@ public partial class WebUI_InStock_InStockEdit : BasePage
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
                                              new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
+                                             new DataParameter("@BatchNo", this.txtBatchNo.Text.Trim()),
+                                             new DataParameter("@SourceBillNo", this.txtSourceBillNo.Text.Trim()),
                                              new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString())
                                              
@@ -323,13 +319,15 @@ public partial class WebUI_InStock_InStockEdit : BasePage
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
                                              new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
+                                             new DataParameter("@BatchNo", this.txtBatchNo.Text.Trim()),
+                                             new DataParameter("@SourceBillNo", this.txtSourceBillNo.Text.Trim()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
                                              new DataParameter("{0}",string.Format("BillID='{0}'", this.txtID.Text.Trim())) };
             Commands[0] = "WMS.UpdateInStock";
         }
         try
         {
-            DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+            DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
             Commands[1] = "WMS.DeleteBillDetail";
             Commands[2] = "WMS.InsertInStockDetail";
             bll.ExecTran(Commands, para, "BillID", new DataTable[] { dt });

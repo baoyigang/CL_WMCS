@@ -9,7 +9,7 @@ using IDAL;
 
 
 
-public partial class WebUI_CMD_ProductTypes : BasePage
+public partial class WebUI_CMD_ProductCategorys : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

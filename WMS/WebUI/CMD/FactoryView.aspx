@@ -70,19 +70,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="center" class="musttitle" style="width:8%;"  >
-                            厂家类别  
-                        </td>
-                        <td  style="width:30%;">
-                            &nbsp;<asp:DropDownList ID="ddlFlag" runat="server" Enabled="false" Width="43%" >
-                                <asp:ListItem Value="3">轮对承修厂家</asp:ListItem>
-                                <asp:ListItem Value="4">电机承修厂家</asp:ListItem>
-                                <asp:ListItem Value="1">齿侧轮芯厂家</asp:ListItem>
-                                <asp:ListItem Value="2">非齿侧轮芯厂家</asp:ListItem>
-                                <asp:ListItem Value="3">承修厂家</asp:ListItem>
-                            </asp:DropDownList>
-                           
-                        </td>
+                         
                          <td  align="center" class="smalltitle" style="width:8%;" >
                             联系人
                         </td>
@@ -90,17 +78,18 @@
                          &nbsp;<asp:TextBox ID="txtLinkPerson" runat="server"   
                                   CssClass="TextRead" Width="43%" ></asp:TextBox>
                         </td>
-                    </tr>
-                    
-                    <tr>
                         <td align="center" class="smalltitle" style="width:8%;"  >
                              联系电话 
                         </td>
                         <td style=" width:30%">
                            &nbsp;<asp:TextBox 
                                 ID="txtLinkPhone" runat="server"  
-                                CssClass="TextRead" Width="42%"></asp:TextBox>
+                                CssClass="TextRead" Width="43%"></asp:TextBox>
                         </td>
+                    </tr>
+                    
+                    <tr>
+                        
                         <td  align="center"  style=" width: 8%;" class="smalltitle"  >
                            传真  
                         </td>
@@ -108,6 +97,7 @@
                              &nbsp;<asp:TextBox ID="txtFax" runat="server"   
                                   CssClass="TextRead" Width="43%"></asp:TextBox> 
                         </td>
+                        <td colspan="2"></td>
                          
                     </tr>
                     <tr>

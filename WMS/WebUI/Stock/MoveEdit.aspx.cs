@@ -83,7 +83,7 @@ public partial class WebUI_Stock_MoveEdit : BasePage
     private void BindDataSub()
     {
         DataTable dt = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text)) });
-        Session[FormID + "_Edit_dgViewSub1"] = dt;
+        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         MovePage("Edit", this.dgViewSub1, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
@@ -106,7 +106,7 @@ public partial class WebUI_Stock_MoveEdit : BasePage
     protected void btnAddDetail_Click(object sender, EventArgs e)
     {
         UpdateTempSub(this.dgViewSub1);
-        DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
         DataTable dt1 = Util.JsonHelper.Json2Dtb(hdnMulSelect.Value);
         int RowIndex = dt.Rows.Count;
         for (int i = 0; i < dt1.Rows.Count; i++)
@@ -126,14 +126,14 @@ public partial class WebUI_Stock_MoveEdit : BasePage
 
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
-        Session[FormID + "_Edit_dgViewSub1"] = dt;
+        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
 
         MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageCount, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
     }
     protected void btnDelDetail_Click(object sender, EventArgs e)
     {
         UpdateTempSub(this.dgViewSub1);
-        DataTable dt = (DataTable)Session[FormID + "_Edit_" + dgViewSub1.ID];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_" + dgViewSub1.ID];
         int RowID = 0;
         for (int i = 0; i < this.dgViewSub1.Rows.Count; i++)
         {
@@ -150,7 +150,7 @@ public partial class WebUI_Stock_MoveEdit : BasePage
         }
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
-        Session[FormID + "_Edit_" + dgViewSub1.ID] = dt;
+        ViewState[FormID + "_Edit_" + dgViewSub1.ID] = dt;
         MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
 
     }
@@ -165,7 +165,7 @@ public partial class WebUI_Stock_MoveEdit : BasePage
 
     public override void UpdateTempSub(GridView dgv)
     {
-        DataTable dt1 = (DataTable)Session[FormID + "_Edit_" + dgv.ID];
+        DataTable dt1 = (DataTable)ViewState[FormID + "_Edit_" + dgv.ID];
         if (dt1.Rows.Count == 0)
         {
             hdnOldCellCode.Value = "";
@@ -199,7 +199,7 @@ public partial class WebUI_Stock_MoveEdit : BasePage
 
         object o = dt1.Compute("SUM(Quantity)", "");
         this.txtTotalQty.Text = o.ToString();
-        Session[FormID + "_Edit_" + dgv.ID] = dt1;
+        ViewState[FormID + "_Edit_" + dgv.ID] = dt1;
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -238,7 +238,7 @@ public partial class WebUI_Stock_MoveEdit : BasePage
                                              new DataParameter("{0}",string.Format("BillID='{0}'", this.txtID.Text.Trim())) };
             Commands[0] = "WMS.UpdateMoveStock";
         }
-        DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
         //判断货位是否被其他单据锁定
         for (int i = 0; i < dt.Rows.Count; i++)
         {

@@ -1,4 +1,4 @@
-﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeFile="ProductTypes.aspx.cs" Inherits="WebUI_CMD_ProductTypes" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeFile="ProductCategorys.aspx.cs" Inherits="WebUI_CMD_ProductCategorys" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -40,8 +40,8 @@
                                 <asp:Literal ID="Literal1" Text="查询栏位" runat="server"  ></asp:Literal>
                              </td>
 						    <td  width="15%" >&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
-                                    <asp:ListItem Selected="True" Value="ProductTypeCode">产品类别</asp:ListItem>
-                                    <asp:ListItem  Value="ProductTypeName">类别名称</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="CategoryCode">产品类别</asp:ListItem>
+                                    <asp:ListItem  Value="CategoryName">类别名称</asp:ListItem>
                                      <asp:ListItem Value="AreaCode" >库区编码</asp:ListItem>
                                     <asp:ListItem Value="AreaName" >库区名称</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
@@ -91,15 +91,15 @@
                       <HeaderStyle Width="60px"></HeaderStyle>
                      <ItemStyle Width="60px" HorizontalAlign="Center"></ItemStyle>
                    </asp:TemplateField>
-                  <asp:TemplateField HeaderText="类别编码" SortExpression="ProductTypeCode">
+                  <asp:TemplateField HeaderText="类别编码" SortExpression="CategoryCode">
                         <ItemTemplate>
-                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "ProductTypeCode") %>'
-                                Text='<%# DataBinder.Eval(Container.DataItem, "ProductTypeCode")%>'></asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "CategoryCode") %>'
+                                Text='<%# DataBinder.Eval(Container.DataItem, "CategoryCode")%>'></asp:HyperLink>
                         </ItemTemplate>
                         <ItemStyle Width="12%" Wrap="False" />
                         <HeaderStyle Width="12%" Wrap="False" />
                     </asp:TemplateField>
-                    <asp:BoundField DataField="ProductTypeName" HeaderText="类别名称" SortExpression="ProductTypeName">
+                    <asp:BoundField DataField="CategoryName" HeaderText="类别名称" SortExpression="CategoryName">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>

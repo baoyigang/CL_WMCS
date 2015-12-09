@@ -124,7 +124,7 @@ public partial class WebUI_Stock_MoveView : BasePage
     private void BindDataSub()
     {
         DataTable dt = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text)) });
-        Session[FormID + "_View_dgViewSub1"] = dt;
+        ViewState[FormID + "_View_dgViewSub1"] = dt;
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         object o = dt.Compute("SUM(Quantity)", "");
@@ -244,7 +244,7 @@ public partial class WebUI_Stock_MoveView : BasePage
         List<DataParameter[]> paras = new List<DataParameter[]>();
         if (this.btnCheck.Text == "审核")
         {
-            DataTable dtSub = (DataTable)Session[FormID + "_View_dgViewSub1"];
+            DataTable dtSub = (DataTable)ViewState[FormID + "_View_dgViewSub1"];
             for (int i = 0; i < dtSub.Rows.Count; i++)
             {
                 int count = 0;

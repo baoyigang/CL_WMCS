@@ -24,20 +24,12 @@
                     $("#txtProductName").focus();
                     return false;
                 }
-                if (trim($("#ddlProductTypeCode").val()) == "") {
+                if (trim($("#ddlCategoryCode").val()) == "") {
                     alert("产品类型不能为空!");
-                    $("#ddlProductTypeCode").focus();
+                    $("#ddlCategoryCode").focus();
                     return false;
                 }
-                if (!$("#chkTemp")[0].checked) {
-
-                    if (trim($("#txtWheelDiameter").val()) == "") {
-                        alert("轮径不能为空!");
-                        $("#txtWheelDiameter").focus();
-                        return false;
-                    }
-
-                }
+                 
 
                 return true;
             }
@@ -66,7 +58,7 @@
                         产品类别</td>
                     <td width="21%">
                         &nbsp;<asp:DropDownList 
-                            ID="ddlProductTypeCode" runat="server" Width="91%">
+                            ID="ddlCategoryCode" runat="server" Width="91%">
                         </asp:DropDownList>
                     </td>
                     <td align="center" class="musttitle" style="width:12%;"  >
@@ -83,229 +75,151 @@
                     <td width="21%">
                             &nbsp;<asp:TextBox 
                                 ID="txtProductName" runat="server"  CssClass="TextBox" Width="90%" 
-                                MaxLength="50" >轮对</asp:TextBox> 
+                                MaxLength="50" ></asp:TextBox> 
                           
 
                     </td>
                     
                 </tr>
                 <tr>
-                     
+                    
                     <td align="center" class="musttitle" style="width:12%;"  >
-                           单位 
+                           英文品名 
                     </td>
                     <td width="21%">
-                            &nbsp;<asp:TextBox ID="txtAxieNo" runat="server"   Width="90%" 
-                                MaxLength="20" CssClass="TextBox" ></asp:TextBox> 
+                            &nbsp;<asp:TextBox ID="txtProductEName" 
+                                runat="server"    Width="90%" 
+                                CssClass="TextBox" MaxLength="20"></asp:TextBox> 
 
                     </td>
                     <td align="center" class="musttitle" style="width:12%;">
-                        轮径</td>
+                        型号</td>
                     <td width="21%">
-                        &nbsp;<asp:TextBox ID="txtWheelDiameter" runat="server" 
-                                  Width="90%" CssClass="TextBox" MaxLength="25" ></asp:TextBox>
-
+                        &nbsp;<asp:TextBox ID="txtModelNo" runat="server" CssClass="TextBox"   
+                            Width="90%" MaxLength="25"></asp:TextBox>
                     </td>
-                    <td align= "center" colspan="2">
-                        <asp:CheckBox ID="chkTemp" runat="server" Text="临时产品" />
+                    <td   align="center" class="smalltitle">
+                        规格
                     </td>
-                     
-                </tr>
-                 <tr>
-                    <td align="center" class="smalltitle" style="width:12%;">
-                        承修厂家</td>
-                    <td width="21%">
-                        &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Width="91%">
-                        </asp:DropDownList>
-
+                    <td >
+                        &nbsp;<asp:TextBox ID="txtSpec" runat="server" 
+                            CssClass="TextBox" MaxLength="25" Width="90%"></asp:TextBox>
                     </td>
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                            &nbsp;轮对修程</td>
-                    <td  width="21%">
-                        &nbsp;<asp:TextBox ID="txtLDXC" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="50" ></asp:TextBox> 
-
-                    </td>
-                     
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                           承修时间 
-                    </td>
-                    <td width="21%">
-                            &nbsp;<uc1:Calendar ID="txtCX_DateTime" runat="server" />
-                    </td>
-                   
                 </tr>
                 <tr>
-                   
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                            齿侧轴径
+                    <td align="center" class="musttitle" style="width:12%;">
+                        供应商</td>
+                    <td width="21%">
+                        &nbsp;<asp:DropDownList ID="ddlFactory" runat="server" 
+                            Width="91%"></asp:DropDownList>
+
                     </td>
+                    <td align="center" class="smalltitle" style="width:12%;"  >
+                            产品条码</td>
                     <td  width="21%">
-                        &nbsp;<asp:TextBox ID="txtCCZ_Diameter" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
+                        &nbsp;<asp:TextBox ID="txtBarcode" runat="server"   Width="90%" 
+                            CssClass="TextBox" MaxLength="50"></asp:TextBox> 
 
                     </td>
                     <td align="center" class="smalltitle" style="width:12%;"  >
-                           非齿侧轴径 
-                    </td>
+                           产品属性</td>
                     <td width="21%">
-                            &nbsp;<asp:TextBox ID="txtFCCZ_Diameter" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
-
-                    </td>
-                    <td align="center" class="smalltitle" style="width:12%;">
-                        齿侧端轴直径</td>
-                    <td width="21%">
-                        &nbsp;<asp:TextBox ID="txtCCD_Diameter" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
-
-                    </td> 
-                   
-                </tr>
-                 <tr>
-                    
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                            非齿侧端轴直径
-                    </td>
-                    <td  width="21%">
-                        &nbsp;<asp:TextBox ID="txtFCCD_Diameter" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
-
-                    </td>
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                           齿侧选配抱轴瓦尺寸</td>
-                    <td width="21%">
-                            &nbsp;<asp:TextBox ID="txtCCXPBZW_Size" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
-
-                    </td>
-                    <td align="center" class="smalltitle" style="width:12%;">
-                        非齿侧选配抱轴瓦尺寸</td>
-                    <td width="21%">
-                        &nbsp;<asp:TextBox ID="txtFCCXPBZW_Size" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
-
+                           &nbsp;<asp:TextBox ID="txtPropertity" 
+                               runat="server"  CssClass="TextBox" 
+                               Width="90%"></asp:TextBox>
                     </td>
                     
                 </tr>
-                 <tr>
-                   
+                <tr>
                     <td align="center" class="smalltitle" style="width:12%;"  >
-                            齿轮编号</td>
-                    <td  width="21%">
-                        &nbsp;<asp:TextBox ID="txtGearNo" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="20" ></asp:TextBox> 
-
-                    </td>
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                           齿侧轮芯标记 
-                    </td>
-                    <td width="21%">
-                            &nbsp;<asp:TextBox ID="txtCCLX_Flag" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
-
-                    </td>
-                   <td align="center" class="smalltitle" style="width:12%;">
-                        非齿侧轮芯标记</td>
-                    <td width="21%">
-                        &nbsp;<asp:TextBox ID="txtFCCLX_Flag" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
-
-                    </td>
-                   
-                </tr>
-                 <tr>
-                     
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                            齿侧轮芯制造年代
+                            计量单位
                     </td>
                     <td  width="21%">
-                        &nbsp;<asp:TextBox ID="txtCCLX_Year" runat="server" 
-                                  Width="90%" CssClass="TextBox" 
-                                MaxLength="25" ></asp:TextBox> 
+                        &nbsp;<asp:TextBox ID="txtUnit" runat="server"   Width="90%" 
+                            CssClass="TextBox" MaxLength="25"></asp:TextBox> 
 
                     </td>
                     <td align="center" class="smalltitle" style="width:12%;"  >
-                           非齿侧轮芯制造年代 
+                           长度 
                     </td>
                     <td width="21%">
-                            &nbsp;<asp:TextBox ID="txtFCCLX_Year" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
+                            &nbsp;<asp:TextBox ID="txtLength" runat="server"  Width="90%" 
+                                CssClass="TextBox" MaxLength="25"></asp:TextBox> 
 
                     </td>
                     <td align="center" class="smalltitle" style="width:12%;">
-                        齿侧轮芯生产厂家</td>
+                        宽度</td>
                     <td width="21%">
-                        &nbsp;<asp:DropDownList 
-                            ID="ddlCCLX_Factory" runat="server" Width="91%">
-                        </asp:DropDownList>
+                        &nbsp;<asp:TextBox ID="txtWidth" runat="server"  Width="90%" 
+                            CssClass="TextBox" MaxLength="25"></asp:TextBox> 
 
                     </td>
-                    
                 </tr>
                  <tr>
-                    
                     <td align="center" class="smalltitle" style="width:12%;"  >
-                            非齿侧轮芯生产厂家
+                            高度
                     </td>
                     <td  width="21%">
-                        &nbsp;<asp:DropDownList 
-                            ID="ddlFCCLX_Factory" runat="server" Width="91%">
-                        </asp:DropDownList>
+                        &nbsp;<asp:TextBox ID="txtHeight" runat="server"  Width="90%" 
+                            CssClass="TextBox" MaxLength="25"></asp:TextBox> 
 
                     </td>
                     <td align="center" class="smalltitle" style="width:12%;"  >
-                           齿侧轮箍标记 
-                    </td>
+                           重量</td>
                     <td width="21%">
-                            &nbsp;<asp:TextBox ID="txtCCLG_Flag" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
+                            &nbsp;<asp:TextBox ID="txtWeight" 
+                                runat="server"   Width="90%" 
+                                CssClass="TextBox"  MaxLength="25"></asp:TextBox> 
 
                     </td>
                     <td align="center" class="smalltitle" style="width:12%;">
-                        非齿侧轮箍标记</td>
+                        材质</td>
                     <td width="21%">
-                        &nbsp;<asp:TextBox ID="txtFCCLG_Flag" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="25" ></asp:TextBox> 
+                        &nbsp;<asp:TextBox ID="txtMaterial" runat="server"   Width="90%" 
+                            CssClass="TextBox" MaxLength="25"></asp:TextBox> 
 
-                    </td> 
-
-                   
+                    </td>
                 </tr>
-                
+                 <tr>
+                    <td align="center" class="smalltitle" style="width:12%;"  >
+                            颜色</td>
+                    <td  width="21%">
+                        &nbsp;<asp:TextBox ID="txtColor" runat="server"  Width="90%" 
+                            CssClass="TextBox" MaxLength="20"></asp:TextBox> 
+
+                    </td>
+                    <td align="center" class="smalltitle" style="width:12%;"  >
+                           有效期 
+                    </td>
+                    <td width="21%">
+                            &nbsp;<asp:TextBox ID="txtValidPeriod" 
+                                runat="server"  Width="90%" 
+                                CssClass="TextBox" MaxLength="25"></asp:TextBox> 
+
+                    </td>
+                   
+                    <td  colspan="2">
+                        &nbsp;</td>
+                </tr>
+                 
+                 
                  <tr>
                   
-                     
+                   
                  
                    <td align="center"  class="smalltitle" style="width:12%;">
-                       入库时间</td>
-                  <td width="21%">
-                      &nbsp;<asp:TextBox ID="txtInstockDate" runat="server"  
-                          CssClass="TextRead" Width="90%"  ></asp:TextBox> 
+                       描述</td>
+                  <td colspan="3">
+                      &nbsp;<asp:TextBox ID="txtDescription" runat="server"  CssClass="TextBox" 
+                          Width="96%"  ></asp:TextBox> 
                   </td>
-                  <td>
-                  </td>
-                  <td>
-                  </td>
+                   
                   <td align="center"  class="smalltitle" style="width:12%;">
                         建单人员
                   </td> 
                   <td>
                     &nbsp;<asp:TextBox ID="txtCreator" runat="server"  
-                          CssClass="TextRead" Width="90%"  ></asp:TextBox> 
+                          CssClass="TextRead" Width="90%" ></asp:TextBox> 
                   </td>
                 </tr>
                 <tr>
@@ -314,21 +228,21 @@
                   </td> 
                   <td>
                     &nbsp;<asp:TextBox ID="txtCreatDate" runat="server"  
-                          CssClass="TextRead" Width="90%"  ></asp:TextBox> 
+                          CssClass="TextRead" Width="90%" ></asp:TextBox> 
                   </td>
                   <td align="center"  class="smalltitle" style="width:12%;">
                         修改人员
                   </td> 
                   <td>
                      &nbsp;<asp:TextBox ID="txtUpdater" runat="server"  
-                          CssClass="TextRead" Width="90%"  ></asp:TextBox> 
+                          CssClass="TextRead" Width="90%"></asp:TextBox> 
                   </td>
                   <td align="center"  class="smalltitle" style="width:12%;">
                         修改日期
                   </td> 
                   <td>
                     &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server"  
-                          CssClass="TextRead" Width="90%"  ></asp:TextBox> 
+                          CssClass="TextRead" Width="90%" ></asp:TextBox> 
                   </td>
                   
                 </tr>	
@@ -337,7 +251,8 @@
                         备注
                     </td>
                     <td colspan="5">
-                        &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
+                        &nbsp;<asp:TextBox 
+                            ID="txtMemo" runat="server" CssClass="TextBox" 
                             TextMode="MultiLine" Height="72px" Width="97%"></asp:TextBox>
                     </td>
                 </tr>

@@ -174,7 +174,7 @@ public partial class WebUI_SysInfo_RoleManage_RoleManage : BasePage
 
         BLL.BLLBase bll = new BLL.BLLBase();
         DataTable dtSub = bll.FillDataTable("Security.SelectGroupUser", new DataParameter[] { new DataParameter("@GroupID", BillID) });
-        Session[FormID + "_S_gvGroupListUser"] = dtSub;
+        ViewState[FormID + "_S_gvGroupListUser"] = dtSub;
         this.gvGroupListUser.DataSource = dtSub;
         this.gvGroupListUser.DataBind();
         MovePage("S", this.gvGroupListUser, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);

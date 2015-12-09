@@ -16,7 +16,7 @@
         });
         function resize() {
             var h = document.documentElement.clientHeight - 260;
-            $("#table-container").css("height", h);
+            $("#divMain").css("height", h);
         }
     </script>
 </head>
@@ -75,7 +75,7 @@
                 </table>
                     
                 </div>
-                <div id="table-container" style="overflow: auto; WIDTH: 100%; HEIGHT: 200px">
+                <div id="divMain" style="overflow: auto; WIDTH: 100%; HEIGHT: 200px"  onscroll="javascript:RecordPostion(this);">
                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="100%" OnRowDataBound="GridView1_RowDataBound">
                         <Columns>
                             <asp:TemplateField >
@@ -252,6 +252,8 @@
                     <asp:Button ID="btnReload" runat="server" Text="" OnClick="btnReload_Click"  CssClass="HiddenControl" />
                     <asp:HiddenField ID="hdnRowIndex" runat="server" Value="0" />
                     <asp:HiddenField ID="hdnRowValue" runat="server"  />
+                    <input type="hidden" id="dvscrollX" runat="server" />
+                    <input type="hidden" id="dvscrollY" runat="server" />
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

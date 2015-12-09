@@ -11,7 +11,7 @@
     <DataType>string</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="3">
-    <FieldName>ProductTypeName</FieldName>
+    <FieldName>CategoryName</FieldName>
     <FieldTitle>产品类别</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
@@ -26,15 +26,11 @@
     <DataType>string</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="6">
-    <FieldName>AxieNo</FieldName>
+    <FieldName>Unit</FieldName>
     <FieldTitle>单位</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="0" ShowQueryIndex="4">
-    <FieldName>StateName</FieldName>
-    <FieldTitle>产品状态</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
+  
   <FIELD ShowInFieldQuery="0" ShowQueryIndex="4">
     <FieldName>BillNo</FieldName>
     <FieldTitle>单号</FieldTitle>

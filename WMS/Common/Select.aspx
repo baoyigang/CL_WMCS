@@ -80,9 +80,9 @@
             window.close();
         }
         function SelectSearch() {
-            if (trim(document.getElementById("txtContent").value) == "") {
+            if (trim(document.getElementById("txtSearch").value) == "") {
                 alert("请输入查询内容！");
-                document.getElementById("txtContent").focus();
+                document.getElementById("txtSearch").focus();
                 return false;
             }
         }

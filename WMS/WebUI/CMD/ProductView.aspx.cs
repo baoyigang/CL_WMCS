@@ -17,7 +17,7 @@ public partial class WebUI_CMD_ProductView : BasePage
     private string TableName = "VCMD_Product";
     private string PrimaryKey = "ProductCode";
     BLL.BLLBase bll = new BLL.BLLBase();
-    private string filter = "IsFixed='0' and AreaCode='001'";
+    private string filter = "IsFixed='0'";
     protected void Page_Load(object sender, EventArgs e)
     {
         strID = Request.QueryString["ID"] + "";
@@ -36,11 +36,11 @@ public partial class WebUI_CMD_ProductView : BasePage
 
 
 
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and ProductTypeCode<>'0001'") });
-        this.ddlProductTypeCode.DataValueField = "ProductTypeCode";
-        this.ddlProductTypeCode.DataTextField = "ProductTypeName";
-        this.ddlProductTypeCode.DataSource = ProductType;
-        this.ddlProductTypeCode.DataBind();
+        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory");
+        this.ddlCategoryCode.DataValueField = "CategoryCode";
+        this.ddlCategoryCode.DataTextField = "CategoryName";
+        this.ddlCategoryCode.DataSource = ProductType;
+        this.ddlCategoryCode.DataBind();
 
         //ddlTrainTypeCode
         //DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType");
@@ -49,27 +49,14 @@ public partial class WebUI_CMD_ProductView : BasePage
         //this.ddlTrainTypeCode.DataSource = TrainType;
         //this.ddlTrainTypeCode.DataBind();
 
-        //ddlCCLX_Factory
-        DataTable CCLX_Factory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=1") });
-        this.ddlCCLX_Factory.DataValueField = "FactoryID";
-        this.ddlCCLX_Factory.DataTextField = "FactoryName";
-        this.ddlCCLX_Factory.DataSource = CCLX_Factory;
-        this.ddlCCLX_Factory.DataBind();
-
-        //ddlFCCLX_Factory
-
-        DataTable FCCLX_Factory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=2") });
-        this.ddlFCCLX_Factory.DataValueField = "FactoryID";
-        this.ddlFCCLX_Factory.DataTextField = "FactoryName";
-        this.ddlFCCLX_Factory.DataSource = FCCLX_Factory;
-        this.ddlFCCLX_Factory.DataBind();
+       
 
         ///ddlCX_Factory
-        DataTable CX_Factory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=3") });
-        this.ddlCX_Factory.DataValueField = "FactoryID";
-        this.ddlCX_Factory.DataTextField = "FactoryName";
-        this.ddlCX_Factory.DataSource = CX_Factory;
-        this.ddlCX_Factory.DataBind();
+        DataTable dtFactory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=3") });
+        this.ddlFactory.DataValueField = "FactoryID";
+        this.ddlFactory.DataTextField = "FactoryName";
+        this.ddlFactory.DataSource = dtFactory;
+        this.ddlFactory.DataBind();
 
     }
 
@@ -80,31 +67,27 @@ public partial class WebUI_CMD_ProductView : BasePage
 
             this.txtID.Text = dt.Rows[0]["ProductCode"].ToString();
             this.txtProductName.Text = dt.Rows[0]["ProductName"].ToString();
-            this.ddlProductTypeCode.SelectedValue = dt.Rows[0]["ProductTypeCode"].ToString();
+            this.ddlCategoryCode.SelectedValue = dt.Rows[0]["CategoryCode"].ToString();
             //this.ddlTrainTypeCode.SelectedValue = dt.Rows[0]["TrainTypeCode"].ToString();
-            this.txtAxieNo.Text = dt.Rows[0]["AxieNo"].ToString();
-            this.txtWheelDiameter.Text = dt.Rows[0]["WheelDiameter"].ToString();
+            this.txtProductEName.Text = dt.Rows[0]["ProductEName"].ToString();
+            this.txtModelNo.Text = dt.Rows[0]["ModelNo"].ToString();
 
-            this.txtCCZ_Diameter.Text = dt.Rows[0]["CCZ_Diameter"].ToString();
-            this.txtFCCZ_Diameter.Text = dt.Rows[0]["FCCZ_Diameter"].ToString();
-            this.txtCCD_Diameter.Text = dt.Rows[0]["CCD_Diameter"].ToString();
-            this.txtFCCD_Diameter.Text = dt.Rows[0]["FCCD_Diameter"].ToString();
-            this.txtCCXPBZW_Size.Text = dt.Rows[0]["CCXPBZW_Size"].ToString();
-            this.txtFCCXPBZW_Size.Text = dt.Rows[0]["FCCXPBZW_Size"].ToString();
-            this.txtGearNo.Text = dt.Rows[0]["GearNo"].ToString();
-            this.txtCCLX_Flag.Text = dt.Rows[0]["CCLX_Flag"].ToString();
-            this.txtFCCLX_Flag.Text = dt.Rows[0]["FCCLX_Flag"].ToString();
-            this.txtCCLX_Year.Text = dt.Rows[0]["CCLX_Year"].ToString();
-            this.txtFCCLX_Year.Text = dt.Rows[0]["FCCLX_Year"].ToString();
-            this.ddlCCLX_Factory.SelectedValue = dt.Rows[0]["CCLX_FactoryID"].ToString();
-            this.ddlFCCLX_Factory.SelectedValue = dt.Rows[0]["FCCLX_FactoryID"].ToString();
-            this.ddlCX_Factory.SelectedValue = dt.Rows[0]["CX_FactoryID"].ToString();
-            this.txtCCLG_Flag.Text = dt.Rows[0]["CCLG_Flag"].ToString();
-            this.txtFCCLG_Flag.Text = dt.Rows[0]["FCCLG_Flag"].ToString();
-            this.chkTemp.Checked = dt.Rows[0]["IsTemp"].ToString() == "1" ? true : false;
-            this.txtLDXC.Text = dt.Rows[0]["LDXC"].ToString();
-            this.txtCX_DateTime.Text = ToYMD(dt.Rows[0]["CX_DateTime"]);
-            this.txtInstockDate.Text = ToYMD(dt.Rows[0]["InstockDate"]);
+            this.txtUnit.Text = dt.Rows[0]["Unit"].ToString();
+            this.txtLength.Text = dt.Rows[0]["Length"].ToString();
+            this.txtWidth.Text = dt.Rows[0]["Width"].ToString();
+            this.txtHeight.Text = dt.Rows[0]["Height"].ToString();
+            this.txtWeight.Text = dt.Rows[0]["Weight"].ToString();
+            this.txtMaterial.Text = dt.Rows[0]["Material"].ToString();
+            this.txtColor.Text = dt.Rows[0]["Color"].ToString();
+            this.txtValidPeriod.Text = dt.Rows[0]["ValidPeriod"].ToString();
+            this.txtAreaName.Text = dt.Rows[0]["AreaName"].ToString();
+             
+            this.ddlFactory.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
+
+
+            this.txtBarcode.Text = dt.Rows[0]["Barcode"].ToString();
+            this.txtPropertity.Text = dt.Rows[0]["Propertity"].ToString();
+            this.txtDescription.Text = dt.Rows[0]["Description"].ToString();
 
             this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
             this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
@@ -120,27 +103,27 @@ public partial class WebUI_CMD_ProductView : BasePage
 
         this.txtID.Text = "";
         this.txtProductName.Text = "";
-        this.txtAxieNo.Text = "";
-        this.txtWheelDiameter.Text = "";
 
-        this.txtCCZ_Diameter.Text = "";
-        this.txtFCCZ_Diameter.Text = "";
-        this.txtCCD_Diameter.Text = "";
-        this.txtFCCD_Diameter.Text = "";
-        this.txtCCXPBZW_Size.Text = "";
-        this.txtFCCXPBZW_Size.Text = "";
-        this.txtGearNo.Text = "";
-        this.txtCCLX_Flag.Text = "";
-        this.txtFCCLX_Flag.Text = "";
-        this.txtCCLX_Year.Text = "";
-        this.txtFCCLX_Year.Text = "";
+        //this.ddlTrainTypeCode.SelectedValue = dt.Rows[0]["TrainTypeCode"].ToString();
+        this.txtProductEName.Text = "";
+        this.txtModelNo.Text = "";
 
-        this.txtCCLG_Flag.Text = "";
-        this.txtFCCLG_Flag.Text = "";
+        this.txtUnit.Text = "";
+        this.txtLength.Text = "";
+        this.txtWidth.Text = "";
+        this.txtHeight.Text = "";
+        this.txtWeight.Text = "";
+        this.txtMaterial.Text = "";
+        this.txtColor.Text = "";
+        this.txtValidPeriod.Text = "";
+        this.txtAreaName.Text = "";
 
-        this.txtLDXC.Text = "";
-        this.txtCX_DateTime.Text = "";
-        this.txtInstockDate.Text = "";
+        this.ddlFactory.SelectedValue = "";
+
+
+        this.txtBarcode.Text = "";
+        this.txtPropertity.Text = "";
+        this.txtDescription.Text = "";
 
         this.txtMemo.Text = "";
         this.txtCreator.Text = "";

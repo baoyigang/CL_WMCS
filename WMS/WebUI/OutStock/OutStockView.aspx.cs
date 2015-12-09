@@ -149,7 +149,7 @@ public partial class WebUI_OutStock_OutStockView : BasePage
     private void BindDataSub()
     {
         DataTable dt = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text)) });
-        Session[FormID + "_View_dgViewSub1"] = dt;
+        ViewState[FormID + "_View_dgViewSub1"] = dt;
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         object o = dt.Compute("SUM(Quantity)", "");

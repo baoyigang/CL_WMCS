@@ -63,25 +63,20 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="center" class="musttitle" style="width:8%;"  >
-                            厂家类别  
+                        <td align="center" class="smalltitle" style="width:8%;"  >
+                            联系人
                         </td>
                         <td  style="width:30%;">
-                            &nbsp;<asp:DropDownList ID="ddlFlag" runat="server" Width="43%" >
-                                <asp:ListItem Value="3">轮对承修厂家</asp:ListItem>
-                                <asp:ListItem Value="4">电机承修厂家</asp:ListItem>
-                                <asp:ListItem Value="1">齿侧轮芯厂家</asp:ListItem>
-                                <asp:ListItem Value="2">非齿侧轮芯厂家</asp:ListItem>
-                                
-                            </asp:DropDownList>
-                           
+                            &nbsp;<asp:TextBox ID="txtLinkPerson" runat="server"   
+                                  CssClass="TextBox" Width="42%" ></asp:TextBox>
                         </td>
                          <td  align="center" class="smalltitle" style="width:8%;" >
                             联系人
                         </td>
                         <td style="width:30%;">
-                         &nbsp;<asp:TextBox ID="txtLinkPerson" runat="server"   
-                                  CssClass="TextBox" Width="43%" ></asp:TextBox>
+                            &nbsp;<asp:TextBox 
+                                ID="txtLinkPhone" runat="server"  
+                                CssClass="TextBox" Width="43%"></asp:TextBox>
                         </td>
                     </tr>
                     
@@ -90,17 +85,14 @@
                              联系电话 
                         </td>
                         <td style=" width:30%">
-                           &nbsp;<asp:TextBox 
-                                ID="txtLinkPhone" runat="server"  
-                                CssClass="TextBox" Width="42%"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="txtFax" runat="server"   
+                                  CssClass="TextBox" Width="42%"></asp:TextBox> 
                         </td>
                         <td  align="center"  style=" width: 8%;" class="smalltitle"  >
                            传真  
                         </td>
                         <td  style="width:30%;">
-                             &nbsp;<asp:TextBox ID="txtFax" runat="server"   
-                                  CssClass="TextBox" Width="43%"></asp:TextBox> 
-                        </td>
+                             </td>
                          
                     </tr>
                     <tr>
