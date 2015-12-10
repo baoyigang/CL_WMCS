@@ -44,20 +44,10 @@ namespace App.View
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            Point P1 = picCrane11.Location;
-            P1.X = P1.X - 88;
-
-            this.picCrane11.Location = P1;
-
-            Point P2 = picCrane12.Location;
+            Point P2 = picCrane.Location;
             P2.X = P2.X - 90;
 
-            this.picCrane12.Location = P2;
-
-            Point P3 = picCrane2.Location;
-            P3.X = P3.X - 54;
-
-            this.picCrane2.Location = P3;
+            this.picCrane.Location = P2;
         }
 
         //private void btnBack_Click(object sender, EventArgs e)
@@ -74,15 +64,9 @@ namespace App.View
             Cars.OnCar += new CarEventHandler(Monitor_OnCar);
             AddDicKeyValue();
 
-            InitialP1 = picCrane11.Location;
-            InitialP2 = picCrane2.Location;
-            InitialP3 = picCrane12.Location;
-            picCrane11.Parent = pictureBox1;
-            picCrane11.BackColor = Color.Transparent;
-            picCrane12.Parent = pictureBox1;
-            picCrane12.BackColor = Color.Transparent;
-            picCrane2.Parent = pictureBox1;
-            picCrane2.BackColor = Color.Transparent;
+            InitialP3 = picCrane.Location;
+            picCrane.Parent = pictureBox1;
+            picCrane.BackColor = Color.Transparent;
 
             this.BindData();
             for (int i = 0; i < this.dgvMain.Columns.Count - 1; i++)
@@ -263,26 +247,22 @@ namespace App.View
                 {
                     if (crane.Column < 7)
                     {
-                        this.picCrane11.Visible = true;
-                        this.picCrane12.Visible = false;
+                        this.picCrane.Visible = false;
                         Point P1 = InitialP1;
                         P1.X = P1.X - (crane.Column - 1) * columnDis1;
-                        this.picCrane11.Location = P1;
                     }
                     else
                     {
-                        this.picCrane11.Visible = false;
-                        this.picCrane12.Visible = true;
+                        this.picCrane.Visible = true;
                         Point P3 = InitialP3;
                         P3.X = P3.X - (12 - crane.Column) * columnDis2;
-                        this.picCrane12.Location = P3;
+                        this.picCrane.Location = P3;
                     }
                 }
                 else
                 {
                     Point P2 = InitialP2;
                     P2.X = P2.X - (crane.Column - 1) * columnDis3;
-                    this.picCrane2.Location = P2;
                 }
 
                 txt = GetTextBox("txtHeight", crane.CraneNo);

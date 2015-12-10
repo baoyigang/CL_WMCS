@@ -158,6 +158,13 @@ namespace App.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap ROBO_CL_20150722_3 {
+            get {
+                object obj = ResourceManager.GetObject("ROBO-CL-20150722-3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Shelf {
             get {
                 object obj = ResourceManager.GetObject("Shelf", resourceCulture);

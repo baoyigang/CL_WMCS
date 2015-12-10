@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMonitor));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemCellCode = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemReassign = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,9 +70,7 @@
             this.colTaskType = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.bsMain = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.picCrane12 = new System.Windows.Forms.PictureBox();
-            this.picCrane2 = new System.Windows.Forms.PictureBox();
-            this.picCrane11 = new System.Windows.Forms.PictureBox();
+            this.picCrane = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -171,9 +170,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCrane)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -336,18 +333,18 @@
             // 
             this.dgvMain.AllowUserToAddRows = false;
             this.dgvMain.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvMain.AutoGenerateColumns = false;
             this.dgvMain.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5,
@@ -369,14 +366,14 @@
             this.colErrDesc,
             this.colTaskType});
             this.dgvMain.DataSource = this.bsMain;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMain.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMain.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMain.Location = new System.Drawing.Point(0, 0);
             this.dgvMain.Name = "dgvMain";
@@ -564,9 +561,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.picCrane12);
-            this.splitContainer1.Panel1.Controls.Add(this.picCrane2);
-            this.splitContainer1.Panel1.Controls.Add(this.picCrane11);
+            this.splitContainer1.Panel1.Controls.Add(this.picCrane);
             this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
             // 
             // splitContainer1.Panel2
@@ -576,42 +571,25 @@
             this.splitContainer1.SplitterDistance = 816;
             this.splitContainer1.TabIndex = 4;
             // 
-            // picCrane12
+            // picCrane
             // 
-            this.picCrane12.BackColor = System.Drawing.SystemColors.Control;
-            this.picCrane12.Image = global::App.Properties.Resources.Crane12;
-            this.picCrane12.Location = new System.Drawing.Point(532, 30);
-            this.picCrane12.Name = "picCrane12";
-            this.picCrane12.Size = new System.Drawing.Size(168, 40);
-            this.picCrane12.TabIndex = 6;
-            this.picCrane12.TabStop = false;
-            // 
-            // picCrane2
-            // 
-            this.picCrane2.BackColor = System.Drawing.SystemColors.Control;
-            this.picCrane2.Image = global::App.Properties.Resources.Crane2;
-            this.picCrane2.Location = new System.Drawing.Point(585, 145);
-            this.picCrane2.Name = "picCrane2";
-            this.picCrane2.Size = new System.Drawing.Size(157, 38);
-            this.picCrane2.TabIndex = 5;
-            this.picCrane2.TabStop = false;
-            // 
-            // picCrane11
-            // 
-            this.picCrane11.Image = global::App.Properties.Resources.Crane11;
-            this.picCrane11.Location = new System.Drawing.Point(534, 254);
-            this.picCrane11.Name = "picCrane11";
-            this.picCrane11.Size = new System.Drawing.Size(168, 40);
-            this.picCrane11.TabIndex = 4;
-            this.picCrane11.TabStop = false;
+            this.picCrane.BackColor = System.Drawing.SystemColors.Control;
+            this.picCrane.Image = global::App.Properties.Resources.Crane12;
+            this.picCrane.Location = new System.Drawing.Point(719, 46);
+            this.picCrane.Name = "picCrane";
+            this.picCrane.Size = new System.Drawing.Size(41, 19);
+            this.picCrane.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picCrane.TabIndex = 6;
+            this.picCrane.TabStop = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pictureBox1.Image = global::App.Properties.Resources.Shelf;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(816, 332);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
@@ -1675,9 +1653,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCrane)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -1721,15 +1697,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox picCrane11;
-        private System.Windows.Forms.PictureBox picCrane2;
         private System.Windows.Forms.TextBox txtErrorDesc1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtTaskType1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtColumn1;
-        private System.Windows.Forms.PictureBox picCrane12;
+        private System.Windows.Forms.PictureBox picCrane;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label14;
