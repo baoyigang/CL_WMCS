@@ -104,111 +104,78 @@
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="ProductTypeName" HeaderText="产品类别" SortExpression="ProductTypeName">
+                    <asp:BoundField DataField="CategoryName" HeaderText="产品类别" SortExpression="CategoryName">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
                      
-                     <asp:CheckBoxField DataField="ChkIsTmp" HeaderText="临时产品"  SortExpression="ChkIsTmp">
-                        <ItemStyle HorizontalAlign="Center" Width="10%" Wrap="False" />
+                    <asp:BoundField DataField="ProductEName" HeaderText="英文品名" SortExpression="ProductEName">
+                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
-                    </asp:CheckBoxField>
+                    </asp:BoundField>
+                    <asp:BoundField DataField="FactoryName" HeaderText="供应商" SortExpression="FactoryName">
+                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                        <HeaderStyle Wrap="False" />
+                    </asp:BoundField>
+                     <asp:BoundField DataField="ModelNo" HeaderText="型号" SortExpression="ModelNo">
+                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                        <HeaderStyle Wrap="False" />
+                    </asp:BoundField>
+                      
+                     <asp:BoundField DataField="Spec" HeaderText="规格" SortExpression="Spec">
+                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                        <HeaderStyle Wrap="False" />
+                    </asp:BoundField>
                     
-                    <asp:BoundField DataField="AxieNo" HeaderText="单位" SortExpression="AxieNo">
+                    <asp:BoundField DataField="Barcode" HeaderText="条码" SortExpression="Barcode">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="WheelDiameter" HeaderText="轴径" SortExpression="WheelDiameter">
+                    <asp:BoundField DataField="Propertity" HeaderText="产品属性" SortExpression="Propertity">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="CCZ_Diameter" HeaderText="齿侧轴径" SortExpression="CCZ_Diameter">
+                     <asp:BoundField DataField="Unit" HeaderText="单位" SortExpression="Unit">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="FCCZ_Diameter" HeaderText="非齿侧轴径" SortExpression="FCCZ_Diameter">
+                     <asp:BoundField DataField="Length" HeaderText="长度" SortExpression="Length">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="CCD_Diameter" HeaderText="齿侧端轴直径" SortExpression="CCD_Diameter">
+                     <asp:BoundField DataField="Width" HeaderText="宽度" SortExpression="Width">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="FCCD_Diameter" HeaderText="非齿侧端轴直径" SortExpression="FCCD_Diameter">
+                     <asp:BoundField DataField="Height" HeaderText="高" SortExpression="Height">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="CCXPBZW_Size" HeaderText="齿侧选配抱轴瓦尺寸" SortExpression="CCXPBZW_Size">
+                    <asp:BoundField DataField="Length" HeaderText="长度" SortExpression="Length">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="FCCXPBZW_Size" HeaderText="非齿侧选配抱轴瓦尺寸" SortExpression="FCCXPBZW_Size">
+                    <asp:BoundField DataField="Material" HeaderText="材质" SortExpression="Material">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                     <asp:BoundField DataField="GearNo" HeaderText="齿轮编号" SortExpression="GearNo">
+                    <asp:BoundField DataField="Weight" HeaderText="重量" SortExpression="Weight">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="CCLX_Flag" HeaderText="齿侧轮芯标记" SortExpression="CCLX_Flag">
+                    <asp:BoundField DataField="Color" HeaderText="颜色" SortExpression="Color">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                     <asp:BoundField DataField="FCCLX_Flag" HeaderText="非齿侧轮芯标记" SortExpression="FCCLX_Flag">
+                    <asp:BoundField DataField="ValidPeriod" HeaderText="有效期" SortExpression="ValidPeriod">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-
-                    <asp:BoundField DataField="CCLX_Year" HeaderText="齿侧轮芯制造年代" SortExpression="CCLX_Year">
+                    <asp:BoundField DataField="Description" HeaderText="描述" SortExpression="Description">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                     <asp:BoundField DataField="FCCLX_Year" HeaderText="非齿侧轮芯制造年代" SortExpression="FCCLX_Year">
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-
-                     <asp:BoundField DataField="CCLXFactoryName" HeaderText="齿侧轮芯生产厂家" SortExpression="CCLXFactoryName">
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-                     <asp:BoundField DataField="FCCLXFactoryName" HeaderText="非齿侧轮芯生产厂家" SortExpression="FCCLXFactoryName">
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-                     <asp:BoundField DataField="CXFactoryName" HeaderText="承修厂家" SortExpression="CXFactoryName">
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-                     <asp:BoundField DataField="CCLG_Flag" HeaderText="齿侧轮箍标记" SortExpression="CCLG_Flag">
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-                     <asp:BoundField DataField="FCCLG_Flag" HeaderText="非齿侧轮箍标记" SortExpression="FCCLG_Flag">
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-
-                    <asp:BoundField DataField="LDXC" HeaderText="轮对修程" SortExpression="LDXC">
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-
-                    <asp:TemplateField HeaderText="承修时间" SortExpression="CX_DateTime">
-                        <ItemTemplate>
-                            <%# ToYMD(DataBinder.Eval(Container.DataItem, "CX_DateTime"))%>
-                        </ItemTemplate>
-                        <HeaderStyle Wrap="False" />
-                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
-                    </asp:TemplateField>
-                    
-                    <asp:TemplateField HeaderText="入库时间" SortExpression="InStockDate">
-                        <ItemTemplate>
-                            <%# ToYMD(DataBinder.Eval(Container.DataItem, "InStockDate"))%>
-                        </ItemTemplate>
-                        <HeaderStyle Wrap="False" />
-                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
-                    </asp:TemplateField>
+                     
                     <asp:BoundField DataField="AreaName" HeaderText="库区" 
                         SortExpression="AreaName" >
                         <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />

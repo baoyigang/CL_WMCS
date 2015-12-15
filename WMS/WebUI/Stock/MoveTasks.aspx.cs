@@ -61,6 +61,9 @@ public partial class WebUI_Stock_MoveTasks : BasePage
         {
             ViewState["filter"] = Filter + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
             ViewState["CurrentPage"] = 1;
+            this.hdnRowIndex.Value = "0";
+            dvscrollX.Value = "0";
+            dvscrollY.Value = "0";
             DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             SetBindDataSub(dt);
         }
@@ -76,6 +79,8 @@ public partial class WebUI_Stock_MoveTasks : BasePage
     {
         ViewState["CurrentPage"] = 1;
         this.hdnRowIndex.Value = "0";
+        dvscrollX.Value = "0";
+        dvscrollY.Value = "0";
         DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
         SetBindDataSub(dt);
     }
@@ -85,6 +90,8 @@ public partial class WebUI_Stock_MoveTasks : BasePage
     {
         ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) - 1;
         this.hdnRowIndex.Value = "0";
+        dvscrollX.Value = "0";
+        dvscrollY.Value = "0";
         DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
         SetBindDataSub(dt);
     }
@@ -93,6 +100,8 @@ public partial class WebUI_Stock_MoveTasks : BasePage
     {
         ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) + 1;
         this.hdnRowIndex.Value = "0";
+        dvscrollX.Value = "0";
+        dvscrollY.Value = "0";
         DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
         SetBindDataSub(dt);
     }
@@ -101,6 +110,8 @@ public partial class WebUI_Stock_MoveTasks : BasePage
     {
         ViewState["CurrentPage"] = 0;
         this.hdnRowIndex.Value = "0";
+        dvscrollX.Value = "0";
+        dvscrollY.Value = "0";
         DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
         SetBindDataSub(dt);
     }
@@ -114,6 +125,8 @@ public partial class WebUI_Stock_MoveTasks : BasePage
 
         ViewState["CurrentPage"] = PageIndex;
         this.hdnRowIndex.Value = "0";
+        dvscrollX.Value = "0";
+        dvscrollY.Value = "0";
         DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
         SetBindDataSub(dt);
     }
@@ -132,7 +145,7 @@ public partial class WebUI_Stock_MoveTasks : BasePage
     {
         BLL.BLLBase bll = new BLL.BLLBase();
         DataTable dtSub = bll.FillDataTable("WMS.SelectBillTask", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
-        Session[FormID + "_S_GridView2"] = dtSub;
+        ViewState[FormID + "_S_GridView2"] = dtSub;
         this.GridView2.DataSource = dtSub;
         this.GridView2.DataBind();
         MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
@@ -144,6 +157,7 @@ public partial class WebUI_Stock_MoveTasks : BasePage
     protected void btnReload_Click(object sender, EventArgs e)
     {
         BtnReloadSub(Convert.ToInt32(this.hdnRowIndex.Value), this.hdnRowValue.Value, this.GridView1);
+        ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "SetScroll", "GetResultFromServer();", true);
     }
     #endregion
 

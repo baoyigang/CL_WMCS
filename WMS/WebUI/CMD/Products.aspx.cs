@@ -9,7 +9,7 @@ using IDAL;
 
 public partial class WebUI_CMD_Products : BasePage
 {
-    private string filter = "AreaCode='001' ";
+    private string filter = "1=1";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)

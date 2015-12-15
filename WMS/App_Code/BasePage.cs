@@ -616,7 +616,7 @@ public class BasePage : System.Web.UI.Page
         if (pindex < 0) pindex = 0;
 
         if (pindex >= dgv.PageCount) pindex = dgv.PageCount - 1;
-        DataTable dt1 = (DataTable)Session[FormID + "_" + strState + "_" + dgv.ID];
+        DataTable dt1 = (DataTable)ViewState[FormID + "_" + strState + "_" + dgv.ID];
 
 
         if (dt1.Rows.Count > 0)
@@ -676,7 +676,7 @@ public class BasePage : System.Web.UI.Page
     /// <param name="strState"></param>
     public void SetGridViewEmptyRow(GridView dgv, string strState)
     {
-        DataTable dt1 = (DataTable)Session[FormID + "_" + strState + "_" + dgv.ID];
+        DataTable dt1 = (DataTable)ViewState[FormID + "_" + strState + "_" + dgv.ID];
         if (dt1.Rows.Count == 0)
         {
             DataTable dtNew = dt1.Clone();

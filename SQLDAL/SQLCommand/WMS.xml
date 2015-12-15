@@ -16,19 +16,17 @@
   
   <Command ID="SelectBillDetail">
     <CommandString>
-      select detail.*,product.ProductName,product.ProductTypeName,product.AxieNo, ProductState.StateName from WMS_BillDetail detail
+      select detail.*,product.ProductName,product.CategoryName from WMS_BillDetail detail
       inner join VCMD_Product product on detail.ProductCode=product.ProductCode
-      left join CMD_ProductState ProductState on detail.StateNo=ProductState.StateNo
       where {0}
       ORDER BY RowID
     </CommandString>
   </Command>
   <Command ID="SelectBillTask">
     <CommandString>
-      select task.*,Product.ProductName,state.StateDesc,ProductState.StateName from WCS_TASK Task
+      select task.*,Product.ProductName,state.StateDesc from WCS_TASK Task
       inner join CMD_Product Product on task.ProductCode=Product.ProductCode
       inner join Sys_TableState state on task.State=state.State and state.TableName='WCS_task' and state.FieldName='State'
-      left join CMD_ProductState ProductState on Task.StateNo=ProductState.StateNo
       where task.ProductCode not in ('0001','0002') and {0}
       order by taskNo
     </CommandString>
@@ -49,19 +47,19 @@
   <!--入库单-->
   <Command ID="InsertInStockBill">
     <CommandString>
-      insert into WMS_BillMaster(BillID,BillDate,AreaCode,BillTypeCode,FactoryID,Memo,Creator,CreateDate,Updater,UpdateDate)
-      values(@BillID,@BillDate,@AreaCode,@BillTypeCode,@FactoryID,@Memo,@Creator,GETDATE(),@Updater,GETDATE())
+      insert into WMS_BillMaster(BillID,BillDate,AreaCode,BillTypeCode,FactoryID,SourceBillNo,Memo,BatchNo,Creator,CreateDate,Updater,UpdateDate)
+      values(@BillID,@BillDate,@AreaCode,@BillTypeCode,@FactoryID,@SourceBillNo,@Memo,@BatchNo,@Creator,GETDATE(),@Updater,GETDATE())
     </CommandString>
   </Command>
   <Command ID="UpdateInStock">
     <CommandString>
-      update WMS_BillMaster set BillDate=@BillDate, AreaCode=@AreaCode,BillTypeCode=@BillTypeCode,FactoryID=@FactoryID,Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where {0}
+      update WMS_BillMaster set BillDate=@BillDate, AreaCode=@AreaCode,BillTypeCode=@BillTypeCode,FactoryID=@FactoryID,Memo=@Memo,BatchNo=@BatchNo,SourceBillNo=@SourceBillNo,Updater=@Updater,UpdateDate=getdate() where {0}
     </CommandString>
   </Command>
   <Command ID="InsertInStockDetail">
     <CommandString>
-      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Memo,StateNo)
-      values(@BillID,@RowID,@ProductCode,@Quantity,@Memo,@StateNo)
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Weight,Barcode,Memo)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@Weight,@Barcode,@Memo)
     </CommandString>
   </Command>
   <Command ID="SpInstockTask">
@@ -78,20 +76,20 @@
   <!--出库单-->
   <Command ID="InsertOutStockBill">
     <CommandString>
-      insert into WMS_BillMaster(BillID,BillDate,BillTypeCode,AreaCode,TrainTypeCode,TrainNo,AxieLocation,Xc,Ccnz,Ccwz,Fccnz,Fccwz,Memo,Creator,CreateDate,Updater,UpdateDate)
-      values(@BillID,@BillDate,@BillTypeCode,@AreaCode,@TrainTypeCode,@TrainNo,@AxieLocation,@Xc,@Ccnz,@Ccwz,@Fccnz,@Fccwz,@Memo,@Creator,getdate(),@Updater,getdate())
+      insert into WMS_BillMaster(BillID,BillDate,BillTypeCode,AreaCode,SourceBillNo,BatchNo,Memo,Creator,CreateDate,Updater,UpdateDate)
+      values(@BillID,@BillDate,@BillTypeCode,@AreaCode,@SourceBillNo,@BatchNo,@Memo,@Creator,getdate(),@Updater,getdate())
     </CommandString>
   </Command>
   <Command ID="UpdateOutStock">
     <CommandString>
-      update WMS_BillMaster set BillDate=@BillDate, AreaCode=@AreaCode,BillTypeCode=@BillTypeCode,TrainTypeCode=@TrainTypeCode,TrainNo=@TrainNo,
-      AxieLocation=@AxieLocation,Xc=@Xc,Ccnz=@Ccnz,Ccwz=@Ccwz,Fccnz=@Fccnz,Fccwz=@Fccwz,Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where {0}
+      update WMS_BillMaster set BillDate=@BillDate, AreaCode=@AreaCode,BillTypeCode=@BillTypeCode,SourceBillNo=@SourceBillNo,BatchNo=@BatchNo,
+      Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where {0}
     </CommandString>
   </Command>
   <Command ID="InsertOutStockDetail">
     <CommandString>
-      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Memo)
-      values(@BillID,@RowID,@ProductCode,@Quantity,@Memo)
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Barcode,Weight,Memo)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@Barcode,@Weight,@Memo)
     </CommandString>
   </Command>
   <Command ID="SpOutstockTask">
@@ -108,7 +106,7 @@
   <Command ID="SelectProductQty">
     <CommandString>
       select ProductCode,(InstockQty-isnull((select SUM(UnStockQty) from View_ProductQty  where billid!=@BillID and  ProductCode=tmp.ProductCode ),0)) as StockQty from View_ProductQTy tmp
-      where ProductCode=@ProductCode
+      where ProductCode=@ProductCode and BarCode=@BarCode
     </CommandString>
   </Command>
   

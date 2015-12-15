@@ -77,12 +77,7 @@ public partial class Login : System.Web.UI.Page
             }
             catch (Exception exp)
             {
-                System.Diagnostics.StackFrame frame = new System.Diagnostics.StackFrame(0);
-                Session["ModuleName"] = this.Page.Title;
-                Session["FunctionName"] = frame.GetMethod().Name;
-                Session["ExceptionalType"] = exp.GetType().FullName;
-                Session["ExceptionalDescription"] = exp.Message;
-                Response.Redirect("Common/MistakesPage.aspx", false);
+                ltlMessage.Text = exp.Message;
             }
         }
         else

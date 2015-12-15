@@ -18,7 +18,7 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight - 250;
+            var h = document.documentElement.clientHeight - 200;
             $("#Sub-container").css("height", h);
         }
      </script>
@@ -71,7 +71,7 @@
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 出库日期
                         </td>
-                        <td  width="25%">
+                        <td  width="17%">
                                 &nbsp;<asp:TextBox ID="txtBillDate" 
                                     runat="server"  CssClass="TextRead" Width="90%" ReadOnly="True" 
                                      ></asp:TextBox>    
@@ -79,96 +79,65 @@
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 出库单号
                         </td>
-                        <td width="25%">
+                        <td width="17%">
                                 &nbsp;<asp:TextBox ID="txtID" 
                                     runat="server"  CssClass="TextRead" Width="90%" 
                                     MaxLength="20" ReadOnly="True" ></asp:TextBox> 
                         </td>
                             <td align="center" class="musttitle" style="width:8%;">
                                 出库类型</td>
-                        <td width="26%">
+                        <td width="17%">
                             &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%" 
                                 Enabled="False">
                             </asp:DropDownList>
                     
                         </td>
-                    </tr>
-                    <tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 库区</td>
-                        <td  width="25%">
+                        <td  width="17%">
                                 &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%" 
                                     Enabled="False">
                             </asp:DropDownList>
                         </td>
-                        <td align="center" class="musttitle" style="width:8%;"  >
-                                产品类型
+                    </tr>
+                    <tr>
+                        
+                        <td align="center" class="smalltitle" style="width:8%;"  >
+                                来源单号
                         </td>
-                        <td width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="90%" 
-                                    Enabled="False">
-                                </asp:DropDownList>
+                        <td width="17%">
+                                &nbsp;<asp:TextBox ID="txtSourceBillNo" runat="server" CssClass="TextRead" Width="90%" 
+                                ReadOnly="True"></asp:TextBox> 
                         </td>
                         <td align="center" class="smalltitle"  style="width:8%;">
-                            上车号
+                            出库批次
                         </td>
-                        <td width="26%">
-                        &nbsp;<asp:TextBox ID="txtTrainNo" runat="server" CssClass="TextRead" Width="90%" 
+                        <td width="17%">
+                        &nbsp;<asp:TextBox ID="txtBatchNo" runat="server" CssClass="TextRead" Width="90%" 
                                 ReadOnly="True"></asp:TextBox>
                         </td>
-                    </tr>
-                     <tr>
-                        <td align="center"  class="smalltitle" style="width:8%;"  >
-                                上车轴位</td>
-                        <td  width="25%">
-                             &nbsp;<asp:TextBox ID="txtAxieLocation" runat="server" CssClass="TextRead" 
-                                 Width="90%" ReadOnly="True"></asp:TextBox>        
+                        <td align="center"   style="width:8%;">
+                           
                         </td>
-                        <td align="center"  class="smalltitle" style="width:8%;"  >
-                                修程
+                        <td width="17%">
+                         
                         </td>
-                        <td width="25%">
-                             &nbsp;<asp:TextBox ID="txtXc" runat="server" CssClass="TextRead" Width="90%" 
-                                 ReadOnly="True"></asp:TextBox>
+                         <td align="center" class="smalltitle"  style="width:8%;">
+                           
                         </td>
-                        <td align="center"  class="smalltitle"  style="width:8%;">
-                            齿侧内轴
-                        </td>
-                        <td width="26%">
-                        &nbsp;<asp:TextBox ID="txtCcnz" runat="server" CssClass="TextRead" Width="90%" 
-                                ReadOnly="True"></asp:TextBox>
+                        <td width="17%">
+                         
                         </td>
                     </tr>
-                     <tr>
-                        <td align="center"  class="smalltitle" style="width:8%;"  >
-                                齿侧外轴</td>
-                        <td  width="25%">
-                                &nbsp;<asp:TextBox ID="txtCcwz" runat="server" CssClass="TextRead" Width="90%" 
-                                    ReadOnly="True"></asp:TextBox>
-                        </td>
-                        <td align="center"  class="smalltitle" style="width:8%;"  >
-                                非齿侧内轴
-                        </td>
-                        <td width="25%">
-                                &nbsp;<asp:TextBox ID="txtFccnz" runat="server" CssClass="TextRead" Width="90%" 
-                                    ReadOnly="True"></asp:TextBox>
-                        </td>
-                        <td align="center" class="smalltitle"   style="width:8%;">
-                            非齿侧外轴
-                        </td>
-                        <td width="26%">
-                        &nbsp;<asp:TextBox ID="txtFccwz" runat="server" CssClass="TextRead" Width="90%" 
-                                ReadOnly="True"></asp:TextBox>
-                        </td>
-                    </tr>
+                     
               
                     <tr style="height:45px">
                         <td align="center" class="smalltitle"  >
                             备注
                         </td>
-                        <td colspan="5"  valign="middle" >
-                            &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
-                                TextMode="MultiLine" Height="30px" Width="97%"></asp:TextBox>
+                        <td colspan="7"  valign="middle" >
+                            &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="TextRead" 
+                                TextMode="MultiLine" Height="30px" Width="98%" ReadOnly="True"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -191,6 +160,14 @@
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="Quantity" HeaderText="数量" SortExpression="Quantity">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Barcode" HeaderText="熔次卷号" SortExpression="Barcode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Weight" HeaderText="重量" SortExpression="Weight">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>

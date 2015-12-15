@@ -423,7 +423,7 @@ function ReturnInt(str) {
 function selectRow(index) {
     document.getElementById('hdnRowIndex').value = index;
     document.getElementById('btnReload').click();
-    GetResultFromServer();
+    
 
 }
 function Search() {
@@ -721,10 +721,13 @@ function GetResultFromServer() {
     try {
         var sx = document.getElementById('dvscrollX');
         var sy = document.getElementById('dvscrollY');
-        document.getElementById('Maincontainer').scrollTop = sy.value;
-        document.getElementById('Maincontainer').scrollLeft = sx.value;
+        var div = document.getElementById('divMain');
+        div.scrollTop =parseInt(sy.value);
+        div.scrollLeft =parseInt(sx.value);
     }
     catch (e) {
+
+
     }
 }
 

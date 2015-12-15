@@ -37,7 +37,7 @@ public partial class WebUI_CMD_FactoryView : BasePage
         {
             this.txtID.Text = dt.Rows[0]["FactoryID"].ToString();
             this.txtFactoryName.Text = dt.Rows[0]["FactoryName"].ToString();
-            this.ddlFlag.SelectedValue = dt.Rows[0]["Flag"].ToString();
+            
             this.txtLinkPerson.Text = dt.Rows[0]["LinkPerson"].ToString();
             this.txtLinkPhone.Text = dt.Rows[0]["LinkPhone"].ToString();
             this.txtFax.Text = dt.Rows[0]["Fax"].ToString();
@@ -55,7 +55,7 @@ public partial class WebUI_CMD_FactoryView : BasePage
     {
         this.txtID.Text = "";
         this.txtFactoryName.Text = "";
-        this.ddlFlag.SelectedValue = "";
+      
         this.txtLinkPerson.Text = "";
         this.txtLinkPhone.Text = "";
         this.txtFax.Text = "";

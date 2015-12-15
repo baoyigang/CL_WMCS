@@ -43,11 +43,7 @@ public partial class WebUI_OutStock_OutStockView : BasePage
         this.ddlAreaCode.DataSource = dtArea;
         this.ddlAreaCode.DataBind();
 
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", " ProductTypeCode<>'0001'") });
-        this.ddlTrainTypeCode.DataValueField = "ProductTypeCode";
-        this.ddlTrainTypeCode.DataTextField = "ProductTypeName";
-        this.ddlTrainTypeCode.DataSource = ProductType;
-        this.ddlTrainTypeCode.DataBind();
+       
 
         DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType", new DataParameter[] { new DataParameter("{0}", "Flag=2") });
         this.ddlBillTypeCode.DataValueField = "BillTypeCode";
@@ -66,14 +62,9 @@ public partial class WebUI_OutStock_OutStockView : BasePage
             this.txtBillDate.Text = ToYMD(dt.Rows[0]["BillDate"]);
             this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
             this.ddlBillTypeCode.SelectedValue = dt.Rows[0]["BillTypeCode"].ToString();
-            this.ddlTrainTypeCode.SelectedValue = dt.Rows[0]["TrainTypeCode"].ToString();
-            this.txtTrainNo.Text = dt.Rows[0]["TrainNo"].ToString();
-            this.txtAxieLocation.Text = dt.Rows[0]["AxieLocation"].ToString();
-            this.txtXc.Text = dt.Rows[0]["XC"].ToString();
-            this.txtCcnz.Text = dt.Rows[0]["Ccnz"].ToString();
-            this.txtCcwz.Text = dt.Rows[0]["Ccwz"].ToString();
-            this.txtFccnz.Text = dt.Rows[0]["Fccnz"].ToString();
-            this.txtFccwz.Text = dt.Rows[0]["Fccwz"].ToString();
+            this.txtSourceBillNo.Text = dt.Rows[0]["SourceBillNo"].ToString();
+            this.txtBatchNo.Text = dt.Rows[0]["BatchNo"].ToString();
+             
             this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
             this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
             this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);
@@ -149,7 +140,7 @@ public partial class WebUI_OutStock_OutStockView : BasePage
     private void BindDataSub()
     {
         DataTable dt = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text)) });
-        Session[FormID + "_View_dgViewSub1"] = dt;
+        ViewState[FormID + "_View_dgViewSub1"] = dt;
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         object o = dt.Compute("SUM(Quantity)", "");
@@ -161,6 +152,8 @@ public partial class WebUI_OutStock_OutStockView : BasePage
     {
         this.txtID.Text = "";
         this.txtBillDate.Text = "";
+        this.txtBatchNo.Text = "";
+        this.txtSourceBillNo.Text = "";
         this.txtMemo.Text = "";
         this.txtCreator.Text = "";
         this.txtCreatDate.Text = "";

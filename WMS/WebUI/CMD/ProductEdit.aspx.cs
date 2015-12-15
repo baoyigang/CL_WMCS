@@ -44,40 +44,17 @@ public partial class WebUI_CMD_ProductEdit : BasePage
     private void BindDropDownList()
     {
 
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and ProductTypeCode<>'0001'") });
-        this.ddlProductTypeCode.DataValueField = "ProductTypeCode";
-        this.ddlProductTypeCode.DataTextField = "ProductTypeName";
-        this.ddlProductTypeCode.DataSource = ProductType;
-        this.ddlProductTypeCode.DataBind();
+        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory");
+        this.ddlCategoryCode.DataValueField = "CategoryCode";
+        this.ddlCategoryCode.DataTextField = "CategoryName";
+        this.ddlCategoryCode.DataSource = ProductType;
+        this.ddlCategoryCode.DataBind();
 
-        //ddlTrainTypeCode
-        //DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType");
-        //this.ddlTrainTypeCode.DataValueField = "TypeCode";
-        //this.ddlTrainTypeCode.DataTextField = "TypeName";
-        //this.ddlTrainTypeCode.DataSource = TrainType;
-        //this.ddlTrainTypeCode.DataBind();
-
-        //ddlCCLX_Factory
-        DataTable CCLX_Factory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=1") });
-        this.ddlCCLX_Factory.DataValueField = "FactoryID";
-        this.ddlCCLX_Factory.DataTextField = "FactoryName";
-        this.ddlCCLX_Factory.DataSource = CCLX_Factory;
-        this.ddlCCLX_Factory.DataBind();
-
-        //ddlFCCLX_Factory
-
-        DataTable FCCLX_Factory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=2") });
-        this.ddlFCCLX_Factory.DataValueField = "FactoryID";
-        this.ddlFCCLX_Factory.DataTextField = "FactoryName";
-        this.ddlFCCLX_Factory.DataSource = FCCLX_Factory;
-        this.ddlFCCLX_Factory.DataBind();
-
-        ///ddlCX_Factory
-        DataTable CX_Factory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=3") });
-        this.ddlCX_Factory.DataValueField = "FactoryID";
-        this.ddlCX_Factory.DataTextField = "FactoryName";
-        this.ddlCX_Factory.DataSource = CX_Factory;
-        this.ddlCX_Factory.DataBind();
+        DataTable dtFactory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=3") });
+        this.ddlFactory.DataValueField = "FactoryID";
+        this.ddlFactory.DataTextField = "FactoryName";
+        this.ddlFactory.DataSource = dtFactory;
+        this.ddlFactory.DataBind();
 
     }
 
@@ -88,32 +65,29 @@ public partial class WebUI_CMD_ProductEdit : BasePage
         {
             this.txtID.Text = dt.Rows[0]["ProductCode"].ToString();
             this.txtProductName.Text = dt.Rows[0]["ProductName"].ToString();
-            this.ddlProductTypeCode.SelectedValue = dt.Rows[0]["ProductTypeCode"].ToString();
+            this.ddlCategoryCode.SelectedValue = dt.Rows[0]["CategoryCode"].ToString();
             //this.ddlTrainTypeCode.SelectedValue = dt.Rows[0]["TrainTypeCode"].ToString();
-            this.txtAxieNo.Text = dt.Rows[0]["AxieNo"].ToString();
-            this.txtWheelDiameter.Text = dt.Rows[0]["WheelDiameter"].ToString();
+            this.txtProductEName.Text = dt.Rows[0]["ProductEName"].ToString();
+            this.txtModelNo.Text = dt.Rows[0]["ModelNo"].ToString();
 
-            this.txtCCZ_Diameter.Text = dt.Rows[0]["CCZ_Diameter"].ToString();
-            this.txtFCCZ_Diameter.Text = dt.Rows[0]["FCCZ_Diameter"].ToString();
-            this.txtCCD_Diameter.Text = dt.Rows[0]["CCD_Diameter"].ToString();
-            this.txtFCCD_Diameter.Text = dt.Rows[0]["FCCD_Diameter"].ToString();
-            this.txtCCXPBZW_Size.Text = dt.Rows[0]["CCXPBZW_Size"].ToString();
-            this.txtFCCXPBZW_Size.Text = dt.Rows[0]["FCCXPBZW_Size"].ToString();
-            this.txtGearNo.Text = dt.Rows[0]["GearNo"].ToString();
-            this.txtCCLX_Flag.Text = dt.Rows[0]["CCLX_Flag"].ToString();
-            this.txtFCCLX_Flag.Text = dt.Rows[0]["FCCLX_Flag"].ToString();
-            this.txtCCLX_Year.Text = dt.Rows[0]["CCLX_Year"].ToString();
-            this.txtFCCLX_Year.Text = dt.Rows[0]["FCCLX_Year"].ToString();
-            this.ddlCCLX_Factory.SelectedValue = dt.Rows[0]["CCLX_FactoryID"].ToString();
-            this.ddlFCCLX_Factory.SelectedValue = dt.Rows[0]["FCCLX_FactoryID"].ToString();
-            this.ddlCX_Factory.SelectedValue = dt.Rows[0]["CX_FactoryID"].ToString();
-            this.txtCCLG_Flag.Text = dt.Rows[0]["CCLG_Flag"].ToString();
-            this.txtFCCLG_Flag.Text = dt.Rows[0]["FCCLG_Flag"].ToString();
-            this.chkTemp.Checked = dt.Rows[0]["IsTemp"].ToString() == "1" ? true : false;
+            this.txtUnit.Text = dt.Rows[0]["Unit"].ToString();
+            this.txtLength.Text = dt.Rows[0]["Length"].ToString();
+            this.txtWidth.Text = dt.Rows[0]["Width"].ToString();
+            this.txtHeight.Text = dt.Rows[0]["Height"].ToString();
+            this.txtWeight.Text = dt.Rows[0]["Weight"].ToString();
+            this.txtMaterial.Text = dt.Rows[0]["Material"].ToString();
+            this.txtColor.Text = dt.Rows[0]["Color"].ToString();
+            this.txtValidPeriod.Text = dt.Rows[0]["ValidPeriod"].ToString();
+            this.txtPartNo.Text = dt.Rows[0]["PartNo"].ToString();
+            this.txtStandardNo.Text = dt.Rows[0]["StandardNo"].ToString();
+            
 
-            this.txtLDXC.Text = dt.Rows[0]["LDXC"].ToString();
-            this.txtCX_DateTime.DateValue = dt.Rows[0]["CX_DateTime"];
-            this.txtInstockDate.Text = ToYMD(dt.Rows[0]["InstockDate"]);
+            this.ddlFactory.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
+
+
+            this.txtBarcode.Text = dt.Rows[0]["Barcode"].ToString();
+            this.txtPropertity.Text = dt.Rows[0]["Propertity"].ToString();
+            this.txtDescription.Text = dt.Rows[0]["Description"].ToString();
 
             this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
             this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
@@ -153,34 +127,29 @@ public partial class WebUI_CMD_ProductEdit : BasePage
             bll.ExecNonQuery("Cmd.InsertProduct", new DataParameter[] { 
                             new DataParameter("@ProductCode", this.txtID.Text.Trim()),
                             new DataParameter("@ProductName", this.txtProductName.Text.Trim()),
-                            new DataParameter("@ProductTypeCode", this.ddlProductTypeCode.SelectedValue),
-                            new DataParameter("@TrainTypeCode", ""),
-                            new DataParameter("@AxieNo", this.txtAxieNo.Text.Trim()),
-                            new DataParameter("@WheelDiameter", this.txtWheelDiameter.Text.Trim()),
-                            new DataParameter("@CCZ_Diameter", this.txtCCZ_Diameter.Text.Trim()),
-                            new DataParameter("@FCCZ_Diameter", this.txtFCCZ_Diameter.Text.Trim()),
-                            new DataParameter("@CCD_Diameter", this.txtCCD_Diameter.Text.Trim()),
-                            new DataParameter("@FCCD_Diameter", this.txtFCCD_Diameter.Text.Trim()),
-                            new DataParameter("@CCXPBZW_Size", this.txtCCXPBZW_Size.Text.Trim()),
-                            new DataParameter("@FCCXPBZW_Size", this.txtFCCXPBZW_Size.Text.Trim()),
-                            new DataParameter("@GearNo", this.txtGearNo.Text.Trim()),
-                            new DataParameter("@CCLX_Flag", this.txtCCLX_Flag.Text.Trim()),
-                            new DataParameter("@FCCLX_Flag", this.txtFCCLX_Flag.Text.Trim()),
-                            new DataParameter("@CCLX_Year", this.txtCCLX_Year.Text.Trim()),
-                            new DataParameter("@FCCLX_Year", this.txtFCCLX_Year.Text.Trim()),
-                            new DataParameter("@CCLX_Factory", this.ddlCCLX_Factory.SelectedValue),
-                            new DataParameter("@FCCLX_Factory", this.ddlFCCLX_Factory.SelectedValue),
-                            new DataParameter("@CX_Factory", this.ddlCX_Factory.SelectedValue),
-                            new DataParameter("@CCLG_Flag", this.txtCCLG_Flag.Text.Trim()),
-                            new DataParameter("@FCCLG_Flag", this.txtFCCLG_Flag.Text.Trim()),
-                            new DataParameter("@WarehouseCode", ""),
-                             new DataParameter("@AreaCode", bll.GetFieldValue("CMD_ProductType","AreaCode","ProductTypeCode='"+this.ddlProductTypeCode.SelectedValue+"'")),
-                            new DataParameter("@LDXC", this.txtLDXC.Text.Trim()),
-                            new DataParameter("@CX_DateTime", this.txtCX_DateTime.DateValue),
+                            new DataParameter("@CategoryCode", this.ddlCategoryCode.SelectedValue),
+                            new DataParameter("@ProductEName", this.txtProductEName.Text),
+                            new DataParameter("@FactoryID", this.ddlFactory.SelectedValue),
+                            new DataParameter("@ModelNo", this.txtModelNo.Text.Trim()),
+                            new DataParameter("@Spec", this.txtSpec.Text.Trim()),
+                            new DataParameter("@Barcode", this.txtBarcode.Text.Trim()),
+                            new DataParameter("@Propertity", this.txtPropertity.Text.Trim()),
+                            new DataParameter("@Unit", this.txtUnit.Text.Trim()),
+                            new DataParameter("@Length", this.txtLength.Text.Trim()),
+                            new DataParameter("@Width", this.txtWidth.Text.Trim()),
+                            new DataParameter("@Height", this.txtHeight.Text.Trim()),
+                            new DataParameter("@Material", this.txtMaterial.Text.Trim()),
+                            new DataParameter("@Weight", this.txtWeight.Text.Trim()),
+                            new DataParameter("@Color", this.txtColor.Text.Trim()),
+                            new DataParameter("StandardNo",this.txtStandardNo.Text.Trim()),
+                            new DataParameter("PartNo",this.txtPartNo.Text.Trim()),
+                            new DataParameter("@ValidPeriod", this.txtValidPeriod.Text.Trim()),
+                            new DataParameter("@Description", this.txtDescription.Text.Trim()),
+                            new DataParameter("@AreaCode", bll.GetFieldValue("CMD_ProductCategory","AreaCode","CategoryCode='"+this.ddlCategoryCode.SelectedValue+"'")),
                             new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                             new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
                             new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
-                            new DataParameter("@IsTemp",chkTemp.Checked ? "1" :"0")
+                          
                 });
         }
         else //修改
@@ -196,33 +165,26 @@ public partial class WebUI_CMD_ProductEdit : BasePage
 
             bll.ExecNonQuery("Cmd.UpdateProduct", new DataParameter[] {  
                             new DataParameter("@ProductName", this.txtProductName.Text.Trim()),
-                            new DataParameter("@ProductTypeCode", this.ddlProductTypeCode.SelectedValue),
-                            new DataParameter("@TrainTypeCode", ""),
-                            new DataParameter("@AxieNo", this.txtAxieNo.Text.Trim()),
-                            new DataParameter("@WheelDiameter", this.txtWheelDiameter.Text.Trim()),
-                            new DataParameter("@CCZ_Diameter", this.txtCCZ_Diameter.Text.Trim()),
-                            new DataParameter("@FCCZ_Diameter", this.txtFCCZ_Diameter.Text.Trim()),
-                            new DataParameter("@CCD_Diameter", this.txtCCD_Diameter.Text.Trim()),
-                            new DataParameter("@FCCD_Diameter", this.txtFCCD_Diameter.Text.Trim()),
-                            new DataParameter("@CCXPBZW_Size", this.txtCCXPBZW_Size.Text.Trim()),
-                            new DataParameter("@FCCXPBZW_Size", this.txtFCCXPBZW_Size.Text.Trim()),
-                            new DataParameter("@GearNo", this.txtGearNo.Text.Trim()),
-                            new DataParameter("@CCLX_Flag", this.txtCCLX_Flag.Text.Trim()),
-                            new DataParameter("@FCCLX_Flag", this.txtFCCLX_Flag.Text.Trim()),
-                            new DataParameter("@CCLX_Year", this.txtCCLX_Year.Text.Trim()),
-                            new DataParameter("@FCCLX_Year", this.txtFCCLX_Year.Text.Trim()),
-                            new DataParameter("@CCLX_Factory", this.ddlCCLX_Factory.SelectedValue),
-                            new DataParameter("@FCCLX_Factory", this.ddlFCCLX_Factory.SelectedValue),
-                            new DataParameter("@CX_Factory", this.ddlCX_Factory.SelectedValue),
-                            new DataParameter("@CCLG_Flag", this.txtCCLG_Flag.Text.Trim()),
-                            new DataParameter("@FCCLG_Flag", this.txtFCCLG_Flag.Text.Trim()),
-                            new DataParameter("@WarehouseCode", ""),
-                            new DataParameter("@AreaCode", bll.GetFieldValue("CMD_ProductType","AreaCode","ProductTypeCode='"+this.ddlProductTypeCode.SelectedValue+"'")),
-                            new DataParameter("@IsTemp",chkTemp.Checked ? "1" :"0"),
-                            new DataParameter("@LDXC", this.txtLDXC.Text.Trim()),
-                            new DataParameter("@CX_DateTime", this.txtCX_DateTime.DateValue),
+                            new DataParameter("@CategoryCode", this.ddlCategoryCode.SelectedValue),
+                            new DataParameter("@ProductEName", this.txtProductEName.Text),
+                            new DataParameter("@FactoryID", this.ddlFactory.SelectedValue),
+                            new DataParameter("@ModelNo", this.txtModelNo.Text.Trim()),
+                            new DataParameter("@Spec", this.txtSpec.Text.Trim()),
+                            new DataParameter("@Barcode", this.txtBarcode.Text.Trim()),
+                            new DataParameter("@Propertity", this.txtPropertity.Text.Trim()),
+                            new DataParameter("@Unit", this.txtUnit.Text.Trim()),
+                            new DataParameter("@Length", this.txtLength.Text.Trim()),
+                            new DataParameter("@Width", this.txtWidth.Text.Trim()),
+                            new DataParameter("@Height", this.txtHeight.Text.Trim()),
+                            new DataParameter("@Material", this.txtMaterial.Text.Trim()),
+                            new DataParameter("@Weight", this.txtWeight.Text.Trim()),
+                            new DataParameter("@Color", this.txtColor.Text.Trim()),
+                            new DataParameter("StandardNo",this.txtStandardNo.Text.Trim()),
+                            new DataParameter("PartNo",this.txtPartNo.Text.Trim()),
+                            new DataParameter("@ValidPeriod", this.txtValidPeriod.Text.Trim()),
+                            new DataParameter("@Description", this.txtDescription.Text.Trim()),
+                            new DataParameter("@AreaCode", bll.GetFieldValue("CMD_ProductCategory","AreaCode","CategoryCode='"+this.ddlCategoryCode.SelectedValue+"'")),
                             new DataParameter("@Memo", this.txtMemo.Text.Trim()),
-                            new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
                             new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
                             new DataParameter("@ProductCode", this.txtID.Text.Trim())
                                                                                });

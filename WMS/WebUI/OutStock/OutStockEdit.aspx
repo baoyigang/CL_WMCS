@@ -19,19 +19,19 @@
                 BindEvent();
             });
             function resize() {
-                var h = document.documentElement.clientHeight - 290;
+                var h = document.documentElement.clientHeight - 230;
                 $("#Sub-container").css("height", h);
             }
             function SelectProduct() {
                 var tableName = 'CMD_ProductInStock';
-                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') and ProductTypeCode='" + $('#ddlTrainTypeCode').val() + "'";
+                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsFixed='0'";
 
                 return GetMulSelectValue(tableName, 'hdnMulSelect', where);
             }
             function BindEvent() {
                 $("[ID$='ProductCode']").bind("change", function () {
                     var txtID = this.id;
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "'  and ProductCode not in ('0001','0002') and ProductTypeCode='" + $('#ddlTrainTypeCode').val() + "'";
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "'  and IsFixed='0'";
 
                     getWhereBaseData('CMD_Product', txtID + "," + txtID.replace("ProductCode", "ProductName"), 'ProductCode,ProductName', where);
                 });
@@ -74,6 +74,11 @@
            
         </script>
     
+    <style type="text/css">
+        .MultiLineTextBox
+        {}
+    </style>
+    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -106,91 +111,65 @@
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 出库日期
                         </td>
-                        <td  width="25%">
+                        <td  width="17%">
                                 &nbsp;<uc1:Calendar ID="txtBillDate" runat="server"  /></td>
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 出库单号
                         </td>
-                        <td width="25%">
+                        <td width="17%">
                                 &nbsp;<asp:TextBox ID="txtID" 
                                     runat="server"  CssClass="TextBox" Width="90%" 
                                     MaxLength="20" ></asp:TextBox> 
                         </td>
                             <td align="center" class="musttitle" style="width:8%;">
                                 出库类型</td>
-                        <td width="26%">
+                        <td width="17%">
                             &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%">
                             </asp:DropDownList>
                     
                         </td>
-                    </tr>
-                    <tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 库区</td>
-                        <td  width="25%">
+                        <td  width="17%">
                                 &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%" 
-                                    onselectedindexchanged="ddlAreaCode_SelectedIndexChanged" AutoPostBack="true">
+                                    AutoPostBack="true">
                             </asp:DropDownList>
                         </td>
-                        <td align="center" class="musttitle" style="width:8%;"  >
-                                产品类型
+                    </tr>
+                    <tr>
+                        
+                        <td align="center" class="smalltitle" style="width:8%;"  >
+                                来源单号
                         </td>
-                        <td width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="90%">
-                                </asp:DropDownList>
+                        <td width="17%">
+                                &nbsp;<asp:TextBox ID="txtSourceBillNo" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
                         </td>
                         <td align="center" class="smalltitle"  style="width:8%;">
-                            上车号
+                            出库批次
                         </td>
-                        <td width="26%">
-                        &nbsp;<asp:TextBox ID="txtTrainNo" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
+                        <td width="17%">
+                        &nbsp;<asp:TextBox ID="txtBatchNo" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
                         </td>
-                    </tr>
-                     <tr>
-                        <td align="center"  class="smalltitle" style="width:8%;"  >
-                                上车轴位</td>
-                        <td  width="25%">
-                             &nbsp;<asp:TextBox ID="txtAxieLocation" runat="server" CssClass="TextBox" 
-                                 Width="90%"></asp:TextBox>        
+                         <td align="center"   style="width:8%;">
+                           
                         </td>
-                        <td align="center"  class="smalltitle" style="width:8%;"  >
-                                修程
+                        <td width="17%">
+                         
                         </td>
-                        <td width="25%">
-                             &nbsp;<asp:TextBox ID="txtXc" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
+                         <td align="center"    style="width:8%;">
+                           
                         </td>
-                        <td align="center"  class="smalltitle"  style="width:8%;">
-                            齿侧内轴
-                        </td>
-                        <td width="26%">
-                        &nbsp;<asp:TextBox ID="txtCcnz" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
+                        <td width="17%">
+                         
                         </td>
                     </tr>
-                     <tr>
-                        <td align="center"  class="smalltitle" style="width:8%;"  >
-                                齿侧外轴</td>
-                        <td  width="25%">
-                                &nbsp;<asp:TextBox ID="txtCcwz" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
-                        </td>
-                        <td align="center"  class="smalltitle" style="width:8%;"  >
-                                非齿侧内轴
-                        </td>
-                        <td width="25%">
-                                &nbsp;<asp:TextBox ID="txtFccnz" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
-                        </td>
-                        <td align="center" class="smalltitle"   style="width:8%;">
-                            非齿侧外轴
-                        </td>
-                        <td width="26%">
-                        &nbsp;<asp:TextBox ID="txtFccwz" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
-                        </td>
-                    </tr>
+                      
               
                     <tr style="height:45px">
                         <td align="center" class="smalltitle"  >
                             备注
                         </td>
-                        <td colspan="5"  valign="middle" >
+                        <td colspan="7"  valign="middle" >
                             &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
                                 TextMode="MultiLine" Height="30px" Width="97%"></asp:TextBox>
                         </td>
@@ -209,7 +188,7 @@
                     </td>
                     </tr>
                 </table> 
-                <div id="Sub-container" style="overflow: auto; width: 100%; height: 280px" >
+                <div id="Sub-container" style="overflow: auto; width: 100%; height: 320px" >
                     <asp:GridView ID="dgViewSub1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin"
                         AllowPaging="True" Width="100%" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
                         <Columns>
@@ -239,7 +218,7 @@
                                 <HeaderStyle Width="20%"  />
                             </asp:TemplateField>
                                 
-                                <asp:TemplateField HeaderText="品名">
+                            <asp:TemplateField HeaderText="品名">
                                 <ItemTemplate>
                                     <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
                                 </ItemTemplate>
@@ -255,6 +234,24 @@
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="10%" />
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="熔次卷号">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Barcode" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="重量">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Weight" runat="server" Width="100%" CssClass="TextBox" style="text-align:right;" 
+                                    onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))" 	onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))" 
+                                    ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox>  
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+
+                            
                             <asp:TemplateField HeaderText="备注">
                                 <ItemTemplate>
                                     <asp:TextBox ID="SubMemo" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
@@ -272,7 +269,7 @@
                             数量合计
                         </td>
                         <td style="width:17%">
-                            &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead" Height="16px" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
                         </td>
                           
                         <td align="right">

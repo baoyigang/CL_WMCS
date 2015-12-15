@@ -53,7 +53,7 @@ public partial class WebUI_CMD_FactoryEdit : BasePage
         {
             this.txtID.Text = dt.Rows[0]["FactoryID"].ToString();
             this.txtFactoryName.Text = dt.Rows[0]["FactoryName"].ToString();
-            this.ddlFlag.SelectedValue = dt.Rows[0]["Flag"].ToString();
+            
             this.txtLinkPerson.Text = dt.Rows[0]["LinkPerson"].ToString();
             this.txtLinkPhone.Text = dt.Rows[0]["LinkPhone"].ToString();
             this.txtFax.Text = dt.Rows[0]["Fax"].ToString();
@@ -82,7 +82,7 @@ public partial class WebUI_CMD_FactoryEdit : BasePage
 
             bll.ExecNonQuery("Cmd.InsertFactory", new DataParameter[] { new DataParameter("@FactoryID", this.txtID.Text.Trim()),
                                                                              new DataParameter("@FactoryName", this.txtFactoryName.Text.Trim()),
-                                                                             new DataParameter("@Flag",this.ddlFlag.SelectedValue),
+                                                                             new DataParameter("@Flag",1),
                                                                              new DataParameter("@LinkPerson", this.txtLinkPerson.Text.Trim()),
                                                                              new DataParameter("@LinkPhone", this.txtLinkPhone.Text.Trim()),
                                                                              new DataParameter("@Fax", this.txtFax.Text.Trim()), 
@@ -94,7 +94,7 @@ public partial class WebUI_CMD_FactoryEdit : BasePage
         else //修改
         {
             bll.ExecNonQuery("Cmd.UpdateFactory", new DataParameter[] {  new DataParameter("@FactoryName", this.txtFactoryName.Text.Trim()),
-                                                                             new DataParameter("@Flag",this.ddlFlag.SelectedValue),
+                                                                             new DataParameter("@Flag",1),
                                                                              new DataParameter("@LinkPerson", this.txtLinkPerson.Text.Trim()),
                                                                              new DataParameter("@LinkPhone", this.txtLinkPhone.Text.Trim()),
                                                                              new DataParameter("@Fax", this.txtFax.Text.Trim()), 
