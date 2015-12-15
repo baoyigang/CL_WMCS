@@ -32,12 +32,12 @@ namespace App
         {
             try
             {
-                //lbLog.Scrollable = true;
-                //Logger.OnLog += new LogEventHandler(Logger_OnLog);
-                //context = new Context();
+                lbLog.Scrollable = true;
+                Logger.OnLog += new LogEventHandler(Logger_OnLog);
+                context = new Context();
 
-                //ContextInitialize initialize = new ContextInitialize();
-                //initialize.InitializeContext(context);
+                ContextInitialize initialize = new ContextInitialize();
+                initialize.InitializeContext(context);
 
                 View.frmMonitor f = new View.frmMonitor();
                 ShowForm(f);

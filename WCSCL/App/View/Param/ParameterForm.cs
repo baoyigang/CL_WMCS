@@ -20,8 +20,6 @@ namespace App.View.Param
         MCP.Service.TCP.Config.Configuration TcpConfg = new MCP.Service.TCP.Config.Configuration("Crane.xml");
 
         MCP.Service.Siemens.Config.Configuration PLC1 = new MCP.Service.Siemens.Config.Configuration("CranePLC1.xml");
-        MCP.Service.Siemens.Config.Configuration PLC2 = new MCP.Service.Siemens.Config.Configuration("CranePLC2.xml");
-        MCP.Service.Siemens.Config.Configuration PLC3 = new MCP.Service.Siemens.Config.Configuration("CarPLC.xml");
        
         private Dictionary<string, string> attributes = null;
 
@@ -49,18 +47,7 @@ namespace App.View.Param
             parameter.PLC1GroupString = PLC1.GroupString;
             parameter.PLC1UpdateRate = PLC1.UpdateRate;
             
-            //PLC2
-            parameter.PLC2ServerName = PLC2.ProgID;
-            parameter.PLC2ServerIP = PLC2.ServerName;
-            parameter.PLC2GroupString = PLC2.GroupString;
-            parameter.PLC2UpdateRate = PLC2.UpdateRate;
-
-            //PLC3
-            parameter.PLC3ServerName = PLC3.ProgID;
-            parameter.PLC3ServerIP = PLC3.ServerName;
-            parameter.PLC3GroupString = PLC3.GroupString;
-            parameter.PLC3UpdateRate = PLC3.UpdateRate;
-
+           
             propertyGrid.SelectedObject = parameter;
         }
 
@@ -91,18 +78,7 @@ namespace App.View.Param
                 PLC1.UpdateRate = parameter.PLC1UpdateRate;
                 PLC1.ServerName = parameter.PLC1ServerIP;
                 PLC1.Save();
-                //PLC2
-                PLC2.GroupString = parameter.PLC2GroupString;
-                PLC2.ProgID = parameter.PLC2ServerName;
-                PLC2.UpdateRate = parameter.PLC2UpdateRate;
-                PLC2.ServerName = parameter.PLC2ServerIP;
-                PLC2.Save();
-                //PLC3
-                PLC3.GroupString = parameter.PLC2GroupString;
-                PLC3.ProgID = parameter.PLC2ServerName;
-                PLC3.UpdateRate = parameter.PLC2UpdateRate;
-                PLC3.ServerName = parameter.PLC2ServerIP;
-                PLC3.Save();  
+                 
 
                 MessageBox.Show("系统参数保存成功，请重新启动本系统。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
