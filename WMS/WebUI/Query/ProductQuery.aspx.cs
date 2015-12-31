@@ -48,32 +48,17 @@ public partial class WebUI_Query_ProductQuery : BasePage
     private void BindOther()
     {
         BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and ProductTypeCode<>'0001'") });
+        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory", new DataParameter[] { new DataParameter("{0}", " IsFixed<>'1'") });
         DataRow dr = ProductType.NewRow();
-        dr["ProductTypeCode"] = "";
-        dr["ProductTypeName"] = "请选择";
+        dr["CategoryCode"] = "";
+        dr["CategoryName"] = "请选择";
         ProductType.Rows.InsertAt(dr, 0);
         ProductType.AcceptChanges();
 
-        this.ddlProductType.DataValueField = "ProductTypeCode";
-        this.ddlProductType.DataTextField = "ProductTypeName";
+        this.ddlProductType.DataValueField = "CategoryCode";
+        this.ddlProductType.DataTextField = "CategoryName";
         this.ddlProductType.DataSource = ProductType;
         this.ddlProductType.DataBind();
-
-
-
-
-        DataTable dtStateNo = bll.FillDataTable("Cmd.SelectProductState");
-        dr = dtStateNo.NewRow();
-        dr["StateNo"] = "";
-        dr["StateName"] = "请选择";
-        dtStateNo.Rows.InsertAt(dr, 0);
-        dtStateNo.AcceptChanges();
-
-        this.ddlStateNo.DataValueField = "StateNo";
-        this.ddlStateNo.DataTextField = "StateName";
-        this.ddlStateNo.DataSource = dtStateNo;
-        this.ddlStateNo.DataBind();
 
     }
     protected void WebReport1_StartReport(object sender, EventArgs e)
@@ -91,7 +76,7 @@ public partial class WebUI_Query_ProductQuery : BasePage
         strWhere = "1=1";
         if (this.ddlProductType.SelectedValue != "")
         {
-            strWhere += string.Format(" and productTypeCode='{0}'", this.ddlProductType.SelectedValue);
+            strWhere += string.Format(" and CategoryCode='{0}'", this.ddlProductType.SelectedValue);
         }
 
 
@@ -104,10 +89,7 @@ public partial class WebUI_Query_ProductQuery : BasePage
         {
             strWhere += " and ProductCode in (" + this.HdnProduct.Value + ") ";
         }
-        if (this.ddlStateNo.SelectedValue != "")
-        {
-            strWhere += " and StateNo='" + this.ddlStateNo.SelectedValue + "'";
-        }
+        
 
     }
     private bool LoadRpt()

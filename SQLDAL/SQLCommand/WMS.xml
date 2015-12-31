@@ -188,8 +188,8 @@
   <Command ID="SelectProductDetailQuery">
     <CommandString>
       select AreaCode,AreaName,ShelfCode,ShelfName,CellCode,CellName,CellRow,CellColumn,IsLock,
-      PalletCode,PalletBarcode,ProductCode,ProductName,ProductTypeCode,ProductTypeName,AxieNo,
-      BillNo,Quantity,InDate,StateNo,StateName
+      PalletCode,BarCode,ProductCode,ProductName,CategoryCode, CategoryName,Unit,
+      BillNo,Quantity,InDate
       from View_CMD_CELL_ALL
       where InDate is not null and {0}
     </CommandString>
@@ -197,10 +197,10 @@
 
   <Command ID="SelectProductTotalQuery">
     <CommandString>
-      select AreaName, ProductCode,ProductName,ProductTypeCode,ProductTypeName,AxieNo,StateNo,StateName,COUNT(1) as Qty
+      select AreaName, ProductCode,ProductName,CategoryCode, CategoryName,Unit,COUNT(1) as Qty
       from View_CMD_CELL_ALL Cell
       where  InDate is not null  and {0}
-      group by AreaName,ProductCode,ProductName,ProductTypeCode,ProductTypeName,AxieNo,StateNo,StateName
+      group by AreaName,ProductCode,ProductName,CategoryCode, CategoryName,Unit
     </CommandString>
   </Command>
 
