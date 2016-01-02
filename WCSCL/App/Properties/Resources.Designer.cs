@@ -95,6 +95,20 @@ namespace App.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _551fb5a24da28a97739ca06c843ac6ff {
+            get {
+                object obj = ResourceManager.GetObject("551fb5a24da28a97739ca06c843ac6ff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Barcode_32 {
+            get {
+                object obj = ResourceManager.GetObject("Barcode_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap calculator {
             get {
                 object obj = ResourceManager.GetObject("calculator", resourceCulture);

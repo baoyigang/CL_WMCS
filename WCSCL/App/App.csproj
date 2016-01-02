@@ -327,6 +327,8 @@
     <None Include="Resources\12.png" />
     <None Include="Resources\111.png" />
     <None Include="Resources\1111.png" />
+    <None Include="Resources\551fb5a24da28a97739ca06c843ac6ff.png" />
+    <None Include="Resources\Barcode_32.png" />
     <Content Include="Resources\down.png" />
     <None Include="Resources\monitor.png" />
     <Content Include="Resources\next.png" />

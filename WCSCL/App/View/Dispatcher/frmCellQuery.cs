@@ -281,7 +281,7 @@ namespace App.View.Dispatcher
             int i = e.Y < top[1] ? 0 : 1;
             int shelf = currentPage * 2 + i - 1;
 
-            int column = columns - (e.X - left) / cellWidth;
+            int column = (e.X - left) / cellWidth +1;
             
             int row = rows - (e.Y - top[i]) / cellHeight + 1;
 
@@ -473,7 +473,7 @@ namespace App.View.Dispatcher
                 int i = e.Y < top[1] ? 0 : 1;
                 int shelf = currentPage * 2 + i - 1;
 
-                int column = columns - (e.X - left) / cellWidth;
+                int column =  (e.X - left) / cellWidth + 1;
                 int row = rows - (e.Y - top[i]) / cellHeight + 1;
                 if (column <= columns && row <= rows && row > 0 && column > 0)
                 {
