@@ -292,7 +292,7 @@
       INSERT INTO CMD_PRODUCT(ProductCode, ProductName, ProductEName, CategoryCode, FactoryID, ModelNo, Spec, Barcode, Propertity, Unit, Length, Width, Height, Material, Weight,
       Color,StandardNo,PartNo, ValidPeriod, Description, Memo, Creator, CreateDate, Updater, UpdateDate, AreaCode)
       values(@ProductCode, @ProductName, @ProductEName, @CategoryCode, @FactoryID, @ModelNo, @Spec, @Barcode, @Propertity, @Unit, @Length, @Width, @Height, @Material, @Weight,
-      @Color,@StandardNo,@PartNo, @ValidPeriod, @Description, @Memo, @Creator, getdate(), Updater, getdate(), @AreaCode)
+      @Color,@StandardNo,@PartNo, @ValidPeriod, @Description, @Memo, @Creator, getdate(), @Updater, getdate(), @AreaCode)
     </CommandString>
   </Command>
   <Command ID="UpdateProduct">
