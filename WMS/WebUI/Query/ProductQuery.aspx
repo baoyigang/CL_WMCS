@@ -42,13 +42,11 @@
                });
            }
            function getWhere() {
-               var where = "ProductCode not in ('0001','0002')";
+               var where = "IsFixed<>'1'";
                if ($("#ddlProductType").val() != "") {
-                   where += " and " + escape("ProductTypeCode='" + $('#ddlProductType').val() + "'");
+                   where += " and " + escape("CategoryCode='" + $('#ddlProductType').val() + "'");
                }
-               if ($("#ddlStateNo").val() != "") {
-                   where += " and " + escape(" and StateNo='" + $('#ddlStateNo').val() + "'");
-               }
+              
                return where;
            }
 
@@ -74,13 +72,7 @@
                             <asp:DropDownList ID="ddlProductType" runat="server" Width="90%">
                             </asp:DropDownList>
                         </td>
-                         <td   align="center" class="musttitle" style="width:6%;">
-                            产品状态 
-                        </td>
-                        <td align="left"   style="width:10%;" >
-                            <asp:DropDownList ID="ddlStateNo" runat="server" Width="90%">
-                            </asp:DropDownList>
-                        </td>
+                        
                         <td   align="center" class="musttitle" style="width:5%;">
                             产品
                         </td>

@@ -93,10 +93,8 @@ public partial class WebUI_Query_WarehouseCell : BasePage
 
         int Rows = int.Parse(ShelfCell.Rows[0]["Rows"].ToString());
         int Columns = int.Parse(ShelfCell.Rows[0]["Columns"].ToString());
-        string Width = "15%";
-        if (Columns > 6)
-            Width = "8%";
-
+        string Width = "2%";
+         
 
 
         Table tb = new Table();
@@ -108,24 +106,20 @@ public partial class WebUI_Query_WarehouseCell : BasePage
             TableRow row = new TableRow();
             for (int j = Columns; j >= 1; j--)
             {
-                int k = j;
-                if (shelfCode == "001002" || shelfCode == "001004")  //特殊处理
+                if (j == Columns)
                 {
-                    k = j + 1;
-                }
-                if (shelfCode == "001005")
-                {
-                    k = 12 - j;
-                }
-                if (shelfCode == "001006")
-                {
-                    k = 13 - j;
+                    if (shelfCode == "001002" || shelfCode == "001003" || shelfCode == "001004" || shelfCode == "001006" || shelfCode == "001007" || shelfCode == "001010" || shelfCode == "001011")
+                    {
+                        TableCell cellAdd = new TableCell();
+                        cellAdd.Attributes.Add("style", "height:25px;width:" + Width + ";border:0px solid #008B8B");
+                        row.Cells.Add(cellAdd);
+                    }
                 }
 
                 if (AreaCode == "")
-                    strWhere = string.Format("CellRow={0} and CellColumn={1}", i, k);
+                    strWhere = string.Format("CellRow={0} and CellColumn={1}", i, j);
                 else
-                    strWhere = string.Format("CellRow={0} and CellColumn={1} and AreaCode='{2}'", i, k, AreaCode);
+                    strWhere = string.Format("CellRow={0} and CellColumn={1} and AreaCode='{2}'", i, j, AreaCode);
 
 
                 DataRow[] drs = ShelfCell.Select(strWhere, "");
@@ -156,7 +150,7 @@ public partial class WebUI_Query_WarehouseCell : BasePage
                 }
                 if (j == 1)
                 {
-                    if (shelfCode == "001002" || shelfCode == "001005" || shelfCode == "001004")
+                    if (shelfCode == "001002" || shelfCode == "001003" || shelfCode == "001004" || shelfCode =="001006"||shelfCode == "001007"||shelfCode == "001010" ||shelfCode == "001011")
                     {
                         TableCell cellAdd = new TableCell();
                         cellAdd.Attributes.Add("style", "height:25px;width:" + Width + ";border:0px solid #008B8B");
@@ -178,28 +172,32 @@ public partial class WebUI_Query_WarehouseCell : BasePage
                 TableRow rowNum = new TableRow();
                 for (int j = Columns; j >= 1; j--)
                 {
+                    string K = j.ToString();
+                    if (j == Columns)
+                    {
+                        if (shelfCode == "001002" || shelfCode == "001003" || shelfCode == "001004" || shelfCode == "001006" || shelfCode == "001007" || shelfCode == "001010" || shelfCode == "001011")
+                        {
+                          
+                            TableCell cellNum1 = new TableCell();
+                            cellNum1.Attributes.Add("style", "height:40px;width:" + Width.ToString() + "px;border:0px solid #008B8B");
+                            cellNum1.Attributes.Add("align", "center");
+                            cellNum1.Attributes.Add("Valign", "top");
+                            rowNum.Cells.Add(cellNum1);
+                        }
+                    }
+                    if (j == 1)
+                    {
+                        if (shelfCode == "001002" || shelfCode == "001003" || shelfCode == "001004" || shelfCode == "001006" || shelfCode == "001007" || shelfCode == "001010" || shelfCode == "001011")
+                            continue;
+                    }
 
-                    int k = j;
-                    if (shelfCode == "001002" || shelfCode == "001004")  //特殊处理
-                    {
-                        k = j + 1;
-                    }
-                    if (shelfCode == "001005")
-                    {
-                        k = 12 - j;
-                    }
-                    if (shelfCode == "001006")
-                    {
-                        k = 13 - j;
-                    }
                     TableCell cellNum = new TableCell();
                     cellNum.Attributes.Add("style", "height:40px;width:" + Width.ToString() + "px;border:0px solid #008B8B");
                     cellNum.Attributes.Add("align", "center");
                     cellNum.Attributes.Add("Valign", "top");
-                    cellNum.Text = "<font color=\"#008B8B\">" + k.ToString() + "</font>";
+                    cellNum.Text = "<font color=\"#008B8B\">" + K  + "</font>";
 
                     rowNum.Cells.Add(cellNum);
-
                 }
                 tb.Rows.Add(rowNum);
 
