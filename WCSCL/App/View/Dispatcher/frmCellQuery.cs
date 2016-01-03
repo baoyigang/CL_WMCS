@@ -249,7 +249,7 @@ namespace App.View.Dispatcher
         }
         private void FillCell(Graphics g, int top, int row, int column, int quantity,string shelfCode)
         {           
-            int x = left + (44 - column) * cellWidth;
+            int x = left + (column-1) * cellWidth;
 
             int y = top + row * cellHeight;
             if (quantity == 1)  //空货位锁定
@@ -432,14 +432,14 @@ namespace App.View.Dispatcher
             {
                 if (IsLock == "0")
                 {
-                    if (ProductCode == "0001" || ProductCode == "0002")
+                    if (ProductCode == "0001")
                         Flag = 6;
                     else
                         Flag = 2;
                 }
                 else
                 {
-                    if (ProductCode == "0001" || ProductCode == "0002")
+                    if (ProductCode == "0001")
                         Flag = 7;
                     else
                         Flag = 3;
