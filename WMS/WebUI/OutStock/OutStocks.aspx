@@ -80,7 +80,7 @@
                 </table>
                     
                 </div>
-                <div id="table-container" style="overflow: auto; WIDTH: 100%; HEIGHT: 200px" onscroll="javascript:RecordPostion(this);">
+                <div id="divMain" style="overflow: auto; WIDTH: 100%; HEIGHT: 200px" onscroll="javascript:RecordPostion(this);">
                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="100%" OnRowDataBound="GridView1_RowDataBound">
                         <Columns>
                             <asp:TemplateField >

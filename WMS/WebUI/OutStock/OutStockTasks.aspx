@@ -18,7 +18,7 @@
         });
         function resize() {
             var h = document.documentElement.clientHeight - 260;
-            $("#dinMain").css("height", h);
+            $("#divMain").css("height", h);
         }
     </script>
 </head>
