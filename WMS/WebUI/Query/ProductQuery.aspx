@@ -94,9 +94,9 @@
                              &nbsp;<asp:Button ID="btnSearch" runat="server" CssClass="ButtonQuery" 
                                  onclick="btnPreview_Click" tabIndex="2" Text="查询" Width="58px" 
                                 onclientclick="return PrintClick();" /> &nbsp;&nbsp;
-                             <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonRefresh" 
+                             <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonReset" 
                                  OnClientClick="return Refresh()" tabIndex="2" 
-                                 Text="刷新" Width="58px" />
+                                 Text="重新过滤" Width="80px" />
                         </td>  
                                                                      
                     </tr>
