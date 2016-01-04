@@ -55,15 +55,15 @@ public partial class WebUI_Query_TaskQuery : BasePage
     private void BindOther()
     {
         BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and ProductTypeCode<>'0001'") });
+        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' AND IsFixed !='1'") });
         DataRow dr = ProductType.NewRow();
-        dr["ProductTypeCode"] = "";
-        dr["ProductTypeName"] = "请选择";
+        dr["CategoryCode"] = "";
+        dr["CategoryName"] = "请选择";
         ProductType.Rows.InsertAt(dr, 0);
         ProductType.AcceptChanges();
 
-        this.ddlProductType.DataValueField = "ProductTypeCode";
-        this.ddlProductType.DataTextField = "ProductTypeName";
+        this.ddlProductType.DataValueField = "CategoryCode";
+        this.ddlProductType.DataTextField = "CategoryName";
         this.ddlProductType.DataSource = ProductType;
         this.ddlProductType.DataBind();
 
@@ -98,16 +98,16 @@ public partial class WebUI_Query_TaskQuery : BasePage
     {
         string AreaCode = ddlArea.SelectedValue;
         BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='" + AreaCode + "' and ProductTypeCode<>'0001'") });
+        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='" + AreaCode + "' AND IsFixed !='1'") });
 
         DataRow dr = ProductType.NewRow();
-        dr["ProductTypeCode"] = "";
-        dr["ProductTypeName"] = "请选择";
+        dr["CategoryCode"] = "";
+        dr["CategoryName"] = "请选择";
         ProductType.Rows.InsertAt(dr, 0);
         ProductType.AcceptChanges();
 
-        this.ddlProductType.DataValueField = "ProductTypeCode";
-        this.ddlProductType.DataTextField = "ProductTypeName";
+        this.ddlProductType.DataValueField = "CategoryCode";
+        this.ddlProductType.DataTextField = "CategoryName";
         this.ddlProductType.DataSource = ProductType;
         this.ddlProductType.DataBind();
 
@@ -165,7 +165,7 @@ public partial class WebUI_Query_TaskQuery : BasePage
 
         if (this.ddlProductType.SelectedValue != "")
         {
-            strWhere += string.Format(" and Product.productTypeCode='{0}'", this.ddlProductType.SelectedValue);
+            strWhere += string.Format(" and Product.CategoryCode='{0}'", this.ddlProductType.SelectedValue);
         }
 
 
