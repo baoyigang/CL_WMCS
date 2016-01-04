@@ -92,7 +92,7 @@ public partial class WebUI_Query_WarehouseCell : BasePage
         DataTable ShelfCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByShelf", new DataParameter[] { new DataParameter("{0}", strWhere) });
 
         int Rows = int.Parse(ShelfCell.Rows[0]["Rows"].ToString());
-        int Columns = int.Parse(ShelfCell.Rows[0]["Columns"].ToString());
+        int Columns = 45;
         string Width = "2%";
          
 
@@ -150,12 +150,12 @@ public partial class WebUI_Query_WarehouseCell : BasePage
                 }
                 if (j == Columns)
                 {
-                    if (shelfCode == "001002" || shelfCode == "001003" || shelfCode == "001004" || shelfCode =="001006"||shelfCode == "001007"||shelfCode == "001010" ||shelfCode == "001011")
-                    {
-                        TableCell cellAdd = new TableCell();
-                        cellAdd.Attributes.Add("style", "height:25px;width:" + Width + ";border:0px solid #008B8B");
-                        row.Cells.Add(cellAdd);
-                    }
+                    //if (shelfCode == "001002" || shelfCode == "001003" || shelfCode == "001004" || shelfCode =="001006"||shelfCode == "001007"||shelfCode == "001010" ||shelfCode == "001011")
+                    //{
+                    //    TableCell cellAdd = new TableCell();
+                    //    cellAdd.Attributes.Add("style", "height:25px;width:" + Width + ";border:0px solid #008B8B");
+                    //    row.Cells.Add(cellAdd);
+                    //}
                     TableCell cellTag = new TableCell();
                     cellTag.Attributes.Add("style", "height:25px;border:0px solid #008B8B");
                     cellTag.Attributes.Add("align", "right");
@@ -175,7 +175,7 @@ public partial class WebUI_Query_WarehouseCell : BasePage
                     string K = j.ToString();
                     if (j == 1 )
                     {
-                        if (shelfCode == "001002" || shelfCode == "001003" || shelfCode == "001004" || shelfCode == "001006" || shelfCode == "001007" || shelfCode == "001010" || shelfCode == "001011")
+                        if (shelfCode == "001002" || shelfCode == "001003"  || shelfCode == "001006" || shelfCode == "001007" || shelfCode == "001010" || shelfCode == "001011")
                         {
                           
                             TableCell cellNum1 = new TableCell();
@@ -198,19 +198,19 @@ public partial class WebUI_Query_WarehouseCell : BasePage
 
                     rowNum.Cells.Add(cellNum);
 
-                    if (j == Columns)
-                    {
-                        if (shelfCode == "001002" || shelfCode == "001003" || shelfCode == "001004" || shelfCode == "001006" || shelfCode == "001007" || shelfCode == "001010" || shelfCode == "001011")
-                        {
+                    //if (j == Columns)
+                    //{
+                    //    if (shelfCode == "001002" || shelfCode == "001003" || shelfCode == "001004" || shelfCode == "001006" || shelfCode == "001007" || shelfCode == "001010" || shelfCode == "001011")
+                    //    {
 
-                            TableCell cellNum1 = new TableCell();
-                            cellNum1.Attributes.Add("style", "height:40px;width:" + Width.ToString() + "px;border:0px solid #008B8B");
-                            cellNum1.Attributes.Add("align", "center");
-                            cellNum1.Attributes.Add("Valign", "top");
-                            rowNum.Cells.Add(cellNum1);
-                        }
+                    //        TableCell cellNum1 = new TableCell();
+                    //        cellNum1.Attributes.Add("style", "height:40px;width:" + Width.ToString() + "px;border:0px solid #008B8B");
+                    //        cellNum1.Attributes.Add("align", "center");
+                    //        cellNum1.Attributes.Add("Valign", "top");
+                    //        rowNum.Cells.Add(cellNum1);
+                    //    }
 
-                    }
+                    //}
                     
                 }
                 tb.Rows.Add(rowNum);
