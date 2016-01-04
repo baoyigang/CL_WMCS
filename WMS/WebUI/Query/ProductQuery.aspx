@@ -96,7 +96,7 @@
                                 onclientclick="return PrintClick();" /> &nbsp;&nbsp;
                              <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonRefresh" 
                                  OnClientClick="return Refresh()" tabIndex="2" 
-                                 Text="刷新" Width="58px" />
+                                 Text="重置" Width="58px" />
                         </td>  
                                                                      
                     </tr>

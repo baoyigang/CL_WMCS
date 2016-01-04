@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/14/2015 18:04:58" ReportInfo.Modified="12/31/2015 21:42:34" ReportInfo.CreatorVersion="1.9.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/14/2015 18:04:58" ReportInfo.Modified="01/04/2016 21:33:00" ReportInfo.CreatorVersion="1.9.9.0">
   <Dictionary>
     <TableDataSource Name="ProductQuery" ReferenceName="ProductQuery" DataType="System.Int32" Enabled="true">
       <Column Name="AreaCode" DataType="System.String"/>
@@ -26,15 +26,15 @@
   <ReportPage Name="Page1">
     <PageHeaderBand Name="PageHeader1" Width="718.2" Height="68.04">
       <TextObject Name="Text1" Width="718.2" Height="37.8" Text="库存明细表" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
-      <TableObject Name="Table1" Top="49.14" Width="633.72" Height="18.9" Border.Lines="All">
+      <TableObject Name="Table1" Top="49.14" Width="712" Height="18.9" Border.Lines="All">
         <TableColumn Name="Column1" Width="64.6"/>
         <TableColumn Name="Column2" Width="68.37"/>
-        <TableColumn Name="Column3" Width="102.42"/>
+        <TableColumn Name="Column3" Width="149.67"/>
         <TableColumn Name="Column4" Width="37.8"/>
         <TableColumn Name="Column5" Width="56.7"/>
         <TableColumn Name="Column6" Width="73.71"/>
         <TableColumn Name="Column19"/>
-        <TableColumn Name="Column7" Width="82.37"/>
+        <TableColumn Name="Column7" Width="113.4"/>
         <TableColumn Name="Column8" Width="81.6"/>
         <TableRow Name="Row1">
           <TableCell Name="Cell1" Border.Lines="Right" Text="产品类型" VertAlign="Center" Font="宋体, 9pt"/>
@@ -50,15 +50,15 @@
       </TableObject>
     </PageHeaderBand>
     <DataBand Name="Data1" Top="72.04" Width="718.2" Height="22.68" DataSource="ProductQuery">
-      <TableObject Name="Table2" Left="-0.01" Width="633.84" Height="22.68" Border.Lines="All">
+      <TableObject Name="Table2" Left="-0.01" Width="712.11" Height="22.68" Border.Lines="All">
         <TableColumn Name="Column10" Width="64.64"/>
         <TableColumn Name="Column11" Width="68.42"/>
-        <TableColumn Name="Column12" Width="102.42"/>
+        <TableColumn Name="Column12" Width="149.69"/>
         <TableColumn Name="Column13" Width="37.8"/>
         <TableColumn Name="Column14" Width="56.7"/>
         <TableColumn Name="Column15" Width="73.71"/>
         <TableColumn Name="Column20"/>
-        <TableColumn Name="Column16" Width="82.4"/>
+        <TableColumn Name="Column16" Width="113.4"/>
         <TableColumn Name="Column17" Width="81.6"/>
         <TableRow Name="Row2" Height="22.68">
           <TableCell Name="Cell10" Border.Lines="Right" Text="[ProductQuery.CategoryName]" VertAlign="Center" Font="宋体, 9pt"/>
