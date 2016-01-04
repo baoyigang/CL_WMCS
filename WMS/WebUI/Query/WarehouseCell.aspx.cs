@@ -237,7 +237,7 @@ public partial class WebUI_Query_WarehouseCell : BasePage
 
             if (IsLock == "1")
             {
-                if (ProductCode == "0001" || ProductCode == "0002")
+                if (ProductCode == "0001" )
                 {
                     Flag = "Gold";
                 }
@@ -248,7 +248,7 @@ public partial class WebUI_Query_WarehouseCell : BasePage
             }
             else
             {
-                if (ProductCode == "0001" || ProductCode == "0002")
+                if (ProductCode == "0001")
                 {
                     Flag = "Orange";
                 }

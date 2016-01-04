@@ -231,10 +231,6 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="CarNo" HeaderText="小车号" SortExpression="CarNo">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
                             <asp:BoundField DataField="CellCode" HeaderText="货位" SortExpression="CellCode">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />

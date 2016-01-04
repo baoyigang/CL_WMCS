@@ -27,7 +27,7 @@
       select task.*,Product.ProductName,state.StateDesc from WCS_TASK Task
       inner join CMD_Product Product on task.ProductCode=Product.ProductCode
       inner join Sys_TableState state on task.State=state.State and state.TableName='WCS_task' and state.FieldName='State'
-      where task.ProductCode not in ('0001','0002') and {0}
+      where  {0}
       order by taskNo
     </CommandString>
   </Command>
