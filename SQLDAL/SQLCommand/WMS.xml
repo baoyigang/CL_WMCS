@@ -188,7 +188,7 @@
   <Command ID="SelectProductDetailQuery">
     <CommandString>
       select AreaCode,AreaName,ShelfCode,ShelfName,CellCode,CellName,CellRow,CellColumn,IsLock,
-      PalletCode,BarCode,ProductCode,ProductName,CategoryCode, CategoryName,Unit,
+      PalletBarcode,BarCode,ProductCode,ProductName,CategoryCode, CategoryName,Unit,
       BillNo,Quantity,InDate
       from View_CMD_CELL_ALL
       where InDate is not null and {0}
