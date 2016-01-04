@@ -14,6 +14,21 @@
     height:16px;
     vertical-align:middle;
 }
+.ButtonReset
+{
+    font-family: "微软雅黑"; 
+    font-size:10pt;  
+    border: 0px #ff0000 solid; 
+    background-color:Transparent;
+    background-image:url(../images/op/Reset.png); 
+    background-repeat:no-repeat;
+    CURSOR: pointer; 
+    padding-left:18px;
+    font-style: normal ; 
+    line-height:16px;
+    height:16px;
+    vertical-align:middle;
+}
 
 /* 返回*/
 .ButtonBack
