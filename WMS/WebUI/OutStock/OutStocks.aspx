@@ -19,7 +19,7 @@
         });
         function resize() {
             var h = document.documentElement.clientHeight - 260;
-            $("#table-container").css("height", h);
+            $("#divMain").css("height", h);
         }
     </script>
 </head>
