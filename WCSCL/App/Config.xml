@@ -11,7 +11,7 @@
   </Services>
   <Processes>
     <!--堆垛机Process-->
-    <Process Name="CraneProcess" Type="Dispatching.dll, Dispatching.Process.CraneProcess">
+    <Process Name="CraneProcess" Type="App.exe, App.Dispatching.Process.CraneProcess">
       <Item ServiceName="CranePLC1" ItemName="CraneTaskFinished" />
     </Process>
   </Processes>

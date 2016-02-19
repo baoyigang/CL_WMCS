@@ -38,16 +38,11 @@
     <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Lib\BLL.dll</HintPath>
-    </Reference>
     <Reference Include="DataGridViewAutoFilter">
       <HintPath>..\..\..\Lib\DataGridViewAutoFilter.dll</HintPath>
     </Reference>
-    <Reference Include="IDAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Lib\IDAL.dll</HintPath>
+    <Reference Include="IServices">
+      <HintPath>..\..\..\Lib\IServices.dll</HintPath>
     </Reference>
     <Reference Include="MCP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -61,8 +56,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Lib\MCP.Service.TCP.dll</HintPath>
     </Reference>
+    <Reference Include="OPC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Lib\OPC.dll</HintPath>
+    </Reference>
+    <Reference Include="OpcRcw.Comn, Version=1.10.2.0, Culture=neutral, PublicKeyToken=9a40e993cbface53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\Lib\OpcRcw.Comn.dll</HintPath>
+    </Reference>
+    <Reference Include="OpcRcw.Da, Version=3.0.3.0, Culture=neutral, PublicKeyToken=9a40e993cbface53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\Lib\OpcRcw.Da.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,7 +87,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\BLLBase.cs" />
     <Compile Include="Crane.cs" />
+    <Compile Include="Dispatching\Process\CarProcess.cs" />
+    <Compile Include="Dispatching\Process\CraneProcess.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,9 +320,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DB.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\Shelf.png" />
     <None Include="Resources\Crane11.png" />
     <None Include="Resources\Crane2.png" />
@@ -340,16 +350,6 @@
     <Content Include="ViewConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\SQLDAL\SQLDAL.csproj">
-      <Project>{3D2E8955-A851-42EC-BE68-F1EB02B7834B}</Project>
-      <Name>SQLDAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dispatching\Dispatching.csproj">
-      <Project>{7C262527-51F1-4586-B590-9F2AD56EDAAC}</Project>
-      <Name>Dispatching</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
