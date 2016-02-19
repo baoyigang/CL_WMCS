@@ -8,7 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using IDAL;
+using Util;
 using System.Drawing;
 
 public partial class WebUI_SysInfo_RoleManage_RoleManage : BasePage

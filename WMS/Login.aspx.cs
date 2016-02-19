@@ -52,8 +52,8 @@ public partial class Login : System.Web.UI.Page
                         #region 添加登录日志
 
                         BLL.BLLBase bll = new BLL.BLLBase();
-                        bll.ExecNonQuery("Security.InsertOperatorLog", new IDAL.DataParameter[]{new IDAL.DataParameter("@LoginUser", Session["G_user"].ToString()),new IDAL.DataParameter("@LoginTime",DateTime.Now),
-                                                         new IDAL.DataParameter("@LoginModule","登录系统"),new IDAL.DataParameter("@ExecuteOperator","用户登录")});
+                        bll.ExecNonQuery("Security.InsertOperatorLog", new DataParameter[]{new DataParameter("@LoginUser", Session["G_user"].ToString()),new DataParameter("@LoginTime",DateTime.Now),
+                                                         new DataParameter("@LoginModule","登录系统"),new DataParameter("@ExecuteOperator","用户登录")});
 
                         #endregion
                         TimeSpan stLogin = new TimeSpan(0, 0, System.Web.HttpContext.Current.Session.Timeout, 0, 0);
@@ -64,8 +64,8 @@ public partial class Login : System.Web.UI.Page
                     else
                     {
                         BLL.BLLBase bll = new BLL.BLLBase();
-                        bll.ExecNonQuery("Security.InsertOperatorLog", new IDAL.DataParameter[]{new IDAL.DataParameter("@LoginUser",this.txtUserName.Text.Trim()),new IDAL.DataParameter("@LoginTime",DateTime.Now),
-                                                         new IDAL.DataParameter("@LoginModule","登录页面"),new IDAL.DataParameter("@ExecuteOperator","登录(用户密码有误)")});
+                        bll.ExecNonQuery("Security.InsertOperatorLog", new DataParameter[]{new DataParameter("@LoginUser",this.txtUserName.Text.Trim()),new DataParameter("@LoginTime",DateTime.Now),
+                                                         new DataParameter("@LoginModule","登录页面"),new DataParameter("@ExecuteOperator","登录(用户密码有误)")});
                         ltlMessage.Text = "对不起,您输入的密码有误!";
                     }
                 }

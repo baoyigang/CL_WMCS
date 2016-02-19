@@ -10,7 +10,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Data.SqlClient;
 using System.Text;
-using IDAL;
+using Util;
 
 public partial class WebUI_SysInfo_ConfigPlan_ConfigPlan:BasePage
 {
