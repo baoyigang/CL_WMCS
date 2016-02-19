@@ -82,10 +82,10 @@
       <HintPath>..\..\..\Lib\Util.dll</HintPath>
     </Reference>
     <Reference Include="XPanderControl">
-      <HintPath>..\Libraries\XPanderControl.dll</HintPath>
+      <HintPath>..\..\..\Lib\XPanderControl.dll</HintPath>
     </Reference>
     <Reference Include="XPExplorerBar">
-      <HintPath>..\Libraries\XPExplorerBar.dll</HintPath>
+      <HintPath>..\..\..\Lib\XPExplorerBar.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +136,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\SQLDAL\SQLDAL.csproj">
+      <Project>{3D2E8955-A851-42EC-BE68-F1EB02B7834B}</Project>
+      <Name>SQLDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

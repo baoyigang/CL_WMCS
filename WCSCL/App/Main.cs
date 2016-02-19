@@ -42,9 +42,9 @@ namespace App
                 View.frmMonitor f = new View.frmMonitor();
                 ShowForm(f);
 
-                tmWorkTimer.Interval = 3000;
-                tmWorkTimer.Elapsed += new System.Timers.ElapsedEventHandler(tmWorker);
-                tmWorkTimer.Start();
+                //tmWorkTimer.Interval = 3000;
+                //tmWorkTimer.Elapsed += new System.Timers.ElapsedEventHandler(tmWorker);
+                //tmWorkTimer.Start();
                 
             }
             catch (Exception ee)

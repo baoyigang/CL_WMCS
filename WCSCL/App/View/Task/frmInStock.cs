@@ -33,30 +33,13 @@ namespace App.View.Task
 
         private void toolStripButton_Request_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < this.dgvMain.SelectedRows.Count; i++)
+            frmInStockTask f = new frmInStockTask();
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (this.dgvMain.SelectedRows[i].Cells["colState"].Value.ToString() == "等待")
-                {
-                    DataGridViewSelectedRowCollection rowColl = dgvMain.SelectedRows;
-                    if (rowColl == null)
-                        return;
-                    DataRow dr = (rowColl[i].DataBoundItem as DataRowView).Row;
-                    frmInStockTask f = new frmInStockTask(dr);
-                    if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        
-                        //string TaskNo = this.dgvMain.SelectedRows[0].Cells["colTaskNo"].Value.ToString();
-                        //bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
-                        this.BindData();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("选中的状态非[等待],请确认！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
+                //string TaskNo = this.dgvMain.SelectedRows[0].Cells["colTaskNo"].Value.ToString();
+                //bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
+                this.BindData();
             }
-            
         }
 
         private void toolStripButton_Cancel_Click(object sender, EventArgs e)

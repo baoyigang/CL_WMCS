@@ -84,12 +84,6 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -223,9 +217,6 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -316,18 +307,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CranePLC2.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CranePLC3.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="DB.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Monitor_bak.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Shelf.png" />
@@ -342,6 +322,13 @@
     <None Include="Resources\report.png" />
     <None Include="Resources\close.png" />
     <None Include="Resources\calculator.png" />
+    <None Include="Resources\1234.png" />
+    <None Include="Resources\123.png" />
+    <None Include="Resources\12.png" />
+    <None Include="Resources\111.png" />
+    <None Include="Resources\1111.png" />
+    <None Include="Resources\551fb5a24da28a97739ca06c843ac6ff.png" />
+    <None Include="Resources\Barcode_32.png" />
     <Content Include="Resources\down.png" />
     <None Include="Resources\monitor.png" />
     <Content Include="Resources\next.png" />
@@ -353,6 +340,16 @@
     <Content Include="ViewConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SQLDAL\SQLDAL.csproj">
+      <Project>{3D2E8955-A851-42EC-BE68-F1EB02B7834B}</Project>
+      <Name>SQLDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dispatching\Dispatching.csproj">
+      <Project>{7C262527-51F1-4586-B590-9F2AD56EDAAC}</Project>
+      <Name>Dispatching</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

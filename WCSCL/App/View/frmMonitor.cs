@@ -16,13 +16,14 @@ namespace App.View
     {
         private Point InitialP1;
         private Point InitialP2;
-        private Point InitialP3;
-        int columnDis1 = 88;
-        int columnDis2 = 90;
-        int columnDis3 = 54;
+
+        float colDis = 20.75f;
+        float rowDis = 54.4f;
+        
+        float colIndex = 1;
+        float rowIndex = 1;
         private System.Timers.Timer tmWorkTimer = new System.Timers.Timer();
         private System.Timers.Timer tmCrane1 = new System.Timers.Timer();
-        private System.Timers.Timer tmCrane2 = new System.Timers.Timer();
         private System.Timers.Timer tmCar = new System.Timers.Timer();
         BLL.BLLBase bll = new BLL.BLLBase();
         Dictionary<int, string> dicCraneFork = new Dictionary<int, string>();
@@ -44,20 +45,10 @@ namespace App.View
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            Point P1 = picCrane11.Location;
-            P1.X = P1.X - 88;
-
-            this.picCrane11.Location = P1;
-
-            Point P2 = picCrane12.Location;
+            Point P2 = picCrane.Location;
             P2.X = P2.X - 90;
 
-            this.picCrane12.Location = P2;
-
-            Point P3 = picCrane2.Location;
-            P3.X = P3.X - 54;
-
-            this.picCrane2.Location = P3;
+            this.picCrane.Location = P2;
         }
 
         //private void btnBack_Click(object sender, EventArgs e)
@@ -74,15 +65,13 @@ namespace App.View
             Cars.OnCar += new CarEventHandler(Monitor_OnCar);
             AddDicKeyValue();
 
-            InitialP1 = picCrane11.Location;
-            InitialP2 = picCrane2.Location;
-            InitialP3 = picCrane12.Location;
-            picCrane11.Parent = pictureBox1;
-            picCrane11.BackColor = Color.Transparent;
-            picCrane12.Parent = pictureBox1;
-            picCrane12.BackColor = Color.Transparent;
-            picCrane2.Parent = pictureBox1;
-            picCrane2.BackColor = Color.Transparent;
+            InitialP1 = picCrane.Location;
+            picCrane.Parent = pictureBox1;
+            picCrane.BackColor = Color.Transparent;
+
+            InitialP2 = picCar.Location;
+            picCar.Parent = pictureBox1;
+            picCar.BackColor = Color.Transparent;
 
             this.BindData();
             for (int i = 0; i < this.dgvMain.Columns.Count - 1; i++)
@@ -96,13 +85,9 @@ namespace App.View
             tmCrane1.Elapsed += new System.Timers.ElapsedEventHandler(tmCraneWorker1);
             tmCrane1.Start();
 
-            tmCrane2.Interval = 3000;
-            tmCrane2.Elapsed += new System.Timers.ElapsedEventHandler(tmCraneWorker2);
-            tmCrane2.Start();
-
-            tmCar.Interval = 3000;
-            tmCar.Elapsed += new System.Timers.ElapsedEventHandler(tmCarWorker);
-            tmCar.Start();
+            //tmCar.Interval = 3000;
+            //tmCar.Elapsed += new System.Timers.ElapsedEventHandler(tmCarWorker);
+            //tmCar.Start();
         }
         private void AddDicKeyValue()
         {
@@ -261,29 +246,10 @@ namespace App.View
                 //堆垛机位置
                 if (crane.CraneNo == 1)
                 {
-                    if (crane.Column < 7)
-                    {
-                        this.picCrane11.Visible = true;
-                        this.picCrane12.Visible = false;
-                        Point P1 = InitialP1;
-                        P1.X = P1.X - (crane.Column - 1) * columnDis1;
-                        this.picCrane11.Location = P1;
-                    }
-                    else
-                    {
-                        this.picCrane11.Visible = false;
-                        this.picCrane12.Visible = true;
-                        Point P3 = InitialP3;
-                        P3.X = P3.X - (12 - crane.Column) * columnDis2;
-                        this.picCrane12.Location = P3;
-                    }
-                }
-                else
-                {
-                    Point P2 = InitialP2;
-                    P2.X = P2.X - (crane.Column - 1) * columnDis3;
-                    this.picCrane2.Location = P2;
-                }
+                    this.picCrane.Visible = true;
+                    Point P1 = InitialP1;
+                    P1.X = P1.X + (int)((crane.Column-1) * colDis);
+                }                
 
                 txt = GetTextBox("txtHeight", crane.CraneNo);
                 if (txt != null)
@@ -302,7 +268,7 @@ namespace App.View
 
                 //更新错误代码、错误描述
                 //更新任务状态为执行中
-                bll.ExecNonQuery("WCS.UpdateTaskError", new DataParameter[] { new DataParameter("@CraneErrCode", crane.ErrCode.ToString()), new DataParameter("@CraneErrDesc", dicCraneError[crane.ErrCode]), new DataParameter("@TaskNo", crane.TaskNo) });
+                //bll.ExecNonQuery("WCS.UpdateTaskError", new DataParameter[] { new DataParameter("@CraneErrCode", crane.ErrCode.ToString()), new DataParameter("@CraneErrDesc", dicCraneError[crane.ErrCode]), new DataParameter("@TaskNo", crane.TaskNo) });
                 if(crane.ErrCode>0)
                     Logger.Error(crane.CraneNo.ToString() + "堆垛机执行时出现错误,代码:"+ crane.ErrCode.ToString() + ",描述:" + dicCraneError[crane.ErrCode]);
             }
@@ -423,57 +389,12 @@ namespace App.View
                 tmCrane1.Start();
             }
         }
-        private void tmCraneWorker2(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            try
-            {
-                tmCrane2.Stop();
-
-                int[] location = new int[2];
-                string serviceName = "CranePLC2";
-                object[] obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneLocation"));
-                for (int j = 0; j < obj.Length; j++)
-                    location[j] = Convert.ToInt16(obj[j]) - 48;
-
-                int[] craneInfo = new int[6];
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneInfo"));
-                for (int j = 0; j < obj.Length; j++)
-                    craneInfo[j] = Convert.ToInt16(obj[j]) - 48;
-
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo"));
-                string plcTaskNo = Util.ConvertStringChar.BytesToString(obj);
-
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneSpeed"));
-
-                Crane crane = new Crane();
-                crane.CraneNo = 2;
-                crane.Column = location[0];
-                crane.Height = location[1];
-                crane.ForkStatus = craneInfo[1];
-                crane.Action = craneInfo[2];
-                crane.TaskType = craneInfo[3];
-                crane.ErrCode = craneInfo[4];
-                crane.TaskNo = plcTaskNo;
-                crane.WalkCode = int.Parse(obj[3].ToString());
-                crane.UpDownCode = int.Parse(obj[4].ToString());
-
-                Cranes.CraneInfo(crane);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex.Message);
-            }
-            finally
-            {
-                tmCrane2.Start();
-            }
-        }
+        
         private void tmCarWorker(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
             {
                 tmCar.Stop();
-
 
                 int[] carInfo = new int[6];
                 object[] obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService("CarPLC", "01_CarInfo"));
@@ -500,38 +421,7 @@ namespace App.View
                     carInfo[j] = Convert.ToInt16(obj[j]) - 48;
 
                 obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService("CarPLC", "02_CarTaskInfo"));
-                TaskNo = Util.ConvertStringChar.BytesToString(obj);
-
-                Car car2 = new Car();
-                car2.CarNo = 2;
-                car2.Load = carInfo[0];
-
-                car2.Status = carInfo[2];
-                car2.TaskType = carInfo[3];
-                car2.ErrCode = carInfo[4];
-                car2.Action = carInfo[5];
-                car2.TaskNo = TaskNo;
-
-                Cars.CarInfo(car2);
-
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService("CarPLC", "03_CarInfo"));
-                for (int j = 0; j < 6; j++)
-                    carInfo[j] = Convert.ToInt16(obj[j]) - 48;
-
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService("CarPLC", "03_CarTaskInfo"));
-                TaskNo = Util.ConvertStringChar.BytesToString(obj);
-
-                Car car3 = new Car();
-                car3.CarNo = 3;
-                car3.Load = carInfo[0];
-
-                car3.Status = carInfo[2];
-                car3.TaskType = carInfo[3];
-                car3.ErrCode = carInfo[4];
-                car3.Action = carInfo[5];
-                car3.TaskNo = TaskNo;
-
-                Cars.CarInfo(car3);
+                TaskNo = Util.ConvertStringChar.BytesToString(obj);                
             }
             catch (Exception ex)
             {
@@ -567,11 +457,26 @@ namespace App.View
 
         private void btnBack1_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("是否要召回1号堆垛机到初始位置?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (colIndex > 45)
             {
-                PutCommand("1", 7);
-                Logger.Info("1号堆垛机下发召回命令");
+                colIndex = 1;
+                rowIndex++;
+                if (rowIndex > 6)
+                    rowIndex = 1;
             }
+            Point P = InitialP1;
+            P.X = P.X + (int)(colDis * (colIndex - 1));
+            P.Y = P.Y + (int)(rowDis*(rowIndex-1));
+
+            this.picCrane.Location = P;
+            colIndex++;
+
+
+            //if (MessageBox.Show("是否要召回1号堆垛机到初始位置?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            //{
+            //    PutCommand("1", 7);
+            //    Logger.Info("1号堆垛机下发召回命令");
+            //}
         }
         private void PutCommand(string craneNo, byte TaskType)
         {
