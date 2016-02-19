@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using IDAL;
+using Util;
 
 public partial class WebUI_Stock_MoveView : BasePage
 {

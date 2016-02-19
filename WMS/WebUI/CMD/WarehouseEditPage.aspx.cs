@@ -8,7 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using IDAL;
+using Util;
 
 public partial class WebUI_CMD_WarehouseEditPage : BasePage
 {

@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Collections;
-using IDAL;
+using Util;
 using System.Configuration;
 
 public partial class Index_Main : System.Web.UI.Page

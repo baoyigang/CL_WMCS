@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Drawing;
-using IDAL;
+using Util;
 
 public partial class WebUI_SysInfo_UserGroupManage_UserGroup : BasePage
 {

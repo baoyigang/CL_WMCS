@@ -5,7 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.SessionState;
-using IDAL;
+using Util;
 
 public class LeftTreeJson : IHttpHandler, IRequiresSessionState
 {

@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml;
 using System.Text;
 using System.Data.SqlClient;
-using IDAL;
+using Util;
 using System.Collections.Generic; 
 public partial class Common_Select : System.Web.UI.Page
 {

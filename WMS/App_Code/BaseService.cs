@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using System.Data;
-using IDAL;
+using Util;
 
 
 /// <summary>
@@ -44,6 +44,7 @@ public class BaseService : System.Web.Services.WebService {
         if (strFieldName == "")
             strFieldName = "*";
 
+       
         BLL.BLLBase bll = new BLL.BLLBase();
         dt = bll.FillDataTable("Security.SelectFieldValue", new DataParameter[] { new DataParameter("{0}", TableName), new DataParameter("{1}", strFieldName), new DataParameter("{2}", strWhere) });
 

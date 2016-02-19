@@ -12,7 +12,7 @@ using FastReport.Data;
 using FastReport.Utils;
 using System.Data;
 using System.IO;
-using IDAL;
+using Util;
 
 
 public partial class WebUI_Query_TaskQuery : BasePage

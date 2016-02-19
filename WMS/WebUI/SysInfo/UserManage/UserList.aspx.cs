@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Collections.Generic;
-using IDAL;
+using Util;
 
 
 public partial class WebUI_SysInfo_UserManage_UserList :BasePage

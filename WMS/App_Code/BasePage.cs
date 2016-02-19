@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Text;
-using IDAL;
+using Util;
 /// <summary>
 ///BasePage 的摘要说明
 /// </summary>
@@ -250,8 +250,8 @@ public class BasePage : System.Web.UI.Page
     {
 
         BLL.BLLBase bll = new BLL.BLLBase();
-        bll.ExecNonQuery("Security.InsertOperatorLog", new IDAL.DataParameter[]{new IDAL.DataParameter("@LoginUser",Session["G_user"].ToString()),new IDAL.DataParameter("@LoginTime",DateTime.Now),
-                                                         new IDAL.DataParameter("@LoginModule",moduleName),new IDAL.DataParameter("@ExecuteOperator",executeOperation)});
+        bll.ExecNonQuery("Security.InsertOperatorLog", new DataParameter[]{new DataParameter("@LoginUser",Session["G_user"].ToString()),new DataParameter("@LoginTime",DateTime.Now),
+                                                         new DataParameter("@LoginModule",moduleName),new DataParameter("@ExecuteOperator",executeOperation)});
     }
 
     /// <summary>
