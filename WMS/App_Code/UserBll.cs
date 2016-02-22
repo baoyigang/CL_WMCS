@@ -12,42 +12,20 @@ namespace BLL.Security
 {
     public class UserBll
     {
-        private Dictionary<string, object> Channels = new Dictionary<string, object>();
-
         private IServices.Security.ISecurityService bll;
 
         public UserBll()
         {
-            bll = GetChannel<IServices.Security.ISecurityService>();
+            bll =Server.GetChannel<IServices.Security.ISecurityService>();
             bll.SetCnKey("");
         }
         public UserBll(string CnKey)
         {
-            bll = GetChannel<IServices.Security.ISecurityService>();
+            bll =Server.GetChannel<IServices.Security.ISecurityService>();
             bll.SetCnKey(CnKey);
         }
 
-        private TChannel GetChannel<TChannel>()
-        {
-            try
-            {
-                string endPointConfigName = typeof(TChannel).Name;
-                if (Channels.ContainsKey(endPointConfigName))
-                {
-                    return (TChannel)Channels[endPointConfigName];
-                }
-
-                ChannelFactory<TChannel> channelFactory = new ChannelFactory<TChannel>(endPointConfigName);
-                TChannel channel = channelFactory.CreateChannel();
-                Channels.Add(endPointConfigName, channel);
-                return channel;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
+       
         public DataTable GetUserInfo(string UserName)
         {
 

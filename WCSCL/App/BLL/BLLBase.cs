@@ -11,41 +11,21 @@ namespace BLL
 {
     public class BLLBase
     {
-        private Dictionary<string, object> Channels = new Dictionary<string, object>();
-       
+     
        private  IServices.IBLLBaseService bll;
 
         public BLLBase()
         {
-            bll = GetChannel<IServices.IBLLBaseService>();
+            bll =Server.GetChannel<IServices.IBLLBaseService>();
             bll.SetCnKey("");
         }
         public BLLBase(string CnKey)
         {
-            bll = GetChannel<IServices.IBLLBaseService>();
+            bll = Server.GetChannel<IServices.IBLLBaseService>();
             bll.SetCnKey(CnKey);
         }
 
-        private TChannel GetChannel<TChannel>()
-        {
-            try
-            {
-                string endPointConfigName = typeof(TChannel).Name;
-                if (Channels.ContainsKey(endPointConfigName))
-                {
-                    return (TChannel)Channels[endPointConfigName];
-                }
-
-                ChannelFactory<TChannel> channelFactory = new ChannelFactory<TChannel>(endPointConfigName);
-                TChannel channel = channelFactory.CreateChannel();
-                Channels.Add(endPointConfigName, channel);
-                return channel;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+     
         /// <summary>
         /// 使用指定连接名，执行指定命令ID的非查询SQL语句
         /// </summary>
