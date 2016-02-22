@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BLLBase.cs" />
+    <Compile Include="BLL\Server.cs" />
     <Compile Include="Crane.cs" />
     <Compile Include="Dispatching\Process\CarProcess.cs" />
     <Compile Include="Dispatching\Process\CraneProcess.cs" />
