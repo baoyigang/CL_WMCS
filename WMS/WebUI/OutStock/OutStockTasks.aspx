@@ -43,7 +43,6 @@
                              </td>
 						    <td  width="15%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
                                     <asp:ListItem Selected="True" Value="BillTypeName">出库类型</asp:ListItem>
-                                    <asp:ListItem Value="AreaName">库区</asp:ListItem>
                                     <asp:ListItem Value="FactoryName">工程</asp:ListItem>
                                     <asp:ListItem Value="BillID">出库单号</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
@@ -108,10 +107,6 @@
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="BillTypeName" HeaderText="出库类型" SortExpression="BillTypeName">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
-                              <asp:BoundField DataField="AreaName" HeaderText="库区" SortExpression="AreaName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>

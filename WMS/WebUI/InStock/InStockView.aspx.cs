@@ -35,11 +35,6 @@ public partial class WebUI_InStock_InStockView : BasePage
     #region 绑定方法
     private void BindDropDownList()
     {
-        DataTable dtArea = bll.FillDataTable("Cmd.SelectArea");
-        this.ddlAreaCode.DataValueField = "AreaCode";
-        this.ddlAreaCode.DataTextField = "AreaName";
-        this.ddlAreaCode.DataSource = dtArea;
-        this.ddlAreaCode.DataBind();
 
         DataTable dtFactory = bll.FillDataTable("Cmd.SelectFactory");
         this.ddlFactoryID.DataValueField = "FactoryID";
@@ -62,7 +57,7 @@ public partial class WebUI_InStock_InStockView : BasePage
         {
             this.txtID.Text = dt.Rows[0]["BillID"].ToString();
             this.txtBillDate.Text = ToYMD(dt.Rows[0]["BillDate"]);
-            this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
+            
             this.ddlBillTypeCode.SelectedValue = dt.Rows[0]["BillTypeCode"].ToString();
             this.ddlFactoryID.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
             this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
@@ -75,6 +70,9 @@ public partial class WebUI_InStock_InStockView : BasePage
             this.txtBatchNo.Text = dt.Rows[0]["BatchNo"].ToString();
             hdnState.Value = dt.Rows[0]["State"].ToString();
             this.txtSourceBillNo.Text = dt.Rows[0]["SourceBillNo"].ToString();
+            this.txtIsUpERP.Text = dt.Rows[0]["IsUpERP"].ToString();
+            this.txtErpMSG.Text = dt.Rows[0]["ErpMSG"].ToString();
+            this.txtState.Text = dt.Rows[0]["StateDesc"].ToString();
             if (this.txtChecker.Text.Trim() != "")
             {
                 this.btnCheck.Text = "反审";
@@ -121,9 +119,10 @@ public partial class WebUI_InStock_InStockView : BasePage
         this.btnDelete.Enabled = blnDelete;
         this.btnEdit.Enabled = blnEdit;
         this.btnCheck.Enabled = blnCheck;
-
-
+        this.btnUpERP.Enabled = false;
         int State = int.Parse(hdnState.Value);
+        int IsUpErp = int.Parse(this.txtIsUpERP.Text);
+        
         if (State == 1)
         {
             this.btnDelete.Enabled = false;
@@ -135,7 +134,8 @@ public partial class WebUI_InStock_InStockView : BasePage
             this.btnEdit.Enabled = false;
             this.btnCheck.Enabled = false;
         }
-
+        if (State == 4 && IsUpErp == 0)
+            this.btnUpERP.Enabled = blnCheck;
 
     }
     private void BindDataSub()
@@ -281,5 +281,24 @@ public partial class WebUI_InStock_InStockView : BasePage
 
         DataTable dt = bll.FillDataTable("WMS.SelectBillMaster", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", strID)) });
         BindData(dt);
+    }
+    protected void btnUpERP_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            ERP.ErpDataService erp = new ERP.ErpDataService();
+            string MSG = "";
+            if (!erp.transBatchInStock(this.txtID.Text, out MSG))
+            {
+                JScript.Instance.ShowMessage(this.updatePanel, this.txtID.Text + " Erp出错：" + MSG);
+                return;
+            }
+            DataTable dt = bll.FillDataTable("WMS.SelectBillMaster", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", strID)) });
+            BindData(dt);
+        }
+        catch (Exception ex)
+        {
+            JScript.Instance.ShowMessage(this.updatePanel, ex.Message);
+        }
     }
 }

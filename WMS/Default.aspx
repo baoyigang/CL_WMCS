@@ -215,8 +215,8 @@
                 //bodyStyle: 'border:1px solid #FF0000',
                 height: 30,
                 titleAlign: null,
-                //bodyStyle: 'background:#cbe4f3',<a href="http://www.unitechnik.com.cn" target="_blank">罗伯泰克自动化科技（苏州）有限公司</a>
-                html: '<div style="border:1px solid #cbe4f3;line-height:30px;text-align: center;background:url(Images/bottom.jpg) repeat-x;"></div>'
+               // bodyStyle: 'background:#cbe4f3',
+                html: '<div style="border:1px solid #cbe4f3;line-height:30px;text-align: center;background:url(Images/bottom.jpg) repeat-x;"><a href="http://www.unitechnik.com.cn" target="_blank">罗伯泰克自动化科技（苏州）有限公司</a></div>'
 
             };
             //布局

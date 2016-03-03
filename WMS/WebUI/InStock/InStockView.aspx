@@ -49,8 +49,7 @@
                                 onclick="btnLast_Click"  />
                         </td>
                         <td align="right">
-                           <%-- <asp:Button ID="btnPrint" runat="server" Text="导出" CssClass="ButtonPrint" 
-                                OnClientClick="return print();" />--%>
+                            <asp:Button ID="btnUpERP" runat="server" Text="上传" CssClass="ButtonUpLoad" onclick="btnUpERP_Click" />
                             <asp:Button ID="btnCheck" runat="server" Text="审核" CssClass="ButtonAudit" onclick="btnCheck_Click"  />
                             <asp:Button ID="btnAdd" runat="server" Text="新增" CssClass="ButtonCreate" OnClientClick="return Add();"  />
                             <asp:Button ID="btnDelete" runat="server" Text="刪除" CssClass="ButtonDel" OnClientClick="return ViewDelete();"
@@ -90,13 +89,13 @@
                                 Enabled="False">
                             </asp:DropDownList>
                         </td>
-                        <td  align="center" class="musttitle"   style="width:8%;">
-                            库区
+                        <td align="center" class="musttitle" style="width:8%;">
+                                单据状态</td>
+                        <td width="17%">
+                            &nbsp;<asp:TextBox ID="txtState" runat="server"  CssClass="TextRead" Width="90%" MaxLength="20" ReadOnly="True" ></asp:TextBox> 
+                           
                         </td>
-                        <td  style="width:17%;">
-                         &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%">
-                            </asp:DropDownList>
-                        </td>
+                        
                     </tr>
                     <tr>
                         <td align="center" class="smalltitle" style="width:8%;">
@@ -121,13 +120,17 @@
                                     Enabled="False">
                                 </asp:DropDownList>
                         </td>
-                        
-                        <td align="center" class="smalltitle"  style="width:8%;">
+                         <td align="center" class="musttitle" style="width:8%;">
+                                上传ERP</td>
+                        <td width="17%">
+                            &nbsp;<asp:TextBox ID="txtIsUpERP" runat="server"  CssClass="TextRead" 
+                                Width="16%" MaxLength="20" ReadOnly="True" ></asp:TextBox>
+                            <asp:TextBox ID="txtErpMSG" runat="server"  CssClass="TextRead" Width="73%" 
+                                ReadOnly="True" ></asp:TextBox>
                            
                         </td>
-                        <td width="17%">
-                       
-                        </td>
+                        
+                        
                     </tr>
               
                     <tr style="height:50px">

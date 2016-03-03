@@ -51,12 +51,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
     private void BindDropDownList()
     {
-        DataTable dtArea = bll.FillDataTable("Cmd.SelectArea");
-        this.ddlAreaCode.DataValueField = "AreaCode";
-        this.ddlAreaCode.DataTextField = "AreaName";
-        this.ddlAreaCode.DataSource = dtArea;
-        this.ddlAreaCode.DataBind();
-
+        
         
 
         DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType", new DataParameter[] { new DataParameter("{0}", "Flag=2") });
@@ -74,7 +69,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         {
             this.txtID.Text = dt.Rows[0]["BillID"].ToString();
             this.txtBillDate.DateValue = dt.Rows[0]["BillDate"];
-            this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
+           
             this.ddlBillTypeCode.SelectedValue = dt.Rows[0]["BillTypeCode"].ToString();
             this.txtBatchNo.Text = dt.Rows[0]["BatchNo"].ToString();
             this.txtSourceBillNo.Text = dt.Rows[0]["SourceBillNo"].ToString();
@@ -256,8 +251,6 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
         DataTable dt1 = (DataTable)ViewState[FormID + "_Edit_" + dgv.ID];
         if (dt1.Rows.Count == 0)
         {
-            this.ddlAreaCode.Enabled = true;
-            
             return;
         }
         DataRow dr;
@@ -277,11 +270,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             dr.EndEdit();
         }
         dt1.AcceptChanges();
-        if (dt1.Rows.Count > 0)
-        {
-            this.ddlAreaCode.Enabled = false;
          
-        }
 
         object o = dt1.Compute("SUM(Quantity)", "");
         this.txtTotalQty.Text = o.ToString();
@@ -337,7 +326,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
                                              new DataParameter("@BillID", this.txtID.Text.Trim()),
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
-                                             new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
+                                             new DataParameter("@AreaCode",""),
                                              new DataParameter("@SourceBillNo",this.txtSourceBillNo.Text),
                                              new DataParameter("@BatchNo",this.txtBatchNo.Text),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
@@ -352,7 +341,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             para = new DataParameter[] { 
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
-                                             new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
+                                             new DataParameter("@AreaCode",""),
                                              new DataParameter("@SourceBillNo",this.txtSourceBillNo.Text),
                                              new DataParameter("@BatchNo",this.txtBatchNo.Text),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),

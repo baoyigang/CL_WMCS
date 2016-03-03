@@ -417,3 +417,19 @@
     line-height:16px;
     vertical-align:middle;
 }
+/* 上传*/
+.ButtonUpLoad
+{
+    font-family: "微软雅黑", "宋体"; 
+    font-size:9pt;  
+    border: 0px #ff0000 solid; 
+    background-color:Transparent;
+    background-image:url(../images/op/upload.png); 
+    background-repeat:no-repeat;
+    CURSOR: pointer; 
+    padding-left:16px;
+    font-style: normal ; 
+    height:16px;
+    line-height:16px;
+    vertical-align:middle;
+}

@@ -30,11 +30,7 @@ public partial class WebUI_CMD_ProductCategoryView : BasePage
     #region 绑定方法
     private void BindDropDownList()
     {
-        DataTable dtArea = bll.FillDataTable("Cmd.SelectArea");
-        this.ddlAreaCode.DataValueField = "AreaCode";
-        this.ddlAreaCode.DataTextField = "AreaName";
-        this.ddlAreaCode.DataSource = dtArea;
-        this.ddlAreaCode.DataBind();
+        
 
     }
 
@@ -44,7 +40,7 @@ public partial class WebUI_CMD_ProductCategoryView : BasePage
         {
             this.txtID.Text = dt.Rows[0]["CategoryCode"].ToString();
             this.txtProductTypeName.Text = dt.Rows[0]["CategoryName"].ToString();
-            this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
+          
             this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
             this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
             this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);

@@ -49,33 +49,21 @@
                     <td align="center" class="musttitle" style="width:8%;"  >
                             类别编码
                     </td>
-                    <td colspan="3" class="musttitle">
+                    <td  style="width:42%;" >
                             &nbsp;<asp:TextBox 
                                 ID="txtID" runat="server"   
-                                 CssClass="TextBox" Width="13%" MaxLength="10"  ></asp:TextBox>&nbsp;&nbsp;</td>
-                         
-                </tr>
-                <tr>
-                    <td align="center" class="musttitle" style="width:8%;"  >
+                                 CssClass="TextBox" Width="40%" MaxLength="10"  ></asp:TextBox> 
+                    </td>
+                     <td align="center" class="musttitle" style="width:8%;"  >
                             类别名称
                     </td>
-                    <td width="30%">
-                            &nbsp;<asp:TextBox 
-                                ID="txtProductTypeName" runat="server"   
-                                 CssClass="TextBox" Width="40%" MaxLength="20" 
-                                 ></asp:TextBox> 
+                    <td style="width:42%;" >
+                        &nbsp;<asp:TextBox ID="txtProductTypeName" runat="server"   
+                                 CssClass="TextBox" Width="42%" MaxLength="20"></asp:TextBox> 
                     </td>
-                        <td  align="center" class="musttitle" style="width:8%;" >
-                            存放库区 
-                    </td>
-                    <td>
-                        &nbsp;<asp:DropDownList 
-                            ID="ddlAreaCode" runat="server" Width="43%" AutoPostBack="True" 
-                            onselectedindexchanged="ddlAreaCode_SelectedIndexChanged"  >
-                        </asp:DropDownList>
-                        
-                    </td>
+                         
                 </tr>
+                
                     
                 <tr style="height:108px;">
                     <td align="center"  class="smalltitle" style="width:8%;">
@@ -83,7 +71,7 @@
                     </td>
                     <td colspan="3" valign="middle">
                         &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="TextBox" 
-                            TextMode="MultiLine" Height="104px" Width="66%"></asp:TextBox>
+                            TextMode="MultiLine" Height="104px" Width="73%"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

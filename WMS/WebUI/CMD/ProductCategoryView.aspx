@@ -57,29 +57,21 @@
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 类别编码
                         </td>
-                        <td colspan="3">
+                        <td width="30%" >
                                 &nbsp;<asp:TextBox 
                                     ID="txtID" runat="server"   
-                                     CssClass="TextRead" Width="13%" MaxLength="10" 
+                                     CssClass="TextRead" Width="40%" MaxLength="10" 
                                     ReadOnly="True"  ></asp:TextBox>&nbsp;&nbsp;</td>
-                         
-                    </tr>
-                    <tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 类别名称
                         </td>
                         <td width="30%">
                                 &nbsp;<asp:TextBox ID="txtProductTypeName" runat="server"  
-                                    CssClass="TextRead" Width="40%" MaxLength="20" ReadOnly="True"></asp:TextBox> 
+                                    CssClass="TextRead" Width="42%" MaxLength="20" ReadOnly="True"></asp:TextBox> 
                         </td>
-                            <td  align="center" class="musttitle" style="width:8%;" >
-                                存放库区 
-                        </td>
-                        <td>
-                            &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Enabled="false" Width="43%">
-                            </asp:DropDownList>
-                        </td>
+                         
                     </tr>
+                   
                     
                     <tr>
                         <td align="center"  class="smalltitle" style="width:8%;">
@@ -87,7 +79,7 @@
                         </td>
                         <td colspan="3">
                             &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="TextRead" 
-                                TextMode="MultiLine" Height="102px" Width="66%" ReadOnly="True"></asp:TextBox>
+                                TextMode="MultiLine" Height="102px" Width="74%" ReadOnly="True"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>

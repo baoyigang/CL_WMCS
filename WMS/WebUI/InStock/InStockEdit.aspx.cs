@@ -50,11 +50,6 @@ public partial class WebUI_InStock_InStockEdit : BasePage
 
     private void BindDropDownList()
     {
-        DataTable dtArea = bll.FillDataTable("Cmd.SelectArea");
-        this.ddlAreaCode.DataValueField = "AreaCode";
-        this.ddlAreaCode.DataTextField = "AreaName";
-        this.ddlAreaCode.DataSource = dtArea;
-        this.ddlAreaCode.DataBind();
 
         DataTable dtFactory = bll.FillDataTable("Cmd.SelectFactory");
         this.ddlFactoryID.DataValueField = "FactoryID";
@@ -77,7 +72,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
         {
             this.txtID.Text = dt.Rows[0]["BillID"].ToString();
             this.txtBillDate.DateValue = dt.Rows[0]["BillDate"];
-            this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
+            
             this.ddlBillTypeCode.SelectedValue = dt.Rows[0]["BillTypeCode"].ToString();
             this.ddlFactoryID.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
             this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
@@ -254,7 +249,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
         DataTable dt1 = (DataTable)ViewState[FormID + "_Edit_" + dgv.ID];
         if (dt1.Rows.Count == 0)
         {
-            this.ddlAreaCode.Enabled = true;
+           
             return;
         }
         DataRow dr;
@@ -276,9 +271,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             dr.EndEdit();
         }
         dt1.AcceptChanges();
-        if (dt1.Rows.Count > 0)
-            this.ddlAreaCode.Enabled = false;
-
+        
 
         object o = dt1.Compute("SUM(Quantity)", "");
         this.txtTotalQty.Text = o.ToString();
@@ -303,7 +296,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
                                              new DataParameter("@BillID", this.txtID.Text.Trim()),
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
-                                             new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
+                                             new DataParameter("@AreaCode",""),
                                              new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@BatchNo", this.txtBatchNo.Text.Trim()),
@@ -320,7 +313,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             para = new DataParameter[] { 
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
-                                             new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
+                                             new DataParameter("@AreaCode",""),
                                              new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@BatchNo", this.txtBatchNo.Text.Trim()),

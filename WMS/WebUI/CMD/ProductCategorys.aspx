@@ -42,8 +42,6 @@
 						    <td  width="15%" >&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
                                     <asp:ListItem Selected="True" Value="CategoryCode">产品类别</asp:ListItem>
                                     <asp:ListItem  Value="CategoryName">类别名称</asp:ListItem>
-                                     <asp:ListItem Value="AreaCode" >库区编码</asp:ListItem>
-                                    <asp:ListItem Value="AreaName" >库区名称</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
                                  </asp:dropdownlist>
                             </td>
@@ -101,16 +99,6 @@
                     </asp:TemplateField>
                     <asp:BoundField DataField="CategoryName" HeaderText="类别名称" SortExpression="CategoryName">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-                   <asp:BoundField DataField="WareHouseName" HeaderText="仓库" 
-                        SortExpression="WareHouseName" >
-                        <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-                     <asp:BoundField DataField="AreaName" HeaderText="库区" 
-                        SortExpression="AreaName" >
-                        <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
                     <asp:BoundField DataField="Memo" HeaderText="备注" 

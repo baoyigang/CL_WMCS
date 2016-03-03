@@ -23,14 +23,14 @@
             }
             function SelectProduct() {
                 var tableName = 'CMD_Product';
-                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsFixed='0' ";
+                var where = " IsFixed='0' ";
 
                 return GetMulSelectValue(tableName, 'hdnMulSelect', where);
             }
             function BindEvent() {
                 $("[ID$='ProductCode']").bind("change", function () {
                     var txtID = this.id;
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "' and IsFixed='0'";
+                    var where = " ProductCode='" + $('#' + txtID).val() + "' and IsFixed='0'";
 
                     getWhereBaseData('CMD_Product', txtID + "," + txtID.replace("ProductCode", "ProductName"), 'ProductCode,ProductName', where);
                 });
@@ -56,11 +56,7 @@
                     $("#ddlBillTypeCode").focus();
                     return false;
                 }
-                if (trim($("#ddlAreaCode").val()) == "") {
-                    alert("库区不能为空!");
-                    $("#ddlAreaCode").focus();
-                    return false;
-                }
+                
 
 
                 if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品编号"))
@@ -124,13 +120,7 @@
                             </asp:DropDownList>
                     
                         </td>
-                        <td  align="center" class="musttitle"   style="width:8%;">
-                            库区
-                        </td>
-                        <td  style="width:17%;">
-                         &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%">
-                            </asp:DropDownList>
-                        </td>
+                        
                     </tr>
                     <tr>
                         <td align="center" class="smalltitle" style="width:8%;"  >
@@ -155,19 +145,16 @@
                             &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%">
                                 </asp:DropDownList>
                         </td>
-                        <td  align="center" style="width:8%;">
-                        </td>
-                        <td  style="width:17%;">
-                        </td>
+                        
                     </tr>
               
                     <tr style="height:50px">
                         <td align="center" class="smalltitle"  >
                             备注
                         </td>
-                        <td colspan="7"  valign="middle" >
+                        <td colspan="5"  valign="middle" >
                             &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
-                                TextMode="MultiLine" Height="45px" Width="98%"></asp:TextBox>
+                                TextMode="MultiLine" Height="45px" Width="97%"></asp:TextBox>
                         </td>
                     </tr>
                 </table>

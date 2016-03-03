@@ -52,7 +52,7 @@ public partial class WebUI_CMD_ProductView : BasePage
        
 
         ///ddlCX_Factory
-        DataTable dtFactory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=3") });
+        DataTable dtFactory = bll.FillDataTable("Cmd.SelectFactory");
         this.ddlFactory.DataValueField = "FactoryID";
         this.ddlFactory.DataTextField = "FactoryName";
         this.ddlFactory.DataSource = dtFactory;

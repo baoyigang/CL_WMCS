@@ -16,6 +16,31 @@
     <DataType>string</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>ProductEName</FieldName>
+    <FieldTitle>英文品名</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>ProductNo</FieldName>
+    <FieldTitle>ERP编码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>Spec</FieldName>
+    <FieldTitle>规格</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>StandardNo</FieldName>
+    <FieldTitle>标准号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>PartNo</FieldName>
+    <FieldTitle>部品号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
     <FieldName>Unit</FieldName>
     <FieldTitle>单位</FieldTitle>
     <DataType>string</DataType>

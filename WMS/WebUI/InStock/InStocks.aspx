@@ -42,7 +42,6 @@
                              </td>
 						    <td  width="15%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
                                     <asp:ListItem Selected="True" Value="BillTypeName">入库类型</asp:ListItem>
-                                    <asp:ListItem Value="AreaName">库区</asp:ListItem>
                                     <asp:ListItem Value="FactoryName">工厂</asp:ListItem>
                                     <asp:ListItem Value="BillID">入库单号</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
@@ -114,10 +113,6 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="AreaName" HeaderText="库区" SortExpression="AreaName">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
                             <asp:BoundField DataField="SourceBillNo" HeaderText="来源单号" SortExpression="SourceBillNo">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
@@ -126,7 +121,11 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-
+                            <asp:BoundField DataField="IsUpERP" HeaderText="上传ERP" 
+                                SortExpression="IsUpERP" >
+                                <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="Memo" HeaderText="备注" 
                                 SortExpression="Memo" >
                                 <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
