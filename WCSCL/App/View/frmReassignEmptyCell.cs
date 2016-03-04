@@ -28,17 +28,18 @@ namespace App.View
         {
             this.txtTaskNo.Text = dr["TaskNo"].ToString();
             this.txtCellCode.Text = dr["CellCode"].ToString();
-            this.txtCarNo.Text = dr["CarNo"].ToString();
+            this.txtAisleNo.Text = dr["AisleNo"].ToString();
             this.txtCraneNo.Text = dr["CraneNo"].ToString();
             this.txtProductCode.Text = dr["ProductCode"].ToString();
             this.txtProductName.Text = dr["ProductName"].ToString();
+            this.txtSpec.Text = dr["Spec"].ToString();
             this.txtAreaCode.Text = dr["AreaCode"].ToString();
 
             CraneNo = dr["CraneNo"].ToString();
 
             DataParameter[] param = new DataParameter[] 
             { 
-                new DataParameter("{0}", string.Format("CraneNo='{0}' and AreaCode='{1}'", CraneNo,this.txtAreaCode.Text))
+                new DataParameter("{0}", string.Format("CraneNo='{0}' and AreaCode='{1}' and AisleNo='{2}'", CraneNo,this.txtAreaCode.Text,this.txtAisleNo.Text))
             };
             DataTable dt = bll.FillDataTable("CMD.SelectCellShelf", param);
             this.cbRow.DataSource = dt.DefaultView;
@@ -119,12 +120,12 @@ namespace App.View
             DataParameter[] param;
             param = new DataParameter[] 
             { 
-                new DataParameter("@CraneNo", this.txtCraneNo.Text), 
-                new DataParameter("@CarNo", this.txtCarNo.Text) 
+                new DataParameter("@AisleNo", this.txtCraneNo.Text), 
+                new DataParameter("@AreaCode", this.txtAreaCode.Text) 
             };
             if (this.radioButton1.Checked)
             {
-                dt = bll.FillDataTable("WCS.sp_GetEmptyCell", param);
+                dt = bll.FillDataTable("WCS.sp_GetCellByAisle", param);
                 if (dt.Rows.Count > 0)
                     this.txtNewCellCode.Text = dt.Rows[0][0].ToString();
                 else

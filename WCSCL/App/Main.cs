@@ -335,5 +335,11 @@ namespace App
             App.View.Param.ParameterForm f = new App.View.Param.ParameterForm();
             ShowForm(f);
         }
+
+        private void toolStripButton_Scan_Click(object sender, EventArgs e)
+        {
+            App.View.Task.frmInStockTask f = new App.View.Task.frmInStockTask();
+            f.ShowDialog();
+        }
     }
 }

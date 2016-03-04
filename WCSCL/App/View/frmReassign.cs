@@ -66,19 +66,20 @@ namespace App.View
         {
             this.txtTaskNo.Text = dr["TaskNo"].ToString();
             this.txtCellCode.Text = dr["CellCode"].ToString();
-            this.txtCarNo.Text = dr["CarNo"].ToString();
+            this.txtAisleNo.Text = dr["AisleNo"].ToString();
             this.txtCraneNo.Text = dr["CraneNo"].ToString();
             this.txtProductCode.Text = dr["ProductCode"].ToString();
             this.txtProductName.Text = dr["ProductName"].ToString();
+            this.txtSpec.Text = dr["Spec"].ToString();
             
             CraneNo = dr["CraneNo"].ToString();
 
-            string filter = string.Format("CMD_Cell.ProductCode='{0}' and CMD_Cell.IsLock='0' and CMD_Cell.IsActive='1' and CMD_Cell.ErrorFlag!='1' and CMD_Shelf.CraneNo='{1}' and CMD_Shelf.CarNo='{2}'", this.txtProductCode.Text,CraneNo,this.txtCarNo.Text);
+            string filter = string.Format("CMD_Cell.ProductCode='{0}' and CMD_Cell.IsLock='0' and CMD_Cell.IsActive='1' and CMD_Cell.ErrorFlag!='1' and CMD_Shelf.CraneNo='{1}' and CMD_Shelf.AisleNo='{2}'", this.txtProductCode.Text,CraneNo,this.txtAisleNo.Text);
 
             DataTable dt = bll.FillDataTable("WCS.SelectCellByFilter", new DataParameter[] { new DataParameter("{0}", filter) });
 
             this.bsMain.DataSource = dt;
-        }       
+        }
 
         private void dgvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

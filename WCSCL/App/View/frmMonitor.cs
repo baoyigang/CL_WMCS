@@ -20,23 +20,14 @@ namespace App.View
         float colDis = 20.75f;
         float rowDis = 54.4f;
         
-        float colIndex = 1;
-        float rowIndex = 1;
         private System.Timers.Timer tmWorkTimer = new System.Timers.Timer();
         private System.Timers.Timer tmCrane1 = new System.Timers.Timer();
-        private System.Timers.Timer tmCar = new System.Timers.Timer();
         BLL.BLLBase bll = new BLL.BLLBase();
         Dictionary<int, string> dicCraneFork = new Dictionary<int, string>();
-        Dictionary<int, string> dicCraneTaskType = new Dictionary<int, string>();
+        Dictionary<int, string> dicCraneState = new Dictionary<int, string>();
         Dictionary<int, string> dicCraneAction = new Dictionary<int, string>();
         Dictionary<int, string> dicCraneError = new Dictionary<int, string>();
         Dictionary<int, string> dicCraneOver = new Dictionary<int, string>();
-
-        Dictionary<int, string> dicCarAction = new Dictionary<int, string>();
-        Dictionary<int, string> dicCarLoad = new Dictionary<int, string>();
-        Dictionary<int, string> dicCarTaskType = new Dictionary<int, string>();
-        Dictionary<int, string> dicCarError = new Dictionary<int, string>();
-
 
         public frmMonitor()
         {
@@ -51,24 +42,16 @@ namespace App.View
             this.picCrane.Location = P2;
         }
 
-        //private void btnBack_Click(object sender, EventArgs e)
-        //{
-        //    this.picCrane11.Location = InitialP1;
-        //    this.picCrane2.Location = InitialP2;
-        //    this.picCrane12.Location = InitialP3;
-        //}
-
         private void frmMonitor_Load(object sender, EventArgs e)
         {
             MainData.OnTask += new TaskEventHandler(Data_OnTask);
             Cranes.OnCrane += new CraneEventHandler(Monitor_OnCrane);
-            Cars.OnCar += new CarEventHandler(Monitor_OnCar);
             AddDicKeyValue();
 
             InitialP1 = picCrane.Location;
             picCrane.Parent = pictureBox1;
             picCrane.BackColor = Color.Transparent;
-
+            
             InitialP2 = picCar.Location;
             picCar.Parent = pictureBox1;
             picCar.BackColor = Color.Transparent;
@@ -84,73 +67,80 @@ namespace App.View
             tmCrane1.Interval = 3000;
             tmCrane1.Elapsed += new System.Timers.ElapsedEventHandler(tmCraneWorker1);
             tmCrane1.Start();
-
-            //tmCar.Interval = 3000;
-            //tmCar.Elapsed += new System.Timers.ElapsedEventHandler(tmCarWorker);
-            //tmCar.Start();
         }
         private void AddDicKeyValue()
         {
-            dicCraneFork.Add(0, "叉非原位和极限");
-            dicCraneFork.Add(1, "叉原位时叉上无货");
-            dicCraneFork.Add(2, "叉原位时叉上有货");
-            dicCraneFork.Add(3, "叉左极限时叉上无货");
-            dicCraneFork.Add(4, "叉左极限时叉上有货");
-            dicCraneFork.Add(5, "叉右极限时叉上无货");
-            dicCraneFork.Add(6, "叉右极限时叉上有货");
+            dicCraneFork.Add(0, "非原点");
+            dicCraneFork.Add(1, "原点");
 
-            dicCraneTaskType.Add(0, "待机");
-            dicCraneTaskType.Add(1, "入库");
-            dicCraneTaskType.Add(2, "出库");
-            dicCraneTaskType.Add(3, "移库");
-            dicCraneTaskType.Add(4, "转库");
-            dicCraneTaskType.Add(5, "双重入库");
-            dicCraneTaskType.Add(6, "回库台位");
-            dicCraneTaskType.Add(7, "召回");
-            dicCraneTaskType.Add(8, "急停");
+            dicCraneState.Add(0, "空闲");
+            dicCraneState.Add(1, "等待");
+            dicCraneState.Add(2, "定位");
+            dicCraneState.Add(3, "取货");
+            dicCraneState.Add(4, "放货");
+            dicCraneState.Add(98, "维修");
 
-            dicCraneAction.Add(0, "维修");
-            dicCraneAction.Add(1, "手动(脱机)");
-            dicCraneAction.Add(2, "单机自动");
-            dicCraneAction.Add(3, "联机自动");
+            dicCraneAction.Add(0, "非自动");
+            dicCraneAction.Add(1, "自动");
 
             dicCraneError.Add(0, "");
-            dicCraneError.Add(1, "货物左超限");
-            dicCraneError.Add(2, "货物右超限");
-            dicCraneError.Add(3, "左侧外形超限");
-            dicCraneError.Add(4, "右侧外形超限");
-            dicCraneError.Add(5, "满货位入库");
-            dicCraneError.Add(6, "空货位出库");
-            dicCraneError.Add(7, "运行变频器报警");
-            dicCraneError.Add(8, "起升变频器报警");
-            dicCraneError.Add(9, "传送地址错");
-            dicCraneError.Add(10, "通讯故障");
-            dicCraneError.Add(11, "运行超时");
-            dicCraneError.Add(12, "起升超时");
-            dicCraneError.Add(13, "货叉超时");
-            dicCraneError.Add(14, "超高1");
-            dicCraneError.Add(15, "超高2");
-            dicCraneError.Add(16, "超高3");
-            dicCraneError.Add(17, "水平激光数据错误");
-            dicCraneError.Add(18, "起升激光数据错误");
-            dicCraneError.Add(19, "货物前超限");
-            dicCraneError.Add(20, "货物后超限");
+            dicCraneError.Add(1, "行走极限开关动作");
+            dicCraneError.Add(2, "载货台上极限开关动作");
+            dicCraneError.Add(3, "载货台下极限开关动作");
+            dicCraneError.Add(4, "电气柜门急停开关被按下");
+            dicCraneError.Add(5, "外部急停按钮被按下");
+            dicCraneError.Add(6, "载货台超速保护装置动作");
+            dicCraneError.Add(7, "载货台安全夹紧装置动作");
+            dicCraneError.Add(8, "相序保护开关未正常工作");
+            dicCraneError.Add(9, "安全继电器未正常工作");
+            dicCraneError.Add(10, "行走变频器故障");
+            dicCraneError.Add(11, "起升变频器故障");
+            dicCraneError.Add(12, "货叉变频器故障");
+            dicCraneError.Add(13, "行走马达保护器故障");
+            dicCraneError.Add(14, "起升马达保护器故障");
+            dicCraneError.Add(15, "货叉马达保护器故障");
+            dicCraneError.Add(16, "行走电机抱闸供电故障");
+            dicCraneError.Add(17, "起升电机抱闸供电故障");
+            dicCraneError.Add(18, "货叉电机抱闸供电故障");
+            dicCraneError.Add(19, "220V 供电故障");
+            dicCraneError.Add(20, "24V 供电故障");
+            dicCraneError.Add(21, "货叉扭矩检测异常");
+            dicCraneError.Add(22, "货叉电机运行超时");
+            dicCraneError.Add(23, "行走电机运行超时");
+            dicCraneError.Add(24, "输送机光栅触发");
+            dicCraneError.Add(25, "起升电机抱闸供电故障");
+            dicCraneError.Add(101, "行走激光丢失");
+            dicCraneError.Add(102, "起升激光丢失");
+            dicCraneError.Add(103, "货叉信号丢失");
+            dicCraneError.Add(104, "Profibus总线通讯故障");
+            dicCraneError.Add(105, "行走停准失败");
+            dicCraneError.Add(106, "起升停准失败");
+            dicCraneError.Add(107, "货叉停准失败");
+            dicCraneError.Add(108, "载货台货物左超长");
+            dicCraneError.Add(109, "载货台货物右超长");
+            dicCraneError.Add(110, "载货台货物左前超宽");
+            dicCraneError.Add(111, "载货台货物左后超差");
+            dicCraneError.Add(112, "载货台货物右前超差");
+            dicCraneError.Add(113, "载货台货物右后超差");
+            dicCraneError.Add(114, "载货台货物左超高");
+            dicCraneError.Add(115, "载货台货物右超高");
 
-            dicCarAction.Add(0, "脱机");
-            dicCarAction.Add(1, "手动");
-            dicCarAction.Add(2, "自动");
-
-            dicCarLoad.Add(0, "无货");
-            dicCarLoad.Add(1, "有货");
-
-            dicCarTaskType.Add(0, "待机");
-            dicCarTaskType.Add(1, "入库");
-            dicCarTaskType.Add(2, "出库");
-
-            dicCarError.Add(0, "");
-            dicCarError.Add(1, "运行超时故障");
-            dicCarError.Add(2, "变频器故障");
-            dicCarError.Add(3, "超时故障+变频器故障");
+            dicCraneError.Add(116, "货叉位置错误");
+            dicCraneError.Add(117, "货叉左侧极限");
+            dicCraneError.Add(118, "货叉右侧极限");
+            dicCraneError.Add(119, "上位机下达急停指令");
+            dicCraneError.Add(120, "取货后载货台无货");
+            dicCraneError.Add(121, "放货时目标货位有货");
+            dicCraneError.Add(122, "放货后载货台有货");
+            dicCraneError.Add(201, "放货或取货超时");
+            dicCraneError.Add(202, "输送机不允许取货");
+            dicCraneError.Add(203, "输送机不允许放货");
+            dicCraneError.Add(301, "自动模式下无任务，载货台有货");
+            dicCraneError.Add(302, "任务错误,任务地址错误");
+            dicCraneError.Add(303, "任务错误,没有卸货任务");
+            dicCraneError.Add(304, "任务错误,任务错误,载货台有货,有取货任务");
+            dicCraneError.Add(305, "任务错误,任务错误,载货台无货,无取货任务");
+            dicCraneError.Add(306, "任务错误,上一任务未完成");
         }
         void Data_OnTask(TaskEventArgs args)
         {
@@ -193,62 +183,38 @@ namespace App.View
                 if (txt != null)
                     txt.Text = crane.TaskNo;
 
-                txt = GetTextBox("txtTaskType", crane.CraneNo);
-                if (txt != null && dicCraneTaskType.ContainsKey(crane.TaskType))
-                    txt.Text = dicCraneTaskType[crane.TaskType];
+                txt = GetTextBox("txtState", crane.CraneNo);
+                if (txt != null && dicCraneState.ContainsKey(crane.TaskType))
+                    txt.Text = dicCraneState[crane.TaskType];
 
                 txt = GetTextBox("txtCraneAction", crane.CraneNo);
                 if (txt != null && dicCraneAction.ContainsKey(crane.Action))
                     txt.Text = dicCraneAction[crane.Action];
 
+                txt = GetTextBox("txtRow", crane.CraneNo);
+                if (txt != null)
+                    txt.Text = crane.Row.ToString();
+
                 txt = GetTextBox("txtColumn", crane.CraneNo);
                 if (txt != null)
                     txt.Text = crane.Column.ToString();
-
-                if (crane.WalkCode > 0)
-                {
-                    txt = GetTextBox("txtBpWalkCode", crane.CraneNo);
-                    if (txt != null)
-                    {
-                        txt.Text = crane.WalkCode.ToString();
-                        txt.BackColor = Color.Red;
-                    }
-                }
-                else
-                {
-                    txt = GetTextBox("txtBpWalkCode", crane.CraneNo);
-                    if (txt != null)
-                    {
-                        txt.Text = "";
-                        txt.BackColor = Control.DefaultBackColor;
-                    }
-                }
-
-                if (crane.UpDownCode > 0)
-                {
-                    txt = GetTextBox("txtBpUpDownCode", crane.CraneNo);
-                    if (txt != null)
-                    {
-                        txt.Text = crane.UpDownCode.ToString();
-                        txt.BackColor = Color.Red;
-                    }
-                }
-                else
-                {
-                    txt = GetTextBox("txtBpUpDownCode", crane.CraneNo);
-                    if (txt != null)
-                    {
-                        txt.Text = "";
-                        txt.BackColor = Control.DefaultBackColor;
-                    }
-                }
 
                 //堆垛机位置
                 if (crane.CraneNo == 1)
                 {
                     this.picCrane.Visible = true;
                     Point P1 = InitialP1;
-                    P1.X = P1.X + (int)((crane.Column-1) * colDis);
+                    if(crane.Column<46)
+                        P1.X = P1.X + (int)((crane.Column-1) * colDis);
+                    else
+                        P1.X = picCar.Location.X+15;
+
+                    P1.Y = P1.Y + (int)(rowDis * (crane.Row - 1));
+                    this.picCrane.Location = P1;
+
+                    Point P2 = InitialP2;
+                    P2.Y = P2.Y + (int)(rowDis * (crane.Row - 1));
+                    this.picCar.Location = P2;
                 }                
 
                 txt = GetTextBox("txtHeight", crane.CraneNo);
@@ -269,8 +235,12 @@ namespace App.View
                 //更新错误代码、错误描述
                 //更新任务状态为执行中
                 //bll.ExecNonQuery("WCS.UpdateTaskError", new DataParameter[] { new DataParameter("@CraneErrCode", crane.ErrCode.ToString()), new DataParameter("@CraneErrDesc", dicCraneError[crane.ErrCode]), new DataParameter("@TaskNo", crane.TaskNo) });
-                if(crane.ErrCode>0)
-                    Logger.Error(crane.CraneNo.ToString() + "堆垛机执行时出现错误,代码:"+ crane.ErrCode.ToString() + ",描述:" + dicCraneError[crane.ErrCode]);
+                if (crane.ErrCode > 0)
+                {
+                    DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", crane.TaskNo), new DataParameter("@CraneErrCode", crane.ErrCode.ToString()), new DataParameter("@CraneErrDesc", dicCraneError[crane.ErrCode]) };
+                    bll.ExecNonQueryTran("WCS.Sp_UpdateTaskError", param);
+                    Logger.Error(crane.CraneNo.ToString() + "堆垛机执行时出现错误,代码:" + crane.ErrCode.ToString() + ",描述:" + dicCraneError[crane.ErrCode]);
+                }
             }
         }
         TextBox GetTextBox(string name, int CraneNo)
@@ -281,51 +251,7 @@ namespace App.View
             else
                 return null;
         }
-        void Monitor_OnCar(CarEventArgs args)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new CarEventHandler(Monitor_OnCar), args);
-            }
-            else
-            {
-                Car car = args.car;
-                TextBox txt = GetTextBox("txtCarAction", car.CarNo);
-                if (txt != null && dicCarAction.ContainsKey(car.Status))
-                    txt.Text = dicCarAction[car.Status];
-
-                txt = GetTextBox("txtCarTaskNo", car.CarNo);
-                if (txt != null)
-                    txt.Text = car.TaskNo;
-
-                txt = GetTextBox("txtCarTaskType", car.CarNo);
-                if (txt != null && dicCraneTaskType.ContainsKey(car.TaskType))
-                    txt.Text = dicCraneTaskType[car.TaskType];
-
-                txt = GetTextBox("txtCarLoad", car.CarNo);
-                if (txt != null && dicCarLoad.ContainsKey(car.Load))
-                    txt.Text = dicCarLoad[car.Load];
-
-                txt = GetTextBox("txtCarErrorDesc", car.CarNo);
-                if (txt != null && dicCarError.ContainsKey(car.ErrCode))
-                {
-                    txt.Text = dicCarError[car.ErrCode];
-                    if (car.Action == 2)
-                    {
-                        if (txt.Text.Length > 0)
-                            txt.Text += "+急停";
-                        else
-                            txt.Text += "急停";
-                    }
-                    txt.ForeColor = Color.Black;
-                    if (txt.Text.Length > 0)
-                        txt.BackColor = Color.Red;
-                    else
-                        txt.BackColor = Control.DefaultBackColor;
-                    //txt.Font.
-                }
-            }
-        }
+        
         private void tmWorker(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
@@ -348,36 +274,27 @@ namespace App.View
             try
             {
                 tmCrane1.Stop();
+                string binary = Convert.ToString(255, 2).PadLeft(8, '0');
 
-                int[] location = new int[2];
                 string serviceName = "CranePLC1";
-                object[] obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneLocation"));
-                for (int j = 0; j < obj.Length; j++)
-                    location[j] = Convert.ToInt16(obj[j]) - 48;
+                string plcTaskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo")));
 
-                int[] craneInfo = new int[6];
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneInfo"));
-                for (int j = 0; j < obj.Length; j++)
-                    craneInfo[j] = Convert.ToInt16(obj[j]) - 48;
-
-                string palletCode = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CranePalletCode")));
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo"));
-                string plcTaskNo = Util.ConvertStringChar.BytesToString(obj);
-
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneSpeed"));
+                string craneMode = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneMode")).ToString();
+                string craneFork = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneFork")).ToString();
+                object[] obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneAlarmCode"));
 
                 Crane crane = new Crane();
                 crane.CraneNo = 1;
-                crane.Column = location[0];
-                crane.Height = location[1];
-                crane.ForkStatus = craneInfo[1];
-                crane.Action = craneInfo[2];
-                crane.TaskType = craneInfo[3];
-                crane.ErrCode = craneInfo[4];
-                crane.PalletCode = palletCode;
+                crane.Row = int.Parse(obj[4].ToString());
+                crane.Column = int.Parse(obj[2].ToString());
+                crane.Height = int.Parse(obj[3].ToString());
+                crane.ForkStatus = int.Parse(craneFork);
+                crane.Action = int.Parse(craneMode);
+                crane.TaskType = int.Parse(obj[1].ToString());
+                crane.ErrCode = int.Parse(obj[0].ToString());
+                crane.PalletCode = "";
                 crane.TaskNo = plcTaskNo;
-                crane.WalkCode = int.Parse(obj[3].ToString());
-                crane.UpDownCode = int.Parse(obj[4].ToString());
+
                 Cranes.CraneInfo(crane);
             }
             catch (Exception ex)
@@ -388,50 +305,8 @@ namespace App.View
             {
                 tmCrane1.Start();
             }
-        }
+        }        
         
-        private void tmCarWorker(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            try
-            {
-                tmCar.Stop();
-
-                int[] carInfo = new int[6];
-                object[] obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService("CarPLC", "01_CarInfo"));
-                for (int j = 0; j < 6; j++)
-                    carInfo[j] = Convert.ToInt16(obj[j]) - 48;
-
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService("CarPLC", "01_CarTaskInfo"));
-                string TaskNo = Util.ConvertStringChar.BytesToString(obj);
-
-                Car car1 = new Car();
-                car1.CarNo = 1;
-                car1.Load = carInfo[0];
-
-                car1.Status = carInfo[2];
-                car1.TaskType = carInfo[3];
-                car1.ErrCode = carInfo[4];
-                car1.Action = carInfo[5];
-                car1.TaskNo = TaskNo;
-
-                Cars.CarInfo(car1);
-
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService("CarPLC", "02_CarInfo"));
-                for (int j = 0; j < 6; j++)
-                    carInfo[j] = Convert.ToInt16(obj[j]) - 48;
-
-                obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService("CarPLC", "02_CarTaskInfo"));
-                TaskNo = Util.ConvertStringChar.BytesToString(obj);                
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex.Message);
-            }
-            finally
-            {
-                tmCar.Start();
-            }
-        }
         private void BindData()
         {
             bsMain.DataSource = GetMonitorData();
@@ -457,68 +332,37 @@ namespace App.View
 
         private void btnBack1_Click(object sender, EventArgs e)
         {
-            if (colIndex > 45)
+            if (MessageBox.Show("是否要召回1号堆垛机到初始位置?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                colIndex = 1;
-                rowIndex++;
-                if (rowIndex > 6)
-                    rowIndex = 1;
+                PutCommand("1", 0);
+                Logger.Info("1号堆垛机下发召回命令");
             }
-            Point P = InitialP1;
-            P.X = P.X + (int)(colDis * (colIndex - 1));
-            P.Y = P.Y + (int)(rowDis*(rowIndex-1));
-
-            this.picCrane.Location = P;
-            colIndex++;
-
-
-            //if (MessageBox.Show("是否要召回1号堆垛机到初始位置?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
-            //{
-            //    PutCommand("1", 7);
-            //    Logger.Info("1号堆垛机下发召回命令");
-            //}
         }
         private void PutCommand(string craneNo, byte TaskType)
         {
-            byte[] cellAddr = new byte[8];
-            cellAddr[0] = TaskType;
-            cellAddr[1] = 0;
-
-            for (int i = 0; i < cellAddr.Length; i++)
-                cellAddr[i] += 48;
-
             string serviceName = "CranePLC" + craneNo;
-            Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
+            int[] cellAddr = new int[9];
+            cellAddr[TaskType] = 1;            
 
-            Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 49);
+            //cellAddr[3] = int.Parse(this.cbFromColumn.Text);
+            //cellAddr[4] = int.Parse(this.cbFromHeight.Text);
+            //cellAddr[5] = int.Parse(this.cbFromRow.Text.Substring(3, 3));
+            //cellAddr[6] = int.Parse(this.cbToColumn.Text);
+            //cellAddr[7] = int.Parse(this.cbToHeight.Text);
+            //cellAddr[8] = int.Parse(this.cbToRow.Text.Substring(3, 3));
+
+            Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
+            Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 0);
         }
 
         private void btnStop1_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("是否要急停1号堆垛机?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                PutCommand("1", 8);
+                PutCommand("1", 2);
                 Logger.Info("1号堆垛机下发急停命令");
             }
-        }
-
-        private void btnBack2_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("是否要召回2号堆垛机到初始位置?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
-            {
-                PutCommand("2", 7);
-                Logger.Info("2号堆垛机下发召回命令");
-            }
-        }
-
-        private void btnStop2_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("是否要急停2号堆垛机?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
-            {
-                PutCommand("2", 8);
-                Logger.Info("2号堆垛机下发急停命令");
-            }
-        }
+        }       
 
 
         private void dgvMain_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -542,7 +386,7 @@ namespace App.View
                     if (TaskType == "11")
                     {
                         this.ToolStripMenuItem11.Visible = true;
-                        this.ToolStripMenuItem12.Visible = true;
+                        this.ToolStripMenuItem12.Visible = false;
                         this.ToolStripMenuItem13.Visible = true;
                         this.ToolStripMenuItem14.Visible = false;
                         this.ToolStripMenuItem15.Visible = false;
@@ -563,7 +407,7 @@ namespace App.View
                         this.ToolStripMenuItem11.Visible = false;
                         this.ToolStripMenuItem12.Visible = false;
                         this.ToolStripMenuItem13.Visible = true;
-                        this.ToolStripMenuItem14.Visible = true;
+                        this.ToolStripMenuItem14.Visible = false;
                         this.ToolStripMenuItem15.Visible = true;
                         this.ToolStripMenuItem16.Visible = true;
                     }
@@ -638,7 +482,7 @@ namespace App.View
                 string TaskType = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells["colTaskType"].Value.ToString();
 
                 if (TaskType == "11")
-                    bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 2), new DataParameter("@TaskNo", TaskNo) });
+                    bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
                 else if (TaskType == "12" || TaskType == "13")
                     bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 0), new DataParameter("@TaskNo", TaskNo) });
                 else if (TaskType == "14")
@@ -647,7 +491,7 @@ namespace App.View
                     if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         if(f.option==0)
-                            bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 2), new DataParameter("@TaskNo", TaskNo) });
+                            bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
                         else
                             bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 5), new DataParameter("@TaskNo", TaskNo) });
 
@@ -682,26 +526,17 @@ namespace App.View
             }
         }
 
-        private void ToolStripMenuItemChangeCarNo_Click(object sender, EventArgs e)
+        private void ToolStripMenuItemDelCraneTask_Click(object sender, EventArgs e)
         {
-            string ItemName = ((ToolStripMenuItem)sender).Name;
-            string State = ItemName.Substring(ItemName.Length - 1, 1);
+            string serviceName = "CranePLC1";
+            int[] cellAddr = new int[9];
+            cellAddr[0] = 0;
+            cellAddr[1] = 1;
 
-            if (this.dgvMain.CurrentCell != null)
-            {
-                BLL.BLLBase bll = new BLL.BLLBase();
-                string TaskNo = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[0].Value.ToString();
-                string CraneNo = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells["colCraneNo"].Value.ToString();
-                frmTaskCarNo f = new frmTaskCarNo(CraneNo);
+            Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
+            Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 0);
 
-                if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    string CarNo = f.carNo;
-                    bll.ExecNonQuery("WCS.UpdateTaskCarNoByTaskNo", new DataParameter[] { new DataParameter("@CarNo", CarNo), new DataParameter("@TaskNo", TaskNo) });
-                }
-                
-                BindData();
-            }
-        }
+            MCP.Logger.Info("已给堆垛机下发取消任务指令");           
+        }        
     }
 }
