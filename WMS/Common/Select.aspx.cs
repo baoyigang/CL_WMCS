@@ -303,7 +303,7 @@ public partial class Common_Select : System.Web.UI.Page
             filter = string.Format(" {0} like '%{1}%' ", this.ddlFieldName.SelectedValue, this.txtSearch.Text.Trim());
             if (Request.QueryString["Where"] != "" && Request.QueryString["Where"] != null)
             {
-                filter += " AND " + Request.QueryString["Where"].Replace('"', "'"[0]);
+                filter += " AND " + Microsoft.JScript.GlobalObject.unescape(Request.QueryString["Where"]);
             }
 
             ViewState["filter"] = filter;
@@ -414,7 +414,7 @@ public partial class Common_Select : System.Web.UI.Page
 
             if (Request.QueryString["Where"] != "" && Request.QueryString["Where"] != null)
             {
-                filter = Request.QueryString["Where"].Replace('"', "'"[0]);
+                filter = Microsoft.JScript.GlobalObject.unescape(Request.QueryString["Where"]);
             }
 
             ViewState["filter"] = filter;

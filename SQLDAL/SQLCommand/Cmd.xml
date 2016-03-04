@@ -135,8 +135,8 @@
   <Command ID="SelectProductCategory">
     <CommandString>
       select cmd.*, house.WarehouseName,area.AreaName from CMD_ProductCategory cmd
-      inner join CMD_Area area on cmd.AreaCode=area.AreaCode
-      inner join CMD_Warehouse house on area.WarehouseCode=house.WarehouseCode
+      left join CMD_Area area on cmd.AreaCode=area.AreaCode
+      left join CMD_Warehouse house on area.WarehouseCode=house.WarehouseCode
       where {0} order by CategoryCode
     </CommandString>
   </Command>

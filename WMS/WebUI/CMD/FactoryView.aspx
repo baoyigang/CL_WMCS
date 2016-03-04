@@ -58,7 +58,7 @@
                         </td>
                         <td  style="width:30%;"  >
                              &nbsp;<asp:TextBox ID="txtID" runat="server"   
-                                  CssClass="TextRead" Width="42%" MaxLength="10" ></asp:TextBox>
+                                  CssClass="TextRead" Width="43%" MaxLength="10" ></asp:TextBox>
                         </td>
                          <td  align="center" class="musttitle" style="width:8%;" >
                              厂家名称
@@ -66,7 +66,7 @@
                         <td style="width:30%;">
                          &nbsp;<asp:TextBox 
                                 ID="txtFactoryName" runat="server"  
-                                CssClass="TextRead" Width="43%" MaxLength="50"></asp:TextBox>
+                                CssClass="TextRead" Width="43%" MaxLength="50" ReadOnly="True"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -76,7 +76,7 @@
                         </td>
                         <td style="width:30%;">
                          &nbsp;<asp:TextBox ID="txtLinkPerson" runat="server"   
-                                  CssClass="TextRead" Width="43%" ></asp:TextBox>
+                                  CssClass="TextRead" Width="43%" ReadOnly="True" ></asp:TextBox>
                         </td>
                         <td align="center" class="smalltitle" style="width:8%;"  >
                              联系电话 
@@ -84,7 +84,7 @@
                         <td style=" width:30%">
                            &nbsp;<asp:TextBox 
                                 ID="txtLinkPhone" runat="server"  
-                                CssClass="TextRead" Width="43%"></asp:TextBox>
+                                CssClass="TextRead" Width="43%" ReadOnly="True"></asp:TextBox>
                         </td>
                     </tr>
                     
@@ -95,7 +95,7 @@
                         </td>
                         <td  style="width:30%;">
                              &nbsp;<asp:TextBox ID="txtFax" runat="server"   
-                                  CssClass="TextRead" Width="43%"></asp:TextBox> 
+                                  CssClass="TextRead" Width="43%" ReadOnly="True"></asp:TextBox> 
                         </td>
                         <td colspan="2"></td>
                          
@@ -106,7 +106,7 @@
                         </td>
                         <td colspan="3">
                             &nbsp;<asp:TextBox ID="txtAddress" runat="server"   
-                                CssClass="TextRead" Width="75%" ></asp:TextBox>
+                                CssClass="TextRead" Width="75%" ReadOnly="True" ></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -115,7 +115,7 @@
                         </td>
                         <td colspan="3">
                             &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="TextRead" 
-                                TextMode="MultiLine" Height="102px" Width="75%"></asp:TextBox>
+                                TextMode="MultiLine" Height="102px" Width="75%" ReadOnly="True"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -124,14 +124,14 @@
                   </td> 
                   <td style="width:30%;">
                     &nbsp;<asp:TextBox ID="txtCreator" runat="server"  
-                          CssClass="TextRead" Width="42%"  ></asp:TextBox> 
+                          CssClass="TextRead" Width="42%" ReadOnly="True"  ></asp:TextBox> 
                   </td>
                   <td align="center" class="smalltitle" style="width:8%;">
                         建单日期
                   </td> 
                   <td style="width:30%;">
                     &nbsp;<asp:TextBox ID="txtCreatDate" runat="server"  
-                          CssClass="TextRead" Width="43%"  ></asp:TextBox> 
+                          CssClass="TextRead" Width="43%" ReadOnly="True"  ></asp:TextBox> 
                   </td>
                 </tr>
                 <tr>
@@ -140,14 +140,14 @@
                   </td> 
                   <td style="width:30%;">
                      &nbsp;<asp:TextBox ID="txtUpdater" runat="server"  
-                          CssClass="TextRead" Width="42%" Height="16px"  ></asp:TextBox> 
+                          CssClass="TextRead" Width="42%" ReadOnly="True"  ></asp:TextBox> 
                   </td>
                   <td align="center"  class="smalltitle" style="width:8%;">
                         修改日期
                   </td> 
                   <td style="width:30%;">
                     &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server"  
-                          CssClass="TextRead" Width="43%"  ></asp:TextBox> 
+                          CssClass="TextRead" Width="43%" ReadOnly="True"  ></asp:TextBox> 
                   </td>
                 </tr>				
 			</table>
