@@ -35,9 +35,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnTaskID = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnState = new System.Windows.Forms.Button();
-            this.txtStateNo = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.dtpInDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.btnProductCode = new System.Windows.Forms.Button();
@@ -45,8 +42,6 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.txtPalletCode = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtBillNo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtProductCode = new System.Windows.Forms.TextBox();
@@ -60,8 +55,6 @@
             this.txtCellCode = new System.Windows.Forms.TextBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cmbInStockType = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -79,7 +72,7 @@
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Location = new System.Drawing.Point(12, 35);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(389, 371);
+            this.groupBox1.Size = new System.Drawing.Size(389, 328);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
@@ -136,11 +129,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.cmbInStockType);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.btnState);
-            this.groupBox2.Controls.Add(this.txtStateNo);
-            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.dtpInDate);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.btnProductCode);
@@ -148,51 +136,21 @@
             this.groupBox2.Controls.Add(this.checkBox3);
             this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Controls.Add(this.txtPalletCode);
-            this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.txtBillNo);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txtProductCode);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(13, 183);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(341, 173);
+            this.groupBox2.Size = new System.Drawing.Size(341, 129);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            // 
-            // btnState
-            // 
-            this.btnState.Location = new System.Drawing.Point(240, 182);
-            this.btnState.Name = "btnState";
-            this.btnState.Size = new System.Drawing.Size(31, 22);
-            this.btnState.TabIndex = 34;
-            this.btnState.Text = "...";
-            this.btnState.UseVisualStyleBackColor = true;
-            this.btnState.Click += new System.EventHandler(this.btnState_Click);
-            // 
-            // txtStateNo
-            // 
-            this.txtStateNo.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtStateNo.Location = new System.Drawing.Point(101, 181);
-            this.txtStateNo.Name = "txtStateNo";
-            this.txtStateNo.Size = new System.Drawing.Size(133, 26);
-            this.txtStateNo.TabIndex = 33;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(17, 184);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 20);
-            this.label7.TabIndex = 32;
-            this.label7.Text = "产品状态：";
             // 
             // dtpInDate
             // 
             this.dtpInDate.Checked = false;
             this.dtpInDate.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dtpInDate.Location = new System.Drawing.Point(101, 139);
+            this.dtpInDate.Location = new System.Drawing.Point(101, 80);
             this.dtpInDate.Name = "dtpInDate";
             this.dtpInDate.ShowCheckBox = true;
             this.dtpInDate.Size = new System.Drawing.Size(168, 26);
@@ -202,7 +160,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(17, 142);
+            this.label2.Location = new System.Drawing.Point(17, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 20);
             this.label2.TabIndex = 30;
@@ -260,24 +218,6 @@
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "锁定";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // txtPalletCode
-            // 
-            this.txtPalletCode.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtPalletCode.Location = new System.Drawing.Point(101, 108);
-            this.txtPalletCode.Name = "txtPalletCode";
-            this.txtPalletCode.Size = new System.Drawing.Size(168, 26);
-            this.txtPalletCode.TabIndex = 9;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(17, 111);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 20);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "托盘编号：";
             // 
             // txtBillNo
             // 
@@ -399,7 +339,7 @@
             // btnOK
             // 
             this.btnOK.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOK.Location = new System.Drawing.Point(95, 417);
+            this.btnOK.Location = new System.Drawing.Point(90, 378);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 30);
             this.btnOK.TabIndex = 45;
@@ -410,7 +350,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(224, 417);
+            this.btnCancel.Location = new System.Drawing.Point(219, 378);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 30);
             this.btnCancel.TabIndex = 44;
@@ -418,31 +358,11 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(17, 80);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 20);
-            this.label8.TabIndex = 35;
-            this.label8.Text = "入库类型：";
-            // 
-            // cmbInStockType
-            // 
-            this.cmbInStockType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbInStockType.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cmbInStockType.FormattingEnabled = true;
-            this.cmbInStockType.Location = new System.Drawing.Point(101, 78);
-            this.cmbInStockType.Name = "cmbInStockType";
-            this.cmbInStockType.Size = new System.Drawing.Size(168, 28);
-            this.cmbInStockType.TabIndex = 36;
-            // 
             // frmCellOpDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 455);
+            this.ClientSize = new System.Drawing.Size(419, 419);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtCellCode);
@@ -479,8 +399,6 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox txtPalletCode;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtBillNo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
@@ -496,10 +414,5 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DateTimePicker dtpInDate;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnState;
-        private System.Windows.Forms.TextBox txtStateNo;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cmbInStockType;
-        private System.Windows.Forms.Label label8;
     }
 }

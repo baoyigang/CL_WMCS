@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMonitor));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemDelCraneTask = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemCellCode = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemReassign = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemStateChange = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +47,7 @@
             this.ToolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemChangeCarNo = new System.Windows.Forms.ToolStripMenuItem();
+            this.bsMain = new System.Windows.Forms.BindingSource(this.components);
             this.pnlMain = new System.Windows.Forms.Panel();
             this.splitContainer_Main = new System.Windows.Forms.SplitContainer();
             this.dgvMain = new System.Windows.Forms.DataGridView();
@@ -55,36 +56,32 @@
             this.Column11 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column6 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column7 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column4 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.colCraneNo = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column8 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column3 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column12 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column13 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column14 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column15 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column10 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column2 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.colErrCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.colErrDesc = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.colTaskType = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.bsMain = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.picCar = new System.Windows.Forms.PictureBox();
             this.picCrane = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label32 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtRow1 = new System.Windows.Forms.TextBox();
             this.btnBack1 = new System.Windows.Forms.Button();
             this.btnStop1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtBpUpDownCode1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtBpWalkCode1 = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtPalletCode1 = new System.Windows.Forms.TextBox();
-            this.txtTaskType1 = new System.Windows.Forms.TextBox();
+            this.txtState1 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.txtErrorNo1 = new System.Windows.Forms.TextBox();
             this.txtHeight1 = new System.Windows.Forms.TextBox();
@@ -97,13 +94,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtTaskNo1 = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).BeginInit();
             this.splitContainer_Main.Panel1.SuspendLayout();
             this.splitContainer_Main.Panel2.SuspendLayout();
             this.splitContainer_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -118,24 +115,31 @@
             // 
             this.contextMenuStrip1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemDelCraneTask,
             this.ToolStripMenuItemCellCode,
             this.ToolStripMenuItemReassign,
-            this.ToolStripMenuItemStateChange,
-            this.ToolStripMenuItemChangeCarNo});
+            this.ToolStripMenuItemStateChange});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 114);
+            // 
+            // ToolStripMenuItemDelCraneTask
+            // 
+            this.ToolStripMenuItemDelCraneTask.Name = "ToolStripMenuItemDelCraneTask";
+            this.ToolStripMenuItemDelCraneTask.Size = new System.Drawing.Size(160, 22);
+            this.ToolStripMenuItemDelCraneTask.Text = "删除堆垛机任务";
+            this.ToolStripMenuItemDelCraneTask.Click += new System.EventHandler(this.ToolStripMenuItemDelCraneTask_Click);
             // 
             // ToolStripMenuItemCellCode
             // 
             this.ToolStripMenuItemCellCode.Name = "ToolStripMenuItemCellCode";
-            this.ToolStripMenuItemCellCode.Size = new System.Drawing.Size(148, 22);
+            this.ToolStripMenuItemCellCode.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemCellCode.Text = "重新分配货位";
             this.ToolStripMenuItemCellCode.Click += new System.EventHandler(this.ToolStripMenuItemCellCode_Click);
             // 
             // ToolStripMenuItemReassign
             // 
             this.ToolStripMenuItemReassign.Name = "ToolStripMenuItemReassign";
-            this.ToolStripMenuItemReassign.Size = new System.Drawing.Size(148, 22);
+            this.ToolStripMenuItemReassign.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemReassign.Text = "重新下发任务";
             this.ToolStripMenuItemReassign.Click += new System.EventHandler(this.ToolStripMenuItemReassign_Click);
             // 
@@ -152,7 +156,7 @@
             this.ToolStripMenuItem17,
             this.ToolStripMenuItem19});
             this.ToolStripMenuItemStateChange.Name = "ToolStripMenuItemStateChange";
-            this.ToolStripMenuItemStateChange.Size = new System.Drawing.Size(148, 22);
+            this.ToolStripMenuItemStateChange.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemStateChange.Text = "任务状态切换";
             // 
             // ToolStripMenuItem10
@@ -174,6 +178,7 @@
             this.ToolStripMenuItem12.Name = "ToolStripMenuItem12";
             this.ToolStripMenuItem12.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem12.Text = "小车确认";
+            this.ToolStripMenuItem12.Visible = false;
             this.ToolStripMenuItem12.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem13
@@ -217,13 +222,6 @@
             this.ToolStripMenuItem19.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem19.Text = "取消";
             this.ToolStripMenuItem19.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
-            // 
-            // ToolStripMenuItemChangeCarNo
-            // 
-            this.ToolStripMenuItemChangeCarNo.Name = "ToolStripMenuItemChangeCarNo";
-            this.ToolStripMenuItemChangeCarNo.Size = new System.Drawing.Size(148, 22);
-            this.ToolStripMenuItemChangeCarNo.Text = "变更小车号";
-            this.ToolStripMenuItemChangeCarNo.Click += new System.EventHandler(this.ToolStripMenuItemChangeCarNo_Click);
             // 
             // pnlMain
             // 
@@ -275,13 +273,14 @@
             this.Column11,
             this.Column6,
             this.Column7,
+            this.Column4,
             this.colCraneNo,
+            this.Column8,
             this.Column3,
             this.Column12,
             this.Column13,
             this.Column14,
             this.Column15,
-            this.Column10,
             this.Column2,
             this.colErrCode,
             this.colErrDesc,
@@ -356,6 +355,15 @@
             this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column7.Width = 120;
             // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Spec";
+            this.Column4.FilteringEnabled = false;
+            this.Column4.HeaderText = "产品规格";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // colCraneNo
             // 
             this.colCraneNo.DataPropertyName = "CraneNo";
@@ -364,6 +372,14 @@
             this.colCraneNo.Name = "colCraneNo";
             this.colCraneNo.ReadOnly = true;
             this.colCraneNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "AisleNo";
+            this.Column8.FilteringEnabled = false;
+            this.Column8.HeaderText = "巷道编号";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
             // 
             // Column3
             // 
@@ -409,15 +425,6 @@
             this.Column15.Name = "Column15";
             this.Column15.ReadOnly = true;
             this.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "PalletCode";
-            this.Column10.FilteringEnabled = false;
-            this.Column10.HeaderText = "托盘编号";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Column2
             // 
@@ -509,19 +516,15 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.label32);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Controls.Add(this.txtRow1);
             this.groupBox4.Controls.Add(this.btnBack1);
             this.groupBox4.Controls.Add(this.btnStop1);
             this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Controls.Add(this.txtBpUpDownCode1);
             this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.label31);
             this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.txtBpWalkCode1);
-            this.groupBox4.Controls.Add(this.label21);
             this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.txtPalletCode1);
-            this.groupBox4.Controls.Add(this.txtTaskType1);
+            this.groupBox4.Controls.Add(this.txtState1);
             this.groupBox4.Controls.Add(this.label20);
             this.groupBox4.Controls.Add(this.txtErrorNo1);
             this.groupBox4.Controls.Add(this.txtHeight1);
@@ -543,16 +546,24 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "堆垛机";
             // 
-            // label32
+            // label8
             // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label32.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label32.Location = new System.Drawing.Point(4, 280);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(65, 20);
-            this.label32.TabIndex = 24;
-            this.label32.Text = "起升变频";
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label8.Location = new System.Drawing.Point(2, 110);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 20);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "当  前  排";
+            // 
+            // txtRow1
+            // 
+            this.txtRow1.Location = new System.Drawing.Point(70, 108);
+            this.txtRow1.Name = "txtRow1";
+            this.txtRow1.ReadOnly = true;
+            this.txtRow1.Size = new System.Drawing.Size(126, 26);
+            this.txtRow1.TabIndex = 19;
             // 
             // btnBack1
             // 
@@ -583,135 +594,82 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(4, 22);
+            this.label1.Location = new System.Drawing.Point(2, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "任务编号";
-            // 
-            // txtBpUpDownCode1
-            // 
-            this.txtBpUpDownCode1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBpUpDownCode1.Location = new System.Drawing.Point(69, 277);
-            this.txtBpUpDownCode1.Name = "txtBpUpDownCode1";
-            this.txtBpUpDownCode1.ReadOnly = true;
-            this.txtBpUpDownCode1.Size = new System.Drawing.Size(97, 26);
-            this.txtBpUpDownCode1.TabIndex = 23;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(4, 194);
+            this.label4.Location = new System.Drawing.Point(2, 231);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 20);
             this.label4.TabIndex = 7;
             this.label4.Text = "错误代码";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label31.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label31.Location = new System.Drawing.Point(4, 251);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(65, 20);
-            this.label31.TabIndex = 22;
-            this.label31.Text = "行走变频";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label3.Location = new System.Drawing.Point(4, 165);
+            this.label3.Location = new System.Drawing.Point(2, 202);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "货叉位置";
-            // 
-            // txtBpWalkCode1
-            // 
-            this.txtBpWalkCode1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBpWalkCode1.Location = new System.Drawing.Point(69, 248);
-            this.txtBpWalkCode1.Name = "txtBpWalkCode1";
-            this.txtBpWalkCode1.ReadOnly = true;
-            this.txtBpWalkCode1.Size = new System.Drawing.Size(97, 26);
-            this.txtBpWalkCode1.TabIndex = 21;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label21.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label21.Location = new System.Drawing.Point(5, 51);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(65, 20);
-            this.label21.TabIndex = 20;
-            this.label21.Text = "托盘编码";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(4, 108);
+            this.label2.Location = new System.Drawing.Point(2, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "工作方式";
             // 
-            // txtPalletCode1
+            // txtState1
             // 
-            this.txtPalletCode1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtState1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPalletCode1.Location = new System.Drawing.Point(70, 48);
-            this.txtPalletCode1.Name = "txtPalletCode1";
-            this.txtPalletCode1.ReadOnly = true;
-            this.txtPalletCode1.Size = new System.Drawing.Size(97, 26);
-            this.txtPalletCode1.TabIndex = 19;
-            // 
-            // txtTaskType1
-            // 
-            this.txtTaskType1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTaskType1.Location = new System.Drawing.Point(69, 77);
-            this.txtTaskType1.Name = "txtTaskType1";
-            this.txtTaskType1.ReadOnly = true;
-            this.txtTaskType1.Size = new System.Drawing.Size(97, 26);
-            this.txtTaskType1.TabIndex = 10;
+            this.txtState1.Location = new System.Drawing.Point(70, 50);
+            this.txtState1.Name = "txtState1";
+            this.txtState1.ReadOnly = true;
+            this.txtState1.Size = new System.Drawing.Size(126, 26);
+            this.txtState1.TabIndex = 10;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label20.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label20.Location = new System.Drawing.Point(109, 137);
+            this.label20.Location = new System.Drawing.Point(4, 170);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(23, 20);
+            this.label20.Size = new System.Drawing.Size(67, 20);
             this.label20.TabIndex = 18;
-            this.label20.Text = "层";
+            this.label20.Text = "当  前  层";
             // 
             // txtErrorNo1
             // 
             this.txtErrorNo1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtErrorNo1.Location = new System.Drawing.Point(69, 191);
+            this.txtErrorNo1.Location = new System.Drawing.Point(70, 228);
             this.txtErrorNo1.Name = "txtErrorNo1";
             this.txtErrorNo1.ReadOnly = true;
-            this.txtErrorNo1.Size = new System.Drawing.Size(97, 26);
+            this.txtErrorNo1.Size = new System.Drawing.Size(126, 26);
             this.txtErrorNo1.TabIndex = 3;
             // 
             // txtHeight1
             // 
-            this.txtHeight1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtHeight1.Location = new System.Drawing.Point(131, 133);
+            this.txtHeight1.Location = new System.Drawing.Point(70, 167);
             this.txtHeight1.Name = "txtHeight1";
             this.txtHeight1.ReadOnly = true;
-            this.txtHeight1.Size = new System.Drawing.Size(35, 26);
+            this.txtHeight1.Size = new System.Drawing.Size(126, 26);
             this.txtHeight1.TabIndex = 17;
             // 
             // label5
@@ -719,20 +677,20 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label5.Location = new System.Drawing.Point(4, 80);
+            this.label5.Location = new System.Drawing.Point(2, 53);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 20);
             this.label5.TabIndex = 11;
-            this.label5.Text = "任务类型";
+            this.label5.Text = "工作状态";
             // 
             // txtForkStatus1
             // 
             this.txtForkStatus1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtForkStatus1.Location = new System.Drawing.Point(69, 162);
+            this.txtForkStatus1.Location = new System.Drawing.Point(70, 199);
             this.txtForkStatus1.Name = "txtForkStatus1";
             this.txtForkStatus1.ReadOnly = true;
-            this.txtForkStatus1.Size = new System.Drawing.Size(97, 26);
+            this.txtForkStatus1.Size = new System.Drawing.Size(126, 26);
             this.txtForkStatus1.TabIndex = 2;
             // 
             // label7
@@ -740,7 +698,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label7.Location = new System.Drawing.Point(4, 137);
+            this.label7.Location = new System.Drawing.Point(2, 139);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(67, 20);
             this.label7.TabIndex = 15;
@@ -750,28 +708,28 @@
             // 
             this.txtErrorDesc1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtErrorDesc1.Location = new System.Drawing.Point(69, 219);
+            this.txtErrorDesc1.Location = new System.Drawing.Point(70, 260);
             this.txtErrorDesc1.Name = "txtErrorDesc1";
             this.txtErrorDesc1.ReadOnly = true;
-            this.txtErrorDesc1.Size = new System.Drawing.Size(97, 26);
+            this.txtErrorDesc1.Size = new System.Drawing.Size(126, 26);
             this.txtErrorDesc1.TabIndex = 12;
             // 
             // txtCraneAction1
             // 
             this.txtCraneAction1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCraneAction1.Location = new System.Drawing.Point(69, 105);
+            this.txtCraneAction1.Location = new System.Drawing.Point(70, 78);
             this.txtCraneAction1.Name = "txtCraneAction1";
             this.txtCraneAction1.ReadOnly = true;
-            this.txtCraneAction1.Size = new System.Drawing.Size(97, 26);
+            this.txtCraneAction1.Size = new System.Drawing.Size(126, 26);
             this.txtCraneAction1.TabIndex = 1;
             // 
             // txtColumn1
             // 
-            this.txtColumn1.Location = new System.Drawing.Point(70, 133);
+            this.txtColumn1.Location = new System.Drawing.Point(70, 137);
             this.txtColumn1.Name = "txtColumn1";
             this.txtColumn1.ReadOnly = true;
-            this.txtColumn1.Size = new System.Drawing.Size(40, 26);
+            this.txtColumn1.Size = new System.Drawing.Size(126, 26);
             this.txtColumn1.TabIndex = 14;
             // 
             // label6
@@ -779,7 +737,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(4, 222);
+            this.label6.Location = new System.Drawing.Point(2, 259);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 20);
             this.label6.TabIndex = 13;
@@ -789,10 +747,10 @@
             // 
             this.txtTaskNo1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTaskNo1.Location = new System.Drawing.Point(69, 19);
+            this.txtTaskNo1.Location = new System.Drawing.Point(70, 19);
             this.txtTaskNo1.Name = "txtTaskNo1";
             this.txtTaskNo1.ReadOnly = true;
-            this.txtTaskNo1.Size = new System.Drawing.Size(97, 26);
+            this.txtTaskNo1.Size = new System.Drawing.Size(126, 26);
             this.txtTaskNo1.TabIndex = 0;
             // 
             // frmMonitor
@@ -806,13 +764,13 @@
             this.Text = "监控";
             this.Load += new System.EventHandler(this.frmMonitor_Load);
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bsMain)).EndInit();
             this.pnlMain.ResumeLayout(false);
             this.splitContainer_Main.Panel1.ResumeLayout(false);
             this.splitContainer_Main.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).EndInit();
             this.splitContainer_Main.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsMain)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -843,7 +801,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtErrorDesc1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtTaskType1;
+        private System.Windows.Forms.TextBox txtState1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtColumn1;
@@ -853,8 +811,6 @@
         private System.Windows.Forms.Button btnBack1;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtHeight1;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox txtPalletCode1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCellCode;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemReassign;
@@ -868,25 +824,24 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem16;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem17;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem19;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.TextBox txtBpUpDownCode1;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox txtBpWalkCode1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemChangeCarNo;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelCraneTask;
         private System.Windows.Forms.PictureBox picCar;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtRow1;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column5;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column1;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column11;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column6;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column7;
+        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column4;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colCraneNo;
+        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column8;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column3;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column12;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column13;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column14;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column15;
-        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column10;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column2;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colErrCode;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colErrDesc;

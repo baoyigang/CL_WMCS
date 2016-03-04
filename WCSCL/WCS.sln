@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLDAL", "..\SQLDAL\SQLDAL.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHost", "..\ServiceHost\ServiceHost.csproj", "{ABD63901-876D-4F98-8B47-A3EC620DFAE0}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AppSetup", "AppSetup\AppSetup.vdproj", "{9D3FE6E8-7096-413E-B13E-801352276C43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,18 @@ Global
 		{ABD63901-876D-4F98-8B47-A3EC620DFAE0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{ABD63901-876D-4F98-8B47-A3EC620DFAE0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{ABD63901-876D-4F98-8B47-A3EC620DFAE0}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Debug|Any CPU.ActiveCfg = Debug
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Debug|Any CPU.Build.0 = Debug
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Debug|Mixed Platforms.Build.0 = Debug
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Debug|x86.ActiveCfg = Debug
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Debug|x86.Build.0 = Debug
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Release|Any CPU.ActiveCfg = Release
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Release|Any CPU.Build.0 = Release
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Release|Mixed Platforms.ActiveCfg = Release
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Release|Mixed Platforms.Build.0 = Release
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Release|x86.ActiveCfg = Release
+		{9D3FE6E8-7096-413E-B13E-801352276C43}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

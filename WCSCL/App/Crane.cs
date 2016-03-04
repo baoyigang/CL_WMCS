@@ -13,6 +13,7 @@ namespace App
         public string PalletCode { get; set; }
         public int TaskType { get; set;}
         public int Action { get; set; }
+        public int Row { get; set; }
         public int Column { get; set; }
         public int Height { get; set; }
         public int ForkStatus { get; set; }
@@ -54,8 +55,7 @@ namespace App
     {
         public int CarNo { get; set; }
         public string TaskNo { get; set; }
-        public string PalletCode { get; set; }
-        public int TaskType { get; set; }
+        public int Position { get; set; }
         public int Action { get; set; }
         public int Load { get; set; }
         public int Status { get; set; }

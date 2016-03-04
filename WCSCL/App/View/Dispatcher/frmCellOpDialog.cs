@@ -38,9 +38,6 @@ namespace App.View.Dispatcher
             drNew["BillTypeCode"] = "";
             drNew["BillTypeName"] = "请选择";
             dtBillType.Rows.InsertAt(drNew, 0);
-            this.cmbInStockType.DataSource = dtBillType.DefaultView;
-            this.cmbInStockType.ValueMember = "BillTypeCode";
-            this.cmbInStockType.DisplayMember = "BillTypeName";
 
             CellCode = dr["CellCode"].ToString();
             AreaCode = dr["AreaCode"].ToString();
@@ -49,9 +46,6 @@ namespace App.View.Dispatcher
             this.txtBillNo.Text = dr["BillNo"].ToString();
             this.txtProductCode.Text = dr["ProductCode"].ToString();
             BillTypeCode = dr["BillTypeCode"].ToString();
-            this.cmbInStockType.SelectedValue = BillTypeCode;
-            this.txtStateNo.Text = dr["StateNo"].ToString();
-            this.txtPalletCode.Text = dr["PalletCode"].ToString();
             this.checkBox1.Checked = dr["IsLock"].ToString() == "1";
             this.checkBox2.Checked = dr["IsActive"].ToString() == "0";
             this.checkBox3.Checked = dr["ErrorFlag"].ToString() == "1";
@@ -71,18 +65,14 @@ namespace App.View.Dispatcher
             BillFields.Add("BillTypeName", "单据类型");
             BillFields.Add("AreaCode", "库区编号");
             BillFields.Add("AreaName", "库区名称");
-            BillFields.Add("FactoryName", "厂名");
-            BillFields.Add("StateDesc", "状态");
             BillFields.Add("Memo", "备注");
             BillFields.Add("Tasker", "作业人员");
             BillFields.Add("TaskDate", "作业日期");
 
             ProductFields.Add("ProductCode", "产品编号");
             ProductFields.Add("ProductName", "产品名称");
-            ProductFields.Add("ProductTypeName", "产品类型");
-
-            StateFields.Add("StateNo", "状态编号");
-            StateFields.Add("StateName", "产品状态");
+            ProductFields.Add("ProductNo", "ERP物料编号");
+            ProductFields.Add("Spec", "规格");
 
             TaskFields.Add("BillID", "单据号码");
             TaskFields.Add("TaskNo", "任务编号");
@@ -91,11 +81,11 @@ namespace App.View.Dispatcher
             TaskFields.Add("ProductName", "产品名称");
             TaskFields.Add("ProductTypeName", "产品类型");
             TaskFields.Add("CraneNo", "堆垛机");
-            TaskFields.Add("CarNo", "小车编号");
             TaskFields.Add("StartDate", "起始时间");
             TaskFields.Add("FinishDate", "结束时间");
 
-            
+            this.groupBox2.Enabled = !radioButton1.Checked;
+            this.groupBox3.Enabled = !radioButton1.Checked;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -139,11 +129,7 @@ namespace App.View.Dispatcher
                     sql += string.Format(",ErrorFlag='{0}'", ErrorFlag);
 
                     //if (this.txtProductCode.Text.Trim().Length > 0)
-                        sql += string.Format(",ProductCode='{0}'", this.txtProductCode.Text.Trim());
-
-                        sql += string.Format(",StateNo='{0}'", this.txtStateNo.Text.Trim());
-                    //if (this.txtPalletCode.Text.Trim().Length > 0)
-                        sql += string.Format(",PalletCode='{0}'", this.txtPalletCode.Text.Trim());
+                        sql += string.Format(",ProductCode='{0}'", this.txtProductCode.Text.Trim());                        
 
                     //if (this.txtBillNo.Text.Trim().Length > 0)
                         sql += string.Format(",BillNo='{0}'", this.txtBillNo.Text.Trim());
@@ -152,22 +138,7 @@ namespace App.View.Dispatcher
                         sql += string.Format(",InDate='{0}'", this.dtpInDate.Value);                    
 
                     param = new DataParameter[] { new DataParameter("{0}", sql), new DataParameter("{1}", string.Format("CellCode='{0}'", this.txtCellCode.Text)) };
-                    bll.ExecNonQuery("WCS.UpdateCellByFilter", param);
-
-                    //更改入库类型
-                    if (this.cmbInStockType.SelectedValue != null)
-                    {
-                        if (BillTypeCode != this.cmbInStockType.SelectedValue.ToString())
-                        {
-                            //更新入库类型
-                            param = new DataParameter[] 
-                        { 
-                            new DataParameter("@BillID", this.txtBillNo.Text),
-                            new DataParameter("@BillTypeCode", this.cmbInStockType.SelectedValue.ToString())                   
-                        };
-                            bll.ExecNonQueryTran("WCS.Sp_UpdateBillTypeCode", param);
-                        }
-                    }
+                    bll.ExecNonQuery("WCS.UpdateCellByFilter", param);                    
                 }
 
                 
@@ -184,7 +155,6 @@ namespace App.View.Dispatcher
             if (selectDialog.ShowDialog() == DialogResult.OK)
             {
                 this.txtBillNo.Text = selectDialog["BillID"];
-                this.cmbInStockType.SelectedValue = selectDialog["BillTypeCode"];
             }
         }
 
@@ -254,16 +224,6 @@ namespace App.View.Dispatcher
         {
             this.groupBox2.Enabled = !radioButton6.Checked;
             this.groupBox3.Enabled = radioButton6.Checked;
-        }
-
-        private void btnState_Click(object sender, EventArgs e)
-        {
-            DataTable dt = bll.FillDataTable("CMD.SelectProductState");
-            SelectDialog selectDialog = new SelectDialog(dt, StateFields, false);
-            if (selectDialog.ShowDialog() == DialogResult.OK)
-            {
-                this.txtStateNo.Text = selectDialog["StateNo"];
-            }
-        }
+        }        
     }
 }

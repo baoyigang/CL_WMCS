@@ -96,21 +96,21 @@ namespace App.View.Param
         }
 
 
-        private string plc2ServerName;
-        [CategoryAttribute("2号堆垛机PLC通信参数"), DescriptionAttribute("服务名称"), Chinese("服务名称")]
-        public string PLC2ServerName
-        {
-            get { return plc2ServerName; }
-            set { plc2ServerName = value; }
-        }
+        //private string plc2ServerName;
+        //[CategoryAttribute("2号堆垛机PLC通信参数"), DescriptionAttribute("服务名称"), Chinese("服务名称")]
+        //public string PLC2ServerName
+        //{
+        //    get { return plc2ServerName; }
+        //    set { plc2ServerName = value; }
+        //}
 
-        private string plc2ServerIp;
-        [CategoryAttribute("2号堆垛机PLC通信参数"), DescriptionAttribute("服务地址IP"), Chinese("服务IP")]
-        public string PLC2ServerIP
-        {
-            get { return plc2ServerIp; }
-            set { plc2ServerIp = value; }
-        }
+        //private string plc2ServerIp;
+        //[CategoryAttribute("2号堆垛机PLC通信参数"), DescriptionAttribute("服务地址IP"), Chinese("服务IP")]
+        //public string PLC2ServerIP
+        //{
+        //    get { return plc2ServerIp; }
+        //    set { plc2ServerIp = value; }
+        //}
 
 
         //private string plc2GroupString;

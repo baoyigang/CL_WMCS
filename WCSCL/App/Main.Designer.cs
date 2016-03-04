@@ -44,8 +44,6 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.pnlTab = new System.Windows.Forms.Panel();
-            this.tabForm = new System.Windows.Forms.TabControl();
             this.toolStripButton_Scan = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_InStockTask = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_OutStock = new System.Windows.Forms.ToolStripButton();
@@ -55,6 +53,8 @@
             this.toolStripButton_StartCrane = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_MoveStock = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
+            this.pnlTab = new System.Windows.Forms.Panel();
+            this.tabForm = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.pnlBottom.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -205,28 +205,6 @@
             this.toolStrip1.TabIndex = 13;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // pnlTab
-            // 
-            this.pnlTab.BackColor = System.Drawing.SystemColors.Menu;
-            this.pnlTab.Controls.Add(this.tabForm);
-            this.pnlTab.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTab.Location = new System.Drawing.Point(0, 77);
-            this.pnlTab.Name = "pnlTab";
-            this.pnlTab.Size = new System.Drawing.Size(1284, 23);
-            this.pnlTab.TabIndex = 14;
-            this.pnlTab.Visible = false;
-            // 
-            // tabForm
-            // 
-            this.tabForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabForm.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabForm.Location = new System.Drawing.Point(0, 0);
-            this.tabForm.Name = "tabForm";
-            this.tabForm.SelectedIndex = 0;
-            this.tabForm.Size = new System.Drawing.Size(1284, 23);
-            this.tabForm.TabIndex = 6;
-            this.tabForm.SelectedIndexChanged += new System.EventHandler(this.tabForm_SelectedIndexChanged);
-            // 
             // toolStripButton_Scan
             // 
             this.toolStripButton_Scan.AutoSize = false;
@@ -236,6 +214,7 @@
             this.toolStripButton_Scan.Size = new System.Drawing.Size(60, 50);
             this.toolStripButton_Scan.Text = "扫码入库";
             this.toolStripButton_Scan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_Scan.Click += new System.EventHandler(this.toolStripButton_Scan_Click);
             // 
             // toolStripButton_InStockTask
             // 
@@ -324,6 +303,28 @@
             this.toolStripButton_Close.Text = "退出系统";
             this.toolStripButton_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton_Close.Click += new System.EventHandler(this.toolStripButton_Close_Click);
+            // 
+            // pnlTab
+            // 
+            this.pnlTab.BackColor = System.Drawing.SystemColors.Menu;
+            this.pnlTab.Controls.Add(this.tabForm);
+            this.pnlTab.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTab.Location = new System.Drawing.Point(0, 77);
+            this.pnlTab.Name = "pnlTab";
+            this.pnlTab.Size = new System.Drawing.Size(1284, 23);
+            this.pnlTab.TabIndex = 14;
+            this.pnlTab.Visible = false;
+            // 
+            // tabForm
+            // 
+            this.tabForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabForm.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabForm.Location = new System.Drawing.Point(0, 0);
+            this.tabForm.Name = "tabForm";
+            this.tabForm.SelectedIndex = 0;
+            this.tabForm.Size = new System.Drawing.Size(1284, 23);
+            this.tabForm.TabIndex = 6;
+            this.tabForm.SelectedIndexChanged += new System.EventHandler(this.tabForm_SelectedIndexChanged);
             // 
             // Main
             // 

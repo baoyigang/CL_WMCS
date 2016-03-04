@@ -14,7 +14,7 @@ namespace App.View.Param
     public partial class ParameterForm : View.BaseForm
     {
         private App.View.Param.Parameter parameter = new App.View.Param.Parameter();
-        private DBConfig config = new DBConfig();
+        //private DBConfig config = new DBConfig();
 
 
         MCP.Service.TCP.Config.Configuration TcpConfg = new MCP.Service.TCP.Config.Configuration("Crane.xml");
@@ -32,9 +32,9 @@ namespace App.View.Param
         private void ReadParameter()
         {
             //本机数据库连接参数
-            parameter.ServerName = config.Parameters["server"].ToString();
-            parameter.DBUser = config.Parameters["uid"].ToString();
-            parameter.Password = config.Parameters["pwd"].ToString();
+            //parameter.ServerName = config.Parameters["server"].ToString();
+            //parameter.DBUser = config.Parameters["uid"].ToString();
+            //parameter.Password = config.Parameters["pwd"].ToString();
 
 
             //扫描枪--由于使用USB接口，而屏蔽
@@ -56,10 +56,10 @@ namespace App.View.Param
             try
             {
                 //保存本机数据库连接参数
-                config.Parameters["server"] = parameter.ServerName;
-                config.Parameters["uid"] = parameter.DBUser;
-                config.Parameters["pwd"] = parameter.Password;
-                config.Save();
+                //config.Parameters["server"] = parameter.ServerName;
+                //config.Parameters["uid"] = parameter.DBUser;
+                //config.Parameters["pwd"] = parameter.Password;
+                //config.Save();
 
 
                 //由于扫码枪使用USB接口，而屏蔽。

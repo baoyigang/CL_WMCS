@@ -198,9 +198,9 @@
             // 
             // Column8
             // 
-            this.Column8.DataPropertyName = "CarNo";
+            this.Column8.DataPropertyName = "Spec";
             this.Column8.FilteringEnabled = false;
-            this.Column8.HeaderText = "小车编号";
+            this.Column8.HeaderText = "产品规格";
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
             this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -343,6 +343,7 @@
             this.toolStripButton_EmptyOut.Size = new System.Drawing.Size(60, 50);
             this.toolStripButton_EmptyOut.Text = "托盘出库";
             this.toolStripButton_EmptyOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_EmptyOut.Visible = false;
             this.toolStripButton_EmptyOut.Click += new System.EventHandler(this.toolStripButton_EmptyOut_Click);
             // 
             // toolStripButton_Close
@@ -371,7 +372,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemState});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
             // 
             // ToolStripMenuItemState
             // 
@@ -381,34 +382,34 @@
             this.toolStripMenuItem4,
             this.toolStripMenuItem5});
             this.ToolStripMenuItemState.Name = "ToolStripMenuItemState";
-            this.ToolStripMenuItemState.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemState.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItemState.Text = "状态切换";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem2.Text = "等待";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem3.Text = "执行";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem4.Text = "完成";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem5.Text = "取消";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
@@ -448,6 +449,12 @@
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.DataGridView dgvMain;
         private System.Windows.Forms.BindingSource bsMain;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemState;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colTaskNo;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column1;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colState;
@@ -463,11 +470,5 @@
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column2;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column12;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column13;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemState;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
     }
 }

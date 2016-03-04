@@ -36,19 +36,29 @@ namespace App.View.Task
         private void cmbCraneNo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string CraneNo = this.cmbCraneNo.Text;
-            DataTable dt = bll.FillDataTable("CMD.SelectCar", new DataParameter[] { new DataParameter("{0}", string.Format("CraneNo='{0}'", CraneNo)) });
-            this.cmbCarNo.DataSource = dt.DefaultView;
-            this.cmbCarNo.ValueMember = "CarNo";
-            this.cmbCarNo.DisplayMember = "CarNo";
-
-            this.txtPalletCode1.Text = "00" + this.cmbCraneNo.Text;
+            DataTable dt = bll.FillDataTable("CMD.SelectStation");
+            this.cmbStationNo.DataSource = dt.DefaultView;
+            this.cmbStationNo.ValueMember = "StationNo";
+            this.cmbStationNo.DisplayMember = "StationNo";
         }
 
-        private void cmbCarNo_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbStationNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BindShelf();
+            BindAisleNo();
             
         }
+        private void BindAisleNo()
+        {
+            DataParameter[] param = new DataParameter[] 
+            { 
+                new DataParameter("{0}", string.Format("CraneNo='{0}' and StationNo='{1}'", this.cmbCraneNo.Text,this.cmbStationNo.Text))
+            };
+
+            DataTable dt = bll.FillDataTable("CMD.SelectAisle", param);
+            this.cmbAisleNo.DataSource = dt.DefaultView;
+            this.cmbAisleNo.ValueMember = "AisleNo";
+            this.cmbAisleNo.DisplayMember = "AisleNo";
+        }      
         private void cmbTaskType_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindShelf();
@@ -64,33 +74,18 @@ namespace App.View.Task
         {
             DataParameter[] param = new DataParameter[] 
             { 
-                new DataParameter("{0}", string.Format("CraneNo='{0}'", this.cmbCraneNo.Text))
+                new DataParameter("{0}", string.Format("CraneNo='{0}' and StationNo='{1}' and AisleNo='{2}'", this.cmbCraneNo.Text,this.cmbStationNo.Text,this.cmbAisleNo.Text))
+            };
+            DataParameter[] param1 = new DataParameter[] 
+            { 
+                new DataParameter("{0}", string.Format("CraneNo='{0}' and StationNo='{1}' and AisleNo='{2}' and IsStation='1'", this.cmbCraneNo.Text,this.cmbStationNo.Text,this.cmbAisleNo.Text))
             };
             if (this.cmbTaskType.SelectedIndex == 0)
             {
-                DataTable dt = new DataTable("dt");
-                dt.Columns.Add("dtText");
-                dt.Columns.Add("dtValue");
-                DataRow dr = dt.NewRow();
-                if (this.cmbCarNo.Text == "01")
-                {
-                    dr["dtText"] = "001002";
-                    dr["dtValue"] = "001002";
-                }
-                else if (this.cmbCarNo.Text == "02")
-                {
-                    dr["dtText"] = "001004";
-                    dr["dtValue"] = "001004";
-                }
-                else
-                {
-                    dr["dtText"] = "001005";
-                    dr["dtValue"] = "001005";
-                }
-                dt.Rows.Add(dr);
+                DataTable dt = bll.FillDataTable("CMD.SelectShelf", param1);
                 this.cbFromRow.DataSource = dt;
-                this.cbFromRow.DisplayMember = "dtText";
-                this.cbFromRow.ValueMember = "dtValue";
+                this.cbFromRow.DisplayMember = "shelfcode";
+                this.cbFromRow.ValueMember = "shelfcode";
             }
             else 
             {
@@ -102,29 +97,10 @@ namespace App.View.Task
 
             if (this.cmbTaskType.SelectedIndex == 1)
             {
-                DataTable dt = new DataTable("dt");
-                dt.Columns.Add("dtText");
-                dt.Columns.Add("dtValue");
-                DataRow dr = dt.NewRow();
-                if (this.cmbCarNo.Text == "01")
-                {
-                    dr["dtText"] = "001002";
-                    dr["dtValue"] = "001002";
-                }
-                else if (this.cmbCarNo.Text == "02")
-                {
-                    dr["dtText"] = "001004";
-                    dr["dtValue"] = "001004";
-                }
-                else
-                {
-                    dr["dtText"] = "001005";
-                    dr["dtValue"] = "001005";
-                }
-                dt.Rows.Add(dr);
+                DataTable dt = bll.FillDataTable("CMD.SelectShelf", param1);
                 this.cbToRow.DataSource = dt;
-                this.cbToRow.DisplayMember = "dtText";
-                this.cbToRow.ValueMember = "dtValue";
+                this.cbToRow.DisplayMember = "shelfcode";
+                this.cbToRow.ValueMember = "shelfcode";
             }
             else
             {
@@ -133,6 +109,40 @@ namespace App.View.Task
                 this.cbToRow.ValueMember = "shelfcode";
                 this.cbToRow.DisplayMember = "shelfcode";
             }
+        }
+        private DataRow drText(DataRow dr)
+        {
+            if (this.cmbStationNo.Text == "01")
+            {
+                dr["dtText"] = "001003";
+                dr["dtValue"] = "001003";
+            }
+            else if (this.cmbStationNo.Text == "02")
+            {
+                dr["dtText"] = "001003";
+                dr["dtValue"] = "001003";
+            }
+            else if (this.cmbStationNo.Text == "03")
+            {
+                dr["dtText"] = "001006";
+                dr["dtValue"] = "001006";
+            }
+            else if (this.cmbStationNo.Text == "04")
+            {
+                dr["dtText"] = "001007";
+                dr["dtValue"] = "001007";
+            }
+            else if (this.cmbStationNo.Text == "05")
+            {
+                dr["dtText"] = "001010";
+                dr["dtValue"] = "001010";
+            }
+            else
+            {
+                dr["dtText"] = "001011";
+                dr["dtValue"] = "001011";
+            }
+            return dr;
         }
         private void cbFromRow_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -193,16 +203,8 @@ namespace App.View.Task
                 dt.Columns.Add("dtValue");
                 DataRow dr = dt.NewRow();
 
-                if (this.cbToRow.Text == "001005")
-                {
-                    dr["dtText"] = "12";
-                    dr["dtValue"] = "12";
-                }
-                else
-                {
-                    dr["dtText"] = "1";
-                    dr["dtValue"] = "1";
-                }
+                dr["dtText"] = "1";
+                dr["dtValue"] = "1";
 
                 dt.Rows.Add(dr);
                 this.cbToColumn.DataSource = dt;
@@ -273,10 +275,8 @@ namespace App.View.Task
                 dt.Columns.Add("dtValue");
                 DataRow dr = dt.NewRow();
 
-
                 dr["dtText"] = "1";
                 dr["dtValue"] = "1";
-
 
                 dt.Rows.Add(dr);
                 this.cbToHeight.DataSource = dt;
@@ -297,29 +297,27 @@ namespace App.View.Task
         private void btnAction_Click(object sender, EventArgs e)
         {
             string serviceName = "CranePLC" + this.cmbCraneNo.Text.Substring(1,1);
-            byte[] cellAddr = new byte[8];
-            cellAddr[0] = byte.Parse((this.cmbTaskType.SelectedIndex+1).ToString());
-            cellAddr[1] = 0;  //0-不允许伸叉，1-允许伸叉
-            cellAddr[2] = byte.Parse(this.cbFromRow.Text.Substring(3,3));
-            cellAddr[3] = byte.Parse(this.cbFromColumn.Text);
-            cellAddr[4] = byte.Parse(this.cbFromHeight.Text);
-            cellAddr[5] = byte.Parse(this.cbToRow.Text.Substring(3, 3));
-            cellAddr[6] = byte.Parse(this.cbToColumn.Text);
-            cellAddr[7] = byte.Parse(this.cbToHeight.Text);
-
-            for (int i = 0; i < cellAddr.Length; i++)
-                cellAddr[i] += 48;
-            sbyte[] palletBarcode = new sbyte[8];
-            Util.ConvertStringChar.stringToBytes(this.txtPalletCode1.Text, 8).CopyTo(palletBarcode, 0);
+            int[] cellAddr = new int[9];
+            cellAddr[0] = 0;
+            cellAddr[1] = 0;
+            cellAddr[2] = 0;
+            
+            cellAddr[3] = int.Parse(this.cbFromColumn.Text);
+            cellAddr[4] = int.Parse(this.cbFromHeight.Text);
+            cellAddr[5] = int.Parse(this.cbFromRow.Text.Substring(3, 3));            
+            cellAddr[6] = int.Parse(this.cbToColumn.Text);
+            cellAddr[7] = int.Parse(this.cbToHeight.Text);
+            cellAddr[8] = int.Parse(this.cbToRow.Text.Substring(3, 3));
 
             sbyte[] taskNo = new sbyte[10];
             Util.ConvertStringChar.stringToBytes(this.txtTaskNo1.Text, 10).CopyTo(taskNo, 0);
 
-            Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
-            Context.ProcessDispatcher.WriteToService(serviceName, "PalletCode", palletBarcode);
+            Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);            
             Context.ProcessDispatcher.WriteToService(serviceName, "TaskNo", taskNo);
-            Context.ProcessDispatcher.WriteToService(serviceName, "ProductType", 49);
-            Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 49);
+            if(int.Parse((this.cmbTaskType.SelectedIndex).ToString())==3)
+            Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 2);
+            else
+                Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 1);
 
             string fromStation = this.cbFromRow.Text.Substring(3, 3) + (1000 + int.Parse(this.cbFromColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbFromHeight.Text)).ToString().Substring(1, 3);
             string toStation = this.cbToRow.Text.Substring(3, 3) + (1000 + int.Parse(this.cbToColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbToHeight.Text)).ToString().Substring(1, 3);
@@ -334,29 +332,24 @@ namespace App.View.Task
         private void button1_Click(object sender, EventArgs e)
         {
             string serviceName = "CranePLC" + this.cmbCraneNo.Text.Substring(1, 1);
-            byte[] cellAddr = new byte[8];
-            cellAddr[0] = 1;
+            byte[] cellAddr = new byte[9];
+            cellAddr[0] = 0;
             cellAddr[1] = 0;
-            cellAddr[5] = byte.Parse(this.cbFromRow.Text.Substring(3, 3));
-            cellAddr[6] = byte.Parse(this.cbFromColumn.Text);
-            cellAddr[7] = byte.Parse(this.cbFromHeight.Text);
-            cellAddr[2] = byte.Parse(this.cbToRow.Text.Substring(3, 3));
-            cellAddr[3] = byte.Parse(this.cbToColumn.Text);
-            cellAddr[4] = byte.Parse(this.cbToHeight.Text);
-
-            for (int i = 0; i < cellAddr.Length; i++)
-                cellAddr[i] += 48;
-            sbyte[] palletBarcode = new sbyte[8];
-            Util.ConvertStringChar.stringToBytes(this.txtPalletCode1.Text, 8).CopyTo(palletBarcode, 0);
+            
+            cellAddr[2] = byte.Parse(this.cbFromColumn.Text);
+            cellAddr[3] = byte.Parse(this.cbFromHeight.Text);
+            cellAddr[4] = byte.Parse(this.cbFromRow.Text.Substring(3, 3));            
+            cellAddr[5] = byte.Parse(this.cbToColumn.Text);
+            cellAddr[6] = byte.Parse(this.cbToHeight.Text);
+            cellAddr[7] = byte.Parse(this.cbToRow.Text.Substring(3, 3));
+            cellAddr[8] = 1;
 
             sbyte[] taskNo = new sbyte[10];
             Util.ConvertStringChar.stringToBytes(this.txtTaskNo1.Text, 10).CopyTo(taskNo, 0);
 
             Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
-            Context.ProcessDispatcher.WriteToService(serviceName, "PalletCode", palletBarcode);
             Context.ProcessDispatcher.WriteToService(serviceName, "TaskNo", taskNo);
-            Context.ProcessDispatcher.WriteToService(serviceName, "ProductType", 49);
-            Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 49);
+            Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 1);
 
             string fromStation = this.cbFromRow.Text.Substring(3, 3) + (1000 + int.Parse(this.cbFromColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbFromHeight.Text)).ToString().Substring(1, 3);
             string toStation = this.cbToRow.Text.Substring(3, 3) + (1000 + int.Parse(this.cbToColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbToHeight.Text)).ToString().Substring(1, 3);
@@ -369,6 +362,24 @@ namespace App.View.Task
                 this.button1.Visible = true;
             else
                 this.button1.Visible = false;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            string serviceName = "CranePLC" + this.cmbCraneNo.Text.Substring(1, 1);
+            int[] cellAddr = new int[9];
+            cellAddr[0] = 0;
+            cellAddr[1] = 1;
+
+            Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
+            Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 0);
+
+            MCP.Logger.Info("测试任务已下发给" + this.cmbCraneNo.Text + "取消任务指令");
+        }
+
+        private void cmbAisleNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindShelf();
         }
     }
 }

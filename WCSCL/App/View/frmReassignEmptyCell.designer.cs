@@ -32,9 +32,9 @@
             this.bsMain = new System.Windows.Forms.BindingSource(this.components);
             this.label6 = new System.Windows.Forms.Label();
             this.txtTaskNo = new System.Windows.Forms.TextBox();
-            this.txtProductTypeName = new System.Windows.Forms.TextBox();
+            this.txtSpec = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtCarNo = new System.Windows.Forms.TextBox();
+            this.txtAisleNo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCellCode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,6 +44,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtProductCode = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtAreaCode = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -57,8 +59,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.txtAreaCode = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -80,13 +80,13 @@
             this.txtTaskNo.Size = new System.Drawing.Size(123, 23);
             this.txtTaskNo.TabIndex = 11;
             // 
-            // txtProductTypeName
+            // txtSpec
             // 
-            this.txtProductTypeName.Location = new System.Drawing.Point(289, 90);
-            this.txtProductTypeName.Name = "txtProductTypeName";
-            this.txtProductTypeName.ReadOnly = true;
-            this.txtProductTypeName.Size = new System.Drawing.Size(223, 23);
-            this.txtProductTypeName.TabIndex = 27;
+            this.txtSpec.Location = new System.Drawing.Point(289, 90);
+            this.txtSpec.Name = "txtSpec";
+            this.txtSpec.ReadOnly = true;
+            this.txtSpec.Size = new System.Drawing.Size(223, 23);
+            this.txtSpec.TabIndex = 27;
             // 
             // label5
             // 
@@ -95,15 +95,15 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 17);
             this.label5.TabIndex = 26;
-            this.label5.Text = "产品类型：";
+            this.label5.Text = "产品规格：";
             // 
-            // txtCarNo
+            // txtAisleNo
             // 
-            this.txtCarNo.Location = new System.Drawing.Point(447, 22);
-            this.txtCarNo.Name = "txtCarNo";
-            this.txtCarNo.ReadOnly = true;
-            this.txtCarNo.Size = new System.Drawing.Size(65, 23);
-            this.txtCarNo.TabIndex = 25;
+            this.txtAisleNo.Location = new System.Drawing.Point(447, 22);
+            this.txtAisleNo.Name = "txtAisleNo";
+            this.txtAisleNo.ReadOnly = true;
+            this.txtAisleNo.Size = new System.Drawing.Size(65, 23);
+            this.txtAisleNo.TabIndex = 25;
             // 
             // label4
             // 
@@ -112,7 +112,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 17);
             this.label4.TabIndex = 24;
-            this.label4.Text = "小车编号：";
+            this.label4.Text = "巷道编号：";
             // 
             // txtCellCode
             // 
@@ -177,9 +177,9 @@
             // 
             this.groupBox1.Controls.Add(this.txtAreaCode);
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.txtProductTypeName);
+            this.groupBox1.Controls.Add(this.txtSpec);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtCarNo);
+            this.groupBox1.Controls.Add(this.txtAisleNo);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtCellCode);
             this.groupBox1.Controls.Add(this.label3);
@@ -198,6 +198,26 @@
             this.groupBox1.TabIndex = 38;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "入库信息";
+            // 
+            // txtAreaCode
+            // 
+            this.txtAreaCode.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtAreaCode.Location = new System.Drawing.Point(91, 121);
+            this.txtAreaCode.MaxLength = 10;
+            this.txtAreaCode.Name = "txtAreaCode";
+            this.txtAreaCode.ReadOnly = true;
+            this.txtAreaCode.Size = new System.Drawing.Size(122, 23);
+            this.txtAreaCode.TabIndex = 70;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.Location = new System.Drawing.Point(13, 125);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(68, 17);
+            this.label12.TabIndex = 69;
+            this.label12.Text = "库区编号：";
             // 
             // label1
             // 
@@ -354,26 +374,6 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // txtAreaCode
-            // 
-            this.txtAreaCode.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtAreaCode.Location = new System.Drawing.Point(91, 121);
-            this.txtAreaCode.MaxLength = 10;
-            this.txtAreaCode.Name = "txtAreaCode";
-            this.txtAreaCode.ReadOnly = true;
-            this.txtAreaCode.Size = new System.Drawing.Size(122, 23);
-            this.txtAreaCode.TabIndex = 70;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(13, 125);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(68, 17);
-            this.label12.TabIndex = 69;
-            this.label12.Text = "库区编号：";
-            // 
             // frmReassignEmptyCell
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -412,9 +412,9 @@
         private System.Windows.Forms.BindingSource bsMain;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTaskNo;
-        private System.Windows.Forms.TextBox txtProductTypeName;
+        private System.Windows.Forms.TextBox txtSpec;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtCarNo;
+        private System.Windows.Forms.TextBox txtAisleNo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtCellCode;
         private System.Windows.Forms.Label label3;

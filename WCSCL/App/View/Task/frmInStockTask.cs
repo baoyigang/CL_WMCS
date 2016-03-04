@@ -102,6 +102,19 @@ namespace App.View.Task
 
         private void btnRequest_Click(object sender, EventArgs e)
         {
+            if (this.txtBarcode.Text.Trim().Length <= 0)
+            {
+                MessageBox.Show("熔次卷号不能为空,请扫码或输入！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.txtBarcode.Focus();
+                return;
+            }
+            if (this.txtTaskNo.Text.Length <= 0)
+            {
+                MessageBox.Show("此熔次卷号找不到对应的等待状态的入库任务,请确认！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.txtBarcode.SelectAll();
+                this.txtBarcode.Focus();
+                return;
+            }
             DataTable dt;
             DataParameter[] param;
 
@@ -142,7 +155,7 @@ namespace App.View.Task
                 {             
                     new DataParameter("@CellCode", this.txtCellCode.Text),                    
                     new DataParameter("@TaskNo", this.txtTaskNo.Text),
-                    new DataParameter("@Station", this.cmbStationNo.Text)
+                    new DataParameter("@StationNo", this.cmbStationNo.Text)
                 };
                 bll.ExecNonQueryTran("WCS.Sp_ExecuteInStockTask", param);
             
@@ -159,6 +172,7 @@ namespace App.View.Task
                 this.txtBillID.Text = dt.Rows[0]["BillID"].ToString();
                 this.txtProductCode.Text = dt.Rows[0]["ProductCode"].ToString();
                 this.txtProductName.Text = dt.Rows[0]["ProductName"].ToString();
+                this.txtSpec.Text = dt.Rows[0]["Spec"].ToString();
                 this.txtAreaCode.Text = dt.Rows[0]["AreaCode"].ToString();
             }
             else
@@ -167,8 +181,14 @@ namespace App.View.Task
                 this.txtBillID.Text = "";
                 this.txtProductCode.Text = "";
                 this.txtProductName.Text = "";
+                this.txtSpec.Text = "";
                 this.txtAreaCode.Text = "";
             }
         }
+
+        private void frmInStockTask_Activated(object sender, EventArgs e)
+        {
+            this.txtBarcode.Focus();
+        }        
     }
 }

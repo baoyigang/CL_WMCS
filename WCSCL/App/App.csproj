@@ -90,7 +90,6 @@
     <Compile Include="BLL\BLLBase.cs" />
     <Compile Include="BLL\Server.cs" />
     <Compile Include="Crane.cs" />
-    <Compile Include="Dispatching\Process\CarProcess.cs" />
     <Compile Include="Dispatching\Process\CraneProcess.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -296,7 +295,9 @@
     <EmbeddedResource Include="View\Task\frmPalletInTask.resx">
       <DependentUpon>frmPalletInTask.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Help.chm" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

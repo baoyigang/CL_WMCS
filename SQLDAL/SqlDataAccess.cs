@@ -79,9 +79,9 @@ namespace SQLDAL
                         sqlP.SourceColumn = dbP.SourceColumn;
                     }
                 }
-                else if (p is DataParameter)
+                else if (p is Util.DataParameter)
                 {
-                    DataParameter dbP = (DataParameter)p;
+                    Util.DataParameter dbP = (Util.DataParameter)p;
                     sqlP = new SqlParameter(dbP.ParameterName, dbP.Value);
                 }
 

@@ -50,9 +50,19 @@
   
 
   <!--货架信息-->
+  <Command ID="SelectStation">
+    <CommandString>
+      SELECT distinct StationNo FROM CMD_Shelf ORDER BY StationNo
+    </CommandString>
+  </Command>
   <Command ID="SelectShelf">
     <CommandString>
       SELECT * FROM CMD_Shelf where {0} ORDER BY ShelfCode,AreaCode
+    </CommandString>
+  </Command>
+  <Command ID="SelectAisle">
+    <CommandString>
+      SELECT distinct AisleNo FROM CMD_Shelf where {0} ORDER BY AisleNo
     </CommandString>
   </Command>
   <Command ID="DeleteShelf">
