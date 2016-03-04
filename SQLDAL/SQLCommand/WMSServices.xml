@@ -34,8 +34,8 @@
   <!--入库单据-->
   <Command ID="InsertInStock">
     <CommandString>
-      insert into WMS_BillMaster(BillID,BillDate,AreaCode,BillTypeCode,FactoryID,SourceBillNo,Memo,BatchNo,Creator,CreateDate,Updater,UpdateDate,State,Checker,CheckDate)
-      select distinct @BillID,BillDate,'001','001','0000000001',BillNo,'','','WebServices',GETDATE(),'WebServices',GETDATE(),1,'WebServices',GETDATE() from WMS_BillTemp
+      insert into WMS_BillMaster(BillID,BillDate,BillTypeCode,FactoryID,SourceBillNo,Memo,BatchNo,Creator,CreateDate,Updater,UpdateDate,State,Checker,CheckDate)
+      select distinct @BillID,BillDate,'001','00001',BillNo,'','','WebServices',GETDATE(),'WebServices',GETDATE(),1,'WebServices',GETDATE() from WMS_BillTemp
       where BillNo=@BillNo and BillType='IS'
     </CommandString>
   </Command>
@@ -57,8 +57,8 @@
   <!--出库单据-->
   <Command ID="InsertOutStock">
     <CommandString>
-      insert into WMS_BillMaster(BillID,BillDate,AreaCode,BillTypeCode,SourceBillNo,Memo,BatchNo,Creator,CreateDate,Updater,UpdateDate,State,Checker,CheckDate)
-      select distinct @BillID,BillDate,'001','020',BillNo,'','','WebServices',GETDATE(),'WebServices',GETDATE(),1,'WebServices',GETDATE() from WMS_BillTemp
+      insert into WMS_BillMaster(BillID,BillDate,BillTypeCode,SourceBillNo,Memo,BatchNo,Creator,CreateDate,Updater,UpdateDate,State,Checker,CheckDate)
+      select distinct @BillID,BillDate,'020',BillNo,'','','WebServices',GETDATE(),'WebServices',GETDATE(),1,'WebServices',GETDATE() from WMS_BillTemp
       where BillNo=@BillNo and BillType='OS'
     </CommandString>
   </Command>
@@ -80,10 +80,11 @@
 
   <Command ID="SelectBillSource">
     <CommandString>
-      select Main.BillID,main.SourceBillNo,SUM(sub.Quantity) as Amount from WMS_BillMaster Main
+      select main.SourceBillNo as BillNo,sub.Barcode as BatchNo,task.AreaCode
+      from WMS_BillMaster Main
       left join WMS_BillDetail Sub on main.BillID=sub.BillID
+      left join WCS_TASK task on task.ProductCode=sub.ProductCode and task.Barcode=sub.Barcode
       where main.BillID=@BillID
-      group by main.BillID,main.SourceBillNo
     </CommandString>
   </Command>
   <Command ID="UpdateBillERP">

@@ -32,24 +32,14 @@ namespace ServiceHost
             if (dt.Rows.Count > 0)
             {
 
-                string strXML1 = "<?xml version=\"1.0\" encoding=\"GB2312\" standalone=\"yes\"?>" + Environment.NewLine + "<DATASETS>" + Environment.NewLine + "<DATASET>" + Environment.NewLine;
+                dt.DataSet.DataSetName = "DATASETS";
+                dt.TableName = "DATASET";
+                string XML = Util.ConvertObj.ConvertDataTableToXml(dt);
 
-                string strXML2 = Environment.NewLine + "</DATASET>" + Environment.NewLine + "</DATASETS>" + Environment.NewLine;
+                ERP.ErpDataService erp = new ERP.ErpDataService();
+                string strResult = erp.transBatchInStock(XML);
 
-                string strBillNo = "<BillNo>" + dt.Rows[0]["SourceBillNo"].ToString() + "</BillNo>" + Environment.NewLine;
-                string strStatus = "<Status>1</Status>" + Environment.NewLine + "<ErrDesc></ErrDesc>" + Environment.NewLine;
-                string strAmount = "<Amount>" + dt.Rows[0]["Amount"].ToString() + "</Amount>" + Environment.NewLine;
-
-                string XML = strXML1 + strBillNo + strStatus + strAmount + strXML2;
-
-                //调用Socket 
-
-                
-
-
-                string strResult = "";
                 string IsUpErp = "1";
-
                 DataSet xmlDS = Util.ConvertObj.XmlStringToDataSet(strResult);
 
                 if (xmlDS.Tables[0].Rows.Count > 0)
@@ -97,19 +87,12 @@ namespace ServiceHost
             if (dt.Rows.Count > 0)
             {
 
-                string strXML1 = "<?xml version=\"1.0\" encoding=\"GB2312\" standalone=\"yes\"?>" + Environment.NewLine + "<DATASETS>" + Environment.NewLine + "<DATASET>" + Environment.NewLine;
+                dt.DataSet.DataSetName = "DATASETS";
+                dt.TableName = "DATASET";
+                string XML = Util.ConvertObj.ConvertDataTableToXml(dt);
 
-                string strXML2 = Environment.NewLine + "</DATASET>" + Environment.NewLine + "</DATASETS>" + Environment.NewLine;
-
-                string strBillNo = "<BillNo>" + dt.Rows[0]["SourceBillNo"].ToString() + "</BillNo>" + Environment.NewLine;
-                string strStatus = "<Status>1</Status>" + Environment.NewLine + "<ErrDesc></ErrDesc>" + Environment.NewLine;
-                string strAmount = "<Amount>" + dt.Rows[0]["Amount"].ToString() + "</Amount>" + Environment.NewLine;
-
-                string XML = strXML1 + strBillNo + strStatus + strAmount + strXML2;
-                
-                //调用ERP
-               
-                string strResult = "";
+                ERP.ErpDataService erp = new ERP.ErpDataService();
+                string strResult = erp.transBatchOutStock(XML);
                 string IsUpErp = "1";
 
                 DataSet xmlDS = Util.ConvertObj.XmlStringToDataSet(strResult);
@@ -159,18 +142,13 @@ namespace ServiceHost
             if (dt.Rows.Count > 0)
             {
 
-                string strXML1 = "<?xml version=\"1.0\" encoding=\"GB2312\" standalone=\"yes\"?>" + Environment.NewLine + "<DATASETS>" + Environment.NewLine + "<DATASET>" + Environment.NewLine;
+                dt.DataSet.DataSetName = "DATASETS";
+                dt.TableName = "DATASET";
+                string XML = Util.ConvertObj.ConvertDataTableToXml(dt);
 
-                string strXML2 = Environment.NewLine + "</DATASET>" + Environment.NewLine + "</DATASETS>" + Environment.NewLine;
+                ERP.ErpDataService erp = new ERP.ErpDataService();
+                string strResult = erp.transBatchCheckStock(XML);
 
-                string strBillNo = "<BillNo>" + dt.Rows[0]["SourceBillNo"].ToString() + "</BillNo>" + Environment.NewLine;
-                string strStatus = "<Status>1</Status>" + Environment.NewLine + "<ErrDesc></ErrDesc>" + Environment.NewLine;
-                string strAmount = "<Amount>" + dt.Rows[0]["Amount"].ToString() + "</Amount>" + Environment.NewLine;
-
-                string XML = strXML1 + strBillNo + strStatus + strAmount + strXML2;
-
-                //调用ERP
-                string strResult = "";
                 string IsUpErp = "1";
 
                 DataSet xmlDS = Util.ConvertObj.XmlStringToDataSet(strResult);
