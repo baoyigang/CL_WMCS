@@ -14,6 +14,7 @@ namespace App.View.Task
     {
         BLL.BLLBase bll = new BLL.BLLBase();
         string CraneNo = "01";
+        string AreaCode = "";
         public frmInStockTask()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace App.View.Task
         private void frmInStockTask_Load(object sender, EventArgs e)
         {
 
+            AreaCode = BLL.Server.GetAreaCode();
             DataTable dt = bll.FillDataTable("WCS.SelectStationNo");
             this.cmbStationNo.DataSource = dt.DefaultView;
             this.cmbStationNo.ValueMember = "StationNo";
@@ -173,7 +175,7 @@ namespace App.View.Task
                 this.txtProductCode.Text = dt.Rows[0]["ProductCode"].ToString();
                 this.txtProductName.Text = dt.Rows[0]["ProductName"].ToString();
                 this.txtSpec.Text = dt.Rows[0]["Spec"].ToString();
-                this.txtAreaCode.Text = dt.Rows[0]["AreaCode"].ToString();
+                this.txtAreaCode.Text = AreaCode;
             }
             else
             {

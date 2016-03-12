@@ -35,12 +35,14 @@ namespace App.Dispatching.Process
         private Dictionary<int, rCrnStatus> dCrnStatus = new Dictionary<int, rCrnStatus>();
         private Timer tmWorkTimer = new Timer();
         private bool blRun = false;
+        private string AreaCode;
 
 
         public override void Initialize(Context context)
         {
             try
             {
+                AreaCode = BLL.Server.GetAreaCode();
                 //获取堆垛机信息
                 DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "1=1") });
                 for (int i = 1; i <= dt.Rows.Count; i++)
@@ -217,7 +219,7 @@ namespace App.Dispatching.Process
 
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
-            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14') and WCS_Task.State='0' and WCS_Task.CraneNo='{0}'",CraneNo)) };
+            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14') and WCS_Task.State='0' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
             DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
 
             //出库
@@ -298,7 +300,7 @@ namespace App.Dispatching.Process
 
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
-            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='1') or (WCS_Task.TaskType='14' and WCS_Task.State='5')) and WCS_Task.CraneNo='{0}'", CraneNo)) };
+            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='1') or (WCS_Task.TaskType='14' and WCS_Task.State='5')) and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
             DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
 
             //出库

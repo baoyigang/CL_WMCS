@@ -381,5 +381,10 @@ namespace App.View.Task
         {
             BindShelf();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Context.ProcessDispatcher.WriteToService("ERP", "SED", this.textBox1.Text);
+        }
     }
 }

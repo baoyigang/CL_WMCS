@@ -74,7 +74,7 @@ namespace App.View
             
             CraneNo = dr["CraneNo"].ToString();
 
-            string filter = string.Format("CMD_Cell.ProductCode='{0}' and CMD_Cell.IsLock='0' and CMD_Cell.IsActive='1' and CMD_Cell.ErrorFlag!='1' and CMD_Shelf.CraneNo='{1}' and CMD_Shelf.AisleNo='{2}'", this.txtProductCode.Text,CraneNo,this.txtAisleNo.Text);
+            string filter = string.Format("CMD_Cell.ProductCode='{0}' and CMD_Cell.IsLock='0' and CMD_Cell.IsActive='1' and CMD_Cell.ErrorFlag!='1' and CMD_Shelf.CraneNo='{1}' and CMD_Shelf.AisleNo='{2}' and CMD_Cell.AreaCode='{3}'", this.txtProductCode.Text, CraneNo, this.txtAisleNo.Text, BLL.Server.GetAreaCode());
 
             DataTable dt = bll.FillDataTable("WCS.SelectCellByFilter", new DataParameter[] { new DataParameter("{0}", filter) });
 
