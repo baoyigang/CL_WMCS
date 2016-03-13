@@ -68,7 +68,7 @@ namespace App.Dispatching.Process
             }
             catch (Exception ex)
             {
-                Logger.Error("THOK.XC.Process.Process_Crane.CraneProcess堆垛机初始化出错，原因：" + ex.Message);
+                Logger.Error("CraneProcess堆垛机初始化出错，原因：" + ex.Message);
             }
         }
         protected override void StateChanged(StateItem stateItem, IProcessDispatcher dispatcher)
@@ -90,13 +90,53 @@ namespace App.Dispatching.Process
                         sbyte[] taskNo = new sbyte[10];
                         Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
                         WriteToService(stateItem.Name, "TaskNo", taskNo);
-                        //存储过程处理
+
                         Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
                         //更新任务状态
-                        DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo)};
-                        bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
+                        DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
+                        //bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
+                        DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcess", param);
 
-                        
+                        //判断任务号是什么类型，如果是盘点另外处理
+                        param = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskNo='{0}'", TaskNo)) };
+                        DataTable dt = bll.FillDataTable("WCS.SelectTask", param);
+
+                        string Flag = "BatchInStock";
+                        string TaskType = "";
+                        string CellCode = "";
+                        if (dt.Rows.Count > 0)
+                        {
+                            TaskType = dt.Rows[0]["TaskType"].ToString();
+                            CellCode = dt.Rows[0]["CellCode"].ToString();
+                            if(TaskType=="12")
+                                Flag = "BatchOutStock";
+                            else if(TaskType=="14")
+                                Flag = "BatchCheckStock";
+                        }
+                        if (dtXml.Rows.Count > 0)
+                        {
+                            string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dt, Flag);
+                            WriteToService("ERP", "ACK", xml);
+                        }
+
+                        string[] str = new string[3];
+                        str[0] = "6";
+                        string strValue = "";
+                        if (TaskType == "14")
+                        {
+                            while ((strValue = FormDialog.ShowDialog(str, dt)) != "")
+                            {
+                                if (strValue != "1")
+                                {
+                                    //更新货位信息
+                                    bll.ExecNonQuery("WCS.UpdateErrCell", new DataParameter[] { new DataParameter("@CellCode", CellCode) });
+                                }
+                                bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 5), new DataParameter("@TaskNo", TaskNo) });
+
+                                //线程继续。
+                                break;
+                            }
+                        }
                     }
                     break;
                 case "Run":
