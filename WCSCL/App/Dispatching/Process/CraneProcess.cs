@@ -86,12 +86,18 @@ namespace App.Dispatching.Process
                     {                        
                         string TaskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(stateItem.Name, "CraneTaskNo")));
 
+                        if (TaskNo.Length <= 0)
+                            return;
+
                         //清除堆垛机任务号
                         sbyte[] taskNo = new sbyte[10];
                         Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
                         WriteToService(stateItem.Name, "TaskNo", taskNo);
 
+                        
                         Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
+
+                        
                         //更新任务状态
                         DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
                         //bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
@@ -115,8 +121,13 @@ namespace App.Dispatching.Process
                         }
                         if (dtXml.Rows.Count > 0)
                         {
-                            string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dt, Flag);
-                            WriteToService("ERP", "ACK", xml);
+                            string BillNo = dtXml.Rows[0][0].ToString();
+                            if (BillNo.Trim().Length > 0)
+                            {
+                                Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
+                                string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dt, Flag);
+                                WriteToService("ERP", "ACK", xml);
+                            }
                         }
 
                         string[] str = new string[3];

@@ -299,8 +299,8 @@ namespace App.View.Dispatcher
                         property.Add("产品编号", cellRows[0]["ProductCode"]);
                         property.Add("产品名称", cellRows[0]["ProductName"]);
                         property.Add("入库类型", cellRows[0]["BillTypeName"]);
-                        //property.Add("产品状态", cellRows[0]["StateName"]);
-                        //property.Add("条码", cellRows[0]["PalletBarcode"]);
+                        property.Add("产品规格", cellRows[0]["Spec"]);
+                        property.Add("条码", cellRows[0]["Barcode"]);
                         //property.Add("产品类型", cellRows[0]["ProductTypeName"]);
                         //property.Add("托盘", cellRows[0]["PalletCode"]);
 
@@ -356,9 +356,9 @@ namespace App.View.Dispatcher
                     Dictionary<string, Dictionary<string, object>> properties = new Dictionary<string, Dictionary<string, object>>();
                     Dictionary<string, object> property = new Dictionary<string, object>();
                     property.Add("产品名称", cellRows[0]["ProductName"]);
-                    property.Add("产品状态", cellRows[0]["StateName"]);
-                    //property.Add("条码", cellRows[0]["PalletBarcode"]);
-                    property.Add("托盘条码", cellRows[0]["PalletCode"]);
+                    property.Add("产品规格", cellRows[0]["Spec"]);
+                    property.Add("条码", cellRows[0]["Barcode"]);
+                    //property.Add("托盘条码", cellRows[0]["PalletCode"]);
 
                     property.Add("单据号", cellRows[0]["BillNo"]);
                     property.Add("入库时间", cellRows[0]["InDate"]);
