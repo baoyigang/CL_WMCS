@@ -34,6 +34,7 @@ namespace App
             {
                 lbLog.Scrollable = true;
                 Logger.OnLog += new LogEventHandler(Logger_OnLog);
+                FormDialog.OnDialog += new DialogEventHandler(FormDialog_OnDialog);
                 context = new Context();
 
                 ContextInitialize initialize = new ContextInitialize();
@@ -129,6 +130,26 @@ namespace App
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
+        }
+        string FormDialog_OnDialog(DialogEventArgs args)
+        {
+            string strValue = "";
+            if (InvokeRequired)
+            {
+                return (string)this.Invoke(new DialogEventHandler(FormDialog_OnDialog), args);
+            }
+            else
+            {
+                if (args.Message[0] == "6")//盘点
+                {
+                    View.CheckScan frm = new View.CheckScan(int.Parse(args.Message[0]), args.dtInfo);
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        strValue = frm.strValue;
+                    }
+                }
+            }
+            return strValue;
         }
         #region 公共方法
         /// <summary>

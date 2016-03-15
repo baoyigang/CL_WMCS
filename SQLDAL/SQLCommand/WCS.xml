@@ -10,7 +10,7 @@
       (case when WCS_TASK.TaskType='11' or (WCS_TASK.TaskType='14' and WCS_TASK.State in('5','6','7','9'))
       then WCS_TASK.CellCode when WCS_TASK.TaskType in('12') or (WCS_TASK.TaskType='14'
       and WCS_TASK.State in('0','1','2','3','4')) then S1.StationAddtess when WCS_TASK.TaskType='13'
-      then WCS_TASK.ToCellCode else '' end) ToStation,S1.AisleNo
+      then WCS_TASK.ToCellCode else '' end) ToStation,S1.AisleNo,C1.BillNo,C1.InDate
       FROM WCS_TASK
       left join CMD_Cell C1 on WCS_TASK.CellCode=C1.CellCode
       left join CMD_Shelf S1 On C1.ShelfCode=S1.ShelfCode
@@ -20,8 +20,7 @@
       Where {0}
       ORDER BY WCS_TASK.TaskLevel DESC, WCS_TASK.RequestDate,WCS_TASK.StartDate
     </CommandString>
-  </Command>
-
+  </Command>  
   <Command ID="sp_GetCell">
     <CommandString>
       sp_GetCell
@@ -80,6 +79,16 @@
   <Command ID="UpdateCell">
     <CommandString>
       update CMD_Cell Set IsLock=@IsLock,ProductCode=@ProductCode,BillNo=@BillNo where CellCode=@CellCode)
+    </CommandString>
+  </Command>
+  <Command ID="UpdateErrCell">
+    <CommandString>
+      update CMD_Cell set ErrorFlag='1',Memo='盘点错误' where CellCode=@CellCode)
+    </CommandString>
+  </Command>
+  <Command ID="UpdateTaskBarcode">
+    <CommandString>
+      update WCS_TASK set CheckBarcode=@CheckBarcode where TaskNo=@TaskNo)
     </CommandString>
   </Command>
   <Command ID="UpdateCellByFilter">

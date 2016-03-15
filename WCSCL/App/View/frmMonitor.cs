@@ -537,6 +537,16 @@ namespace App.View
             Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 0);
 
             MCP.Logger.Info("已给堆垛机下发取消任务指令");           
+        }
+
+        private void btnClearAlarm_Click(object sender, EventArgs e)
+        {
+            Context.ProcessDispatcher.WriteToService("CranePLC1", "Reset", 1);
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Context.ProcessDispatcher.WriteToService("CranePLC1", "Reset", 2);
         }        
     }
 }

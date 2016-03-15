@@ -444,6 +444,10 @@
     </CommandString>
   </Command>
 
- 
+  <Command ID="SelecCellInfoByBarcode">
+    <CommandString>
+      SELECT * FROM View_CMD_CELL_ALL WHERE Barcode = @Barcode
+    </CommandString>
+  </Command>
 
 </SqlCommand>
