@@ -198,14 +198,50 @@
                                         ID="btnProduct"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClientClick="return SelectProduct();" OnClick="btnProduct_Click" />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle Width="20%"  />
+                                <HeaderStyle Width="10%"  />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="品名">
                                 <ItemTemplate>
                                     <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="25%" />
+                                <HeaderStyle  Width="15%" />
+                            </asp:TemplateField>
+                           
+                             <asp:TemplateField HeaderText="规格">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Spec" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="牌号状态">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Propertity" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="产品型号">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="ModelNo" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="标准号">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="StandardNo" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="部件号">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="PartNo" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="数量">
                                 <ItemTemplate>
@@ -214,7 +250,7 @@
                                     ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle Width="10%" />
+                                <HeaderStyle Width="5%" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="熔次卷号">
                                 <ItemTemplate>
@@ -230,7 +266,7 @@
                                     ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox>  
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="10%" />
+                                <HeaderStyle  Width="5%" />
                             </asp:TemplateField>
                              
                             <asp:TemplateField HeaderText="备注">
@@ -238,7 +274,7 @@
                                     <asp:TextBox ID="SubMemo" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="38%" />
+                                <HeaderStyle  Width="15%" />
                             </asp:TemplateField>
                         </Columns>
                         <PagerSettings Visible="false" />

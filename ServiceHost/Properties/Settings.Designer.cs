@@ -22,15 +22,5 @@ namespace ServiceHost.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:1596/ErpDataService.asmx")]
-        public string ServiceHost_ERP_ErpDataService {
-            get {
-                return ((string)(this["ServiceHost_ERP_ErpDataService"]));
-            }
-        }
     }
 }

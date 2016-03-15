@@ -25,6 +25,36 @@
     <FieldTitle>品名</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
+    <FieldName>Spec</FieldName>
+    <FieldTitle>规格</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>ModelNo</FieldName>
+    <FieldTitle>产品型号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>Propertity</FieldName>
+    <FieldTitle>牌号状态</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>StandardNo</FieldName>
+    <FieldTitle>标准号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>PartNo</FieldName>
+    <FieldTitle>部品号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>Barcode</FieldName>
+    <FieldTitle>熔次卷号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="6">
     <FieldName>Unit</FieldName>
     <FieldTitle>单位</FieldTitle>

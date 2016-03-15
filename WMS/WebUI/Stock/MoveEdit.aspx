@@ -214,13 +214,36 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-
+                            <asp:BoundField DataField="Spec" HeaderText="规格" SortExpression="Spec">
+                                <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Propertity" HeaderText="牌号状态" SortExpression="Propertity">
+                                <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ModelNo" HeaderText="产品型号" SortExpression="ModelNo">
+                                <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="StandardNo" HeaderText="标准号" SortExpression="StandardNo">
+                                <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="PartNo" HeaderText="部件号" SortExpression="PartNo">
+                                <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Barcode" HeaderText="熔次卷号" SortExpression="Barcode">
+                                <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
                              <asp:TemplateField HeaderText="货位">
                                 <ItemTemplate>
                                     <asp:Label ID="OldCellCode" runat="server" Text=""></asp:Label>
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
-                                <HeaderStyle Width="4%"  />
+                                <HeaderStyle Width="8%"  />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="新货位">
                                <ItemTemplate>
@@ -235,7 +258,7 @@
                                     <asp:TextBox ID="SubMemo" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="38%" />
+                                <HeaderStyle  Width="12%" />
                             </asp:TemplateField>
                         </Columns>
                         <PagerSettings Visible="false" />

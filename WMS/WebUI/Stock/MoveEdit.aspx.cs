@@ -119,7 +119,12 @@ public partial class WebUI_Stock_MoveEdit : BasePage
             dr["ProductName"] = dt1.Rows[i]["ProductName"];
             dr["CellCode"] = dt1.Rows[i]["CellCode"];
             dr["Quantity"] = dt1.Rows[i]["Quantity"];
-
+            dr["Spec"] = dt1.Rows[i]["Spec"];
+            dr["Propertity"] = dt1.Rows[i]["Propertity"];
+            dr["ModelNo"] = dt1.Rows[i]["ModelNo"];
+            dr["StandardNo"] = dt1.Rows[i]["StandardNo"];
+            dr["PartNo"] = dt1.Rows[i]["PartNo"];
+            dr["BarCode"] = dt1.Rows[i]["BarCode"];
             dt.Rows.Add(dr);
 
         }

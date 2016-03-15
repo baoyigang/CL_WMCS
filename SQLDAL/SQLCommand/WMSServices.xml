@@ -62,7 +62,7 @@
       where BillNo=@BillNo and BillType='OS'
     </CommandString>
   </Command>
-  <Command ID="InsertInStockDetail">
+  <Command ID="InsertOutStockDetail">
     <CommandString>
       insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Weight,Barcode,Memo)
       select @BillID,ROW_NUMBER() over(order by wms_billtemp.productcode,size),CMD_Product.ProductCode, Quantity,wms_billtemp.Weight,BatchNo,wms_billtemp.Memo

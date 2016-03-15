@@ -106,6 +106,11 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             ((TextBox)e.Row.FindControl("SubMemo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Memo")].ToString();
             ((TextBox)e.Row.FindControl("Barcode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Barcode")].ToString();
             ((TextBox)e.Row.FindControl("Weight")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Weight")].ToString();
+            ((TextBox)e.Row.FindControl("Spec")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Spec")].ToString();
+            ((TextBox)e.Row.FindControl("Propertity")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Propertity")].ToString();
+            ((TextBox)e.Row.FindControl("ModelNo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ModelNo")].ToString();
+            ((TextBox)e.Row.FindControl("StandardNo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("StandardNo")].ToString();
+            ((TextBox)e.Row.FindControl("PartNo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("PartNo")].ToString();
         }
     }
 
@@ -133,6 +138,11 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             dr["BillID"] = this.txtID.Text.Trim();
             dr["ProductCode"] = dt1.Rows[i]["ProductCode"];
             dr["ProductName"] = dt1.Rows[i]["ProductName"];
+            dr["Spec"] = dt1.Rows[i]["Spec"];
+            dr["Propertity"] = dt1.Rows[i]["Propertity"];
+            dr["ModelNo"] = dt1.Rows[i]["ModelNo"];
+            dr["StandardNo"] = dt1.Rows[i]["StandardNo"];
+            dr["PartNo"] = dt1.Rows[i]["PartNo"];
             dr["Quantity"] = 1;
 
         }
@@ -233,7 +243,11 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             dr["BillID"] = this.txtID.Text.Trim();
             dr["ProductCode"] = dt1.Rows[i]["ProductCode"];
             dr["ProductName"] = dt1.Rows[i]["ProductName"];
-            
+            dr["Spec"] = dt1.Rows[i]["Spec"];
+            dr["Propertity"] = dt1.Rows[i]["Propertity"];
+            dr["ModelNo"] = dt1.Rows[i]["ModelNo"];
+            dr["StandardNo"] = dt1.Rows[i]["StandardNo"];
+            dr["PartNo"] = dt1.Rows[i]["PartNo"];
             dr["Quantity"] = 1;
 
         }

@@ -16,7 +16,8 @@
   
   <Command ID="SelectBillDetail">
     <CommandString>
-      select detail.*,product.ProductName,product.CategoryName from WMS_BillDetail detail
+      select detail.*,product.ProductName,product.CategoryName,product.Spec,product.Propertity,product.ModelNo,product.PartNo,product.StandardNo
+      from WMS_BillDetail detail
       inner join VCMD_Product product on detail.ProductCode=product.ProductCode
       where {0}
       ORDER BY RowID
@@ -24,7 +25,8 @@
   </Command>
   <Command ID="SelectBillTask">
     <CommandString>
-      select task.*,Product.ProductName,state.StateDesc from WCS_TASK Task
+      select task.*,Product.ProductName,product.Spec,product.Propertity,product.ModelNo,product.PartNo,product.StandardNo,state.StateDesc
+      from WCS_TASK Task
       inner join CMD_Product Product on task.ProductCode=Product.ProductCode
       inner join Sys_TableState state on task.State=state.State and state.TableName='WCS_task' and state.FieldName='State'
       where  {0}
@@ -125,8 +127,8 @@
   </Command>
   <Command ID="InsertMoveStockDetail">
     <CommandString>
-      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,CellCode,NewCellCode,Memo)
-      values(@BillID,@RowID,@ProductCode,@Quantity,@CellCode,@NewCellCode,@Memo)
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,CellCode,NewCellCode,Memo,BarCode)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@CellCode,@NewCellCode,@Memo,@BarCode)
     </CommandString>
   </Command>
   <Command ID="SpMoveStockTask">
@@ -169,8 +171,8 @@
   </Command>
   <Command ID="InsertInventoryStockDetail">
     <CommandString>
-      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,CellCode,Memo)
-      values(@BillID,@RowID,@ProductCode,@Quantity,@CellCode,@Memo)
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,CellCode,Memo,BarCode)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@CellCode,@Memo,@BarCode)
     </CommandString>
   </Command>
   <Command ID="SpInventoryStockTask">

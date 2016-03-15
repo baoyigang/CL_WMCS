@@ -200,7 +200,7 @@
                                         ID="btnProduct"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClientClick="return SelectProduct();" OnClick="btnProduct_Click" />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle Width="20%"  />
+                                <HeaderStyle Width="8%"  />
                             </asp:TemplateField>
                                 
                             <asp:TemplateField HeaderText="品名">
@@ -208,7 +208,42 @@
                                     <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="25%" />
+                                <HeaderStyle  Width="12%" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="规格">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Spec" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="牌号状态">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Propertity" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="产品型号">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="ModelNo" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="标准号">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="StandardNo" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="部件号">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="PartNo" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="数量">
                                 <ItemTemplate>
@@ -242,7 +277,7 @@
                                     <asp:TextBox ID="SubMemo" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="38%" />
+                                <HeaderStyle  Width="18%" />
                             </asp:TemplateField>
                         </Columns>
                         <PagerSettings Visible="false" />

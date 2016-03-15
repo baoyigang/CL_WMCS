@@ -31,6 +31,16 @@
     <DataType>string</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>ModelNo</FieldName>
+    <FieldTitle>产品型号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>Propertity</FieldName>
+    <FieldTitle>牌号状态</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
     <FieldName>StandardNo</FieldName>
     <FieldTitle>标准号</FieldTitle>
     <DataType>string</DataType>

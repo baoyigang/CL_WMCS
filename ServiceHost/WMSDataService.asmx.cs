@@ -8,6 +8,7 @@ using System.Xml;
 using System.IO;
 using Util;
 using IServices;
+using System.Text;
 
 namespace ServiceHost
 {
@@ -18,7 +19,7 @@ namespace ServiceHost
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // 若要允许使用 ASP.NET AJAX 从脚本中调用此 Web 服务，请取消对下行的注释。
-    [System.Web.Script.Services.ScriptService]
+    //[System.Web.Script.Services.ScriptService]
     public class WMSDataService : System.Web.Services.WebService
     {
         /// <summary>
@@ -29,9 +30,50 @@ namespace ServiceHost
         [WebMethod]
         public string transWmsProduct(string wmsProductObject)
         {
+            try
+            {
+                string str = GetUnicodeString(wmsProductObject);
+                WriteToLog("transWmsProduct", str);
+            }
+            catch (Exception ex)
+            {
+ 
+            }
+
+
+            //byte[] bt = Convert.FromBase64String(wmsProductObject);
+            //string strs = System.Text.Encoding.Default.GetString(bt);
+            //string strs1 = System.Text.Encoding.UTF8.GetString(bt);
+
+            WriteToLog("transWmsProduct", wmsProductObject);
+            //WriteToLog("transWmsProduct", strs);
+            //WriteToLog("transWmsProduct", strs1);
+
             DataSet xmlDS = Util.ConvertObj.XmlStringToDataSet(wmsProductObject);
 
             DataTable dt = xmlDS.Tables[0];
+
+            string Msg = "成功";
+            string bln = "Y";
+
+            string result = bln + "," + Msg;
+            string strXML1 = "<?xml version=\"1.0\" encoding=\"GB2312\" standalone=\"yes\"?>" + Environment.NewLine + "<DATASETS>" + Environment.NewLine + "<DATASET>" + Environment.NewLine;
+
+            string strXML2 = Environment.NewLine + "</DATASET>" + Environment.NewLine + "</DATASETS>" + Environment.NewLine;
+
+            string strResult = "<RESULT>" + result + "</RESULT>";
+
+        
+            if (dt.Rows.Count == 0)
+            {
+                bln = "N";
+                Msg = "内容不能为空！";
+                result = bln + "," + Msg;
+                strResult = "<RESULT>" + result + "</RESULT>";
+                return strXML1 + strResult + strXML2;
+            }
+
+
 
             string[] Comds = new string[dt.Rows.Count];
             List<DataParameter[]> paras = new List<DataParameter[]>();
@@ -86,8 +128,7 @@ namespace ServiceHost
                 }
                 paras.Add(para);
             }
-            string Msg = "成功";
-            string bln = "Y";
+         
           
             try
             {
@@ -98,14 +139,9 @@ namespace ServiceHost
                 Msg = ex.Message;
                 bln = "N";
             }
-            string result = bln + "," + Msg;
-            string strXML = "<?xml version=\"1.0\" encoding=\"GB2312\" standalone=\"yes\"?>" + Environment.NewLine;
-            strXML += "<DATASETS>" + Environment.NewLine;
-            strXML += "<DATASET>" + Environment.NewLine;
-            strXML += "<RESULT>" + result + "</RESULT>" + Environment.NewLine;
-            strXML += "</DATASET>" +Environment.NewLine;
-            strXML += "</DATASETS>" + Environment.NewLine;
-            return strXML;
+            result = bln + "," + Msg;
+            strResult = "<RESULT>" + result + "</RESULT>";
+            return strXML1 + strResult + strXML2;
         }
         /// <summary>
         /// ERP系统为WMS提供批次入库信息
@@ -115,6 +151,7 @@ namespace ServiceHost
         [WebMethod]
         public string transInStock(string wmsInStockObject)
         {
+            WriteToLog("transInStock", wmsInStockObject);
             DataSet xmlDS = Util.ConvertObj.XmlStringToDataSet(wmsInStockObject);
             DataTable dt = xmlDS.Tables[0];
 
@@ -129,17 +166,8 @@ namespace ServiceHost
             string strResult = "<RESULT>" + result + "</RESULT>";
             BLL.BLLBase bll = new BLL.BLLBase();
 
-
             DataTable dtCode = dt.DefaultView.ToTable(true, "BillNo");
-            if (dtCode.Rows.Count > 1)
-            {
-                bln = "N";
-                Msg = "系统一次只能传送一个单号！";
-                result = bln + "," + Msg;
-                strResult = "<RESULT>" + result + "</RESULT>";
-                return strXML1 + strResult + strXML2;
-            }
-            else if (dtCode.Rows.Count == 0)
+            if (dtCode.Rows.Count == 0)
             {
                 bln = "N";
                 Msg = "内容不能为空！";
@@ -150,70 +178,84 @@ namespace ServiceHost
             else
             {
 
-                int HasCount = bll.GetRowCount("WMS_BillMaster", string.Format("SourceBillNo='{0}' and BillID like 'IS%'", dtCode.Rows[0]["BillNo"].ToString().Replace("'", "''")));
-                if (HasCount > 0)
+              
+                List<string> list = new List<string>();
+                List<DataParameter[]> paras = new List<DataParameter[]>();
+                DataParameter[] para;
+                string strWhere = "'-1'";
+                string strBillID = bll.GetAutoCodeByTableName("IS", "WMS_BillMaster", DateTime.Now, "1=1");
+                string BillID = strBillID;
+                for (int k = 0; k < dtCode.Rows.Count; k++)
                 {
-                    bln = "N";
-                    Msg = "单号" + dtCode.Rows[0]["BillNo"].ToString() + "已经传入WMS，不能再次传递！";
-                    result = bln + "," + Msg;
-                    strResult = "<RESULT>" + result + "</RESULT>";
-                    return strXML1 + strResult + strXML2;
-                }
-            }
 
-            int RowCount = dt.Rows.Count;
+                    if (k != 0)
+                    {
+                        BillID = Util.Utility.NewID(strBillID);
+                        strBillID = BillID;
+                    }
 
-            string[] Comds = new string[RowCount + 4];
-            List<DataParameter[]> paras = new List<DataParameter[]>();
-            DataParameter[] para;
-            Comds[0] = "WMSServices.DeleteBillTemp";
-            para = new DataParameter[] { new DataParameter("@BillType","IS"),
-                                         new DataParameter("@BillNo",dtCode.Rows[0][0].ToString())
-                                        };
+                    string BillNo=dtCode.Rows[k]["BillNo"].ToString().Replace("'", "''");
+                    int HasCount = bll.GetRowCount("WMS_BillMaster", string.Format("SourceBillNo='{0}' and BillID like 'IS%'", BillNo));
+                    if (HasCount > 0)
+                    {
+                        bln = "N";
+                        Msg = "单号" + BillNo + "已经传入WMS，不能再次传递！";
+                        result = bln + "," + Msg;
+                        strResult = "<RESULT>" + result + "</RESULT>";
+                        return strXML1 + strResult + strXML2;
+                    }
+                    list.Add("WMSServices.DeleteBillTemp");
+                    para = new DataParameter[] { new DataParameter("@BillType","IS"),
+                                                 new DataParameter("@BillNo",BillNo)
+                                                };
 
 
+                    paras.Add(para);
+                    DataRow[] drs = dt.Select(string.Format("BillNo='{0}'", BillNo));
 
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                DataRow dr = dt.Rows[i];
-                Comds[i + 1] = "WMSServices.InsertBillTemp";
-                para = new DataParameter[] { new DataParameter("@BillType","IS"), 
-                                            new DataParameter("@BillNo",dr["BillNo"]),
-                                            new DataParameter("@BillDate",dr["BillDate"]),
-                                            new DataParameter("@BatchNo",dr["BatchNo"]),
-                                            new DataParameter("@ProductCode",dr["ProductCode"]),
-                                            new DataParameter("@Size",dr["Size"]),
-                                            new DataParameter("@Weight",dr["Weight"]),
-                                            new DataParameter("@Quantity",dr["Quantity"]),
-                                            new DataParameter("@Memo",dr["Memo"]) 
+                    for (int i = 0; i < drs.Length; i++)
+                    {
+                        DataRow dr = drs[i];
+                        list.Add("WMSServices.InsertBillTemp");
+                        para = new DataParameter[] { new DataParameter("@BillType","IS"), 
+                                                     new DataParameter("@BillNo",dr["BillNo"]),
+                                                     new DataParameter("@BillDate",dr["BillDate"]),
+                                                     new DataParameter("@BatchNo",dr["BatchNo"]),
+                                                     new DataParameter("@ProductCode",dr["ProductCode"]),
+                                                     new DataParameter("@Size",dr["Size"]),
+                                                     new DataParameter("@Weight",dr["Weight"]),
+                                                     new DataParameter("@Quantity",1),
+                                                     new DataParameter("@Memo",dr["Memo"]) 
                                                              
                                          };
 
+                        paras.Add(para);
+                    }
+                    list.Add("WMSServices.InsertInStock");//插入主表
+                    para = new DataParameter[] { new DataParameter("@BillID", BillID), new DataParameter("@BillNo", BillNo) };
+                    paras.Add(para);
+
+
+                    list.Add("WMSServices.InsertInStockDetail"); //从表
+                    para = new DataParameter[] { new DataParameter("@BillID", BillID), new DataParameter("@BillNo", BillNo) };
+                    paras.Add(para);
+
+                    strWhere += ",'" + BillID + "'";
+
+                }
+                list.Add("WMSServices.SpInstockTask");//入库作业
+                para = new DataParameter[] { new DataParameter("@strWhere", strWhere), new DataParameter("@UserName", "WebServices") };
                 paras.Add(para);
-            }
-            string BillID = bll.GetAutoCodeByTableName("IS", "WMS_BillMaster", DateTime.Now, "1=1");
 
-            Comds[RowCount + 1] = "WMSServices.InsertInStock";//插入主表
-            para = new DataParameter[] { new DataParameter("@BillID", BillID), new DataParameter("@BillNo", dtCode.Rows[0][0].ToString()) };
-            paras.Add(para);
-
-
-            Comds[dt.Rows.Count + 2] = "WMSServices.InsertInStockDetail"; //从表
-            para = new DataParameter[] { new DataParameter("@BillID", BillID), new DataParameter("@BillNo", dtCode.Rows[0][0].ToString()) };
-            paras.Add(para);
-
-            Comds[RowCount + 3] = "WMSServices.SpInstockTask";//入库作业
-            para = new DataParameter[] { new DataParameter("@strWhere", "'" + BillID + "'"), new DataParameter("@UserName", "WebServices") };
-            paras.Add(para);
-
-            try
-            {
-                bll.ExecTran(Comds, paras);
-            }
-            catch (Exception ex)
-            {
-                Msg = ex.Message;
-                bln = "N";
+                try
+                {
+                    bll.ExecTran(list.ToArray(), paras);
+                }
+                catch (Exception ex)
+                {
+                    Msg = ex.Message;
+                    bln = "N";
+                }
             }
 
             result = bln + "," + Msg;
@@ -230,6 +272,7 @@ namespace ServiceHost
         [WebMethod]
         public string transOutStock(string wmsOutStockObject)
         {
+            WriteToLog("transOutStock", wmsOutStockObject);
             DataSet xmlDS = Util.ConvertObj.XmlStringToDataSet(wmsOutStockObject);
             DataTable dt = xmlDS.Tables[0];
 
@@ -246,15 +289,7 @@ namespace ServiceHost
 
 
             DataTable dtCode = dt.DefaultView.ToTable(true, "BillNo");
-            if (dtCode.Rows.Count > 1)
-            {
-                bln = "N";
-                Msg = "系统一次只能传送一个单号！";
-                result = bln + "," + Msg;
-                strResult = "<RESULT>" + result + "</RESULT>";
-                return strXML1 + strResult + strXML2;
-            }
-            else if (dtCode.Rows.Count == 0)
+            if (dtCode.Rows.Count == 0)
             {
                 bln = "N";
                 Msg = "内容不能为空！";
@@ -264,71 +299,93 @@ namespace ServiceHost
             }
             else
             {
+                List<string> list = new List<string>();
+                List<DataParameter[]> paras = new List<DataParameter[]>();
+                DataParameter[] para;
 
-                int HasCount = bll.GetRowCount("WMS_BillMaster", string.Format("SourceBillNo='{0}' and BillID like 'OS%'", dtCode.Rows[0]["BillNo"].ToString().Replace("'", "''")));
-                if (HasCount > 0)
+                string strBillID = bll.GetAutoCodeByTableName("OS", "WMS_BillMaster", DateTime.Now, "1=1");
+                string BillID = strBillID;
+                for (int k = 0; k < dtCode.Rows.Count; k++)
                 {
-                    bln = "N";
-                    Msg = "单号" + dtCode.Rows[0]["BillNo"].ToString() + "已经传入WMS，不能再次传递！";
-                    result = bln + "," + Msg;
-                    strResult = "<RESULT>" + result + "</RESULT>";
-                    return strXML1 + strResult + strXML2;
-                }
-            }
 
-            int RowCount = dt.Rows.Count;
+                    if (k != 0)
+                    {
+                        BillID = Util.Utility.NewID(strBillID);
+                        strBillID = BillID;
+                    }
+                    string BillNo = dtCode.Rows[k]["BillNo"].ToString().Replace("'", "''");
+                    int HasCount = bll.GetRowCount("WMS_BillMaster", string.Format("SourceBillNo='{0}' and BillID like 'OS%'", BillNo));
+                    if (HasCount > 0)
+                    {
+                        bln = "N";
+                        Msg = "单号" + dtCode.Rows[0]["BillNo"].ToString() + "已经传入WMS，不能再次传递！";
+                        result = bln + "," + Msg;
+                        strResult = "<RESULT>" + result + "</RESULT>";
+                        return strXML1 + strResult + strXML2;
+                    }
 
-            string[] Comds = new string[RowCount + 4];
-            List<DataParameter[]> paras = new List<DataParameter[]>();
-            DataParameter[] para;
-            Comds[0] = "WMSServices.DeleteBillTemp";
-            para = new DataParameter[] { new DataParameter("@BillType","OS"),
-                                         new DataParameter("@BillNo",dtCode.Rows[0][0].ToString())
+
+                   list.Add("WMSServices.DeleteBillTemp");
+                    para = new DataParameter[] { new DataParameter("@BillType","OS"),
+                                         new DataParameter("@BillNo",BillNo)
                                         };
 
+                    paras.Add(para);
+
+                    
+                    DataRow[] drs = dt.Select(string.Format("BillNo='{0}'", BillNo));
+
+                    for (int i = 0; i < drs.Length; i++)
+                    {
+                        DataRow dr = drs[i];
+
+                        HasCount = bll.GetRowCount("CMD_CELL", string.Format("Barcode='{0}' and IsLock=0 and InDate is not null", dr["BatchNo"]));
+                        if (HasCount == 0)
+                        {
+                            bln = "N";
+                            Msg = "单号：" + dtCode.Rows[0]["BillNo"].ToString() + " 熔次卷号：" + dr["BatchNo"] + " 库存数量为零无法出库！";
+                            result = bln + "," + Msg;
+                            strResult = "<RESULT>" + result + "</RESULT>";
+                            return strXML1 + strResult + strXML2;
+                        }
 
 
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                DataRow dr = dt.Rows[i];
-                Comds[i + 1] = "WMSServices.InsertBillTemp";
-                para = new DataParameter[] { new DataParameter("@BillType","OS"), 
+                       
+                       list.Add("WMSServices.InsertBillTemp");
+                        para = new DataParameter[] { new DataParameter("@BillType","OS"), 
                                             new DataParameter("@BillNo",dr["BillNo"]),
                                             new DataParameter("@BillDate",dr["BillDate"]),
                                             new DataParameter("@BatchNo",dr["BatchNo"]),
                                             new DataParameter("@ProductCode",dr["ProductCode"]),
                                             new DataParameter("@Size",dr["Size"]),
                                             new DataParameter("@Weight",dr["Weight"]),
-                                            new DataParameter("@Quantity",dr["Quantity"]),
+                                            new DataParameter("@Quantity",1),
                                             new DataParameter("@Memo",dr["Memo"]) 
                                                              
                                          };
 
-                paras.Add(para);
-            }
-            string BillID = bll.GetAutoCodeByTableName("OS", "WMS_BillMaster", DateTime.Now, "1=1");
+                        paras.Add(para);
+                    }
+                   
 
-            Comds[RowCount + 1] = "WMSServices.InsertOutStock";//插入主表
-            para = new DataParameter[] { new DataParameter("@BillID", BillID), new DataParameter("@BillNo", dtCode.Rows[0][0].ToString()) };
-            paras.Add(para);
+                   list.Add("WMSServices.InsertOutStock");//插入主表
+                    para = new DataParameter[] { new DataParameter("@BillID", BillID), new DataParameter("@BillNo", BillNo) };
+                    paras.Add(para);
 
 
-            Comds[dt.Rows.Count + 2] = "WMSServices.InsertOutStockDetail"; //从表
-            para = new DataParameter[] { new DataParameter("@BillID", BillID), new DataParameter("@BillNo", dtCode.Rows[0][0].ToString()) };
-            paras.Add(para);
-
-            Comds[RowCount + 3] = "WMSServices.SpOutStockTask";//入库作业
-            para = new DataParameter[] { new DataParameter("@strWhere", "'" + BillID + "'"), new DataParameter("@UserName", "WebServices") };
-            paras.Add(para);
-
-            try
-            {
-                bll.ExecTran(Comds, paras);
-            }
-            catch (Exception ex)
-            {
-                Msg = ex.Message;
-                bln = "N";
+                   list.Add("WMSServices.InsertOutStockDetail"); //从表
+                    para = new DataParameter[] { new DataParameter("@BillID", BillID), new DataParameter("@BillNo", BillNo) };
+                    paras.Add(para);
+                }
+                try
+                {
+                    bll.ExecTran(list.ToArray(), paras);
+                }
+                catch (Exception ex)
+                {
+                    Msg = ex.Message;
+                    bln = "N";
+                }
             }
 
             result = bln + "," + Msg;
@@ -336,6 +393,56 @@ namespace ServiceHost
             return strXML1 + strResult + strXML2;
         }
 
+        private void WriteToLog(string WmsType, string Msg)
+        {
+            string path = System.AppDomain.CurrentDomain.BaseDirectory + @"\PDATcp";
+
+            if (!System.IO.Directory.Exists(path))
+                System.IO.Directory.CreateDirectory(path);
+            path = path + @"\" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            System.IO.File.AppendAllText(path, string.Format("{0} , {1} :  {2}", DateTime.Now, WmsType, Msg + "\r\n"));
+        }
+
+
+        private  string GetUnicodeString(string sValue)
+        {
+
+            Encoding def = Encoding.Default;
+
+            Encoding unicode = Encoding.UTF8;
+
+
+
+            // Check whether default encoding is same as "UTF-8" encoding
+
+            if (def == unicode) return sValue;
+
+
+
+            // Check parameter
+
+            if (sValue == null || sValue.Length == 0) return sValue;
+
+
+
+            // Convert the string into a byte[].
+
+            byte[] defBytes = def.GetBytes(sValue);
+
+
+
+            // Perform the conversion from one encoding to the other.
+
+            byte[] unicodeBytes = Encoding.Convert(def, unicode, defBytes);
+
+            char[] uniChars = new char[unicodeBytes.Length];
+
+            for (int i = 0; i < unicodeBytes.Length; i++)
+
+                uniChars[i] = (char)(unicodeBytes[i]);
+            return new string(uniChars);
+
+        }
 
 
     }
