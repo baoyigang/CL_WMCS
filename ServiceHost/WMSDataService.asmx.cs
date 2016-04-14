@@ -30,24 +30,7 @@ namespace ServiceHost
         [WebMethod]
         public string transWmsProduct(string wmsProductObject)
         {
-            try
-            {
-                string str = GetUnicodeString(wmsProductObject);
-                WriteToLog("transWmsProduct", str);
-            }
-            catch (Exception ex)
-            {
- 
-            }
-
-
-            //byte[] bt = Convert.FromBase64String(wmsProductObject);
-            //string strs = System.Text.Encoding.Default.GetString(bt);
-            //string strs1 = System.Text.Encoding.UTF8.GetString(bt);
-
             WriteToLog("transWmsProduct", wmsProductObject);
-            //WriteToLog("transWmsProduct", strs);
-            //WriteToLog("transWmsProduct", strs1);
 
             DataSet xmlDS = Util.ConvertObj.XmlStringToDataSet(wmsProductObject);
 
@@ -110,8 +93,9 @@ namespace ServiceHost
                 else
                 {
                     Comds[i] = "WMSServices.InsertProduct";
-                    string strWmsProductCode =Util.Utility.NewID(strProductCode);
-                    strProductCode = strWmsProductCode;
+                    string strWmsProductCode = strProductCode;
+                    strProductCode = Util.Utility.NewID(strWmsProductCode);
+
                     para = new DataParameter[] {    new DataParameter("@ProductWMSCode",strWmsProductCode),
                                                     new DataParameter("@ProductCode",dr["ProductCode"].ToString()), 
                                                     new DataParameter("@ProductName",dr["ProductName"].ToString()),
@@ -166,8 +150,8 @@ namespace ServiceHost
             string strResult = "<RESULT>" + result + "</RESULT>";
             BLL.BLLBase bll = new BLL.BLLBase();
 
-            DataTable dtCode = dt.DefaultView.ToTable(true, "BillNo");
-            if (dtCode.Rows.Count == 0)
+
+            if (dt.Rows.Count == 0)
             {
                 bln = "N";
                 Msg = "内容不能为空！";
@@ -178,7 +162,8 @@ namespace ServiceHost
             else
             {
 
-              
+                DataTable dtCode = dt.DefaultView.ToTable(true, "BillNo");
+
                 List<string> list = new List<string>();
                 List<DataParameter[]> paras = new List<DataParameter[]>();
                 DataParameter[] para;
@@ -204,13 +189,7 @@ namespace ServiceHost
                         strResult = "<RESULT>" + result + "</RESULT>";
                         return strXML1 + strResult + strXML2;
                     }
-                    list.Add("WMSServices.DeleteBillTemp");
-                    para = new DataParameter[] { new DataParameter("@BillType","IS"),
-                                                 new DataParameter("@BillNo",BillNo)
-                                                };
-
-
-                    paras.Add(para);
+                    
                     DataRow[] drs = dt.Select(string.Format("BillNo='{0}'", BillNo));
 
                     for (int i = 0; i < drs.Length; i++)
@@ -242,10 +221,21 @@ namespace ServiceHost
 
                     strWhere += ",'" + BillID + "'";
 
+                    list.Add("WMSServices.DeleteBillTemp");
+                    para = new DataParameter[] { new DataParameter("@BillType","IS"),
+                                                 new DataParameter("@BillNo",BillNo)
+                                                };
+                    paras.Add(para);
+
                 }
                 list.Add("WMSServices.SpInstockTask");//入库作业
                 para = new DataParameter[] { new DataParameter("@strWhere", strWhere), new DataParameter("@UserName", "WebServices") };
                 paras.Add(para);
+
+               
+
+
+               
 
                 try
                 {
@@ -288,8 +278,8 @@ namespace ServiceHost
             BLL.BLLBase bll = new BLL.BLLBase();
 
 
-            DataTable dtCode = dt.DefaultView.ToTable(true, "BillNo");
-            if (dtCode.Rows.Count == 0)
+           
+            if (dt.Rows.Count == 0)
             {
                 bln = "N";
                 Msg = "内容不能为空！";
@@ -299,6 +289,7 @@ namespace ServiceHost
             }
             else
             {
+                DataTable dtCode = dt.DefaultView.ToTable(true, "BillNo");
                 List<string> list = new List<string>();
                 List<DataParameter[]> paras = new List<DataParameter[]>();
                 DataParameter[] para;
@@ -325,12 +316,7 @@ namespace ServiceHost
                     }
 
 
-                   list.Add("WMSServices.DeleteBillTemp");
-                    para = new DataParameter[] { new DataParameter("@BillType","OS"),
-                                         new DataParameter("@BillNo",BillNo)
-                                        };
-
-                    paras.Add(para);
+                   
 
                     
                     DataRow[] drs = dt.Select(string.Format("BillNo='{0}'", BillNo));
@@ -339,7 +325,7 @@ namespace ServiceHost
                     {
                         DataRow dr = drs[i];
 
-                        HasCount = bll.GetRowCount("CMD_CELL", string.Format("Barcode='{0}' and IsLock=0 and InDate is not null", dr["BatchNo"]));
+                        HasCount = bll.GetRowCount("View_ProductQty", string.Format("Barcode='{0}' and (InstockQty-UnStockQty)>0 ", dr["BatchNo"]));
                         if (HasCount == 0)
                         {
                             bln = "N";
@@ -375,6 +361,14 @@ namespace ServiceHost
 
                    list.Add("WMSServices.InsertOutStockDetail"); //从表
                     para = new DataParameter[] { new DataParameter("@BillID", BillID), new DataParameter("@BillNo", BillNo) };
+                    paras.Add(para);
+
+
+                    list.Add("WMSServices.DeleteBillTemp");
+                    para = new DataParameter[] { new DataParameter("@BillType","OS"),
+                                         new DataParameter("@BillNo",BillNo)
+                                        };
+
                     paras.Add(para);
                 }
                 try

@@ -9,6 +9,7 @@
         <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
         <script type="text/javascript" src="../../JQuery/jquery-1.8.3.min.js"></script>
          <script type="text/javascript" src="../../JScript/DataProcess.js"></script>
+         <script type="text/javascript" src= "../../JScript/Common.js"></script>
         <script type="text/javascript" language="javascript">
             var oldcell;
             $(document).ready(function () {
@@ -32,7 +33,7 @@
                 oldcell = obj;
             }
 
-
+  
 
             function ShowCellInfo(obj) {
                 closeinfo();
@@ -50,7 +51,7 @@
                     document.getElementById("StateName").innerText = json[0].StateName == null ? "" : json[0].StateName;
                     document.getElementById("BillNo").innerText = json[0].BillNo;
 
-                    document.getElementById("Indate").innerText = json[0].InDate == null ? "" : json[0].InDate;
+                    document.getElementById("Indate").innerText = json[0].InDate == null ? "" : new Date(parseInt(json[0].InDate.replace(/\D/igm, ""))).Format("yyyy-MM-dd"); 
                     document.getElementById("AreaName").innerText = json[0].AreaName;
                     document.getElementById("ShelfName").innerText = json[0].ShelfName;
                     document.getElementById("CellColumn").innerText = json[0].CellColumn;
@@ -109,7 +110,7 @@
     <form id="form1" runat="server">
     <asp:Panel ID="pnlCell" runat="server"  Width="100%" Height="450px"  style="overflow:auto;" >
     </asp:Panel>
-    <div id="productinfo"  style=" width:330px; height:180px; position:absolute; background-color:#dbe7fd;opacity:0.9; display:none; border:1px solid #000;">
+    <div id="productinfo"  style=" width:380px; height:180px; position:absolute; background-color:#dbe7fd;opacity:0.9; display:none; border:1px solid #000;">
         <div id="btclose" style=" width:100%; height:20px;">
           <span id="cellcode" style="float:left"></span>
           <span onclick="closeinfo()"  style=" float:right; width:15px; height:20px;  cursor:pointer">X</span>

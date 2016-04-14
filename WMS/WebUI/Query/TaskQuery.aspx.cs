@@ -47,7 +47,7 @@ public partial class WebUI_Query_TaskQuery : BasePage
 
 
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "BindEvent();", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "", "BindEvent();", true);
         }
         SetTextReadOnly(this.txtProductName);
 

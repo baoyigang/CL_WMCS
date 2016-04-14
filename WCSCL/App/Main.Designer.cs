@@ -34,6 +34,7 @@
             this.OutStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InventortoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MoveStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UpERPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Monitor = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Cell = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemSetup = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +53,7 @@
             this.toolStripButton_CellMonitor = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_StartCrane = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_MoveStock = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_UpERP = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.pnlTab = new System.Windows.Forms.Panel();
             this.tabForm = new System.Windows.Forms.TabControl();
@@ -79,7 +81,8 @@
             this.inStockToolStripMenuItem,
             this.OutStockToolStripMenuItem,
             this.InventortoolStripMenuItem,
-            this.MoveStockToolStripMenuItem});
+            this.MoveStockToolStripMenuItem,
+            this.UpERPToolStripMenuItem});
             this.taskToolStripMenuItem.Name = "taskToolStripMenuItem";
             this.taskToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.taskToolStripMenuItem.Text = "任务操作";
@@ -87,30 +90,37 @@
             // inStockToolStripMenuItem
             // 
             this.inStockToolStripMenuItem.Name = "inStockToolStripMenuItem";
-            this.inStockToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.inStockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.inStockToolStripMenuItem.Text = "入库任务";
             this.inStockToolStripMenuItem.Click += new System.EventHandler(this.inStockToolStripMenuItem_Click);
             // 
             // OutStockToolStripMenuItem
             // 
             this.OutStockToolStripMenuItem.Name = "OutStockToolStripMenuItem";
-            this.OutStockToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.OutStockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.OutStockToolStripMenuItem.Text = "出库任务";
             this.OutStockToolStripMenuItem.Click += new System.EventHandler(this.OutStockToolStripMenuItem_Click);
             // 
             // InventortoolStripMenuItem
             // 
             this.InventortoolStripMenuItem.Name = "InventortoolStripMenuItem";
-            this.InventortoolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.InventortoolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.InventortoolStripMenuItem.Text = "盘点任务";
             this.InventortoolStripMenuItem.Click += new System.EventHandler(this.InventortoolStripMenuItem_Click);
             // 
             // MoveStockToolStripMenuItem
             // 
             this.MoveStockToolStripMenuItem.Name = "MoveStockToolStripMenuItem";
-            this.MoveStockToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.MoveStockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.MoveStockToolStripMenuItem.Text = "移库任务";
             this.MoveStockToolStripMenuItem.Click += new System.EventHandler(this.MoveStockToolStripMenuItem_Click);
+            // 
+            // UpERPToolStripMenuItem
+            // 
+            this.UpERPToolStripMenuItem.Name = "UpERPToolStripMenuItem";
+            this.UpERPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.UpERPToolStripMenuItem.Text = "上传ERP";
+            this.UpERPToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton_UpERP_Click);
             // 
             // ToolStripMenuItem_Monitor
             // 
@@ -159,7 +169,7 @@
             this.columnHeader2,
             this.columnHeader3});
             this.lbLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbLog.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbLog.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbLog.FullRowSelect = true;
             this.lbLog.LabelWrap = false;
             this.lbLog.Location = new System.Drawing.Point(0, 0);
@@ -198,6 +208,7 @@
             this.toolStripButton_CellMonitor,
             this.toolStripButton_StartCrane,
             this.toolStripButton_MoveStock,
+            this.toolStripButton_UpERP,
             this.toolStripButton_Close});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
@@ -293,6 +304,17 @@
             this.toolStripButton_MoveStock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton_MoveStock.Click += new System.EventHandler(this.toolStripButton_MoveStock_Click);
             // 
+            // toolStripButton_UpERP
+            // 
+            this.toolStripButton_UpERP.AutoSize = false;
+            this.toolStripButton_UpERP.Image = global::App.Properties.Resources.database_accept;
+            this.toolStripButton_UpERP.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_UpERP.Name = "toolStripButton_UpERP";
+            this.toolStripButton_UpERP.Size = new System.Drawing.Size(60, 50);
+            this.toolStripButton_UpERP.Text = "上传ERP";
+            this.toolStripButton_UpERP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_UpERP.Click += new System.EventHandler(this.toolStripButton_UpERP_Click);
+            // 
             // toolStripButton_Close
             // 
             this.toolStripButton_Close.AutoSize = false;
@@ -318,7 +340,7 @@
             // tabForm
             // 
             this.tabForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabForm.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabForm.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabForm.Location = new System.Drawing.Point(0, 0);
             this.tabForm.Name = "tabForm";
             this.tabForm.SelectedIndex = 0;
@@ -383,5 +405,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemSetup;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Param;
         private System.Windows.Forms.ToolStripButton toolStripButton_Scan;
+        private System.Windows.Forms.ToolStripButton toolStripButton_UpERP;
+        private System.Windows.Forms.ToolStripMenuItem UpERPToolStripMenuItem;
     }
 }

@@ -10,7 +10,7 @@ using Util;
 
 namespace App.View.Task
 {
-    public partial class frmInStockTask : Form
+    public partial class frmInStockTask :BaseForm
     {
         BLL.BLLBase bll = new BLL.BLLBase();
         string CraneNo = "01";
@@ -31,7 +31,7 @@ namespace App.View.Task
         }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.radioButton1.Checked)
+            if (this.radioButton1.Checked || radioButton3.Checked)
             {
                 this.cbRow.Enabled = false;
                 this.cbColumn.Enabled = false;
@@ -125,43 +125,77 @@ namespace App.View.Task
                 new DataParameter("@StationNo", this.cmbStationNo.Text), 
                 new DataParameter("@AreaCode", this.txtAreaCode.Text) 
             };
-            
 
-                if (this.radioButton1.Checked)
-                {
-                    dt = bll.FillDataTable("WCS.sp_GetCell", param);
-                    if (dt.Rows.Count > 0)
-                        this.txtCellCode.Text = dt.Rows[0][0].ToString();
-                    else
-                        this.txtCellCode.Text = "";
-                }
+
+            if (this.radioButton1.Checked)
+            {
+                dt = bll.FillDataTable("WCS.sp_GetCell", param);
+                if (dt.Rows.Count > 0)
+                    this.txtCellCode.Text = dt.Rows[0][0].ToString();
                 else
-                {
-                    this.txtCellCode.Text = this.cbRow.Text.Substring(3, 3) + (1000 + int.Parse(this.cbColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbHeight.Text)).ToString().Substring(1, 3);
-                }
-                
+                    this.txtCellCode.Text = "";
+            }
+            else if (this.radioButton2.Checked)
+            {
+                this.txtCellCode.Text = this.cbRow.Text.Substring(3, 3) + (1000 + int.Parse(this.cbColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbHeight.Text)).ToString().Substring(1, 3);
+            }
+            else
+            {
+                bll.ExecNonQuery("WCS.UpdateTaskAreaCodeByTaskNo", new DataParameter[] { new DataParameter("@AreaCode", this.txtAreaCode.Text), new DataParameter("@TaskNo", this.txtTaskNo.Text) });
+                param = new DataParameter[] { new DataParameter("@TaskNo", this.txtTaskNo.Text) };
 
-                //判断货位是否为空
-                param = new DataParameter[] 
+                DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcessNoShelf", param);
+                if (dtXml.Rows.Count > 0)
+                {
+                    string BillNo = dtXml.Rows[0][0].ToString();
+                    if (BillNo.Trim().Length > 0)
+                    {
+                        string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, "BatchInStock");
+                        Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
+                        MCP.Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
+                    }
+                }
+                SetControlEmpty();
+                this.txtBarcode.Focus();
+                return;
+
+            }
+
+
+            //判断货位是否为空
+            param = new DataParameter[] 
                 { 
                     new DataParameter("{0}", string.Format("CellCode='{0}' and ProductCode='' and IsActive='1' and IsLock='0' and AreaCode='{1}'", this.txtCellCode.Text,this.txtAreaCode.Text))
                 };
-                dt = bll.FillDataTable("CMD.SelectCell", param);
-                if (dt.Rows.Count <= 0)
-                {
-                    MessageBox.Show("自动获取的货位或指定的货位非空货位,请确认！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                //锁定货位
-                param = new DataParameter[] 
-                {             
-                    new DataParameter("@CellCode", this.txtCellCode.Text),                    
-                    new DataParameter("@TaskNo", this.txtTaskNo.Text),
-                    new DataParameter("@StationNo", this.cmbStationNo.Text)
-                };
-                bll.ExecNonQueryTran("WCS.Sp_ExecuteInStockTask", param);
+            dt = bll.FillDataTable("CMD.SelectCell", param);
+            if (dt.Rows.Count <= 0)
+            {
+                MessageBox.Show("自动获取的货位或指定的货位非空货位,请确认！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            //锁定货位
+            param = new DataParameter[] 
+                    {             
+                        new DataParameter("@CellCode", this.txtCellCode.Text),                    
+                        new DataParameter("@TaskNo", this.txtTaskNo.Text),
+                        new DataParameter("@StationNo", this.cmbStationNo.Text)
+                    };
+            bll.ExecNonQueryTran("WCS.Sp_ExecuteInStockTask", param);
+            SetControlEmpty();
+            this.txtBarcode.Focus();
             
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        private void SetControlEmpty()
+        {
+            this.txtBarcode.Text = "";
+            this.txtTaskNo.Text = "";
+            this.txtBillID.Text = "";
+            this.txtProductCode.Text = "";
+            this.txtProductName.Text = "";
+            this.txtSpec.Text = "";
+            this.txtCellCode.Text = "";
+           
         }
 
         private void txtBarcode_TextChanged(object sender, EventArgs e)
