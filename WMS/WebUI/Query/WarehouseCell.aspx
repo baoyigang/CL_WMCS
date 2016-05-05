@@ -44,11 +44,11 @@
                 var json = eval(Ajax("GetCellInfo", row));
 
                 if (json) {
-                    document.getElementById("ProductTypeName").innerText = json[0].ProductTypeName == null ? "" : json[0].ProductTypeName;
-                    document.getElementById("ProductCode").innerText = json[0].ProductCode;
-                    document.getElementById("ProductName").innerText = json[0].ProductName == null ? "" : json[0].ProductName;
+                    document.getElementById("Spec").innerText = json[0].Spec == null ? "" : json[0].Spec;
+                    document.getElementById("Barcode").innerText = json[0].Barcode;
+                    document.getElementById("Weight").innerText = json[0].Weight == null ? "" : json[0].Weight;
 
-                    document.getElementById("StateName").innerText = json[0].StateName == null ? "" : json[0].StateName;
+                  
                     document.getElementById("BillNo").innerText = json[0].BillNo;
 
                     document.getElementById("Indate").innerText = json[0].InDate == null ? "" : new Date(parseInt(json[0].InDate.replace(/\D/igm, ""))).Format("yyyy-MM-dd"); 
@@ -122,38 +122,34 @@
                         <b>产品信息</b>
                       </td>
                    </tr>
+                     <tr>
+                      <td  class="cellinfo" style="width:20%;">
+                            &nbsp;规格:
+                      </td>
+                      <td colspan="3" id="Spec">
+                        
+                      </td>
+                      
+                   </tr>
                    <tr>
                       <td  class="cellinfo" style="width:20%;">
-                            &nbsp;产品类型:
+                            &nbsp;熔次卷号:
                       </td>
-                      <td id="ProductTypeName">
+                      <td id="Barcode">
                         
                       </td>
 
                        <td   class="cellinfo" style="width:20%;">
-                             &nbsp;产品编码:
+                             &nbsp;重量:
                       </td>
-                      <td id="ProductCode">
+                      <td id="Weight">
                         
                       </td>
                       
                      
                    </tr>
                    
-                   <tr>
-                      <td  class="cellinfo" style="width:20%;">
-                            &nbsp;品名:
-                      </td>
-                      <td id="ProductName">
-                        
-                      </td>
-                      <td   class="cellinfo"  style="width:20%;">
-                            
-                      </td>
-                      <td id="StateName" >
-                          
-                      </td>
-                   </tr>
+                 
                     
                     <tr>
                         <td   class="cellinfo"  style="width:20%;">

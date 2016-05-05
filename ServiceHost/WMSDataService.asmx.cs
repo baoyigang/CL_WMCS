@@ -35,6 +35,7 @@ namespace ServiceHost
             DataSet xmlDS = Util.ConvertObj.XmlStringToDataSet(wmsProductObject);
 
             DataTable dt = xmlDS.Tables[0];
+            DataTable dtNew = dt.DefaultView.ToTable(true, "ProductCode", "Size");
 
             string Msg = "成功";
             string bln = "Y";
@@ -180,7 +181,7 @@ namespace ServiceHost
                     }
 
                     string BillNo=dtCode.Rows[k]["BillNo"].ToString().Replace("'", "''");
-                    int HasCount = bll.GetRowCount("WMS_BillMaster", string.Format("SourceBillNo='{0}' and BillID like 'IS%'", BillNo));
+                    int HasCount = bll.GetRowCount("WMS_BillMaster", string.Format("SourceBillNo='{0}' and BillID like 'IS%' and SourceBillNo!=''", BillNo));
                     if (HasCount > 0)
                     {
                         bln = "N";
@@ -255,7 +256,7 @@ namespace ServiceHost
         }
 
         /// <summary>
-        /// ERP系统为WMS提供批次出库信息
+        /// ERP系统为WMS提供批次下架信息
         /// </summary>
         /// <param name="wmsProductObject"></param>
         /// <returns></returns>
@@ -386,7 +387,7 @@ namespace ServiceHost
             strResult = "<RESULT>" + result + "</RESULT>";
             return strXML1 + strResult + strXML2;
         }
-
+ 
         private void WriteToLog(string WmsType, string Msg)
         {
             string path = System.AppDomain.CurrentDomain.BaseDirectory + @"\PDATcp";

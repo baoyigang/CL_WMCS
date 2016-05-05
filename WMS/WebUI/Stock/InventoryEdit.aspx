@@ -43,7 +43,7 @@
                 strCellCode += "'-1'";
                 var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and IsActive=1 and ProductCode !='' and CellCode not in (" + strCellCode + ") ";
 
-                return GetMulSelectValue('CMD_Cell', 'hdnMulSelect', where);
+                return GetMulSelectValue('CMD_ProductInStock', 'hdnMulSelect', where);
             }
 
             function Save() {
@@ -228,7 +228,7 @@
                             数量合计
                         </td>
                         <td style="width:17%">
-                            &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead" Height="16px" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead"  ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
                         </td>
                           
                         <td align="right">

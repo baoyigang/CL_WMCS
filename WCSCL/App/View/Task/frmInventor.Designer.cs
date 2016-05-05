@@ -39,23 +39,20 @@
             this.pnlContent = new System.Windows.Forms.Panel();
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.colTaskNo = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column1 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.colState = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column6 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column7 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column10 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column4 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column5 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column14 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column15 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column9 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column10 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column2 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column12 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column13 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.pnlTool = new System.Windows.Forms.Panel();
+            this.txtBarCode = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_Refresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Cancel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_OK = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -101,13 +98,13 @@
             this.dgvMain.AllowUserToAddRows = false;
             this.dgvMain.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMain.AutoGenerateColumns = false;
             this.dgvMain.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -116,23 +113,17 @@
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTaskNo,
-            this.Column1,
             this.colState,
             this.Column6,
             this.Column7,
+            this.Column10,
             this.Column4,
             this.Column5,
-            this.Column14,
-            this.Column15,
-            this.Column9,
-            this.Column10,
-            this.Column2,
-            this.Column12,
-            this.Column13});
+            this.Column2});
             this.dgvMain.DataSource = this.bsMain;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -145,7 +136,7 @@
             this.dgvMain.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -166,15 +157,6 @@
             this.colTaskNo.Name = "colTaskNo";
             this.colTaskNo.ReadOnly = true;
             this.colTaskNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "BillTypeName";
-            this.Column1.FilteringEnabled = false;
-            this.Column1.HeaderText = "任务类型";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // colState
             // 
@@ -205,6 +187,15 @@
             this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column7.Width = 120;
             // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "BarCode";
+            this.Column10.FilteringEnabled = false;
+            this.Column10.HeaderText = "熔次卷号";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // Column4
             // 
             this.Column4.DataPropertyName = "CellCode";
@@ -223,43 +214,6 @@
             this.Column5.ReadOnly = true;
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // Column14
-            // 
-            this.Column14.DataPropertyName = "StartDate";
-            this.Column14.FilteringEnabled = false;
-            this.Column14.HeaderText = "开始时间";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column15
-            // 
-            this.Column15.DataPropertyName = "FinishDate";
-            this.Column15.FilteringEnabled = false;
-            this.Column15.HeaderText = "结束时间";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            this.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "PalletTaskNo";
-            this.Column9.FilteringEnabled = false;
-            this.Column9.HeaderText = "托盘任务号";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column9.Width = 120;
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "PalletCode";
-            this.Column10.FilteringEnabled = false;
-            this.Column10.HeaderText = "托盘编号";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
             // Column2
             // 
             this.Column2.DataPropertyName = "BillID";
@@ -269,33 +223,35 @@
             this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // Column12
-            // 
-            this.Column12.DataPropertyName = "TaskDate";
-            this.Column12.FilteringEnabled = false;
-            this.Column12.HeaderText = "作业日期";
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column13
-            // 
-            this.Column13.DataPropertyName = "Tasker";
-            this.Column13.FilteringEnabled = false;
-            this.Column13.HeaderText = "作业人员";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
             // pnlTool
             // 
             this.pnlTool.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.pnlTool.Controls.Add(this.txtBarCode);
+            this.pnlTool.Controls.Add(this.label1);
             this.pnlTool.Controls.Add(this.toolStrip1);
             this.pnlTool.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTool.Location = new System.Drawing.Point(0, 0);
             this.pnlTool.Name = "pnlTool";
             this.pnlTool.Size = new System.Drawing.Size(800, 56);
             this.pnlTool.TabIndex = 0;
+            // 
+            // txtBarCode
+            // 
+            this.txtBarCode.Location = new System.Drawing.Point(312, 16);
+            this.txtBarCode.Name = "txtBarCode";
+            this.txtBarCode.Size = new System.Drawing.Size(228, 21);
+            this.txtBarCode.TabIndex = 4;
+            this.txtBarCode.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(253, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "熔次卷号";
+            this.label1.Visible = false;
             // 
             // toolStrip1
             // 
@@ -304,6 +260,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton_Refresh,
             this.toolStripButton_Cancel,
+            this.toolStripButton_OK,
             this.toolStripButton_Close});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -333,6 +290,17 @@
             this.toolStripButton_Cancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton_Cancel.Click += new System.EventHandler(this.toolStripButton_Cancel_Click);
             // 
+            // toolStripButton_OK
+            // 
+            this.toolStripButton_OK.Image = global::App.Properties.Resources.database_accept;
+            this.toolStripButton_OK.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_OK.Name = "toolStripButton_OK";
+            this.toolStripButton_OK.Size = new System.Drawing.Size(60, 49);
+            this.toolStripButton_OK.Text = "盘点完成";
+            this.toolStripButton_OK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_OK.Visible = false;
+            this.toolStripButton_OK.Click += new System.EventHandler(this.toolStripButton_OK_Click);
+            // 
             // toolStripButton_Close
             // 
             this.toolStripButton_Close.AutoSize = false;
@@ -359,7 +327,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemState});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
             // 
             // ToolStripMenuItemState
             // 
@@ -372,27 +340,27 @@
             this.toolStripMenuItem1,
             this.toolStripMenuItem5});
             this.ToolStripMenuItemState.Name = "ToolStripMenuItemState";
-            this.ToolStripMenuItemState.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemState.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItemState.Text = "状态切换";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem2.Text = "等待";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem3.Text = "执行";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem6.Text = "盘点出库";
             this.toolStripMenuItem6.Visible = false;
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
@@ -400,28 +368,28 @@
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem4.Text = "盘点入库";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem7.Text = "执行";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem1.Text = "盘点完成";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem5.Text = "取消";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
@@ -441,6 +409,7 @@
             this.pnlContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.pnlTool.ResumeLayout(false);
+            this.pnlTool.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -467,21 +436,18 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colTaskNo;
-        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column1;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colState;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column6;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column7;
+        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column10;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column4;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column5;
-        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column14;
-        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column15;
-        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column9;
-        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column10;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column2;
-        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column12;
-        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column13;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripButton toolStripButton_OK;
+        private System.Windows.Forms.TextBox txtBarCode;
+        private System.Windows.Forms.Label label1;
     }
 }

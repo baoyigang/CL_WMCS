@@ -54,5 +54,13 @@ namespace BLL
            confg.Release();
            return AreaCode;
         }
+        public static string GetTaskTest()
+        {
+            MCP.Config.Configuration confg = new MCP.Config.Configuration();
+            confg.Load("Config.xml");
+            string AreaCode = confg.Attributes["TaskTest"];
+            confg.Release();
+            return AreaCode;
+        }
     }
 }

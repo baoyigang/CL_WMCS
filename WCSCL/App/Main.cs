@@ -40,6 +40,12 @@ namespace App
                 ContextInitialize initialize = new ContextInitialize();
                 initialize.InitializeContext(context);
 
+                if (BLL.Server.GetTaskTest() == "0")
+                {
+                    this.toolStripButton1.Visible = false;
+                }
+
+
                 View.frmMonitor f = new View.frmMonitor();
                 ShowForm(f);
 

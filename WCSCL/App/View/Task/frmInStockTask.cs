@@ -47,15 +47,20 @@ namespace App.View.Task
 
         private void cmbStation_SelectedIndexChanged(object sender, EventArgs e)
         {
+            BindAisleNo();
+        }
+        private void BindAisleNo()
+        {
             DataParameter[] param = new DataParameter[] 
             { 
-                new DataParameter("{0}", string.Format("StationNo='{0}'", this.cmbStationNo.Text))
+                new DataParameter("{0}", string.Format("CraneNo='{0}' and StationNo='{1}'",CraneNo, this.cmbStationNo.Text))
             };
-            DataTable dt = bll.FillDataTable("CMD.SelectCellShelf", param);
-            this.cbRow.DataSource = dt.DefaultView;
-            this.cbRow.ValueMember = "shelfcode";
-            this.cbRow.DisplayMember = "shelfcode";
-        }
+
+            DataTable dt = bll.FillDataTable("CMD.SelectAisle", param);
+            this.cmbAisleNo.DataSource = dt.DefaultView;
+            this.cmbAisleNo.ValueMember = "AisleNo";
+            this.cmbAisleNo.DisplayMember = "AisleNo";
+        }   
 
         private void cbRow_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -122,14 +127,14 @@ namespace App.View.Task
 
             param = new DataParameter[] 
             { 
-                new DataParameter("@StationNo", this.cmbStationNo.Text), 
-                new DataParameter("@AreaCode", this.txtAreaCode.Text) 
+                new DataParameter("@AreaCode", this.txtAreaCode.Text) ,
+                new DataParameter("@AisleNo",this.cmbAisleNo.Text)
             };
 
 
             if (this.radioButton1.Checked)
             {
-                dt = bll.FillDataTable("WCS.sp_GetCell", param);
+                dt = bll.FillDataTable("WCS.sp_GetCellByAisle", param);
                 if (dt.Rows.Count > 0)
                     this.txtCellCode.Text = dt.Rows[0][0].ToString();
                 else
@@ -191,7 +196,7 @@ namespace App.View.Task
             this.txtBarcode.Text = "";
             this.txtTaskNo.Text = "";
             this.txtBillID.Text = "";
-            this.txtProductCode.Text = "";
+           
             this.txtProductName.Text = "";
             this.txtSpec.Text = "";
             this.txtCellCode.Text = "";
@@ -206,7 +211,7 @@ namespace App.View.Task
             {
                 this.txtTaskNo.Text = dt.Rows[0]["TaskNo"].ToString();
                 this.txtBillID.Text = dt.Rows[0]["BillID"].ToString();
-                this.txtProductCode.Text = dt.Rows[0]["ProductCode"].ToString();
+               
                 this.txtProductName.Text = dt.Rows[0]["ProductName"].ToString();
                 this.txtSpec.Text = dt.Rows[0]["Spec"].ToString();
                 this.txtAreaCode.Text = AreaCode;
@@ -215,7 +220,7 @@ namespace App.View.Task
             {
                 this.txtTaskNo.Text = "";
                 this.txtBillID.Text = "";
-                this.txtProductCode.Text = "";
+             
                 this.txtProductName.Text = "";
                 this.txtSpec.Text = "";
                 this.txtAreaCode.Text = "";
@@ -225,6 +230,21 @@ namespace App.View.Task
         private void frmInStockTask_Activated(object sender, EventArgs e)
         {
             this.txtBarcode.Focus();
+        }
+
+        private void cmbAisleNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbAisleNo.Text == "System.Data.DataRowView")
+                return;
+
+            DataParameter[] param = new DataParameter[] 
+            { 
+                new DataParameter("{0}", string.Format("CraneNo='{0}' and  StationNo='{1}' and AisleNo='{2}'",this.CraneNo, this.cmbStationNo.Text,this.cmbAisleNo.Text))
+            };
+            DataTable dt = bll.FillDataTable("CMD.SelectCellShelf", param);
+            this.cbRow.DataSource = dt.DefaultView;
+            this.cbRow.ValueMember = "shelfcode";
+            this.cbRow.DisplayMember = "shelfcode";
         }        
     }
 }

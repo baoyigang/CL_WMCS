@@ -24,14 +24,22 @@
             function SelectProduct() {
                 var tableName = 'CMD_Product';
                 var where = " IsFixed='0' ";
+                if ($("#ddlBillTypeCode").val() == "002")
+                    tableName = "CMD_ProductInCache";
+                
 
                 return GetMulSelectValue(tableName, 'hdnMulSelect', where);
             }
             function BindEvent() {
                 $("[ID$='ProductCode']").bind("change", function () {
                     var txtID = this.id;
-                    var where = " ProductCode='" + $('#' + txtID).val() + "' and IsFixed='0'";
 
+                    var where = " ProductCode='" + $('#' + txtID).val() + "' and IsFixed='0'";
+                    var tableName = 'CMD_Product';
+                    if ($("#ddlBillTypeCode").val() == "002") {
+                        where = " ProductCode='" + $('#' + txtID).val() + "'";
+                        tableName = 'VCMD_PRODUCTInCache';
+                    }
                     getWhereBaseData('CMD_Product', txtID + "," + txtID.replace("ProductCode", "ProductName"), 'ProductCode,ProductName', where);
                 });
                 $("[ID$='ProductCode']").bind("dblclick", function () {

@@ -91,8 +91,11 @@ function regInput(obj, reg, inputStr) {
     if (obj.tagName != "INPUT" || obj.readOnly == true)
         return false;
     var str = obj.value;
-    return reg.test(str + inputStr);
-//    var docSel = document.selection.createRange()
+        return reg.test(str + inputStr);
+
+    
+//    var docSel = document.selection.createRange();
+//  
 //    if (docSel.parentElement().tagName != "INPUT" || docSel.parentElement().readOnly == true)
 //        return false
 //    oSel = docSel.duplicate()

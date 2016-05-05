@@ -237,8 +237,30 @@
       Sp_TaskProcessNoShelf
     </CommandString>
   </Command>
+
+  <Command ID="SelectCacheInventor">
+    <CommandString>
+      select * from  WCS_TASK  where State=0 and CheckBarcode='' and CellCode='' and  TaskType='14' and AreaCode=@AreaCode
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateCacheInventorBarCode">
+    <CommandString>
+      update WCS_TASK set State=7,FinishDate=GETDATE(),CheckBarcode=@BarCode where State=0 and CellCode='' and CheckBarcode='' and  TaskType='14' and AreaCode=@AreaCode  and Barcode=@BarCode
+    </CommandString>
+  </Command>
   
   
+  <Command ID="UpdateCacheInventorFinished">
+    <CommandString>
+      update WCS_TASK set State=7,FinishDate=GETDATE() where State=0 and CheckBarcode='' and  TaskType='14' and AreaCode=@AreaCode
+    </CommandString>
+  </Command>
+  <Command ID="Sp_TaskProcessNoShelf">
+    <CommandString>
+      Sp_TaskProcessNoShelf
+    </CommandString>
+  </Command>
   
 
 </SqlCommand>

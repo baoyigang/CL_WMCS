@@ -90,7 +90,7 @@ public partial class WebUI_InStock_InStockTypeEdit : BasePage
         }
         else //修改
         {
-            bll.ExecNonQuery("Cmd.UpdateTrainType", new DataParameter[] {  new DataParameter("@BillTypeName", this.txtBillTypeName.Text.Trim()),
+            bll.ExecNonQuery("Cmd.UpdateBillType", new DataParameter[] {  new DataParameter("@BillTypeName", this.txtBillTypeName.Text.Trim()),
                                                                                  new DataParameter("@Memo", this.txtMemo.Text.Trim()) ,
                                                                                  new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
                                                                                  new DataParameter("@BillTypeCode", this.txtID.Text.Trim())

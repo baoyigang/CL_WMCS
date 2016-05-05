@@ -30,8 +30,6 @@
         {
             this.btnClose = new System.Windows.Forms.Button();
             this.btnRequest = new System.Windows.Forms.Button();
-            this.txtProductCode = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTaskNo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,13 +50,15 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.cmbStationNo = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtSpec = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.cmbAisleNo = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,26 +83,6 @@
             this.btnRequest.Text = "入库执行";
             this.btnRequest.UseVisualStyleBackColor = true;
             this.btnRequest.Click += new System.EventHandler(this.btnRequest_Click);
-            // 
-            // txtProductCode
-            // 
-            this.txtProductCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtProductCode.Location = new System.Drawing.Point(109, 87);
-            this.txtProductCode.MaxLength = 10;
-            this.txtProductCode.Name = "txtProductCode";
-            this.txtProductCode.ReadOnly = true;
-            this.txtProductCode.Size = new System.Drawing.Size(237, 29);
-            this.txtProductCode.TabIndex = 46;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(19, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 21);
-            this.label4.TabIndex = 45;
-            this.label4.Text = "产品代码";
             // 
             // label2
             // 
@@ -136,7 +116,7 @@
             // txtProductName
             // 
             this.txtProductName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtProductName.Location = new System.Drawing.Point(109, 125);
+            this.txtProductName.Location = new System.Drawing.Point(109, 124);
             this.txtProductName.MaxLength = 10;
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.ReadOnly = true;
@@ -147,7 +127,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(19, 129);
+            this.label5.Location = new System.Drawing.Point(19, 126);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 21);
             this.label5.TabIndex = 52;
@@ -270,7 +250,7 @@
             // txtBillID
             // 
             this.txtBillID.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtBillID.Location = new System.Drawing.Point(453, 48);
+            this.txtBillID.Location = new System.Drawing.Point(453, 52);
             this.txtBillID.Name = "txtBillID";
             this.txtBillID.ReadOnly = true;
             this.txtBillID.Size = new System.Drawing.Size(237, 29);
@@ -280,7 +260,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(363, 52);
+            this.label10.Location = new System.Drawing.Point(363, 56);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(74, 21);
             this.label10.TabIndex = 65;
@@ -289,7 +269,7 @@
             // txtAreaCode
             // 
             this.txtAreaCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtAreaCode.Location = new System.Drawing.Point(453, 124);
+            this.txtAreaCode.Location = new System.Drawing.Point(453, 122);
             this.txtAreaCode.MaxLength = 10;
             this.txtAreaCode.Name = "txtAreaCode";
             this.txtAreaCode.ReadOnly = true;
@@ -300,7 +280,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(363, 128);
+            this.label11.Location = new System.Drawing.Point(363, 126);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(74, 21);
             this.label11.TabIndex = 67;
@@ -310,7 +290,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(19, 13);
+            this.label12.Location = new System.Drawing.Point(19, 21);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(74, 21);
             this.label12.TabIndex = 71;
@@ -333,6 +313,18 @@
             this.groupBox1.TabIndex = 72;
             this.groupBox1.TabStop = false;
             // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton3.Location = new System.Drawing.Point(17, 50);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(108, 25);
+            this.radioButton3.TabIndex = 63;
+            this.radioButton3.Text = "不分配货位";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
             // txtBarcode
             // 
             this.txtBarcode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -347,7 +339,7 @@
             this.cmbStationNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStationNo.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbStationNo.FormattingEnabled = true;
-            this.cmbStationNo.Location = new System.Drawing.Point(109, 48);
+            this.cmbStationNo.Location = new System.Drawing.Point(109, 50);
             this.cmbStationNo.Name = "cmbStationNo";
             this.cmbStationNo.Size = new System.Drawing.Size(237, 29);
             this.cmbStationNo.TabIndex = 75;
@@ -357,7 +349,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(19, 52);
+            this.label13.Location = new System.Drawing.Point(19, 56);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(74, 21);
             this.label13.TabIndex = 74;
@@ -393,23 +385,34 @@
             this.label9.TabIndex = 78;
             this.label9.Text = "货位分配";
             // 
-            // radioButton3
+            // cmbAisleNo
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton3.Location = new System.Drawing.Point(17, 50);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(108, 25);
-            this.radioButton3.TabIndex = 63;
-            this.radioButton3.Text = "不分配货位";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.cmbAisleNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAisleNo.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.cmbAisleNo.FormattingEnabled = true;
+            this.cmbAisleNo.Location = new System.Drawing.Point(109, 87);
+            this.cmbAisleNo.Name = "cmbAisleNo";
+            this.cmbAisleNo.Size = new System.Drawing.Size(237, 29);
+            this.cmbAisleNo.TabIndex = 98;
+            this.cmbAisleNo.SelectedIndexChanged += new System.EventHandler(this.cmbAisleNo_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label4.Location = new System.Drawing.Point(19, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 21);
+            this.label4.TabIndex = 97;
+            this.label4.Text = "巷道编号";
             // 
             // frmInStockTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 360);
+            this.Controls.Add(this.cmbAisleNo);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtSpec);
             this.Controls.Add(this.label3);
@@ -426,8 +429,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnRequest);
-            this.Controls.Add(this.txtProductCode);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtCellCode);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtTaskNo);
@@ -451,8 +452,6 @@
 
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnRequest;
-        private System.Windows.Forms.TextBox txtProductCode;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTaskNo;
         private System.Windows.Forms.Label label1;
@@ -480,5 +479,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.ComboBox cmbAisleNo;
+        private System.Windows.Forms.Label label4;
     }
 }

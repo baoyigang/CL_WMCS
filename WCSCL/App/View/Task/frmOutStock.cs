@@ -67,7 +67,7 @@ namespace App.View.Task
         }
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType='12'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType in ('12','15') And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") }); 
             bsMain.DataSource = dt;
         }
 

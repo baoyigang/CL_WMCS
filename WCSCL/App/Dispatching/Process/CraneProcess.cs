@@ -95,25 +95,7 @@ namespace App.Dispatching.Process
                             int Column = int.Parse(objRow[2].ToString());
                             int Height = int.Parse(objRow[3].ToString());
                             int Row = int.Parse(objRow[4].ToString());
-                            if (Column == 1 && Height == 1)
-                            {
-                                int[] cellAddr = new int[9];
-                                cellAddr[0] = 0;
-                                cellAddr[1] = 0;
-                                cellAddr[2] = 0;
-
-                                cellAddr[3] = 1;
-                                cellAddr[4] = 1;
-                                cellAddr[5] = Row * 2 - 1;
-                                cellAddr[6] = 1;
-                                cellAddr[7] = 2;
-                                cellAddr[8] = Row * 2 - 1;
-                                Util.ConvertStringChar.stringToBytes(TaskNo, 10).CopyTo(taskNo, 0);
-                                Context.ProcessDispatcher.WriteToService("CranePLC1", "TaskAddress", cellAddr);
-                                Context.ProcessDispatcher.WriteToService("CranePLC1", "TaskNo", taskNo);
-                                Context.ProcessDispatcher.WriteToService("CranePLC1", "WriteFinished", 2);
-                                return;
-                            }
+                           
                             //更新任务状态
                             DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
                             //bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
@@ -168,9 +150,35 @@ namespace App.Dispatching.Process
                                 }
                             }
                             //清除堆垛机任务号
-                            Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
-                            WriteToService(stateItem.Name, "TaskNo", taskNo);
-                            Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
+
+                            if (Column == 1 && Height == 1)
+                            {
+                                int[] cellAddr = new int[9];
+                                cellAddr[0] = 0;
+                                cellAddr[1] = 0;
+                                cellAddr[2] = 0;
+
+                                cellAddr[3] = 1;
+                                cellAddr[4] = 1;
+                                cellAddr[5] = Row * 2 - 1;
+                                cellAddr[6] = 1;
+                                cellAddr[7] = 2;
+                                cellAddr[8] = Row * 2 - 1;
+                                Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
+                                Context.ProcessDispatcher.WriteToService("CranePLC1", "TaskAddress", cellAddr);
+                                Context.ProcessDispatcher.WriteToService("CranePLC1", "TaskNo", taskNo);
+                                Context.ProcessDispatcher.WriteToService("CranePLC1", "WriteFinished", 2);
+                                Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
+                                return;
+                            }
+                            else
+                            {
+                                Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
+                                WriteToService(stateItem.Name, "TaskNo", taskNo);
+                                Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
+                            }
+                           
+                           
                         }
                     }
                     catch (Exception ex1)
@@ -299,7 +307,7 @@ namespace App.Dispatching.Process
 
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
-            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14') and WCS_Task.State='0' and WCS_Task.CellCode!='' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
+            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14','15') and WCS_Task.State='0' and WCS_Task.CellCode!='' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
             DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
 
             //出库
@@ -380,7 +388,7 @@ namespace App.Dispatching.Process
 
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
-            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='1') or (WCS_Task.TaskType='14' and WCS_Task.State='5')) and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
+            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='1') or (WCS_Task.TaskType='14' and WCS_Task.State='5')) and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!=''", CraneNo, AreaCode)) };
             DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
 
             //出库

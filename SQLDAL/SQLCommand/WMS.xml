@@ -112,6 +112,13 @@
     </CommandString>
   </Command>
   
+  <Command ID="SelectProductCacheQty">
+    <CommandString>
+      select ProductCode,(InstockQty-isnull((select SUM(UnStockQty) from View_ProductCacheQty  where billid!=@BillID and  ProductCode=tmp.ProductCode ),0)) as StockQty from View_ProductQTy tmp
+      where ProductCode=@ProductCode and BarCode=@BarCode
+    </CommandString>
+  </Command>
+  
   <!--移库单-->
 
   <Command ID="InsertMoveStockBill">

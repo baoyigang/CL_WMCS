@@ -168,7 +168,8 @@
             "1 入库",
             "2 出库",
             "3 移库",
-            "4 移动"});
+            "4 移动",
+            "5重下任务"});
             this.cmbTaskType.Location = new System.Drawing.Point(99, 153);
             this.cmbTaskType.Name = "cmbTaskType";
             this.cmbTaskType.Size = new System.Drawing.Size(118, 28);

@@ -35,7 +35,7 @@ namespace App.View
         
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectWmsBillID", new DataParameter[] { new DataParameter("{0}", "State=4 and IsUpERP=0 and TaskType!=13") });
+            DataTable dt = bll.FillDataTable("WCS.SelectWmsBillID", new DataParameter[] { new DataParameter("{0}", "State=4 and IsUpERP=0 and TaskType in('11','14')") });
             bsMain.DataSource = dt;
         }
 
@@ -122,8 +122,11 @@ namespace App.View
                 Cmd = "WCS.SelectUpErpCheck";
 
             DataTable dt = bll.FillDataTable(Cmd, new DataParameter[] { new DataParameter("@BillID", BillID) });
-            string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dt, Option);
-            Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
+            if (dt.Rows.Count > 0)
+            {
+                string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dt, Option);
+                Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
+            }
 
         }
 

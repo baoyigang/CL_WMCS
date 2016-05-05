@@ -90,35 +90,35 @@
             // inStockToolStripMenuItem
             // 
             this.inStockToolStripMenuItem.Name = "inStockToolStripMenuItem";
-            this.inStockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.inStockToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.inStockToolStripMenuItem.Text = "入库任务";
             this.inStockToolStripMenuItem.Click += new System.EventHandler(this.inStockToolStripMenuItem_Click);
             // 
             // OutStockToolStripMenuItem
             // 
             this.OutStockToolStripMenuItem.Name = "OutStockToolStripMenuItem";
-            this.OutStockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.OutStockToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.OutStockToolStripMenuItem.Text = "出库任务";
             this.OutStockToolStripMenuItem.Click += new System.EventHandler(this.OutStockToolStripMenuItem_Click);
             // 
             // InventortoolStripMenuItem
             // 
             this.InventortoolStripMenuItem.Name = "InventortoolStripMenuItem";
-            this.InventortoolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.InventortoolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.InventortoolStripMenuItem.Text = "盘点任务";
             this.InventortoolStripMenuItem.Click += new System.EventHandler(this.InventortoolStripMenuItem_Click);
             // 
             // MoveStockToolStripMenuItem
             // 
             this.MoveStockToolStripMenuItem.Name = "MoveStockToolStripMenuItem";
-            this.MoveStockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.MoveStockToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.MoveStockToolStripMenuItem.Text = "移库任务";
             this.MoveStockToolStripMenuItem.Click += new System.EventHandler(this.MoveStockToolStripMenuItem_Click);
             // 
             // UpERPToolStripMenuItem
             // 
             this.UpERPToolStripMenuItem.Name = "UpERPToolStripMenuItem";
-            this.UpERPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.UpERPToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.UpERPToolStripMenuItem.Text = "上传ERP";
             this.UpERPToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton_UpERP_Click);
             // 
@@ -156,9 +156,9 @@
             // 
             this.pnlBottom.Controls.Add(this.lbLog);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 460);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 387);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(1284, 100);
+            this.pnlBottom.Size = new System.Drawing.Size(1284, 173);
             this.pnlBottom.TabIndex = 9;
             // 
             // lbLog
@@ -175,7 +175,7 @@
             this.lbLog.Location = new System.Drawing.Point(0, 0);
             this.lbLog.Name = "lbLog";
             this.lbLog.ShowGroups = false;
-            this.lbLog.Size = new System.Drawing.Size(1284, 100);
+            this.lbLog.Size = new System.Drawing.Size(1284, 173);
             this.lbLog.TabIndex = 10;
             this.lbLog.UseCompatibleStateImageBehavior = false;
             this.lbLog.View = System.Windows.Forms.View.Details;

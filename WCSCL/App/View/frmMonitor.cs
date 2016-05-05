@@ -224,9 +224,7 @@ namespace App.View
                 txt = GetTextBox("txtForkStatus", crane.CraneNo);
                 if (txt != null && dicCraneFork.ContainsKey(crane.ForkStatus))
                     txt.Text = dicCraneFork[crane.ForkStatus];
-                txt = GetTextBox("txtErrorNo", crane.CraneNo);
-                if (txt != null)
-                    txt.Text = crane.ErrCode.ToString();
+               
 
                 txt = GetTextBox("txtErrorDesc", crane.CraneNo);
                 if (txt != null && dicCraneError.ContainsKey(crane.ErrCode))
@@ -235,11 +233,24 @@ namespace App.View
                 //更新错误代码、错误描述
                 //更新任务状态为执行中
                 //bll.ExecNonQuery("WCS.UpdateTaskError", new DataParameter[] { new DataParameter("@CraneErrCode", crane.ErrCode.ToString()), new DataParameter("@CraneErrDesc", dicCraneError[crane.ErrCode]), new DataParameter("@TaskNo", crane.TaskNo) });
-                if (crane.ErrCode > 0)
+                txt = GetTextBox("txtErrorNo", crane.CraneNo);
+                if (txt != null)
                 {
-                    DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", crane.TaskNo), new DataParameter("@CraneErrCode", crane.ErrCode.ToString()), new DataParameter("@CraneErrDesc", dicCraneError[crane.ErrCode]) };
-                    bll.ExecNonQueryTran("WCS.Sp_UpdateTaskError", param);
-                    Logger.Error(crane.CraneNo.ToString() + "堆垛机执行时出现错误,代码:" + crane.ErrCode.ToString() + ",描述:" + dicCraneError[crane.ErrCode]);
+                    if (crane.ErrCode > 0)
+                    {
+                        DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", crane.TaskNo), new DataParameter("@CraneErrCode", crane.ErrCode.ToString()), new DataParameter("@CraneErrDesc", dicCraneError[crane.ErrCode]) };
+                        bll.ExecNonQueryTran("WCS.Sp_UpdateTaskError", param);
+                        if (txt.Text.Trim() == "")
+                            txt.Text = "0";
+                        if (crane.ErrCode != int.Parse(txt.Text))
+                            Logger.Error(crane.CraneNo.ToString() + "堆垛机执行时出现错误,代码:" + crane.ErrCode.ToString() + ",描述:" + dicCraneError[crane.ErrCode]);
+                        txt.Text = crane.ErrCode.ToString();
+
+                    }
+                    else
+                    {
+                        txt.Text = "0";
+                    }
                 }
             }
         }
@@ -313,7 +324,7 @@ namespace App.View
         }
         private DataTable GetMonitorData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "(WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('2','3')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('2','3','4','5','6'))") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "(WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('2','3')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('2','3','4','5','6')) And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
             return dt;
         }
         private void btnBack_Click(object sender, EventArgs e)
@@ -477,27 +488,72 @@ namespace App.View
         {
             if (this.dgvMain.CurrentCell != null)
             {
-                BLL.BLLBase bll = new BLL.BLLBase();
-                string TaskNo = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[0].Value.ToString();
-                string TaskType = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells["colTaskType"].Value.ToString();
+                string serviceName = "CranePLC1";
 
-                if (TaskType == "11")
-                    bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
-                else if (TaskType == "12" || TaskType == "13")
-                    bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 0), new DataParameter("@TaskNo", TaskNo) });
-                else if (TaskType == "14")
+                int[] cellAddr = new int[9];
+                cellAddr[0] = 0;
+                cellAddr[1] = 1;
+
+                Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
+                Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 0);
+
+                DataRow dr = ((DataRowView)dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].DataBoundItem).Row;
+                string TaskNo = dr["TaskNo"].ToString();
+                string fromStation = dr["FromStation"].ToString();
+                string toStation = dr["ToStation"].ToString();
+                string CraneLoad = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneLoad")).ToString();
+               
+                cellAddr[0] = 0;
+                cellAddr[1] = 0;
+                cellAddr[2] = 0;
+                int Flag = 1;
+                if (CraneLoad.Equals("0") || CraneLoad.Equals("False"))
                 {
-                    frmTaskOption f = new frmTaskOption();
-                    if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        if(f.option==0)
-                            bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
-                        else
-                            bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 5), new DataParameter("@TaskNo", TaskNo) });
-
-                    }
+                    cellAddr[3] = byte.Parse(fromStation.Substring(3, 3));
+                    cellAddr[4] = byte.Parse(fromStation.Substring(6, 3));
+                    cellAddr[5] = byte.Parse(fromStation.Substring(0, 3));
                 }
-                this.BindData();
+                else
+                {
+                    cellAddr[3] = 1;
+                    cellAddr[4] = 1;
+                    cellAddr[5] = 1;
+                    Flag = 3;
+                }
+                cellAddr[6] = byte.Parse(toStation.Substring(3, 3));
+                cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
+                cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
+
+                sbyte[] taskNo = new sbyte[10];
+                Util.ConvertStringChar.stringToBytes(TaskNo, 10).CopyTo(taskNo, 0);
+
+                Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
+                Context.ProcessDispatcher.WriteToService(serviceName, "TaskNo", taskNo);
+                if (Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", Flag))
+                {
+                    Logger.Info(TaskNo + "重下堆垛机任务！");
+                }
+                //BLL.BLLBase bll = new BLL.BLLBase();
+                //string TaskNo = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[0].Value.ToString();
+                //string TaskType = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells["colTaskType"].Value.ToString();
+
+                //if (TaskType == "11")
+                //    bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
+                //else if (TaskType == "12" || TaskType == "13")
+                //    bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 0), new DataParameter("@TaskNo", TaskNo) });
+                //else if (TaskType == "14")
+                //{
+                //    frmTaskOption f = new frmTaskOption();
+                //    if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                //    {
+                //        if(f.option==0)
+                //            bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
+                //        else
+                //            bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 5), new DataParameter("@TaskNo", TaskNo) });
+
+                //    }
+                //}
+                //this.BindData();
             }
         }
 
