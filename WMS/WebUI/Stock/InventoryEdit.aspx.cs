@@ -126,7 +126,7 @@ using Util;
                 dr["ProductCode"] = dt1.Rows[i]["ProductCode"];
                 dr["ProductName"] = dt1.Rows[i]["ProductName"];
                 dr["CellCode"] = dt1.Rows[i]["CellCode"];
-                dr["Quantity"] = dt1.Rows[i]["Quantity"];
+                dr["Quantity"] = 1;
                 dr["Spec"] = dt1.Rows[i]["Spec"];
                 dr["Propertity"] = dt1.Rows[i]["Propertity"];
                 dr["ModelNo"] = dt1.Rows[i]["ModelNo"];

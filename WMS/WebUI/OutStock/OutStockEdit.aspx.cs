@@ -44,7 +44,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
         ScriptManager.RegisterStartupScript(this.updatePanel1, this.updatePanel1.GetType(), "Resize", "resize();BindEvent();", true);
         writeJsvar(FormID, SqlCmd, strID);
-        SetTextReadOnly(this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate);
+        SetTextReadOnly(this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate,this.txtSourceBillNo);
 
 
     }
@@ -143,6 +143,8 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             dr["ModelNo"] = dt1.Rows[i]["ModelNo"];
             dr["StandardNo"] = dt1.Rows[i]["StandardNo"];
             dr["PartNo"] = dt1.Rows[i]["PartNo"];
+            dr["Barcode"] = dt1.Rows[i]["Barcode"];
+            dr["Weight"] = dt1.Rows[i]["Weight"];
             dr["Quantity"] = 1;
 
         }
@@ -247,7 +249,9 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             dr["Propertity"] = dt1.Rows[i]["Propertity"];
             dr["ModelNo"] = dt1.Rows[i]["ModelNo"];
             dr["StandardNo"] = dt1.Rows[i]["StandardNo"];
+            dr["Barcode"] = dt1.Rows[i]["Barcode"];
             dr["PartNo"] = dt1.Rows[i]["PartNo"];
+            dr["Weight"] = dt1.Rows[i]["Weight"];
             dr["Quantity"] = 1;
 
         }

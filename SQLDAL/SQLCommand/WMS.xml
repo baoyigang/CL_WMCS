@@ -18,7 +18,7 @@
     <CommandString>
       select detail.*,product.ProductName,product.CategoryName,product.Spec,product.Propertity,product.ModelNo,product.PartNo,product.StandardNo
       from WMS_BillDetail detail
-      inner join VCMD_Product product on detail.ProductCode=product.ProductCode
+      left join VCMD_Product product on detail.ProductCode=product.ProductCode
       where {0}
       ORDER BY RowID
     </CommandString>
@@ -112,6 +112,13 @@
     </CommandString>
   </Command>
   
+  <Command ID="SelectProductCacheQty">
+    <CommandString>
+      select ProductCode,(InstockQty-isnull((select SUM(UnStockQty) from View_ProductCacheQty  where billid!=@BillID and  ProductCode=tmp.ProductCode ),0)) as StockQty from View_ProductQTy tmp
+      where ProductCode=@ProductCode and BarCode=@BarCode
+    </CommandString>
+  </Command>
+  
   <!--移库单-->
 
   <Command ID="InsertMoveStockBill">
@@ -191,18 +198,40 @@
     <CommandString>
       select AreaCode,AreaName,ShelfCode,ShelfName,CellCode,CellName,CellRow,CellColumn,IsLock,
       PalletBarcode,BarCode,ProductCode,ProductName,CategoryCode, CategoryName,Unit,
-      BillNo,Quantity,InDate
-      from View_CMD_CELL_ALL
+      BillNo,Quantity,InDate,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName
+      from View_CMD_CELL_ALL Product
       where InDate is not null and {0}
+      union all
+      select Main.AreaCode,AreaName,'' as ShelfCode,'' as ShelfName,'' as CellCode,'' as CellName,0 as CellRow,0 as CellColumn ,
+      islock,'' as PalletBarcode,Main.BarCode,Main.ProductCode,ProductName,Product.CategoryCode, CategoryName,Unit,
+      BillNo,1 as Quantity,InDate ,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName
+      from WMS_NotShelfList Main
+      left join CMD_Area on Main.AreaCode=CMD_Area.AreaCode
+      left join CMD_Product Product on Main.ProductCode=Product.ProductCode
+      left join CMD_ProductCategory Categroy on Product.CategoryCode=Categroy.CategoryCode
+      where {0}
+
     </CommandString>
   </Command>
 
   <Command ID="SelectProductTotalQuery">
     <CommandString>
-      select AreaName, ProductCode,ProductName,CategoryCode, CategoryName,Unit,COUNT(1) as Qty
-      from View_CMD_CELL_ALL Cell
-      where  InDate is not null  and {0}
-      group by AreaName,ProductCode,ProductName,CategoryCode, CategoryName,Unit
+      select  AreaName, ProductCode,ProductName,CategoryCode, CategoryName,Unit,SUM(Qty) as Qty,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName from (
+
+      select AreaName, ProductCode,ProductName,CategoryCode, CategoryName,Unit,COUNT(1) as Qty,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName
+      from View_CMD_CELL_ALL Product
+      where  InDate is not null and {0}
+      group by AreaName,ProductCode,ProductName,CategoryCode, CategoryName,Unit,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName
+      union all
+      select AreaName, main.ProductCode,ProductName,Product.CategoryCode, CategoryName,Unit,COUNT(1) as Qty ,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName
+      from WMS_NotShelfList Main
+      left join CMD_Area on Main.AreaCode=CMD_Area.AreaCode
+      left join CMD_Product Product on Main.ProductCode=Product.ProductCode
+      left join CMD_ProductCategory Categroy on Product.CategoryCode=Categroy.CategoryCode
+      where {0}
+      group by AreaName,main.ProductCode,ProductName,product.CategoryCode, CategoryName,Unit,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName)
+      tmp
+      group by AreaName,ProductCode,ProductName,CategoryCode, CategoryName,Unit,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName
     </CommandString>
   </Command>
 

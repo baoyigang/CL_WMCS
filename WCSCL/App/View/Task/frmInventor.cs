@@ -55,7 +55,7 @@ namespace App.View.Task
 
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3','4','5','6') and WCS_TASK.TaskType='14'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3','4','5','6') and WCS_TASK.TaskType='14' And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
             bsMain.DataSource = dt;
         }
 
@@ -64,6 +64,7 @@ namespace App.View.Task
             //this.BindData();
             for (int i = 0; i < this.dgvMain.Columns.Count - 1; i++)
                 ((DataGridViewAutoFilterTextBoxColumn)this.dgvMain.Columns[i]).FilteringEnabled = true;
+            this.txtBarCode.Focus();
         }
         private void dgvMain_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -142,6 +143,69 @@ namespace App.View.Task
         private void frmInventor_Activated(object sender, EventArgs e)
         {
             this.BindData();
+            this.txtBarCode.Focus();
+        }
+
+
+
+
+
+        private void txtBarCode_TextChanged(object sender, EventArgs e)
+        {
+            if (this.txtBarCode.Text != "")
+            {
+
+                string BillID = bll.GetFieldValue("WCS_TASK", "BillID", string.Format("State=0 and CheckBarcode='' and CellCode='' and  TaskType='14' and AreaCode='{0}'  and Barcode='{1}'", BLL.Server.GetAreaCode(), this.txtBarCode.Text));
+                if (BillID.Trim().Length > 0)
+                {
+                    bll.ExecNonQuery("WCS.UpdateCacheInventorBarCode", new DataParameter[] { new DataParameter("@AreaCode", BLL.Server.GetAreaCode()), new DataParameter("@BarCode", this.txtBarCode.Text) });
+                    DataTable dt = bll.FillDataTable("WCS.SelectUpErpCheck", new DataParameter[] { new DataParameter("@BillID", BillID) });
+                    if (dt.Rows.Count > 0)
+                    {
+                        string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dt, "BatchCheckStock");
+                        Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("扫描的熔次卷号不在缓存中，请确认", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                this.txtBarCode.Text = "";
+                this.txtBarCode.Focus();
+                this.BindData();
+            }
+        }
+
+        private void toolStripButton_OK_Click(object sender, EventArgs e)
+        {
+            DataTable dtCache = bll.FillDataTable("WCS.SelectCacheInventor", new DataParameter[] { new DataParameter("@AreaCode", BLL.Server.GetAreaCode()) });
+            if (dtCache.Rows.Count > 0)
+            {
+
+                if (DialogResult.Yes == MessageBox.Show("缓存中还有未扫描的熔次卷号，是否确认盘点完成？", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+
+                    DataParameter[] param = new DataParameter[] { new DataParameter("@AreaCode", BLL.Server.GetAreaCode()) };
+                    bll.ExecNonQuery("WCS.UpdateCacheInventorFinished", param);
+
+                   string Cmd = "WCS.SelectUpErpCheck";
+
+                   DataTable dtBill = dtCache.DefaultView.ToTable(true, "BillID");
+
+                   for (int i = 0; i < dtBill.Rows.Count; i++)
+                   {
+                       DataTable dt = bll.FillDataTable(Cmd, new DataParameter[] { new DataParameter("@BillID", dtBill.Rows[i][0].ToString()) });
+                       if (dt.Rows.Count > 0)
+                       {
+                           string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dt, "BatchCheckStock");
+                           Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
+                       }
+                   }
+
+                    this.BindData();
+                }
+            }
+
         }        
     }
 }

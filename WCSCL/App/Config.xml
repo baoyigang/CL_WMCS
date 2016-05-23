@@ -4,7 +4,7 @@
   <Attributes>
     <Attribute Name="ScanPortName" Value="COM2" />
     <Attribute Name="ScanBaudRate" Value="19200" />
-    <Attribute Name="IsShowFlag" Value="1" />
+    <Attribute Name="TaskTest" Value="0" />
     <Attribute Name="AreaCode" Value="001" />
   </Attributes>
   <Services>
@@ -17,7 +17,10 @@
       <Item ServiceName="CranePLC1" ItemName="CraneTaskFinished" />
     </Process>
     <!--<Process Name="ErpProcess" Type="App.exe, App.Dispatching.Process.ErpProcess">
-      <Item ServiceName="ERP" ItemName="erp" />
+      <Item ServiceName="ERP" ItemName="InStock" />
+      <Item ServiceName="ERP" ItemName="OutStock" />
+      <Item ServiceName="ERP" ItemName="CheckStock" />
+      <Item ServiceName="ERP" ItemName="" />
     </Process>-->
   </Processes>
 </Configuration>

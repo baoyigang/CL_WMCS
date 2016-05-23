@@ -236,28 +236,7 @@
     </CommandString>
   </Command>
   
-  <!--入库类型-->
-  <Command ID="SelectInBillType">
-    <CommandString>
-      Select ROW_NUMBER() over(order by BillTypeCode) as RowIndex,* from CMD_BillType where {0} order by BillTypeCode
-    </CommandString>
-  </Command>
-  <Command ID="DeleteInBillType">
-    <CommandString>
-      delete from CMD_COLOR WHERE ID in({0})
-    </CommandString>
-  </Command>
-  <Command ID="InsertInBillType">
-    <CommandString>
-      INSERT INTO CMD_COLOR(ID,COLOR_CODE,PRODUCT_CODE,PRODUCT_Model,COLOR_NAME,MEMO,Creator, CreateDate, Updater, UpdateDate)
-      values(@ID,@COLOR_CODE,@PRODUCT_CODE,@PRODUCT_Model,@COLOR_NAME,@MEMO, @Creator, getdate(), @Updater, getdate())
-    </CommandString>
-  </Command>
-  <Command ID="UpdateInBillType">
-    <CommandString>
-      Update CMD_COLOR Set COLOR_CODE=@COLOR_CODE,COLOR_NAME=@COLOR_NAME,PRODUCT_CODE=@PRODUCT_CODE,MEMO=@MEMO,PRODUCT_Model=@PRODUCT_Model,Updater=@Updater, UpdateDate=getdate() where ID={0}
-    </CommandString>
-  </Command>
+ 
 
   <!--单据类型-->
   <Command ID="SelectBillType">
@@ -276,7 +255,7 @@
       values(@Flag,@BillTypeCode,@BillTypeName,@TaskType,@TaskLevel,@Memo, @Creator, getdate(), @Updater, getdate())
     </CommandString>
   </Command>
-  <Command ID="UpdateInBillType">
+  <Command ID="UpdateBillType">
     <CommandString>
       Update CMD_BillType Set BillTypeName=@BillTypeName,Memo=@Memo,Updater=@Updater, UpdateDate=getdate() where BillTypeCode=@BillTypeCode
     </CommandString>

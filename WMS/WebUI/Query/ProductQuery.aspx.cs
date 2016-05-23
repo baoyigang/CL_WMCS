@@ -40,7 +40,7 @@ public partial class WebUI_Query_ProductQuery : BasePage
 
 
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "BindEvent();", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "", "BindEvent();", true);
         }
         SetTextReadOnly(this.txtProductName);
 
@@ -76,18 +76,18 @@ public partial class WebUI_Query_ProductQuery : BasePage
         strWhere = "1=1";
         if (this.ddlProductType.SelectedValue != "")
         {
-            strWhere += string.Format(" and CategoryCode='{0}'", this.ddlProductType.SelectedValue);
+            strWhere += string.Format(" and Product.CategoryCode='{0}'", this.ddlProductType.SelectedValue);
         }
 
 
         if (this.HdnProduct.Value.Length == 0)
         {
             if (this.txtProductCode.Text.Trim().Length > 0)
-                strWhere += string.Format(" and ProductCode='{0}'", this.txtProductCode.Text);
+                strWhere += string.Format(" and Product.ProductCode='{0}'", this.txtProductCode.Text);
         }
         else
         {
-            strWhere += " and ProductCode in (" + this.HdnProduct.Value + ") ";
+            strWhere += " and Product.ProductCode in (" + this.HdnProduct.Value + ") ";
         }
         
 

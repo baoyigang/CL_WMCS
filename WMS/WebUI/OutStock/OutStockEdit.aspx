@@ -200,7 +200,7 @@
                                         ID="btnProduct"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClientClick="return SelectProduct();" OnClick="btnProduct_Click" />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle Width="8%"  />
+                                <HeaderStyle Width="12%"  />
                             </asp:TemplateField>
                                 
                             <asp:TemplateField HeaderText="品名">
@@ -252,7 +252,7 @@
                                     ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle Width="10%" />
+                                <HeaderStyle Width="8%" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="熔次卷号">
                                 <ItemTemplate>

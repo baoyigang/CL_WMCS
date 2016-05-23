@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/14/2015 18:04:58" ReportInfo.Modified="01/04/2016 21:33:00" ReportInfo.CreatorVersion="1.9.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/14/2015 18:04:58" ReportInfo.Modified="04/12/2016 17:22:29" ReportInfo.CreatorVersion="1.6.2.0">
   <Dictionary>
     <TableDataSource Name="ProductQuery" ReferenceName="ProductQuery" DataType="System.Int32" Enabled="true">
       <Column Name="AreaCode" DataType="System.String"/>
@@ -14,22 +14,32 @@
       <Column Name="InDate" DataType="System.DateTime"/>
       <Column Name="ProductCode" DataType="System.String"/>
       <Column Name="ProductName" DataType="System.String"/>
-      <Column Name="PalletCode" DataType="System.String"/>
       <Column Name="BillNo" DataType="System.String"/>
       <Column Name="Quantity" DataType="System.Decimal"/>
       <Column Name="BarCode" DataType="System.String"/>
       <Column Name="CategoryCode" DataType="System.String"/>
       <Column Name="CategoryName" DataType="System.String"/>
       <Column Name="Unit" DataType="System.String"/>
+      <Column Name="PalletBarcode" DataType="System.String"/>
+      <Column Name="ModelNo" DataType="System.String"/>
+      <Column Name="Spec" DataType="System.String"/>
+      <Column Name="Propertity" DataType="System.String"/>
+      <Column Name="ValidPeriod" DataType="System.String"/>
+      <Column Name="PartNo" DataType="System.String"/>
+      <Column Name="StandardNo" DataType="System.String"/>
+      <Column Name="ProductNo" DataType="System.String"/>
+      <Column Name="ProductEName" DataType="System.String"/>
     </TableDataSource>
   </Dictionary>
-  <ReportPage Name="Page1">
-    <PageHeaderBand Name="PageHeader1" Width="718.2" Height="68.04">
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210">
+    <PageHeaderBand Name="PageHeader1" Width="1047.06" Height="68.04">
       <TextObject Name="Text1" Width="718.2" Height="37.8" Text="库存明细表" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
-      <TableObject Name="Table1" Top="49.14" Width="712" Height="18.9" Border.Lines="All">
+      <TableObject Name="Table1" Top="49.14" Width="1023.71" Height="18.9" Border.Lines="All">
         <TableColumn Name="Column1" Width="64.6"/>
         <TableColumn Name="Column2" Width="68.37"/>
         <TableColumn Name="Column3" Width="149.67"/>
+        <TableColumn Name="Column21" Width="182.69"/>
+        <TableColumn Name="Column23" Width="129.02"/>
         <TableColumn Name="Column4" Width="37.8"/>
         <TableColumn Name="Column5" Width="56.7"/>
         <TableColumn Name="Column6" Width="73.71"/>
@@ -40,6 +50,8 @@
           <TableCell Name="Cell1" Border.Lines="Right" Text="产品类型" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell2" Border.Lines="Right" Text="产品编号" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell3" Border.Lines="Right" Text="品名" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell21" Border.Lines="Right" Text="规格" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell23" Border.Lines="Right" Text="熔次卷号" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell4" Border.Lines="Right" Text="单位" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell5" Border.Lines="Right" Text="库区" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell6" Border.Lines="Right" Text="货位" VertAlign="Center" Font="宋体, 9pt"/>
@@ -49,11 +61,13 @@
         </TableRow>
       </TableObject>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="72.04" Width="718.2" Height="22.68" DataSource="ProductQuery">
-      <TableObject Name="Table2" Left="-0.01" Width="712.11" Height="22.68" Border.Lines="All">
+    <DataBand Name="Data1" Top="72.04" Width="1047.06" Height="22.68" DataSource="ProductQuery">
+      <TableObject Name="Table2" Left="-0.01" Width="1023.62" Height="22.68" Border.Lines="All">
         <TableColumn Name="Column10" Width="64.64"/>
         <TableColumn Name="Column11" Width="68.42"/>
         <TableColumn Name="Column12" Width="149.69"/>
+        <TableColumn Name="Column22" Width="182.61"/>
+        <TableColumn Name="Column24" Width="128.9"/>
         <TableColumn Name="Column13" Width="37.8"/>
         <TableColumn Name="Column14" Width="56.7"/>
         <TableColumn Name="Column15" Width="73.71"/>
@@ -64,6 +78,8 @@
           <TableCell Name="Cell10" Border.Lines="Right" Text="[ProductQuery.CategoryName]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell11" Border.Lines="Right" Text="[ProductQuery.ProductCode]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell12" Border.Lines="Right" Text="[ProductQuery.ProductName]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell22" Border.Lines="Right" Text="[ProductQuery.Spec]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell24" Border.Lines="Right" Text="[ProductQuery.BarCode]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell13" Border.Lines="Right" Text="[ProductQuery.Unit]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell14" Border.Lines="Right" Text="[ProductQuery.AreaName]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell15" Border.Lines="Right" Text="[ProductQuery.CellCode]" VertAlign="Center" Font="宋体, 9pt"/>
@@ -77,6 +93,6 @@
         <Sort Expression="[ProductQuery.ProductCode]"/>
       </Sort>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="98.72" Width="718.2"/>
+    <PageFooterBand Name="PageFooter1" Top="98.72" Width="1047.06"/>
   </ReportPage>
 </Report>

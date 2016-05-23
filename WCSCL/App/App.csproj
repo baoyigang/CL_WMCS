@@ -52,8 +52,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Lib\MCP.Service.Siemens.dll</HintPath>
     </Reference>
-    <Reference Include="MCP.Service.TCP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MCP.Service.TCP">
       <HintPath>..\..\..\Lib\MCP.Service.TCP.dll</HintPath>
     </Reference>
     <Reference Include="OPC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -81,6 +80,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="TCP">
+      <HintPath>..\..\..\Lib\TCP.dll</HintPath>
+    </Reference>
     <Reference Include="Util, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Lib\Util.dll</HintPath>
@@ -118,6 +120,12 @@
     </Compile>
     <Compile Include="View\CheckScan.designer.cs">
       <DependentUpon>CheckScan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Task\frmBillUpERP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Task\frmBillUpERP.Designer.cs">
+      <DependentUpon>frmBillUpERP.cs</DependentUpon>
     </Compile>
     <Compile Include="View\TaskCarNo.cs">
       <SubType>Form</SubType>
@@ -249,6 +257,9 @@
     <EmbeddedResource Include="View\CheckScan.resx">
       <DependentUpon>CheckScan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Task\frmBillUpERP.resx">
+      <DependentUpon>frmBillUpERP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\TaskCarNo.resx">
       <DependentUpon>TaskCarNo.cs</DependentUpon>
     </EmbeddedResource>
@@ -355,6 +366,7 @@
     <None Include="Resources\Barcode_32.png" />
     <Content Include="ERP.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Resources\down.png" />
     <None Include="Resources\monitor.png" />
@@ -366,6 +378,7 @@
     <Content Include="Resources\up.png" />
     <Content Include="ViewConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

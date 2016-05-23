@@ -301,7 +301,7 @@ namespace App.View.Dispatcher
                         property.Add("入库类型", cellRows[0]["BillTypeName"]);
                         property.Add("产品规格", cellRows[0]["Spec"]);
                         property.Add("条码", cellRows[0]["Barcode"]);
-                        //property.Add("产品类型", cellRows[0]["ProductTypeName"]);
+                        property.Add("重量", cellRows[0]["Weight"]);
                         //property.Add("托盘", cellRows[0]["PalletCode"]);
 
                         property.Add("单据号", cellRows[0]["BillNo"]);

@@ -29,7 +29,7 @@ namespace App.View.Task
             this.cmbCraneNo.DisplayMember = "CraneNo";
 
             this.cmbTaskType.SelectedIndex = 0;
-            this.txtTaskNo1.Text = DateTime.Now.ToString("yyMMdd") + "0001";
+            this.txtTaskNo1.Text = DateTime.Now.ToString("yyMMdd") + "0000";
             
         }
 
@@ -314,8 +314,10 @@ namespace App.View.Task
 
             Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);            
             Context.ProcessDispatcher.WriteToService(serviceName, "TaskNo", taskNo);
-            if(int.Parse((this.cmbTaskType.SelectedIndex).ToString())==3)
-            Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 2);
+            if (int.Parse((this.cmbTaskType.SelectedIndex).ToString()) == 3)
+                Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 2);
+            else if (int.Parse((this.cmbTaskType.SelectedIndex).ToString()) == 5)
+                Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 3);
             else
                 Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 1);
 

@@ -4,7 +4,7 @@
   <Command ID="InsertProduct">
     <CommandString>
       INSERT INTO CMD_PRODUCT(ProductCode,ProductNo, ProductName, ProductEName, Spec, Propertity,Weight, ModelNo, StandardNo, PartNo, Memo,Creator, CreateDate, Updater, UpdateDate, AreaCode,CategoryCode,FactoryID)
-      values(@ProductWMSCode, @ProductCode, @ProductName, @ProductEName, @Size, @AlloyTemper, @Weight, @ProductType, @StandardNo, @PartNo, @Memo,'WebServices',getdate(),'WebServices',getdate(),'001','0002','0000000001')
+      values(@ProductWMSCode, @ProductCode, @ProductName, @ProductEName, @Size, @AlloyTemper, @Weight, @ProductType, @StandardNo, @PartNo, @Memo,'WebServices',getdate(),'WebServices',getdate(),'001','0001','00001')
     </CommandString>
   </Command>
 
@@ -93,6 +93,24 @@
     </CommandString>
   </Command>
 
-  
+  <Command ID="DeleteNotShelfList">
+    <CommandString>
+      delete from WMS_NotShelfList  where BillNo=@BillID and
+      ProductCode=@ProductCode and Barcode=@Barcode and IsLock=1 and RowID=(select min(RowID) from WMS_NotShelfList where ProductCode=@ProductCode and Barcode=@Barcode and IsLock=1)
+    </CommandString>
+  </Command>
+  <Command ID="UpdateNotShelfListNotLock">
+    <CommandString>
+     update WMS_NotShelfList set IsLock=0 where BillNo=@BillID and IsLock=1
+    </CommandString>
+  </Command>
+
+  <Command ID="InsertNotShelfList">
+    <CommandString>
+      insert into WMS_NotShelfList(AreaCode,Barcode,BillNo,InDate,IsLock,ProductCode,RowID,TaskNo,Weight)
+      select AreaCode,Barcode,BillID,GETDATE(),0,ProductCode,(select isnull(MAX(rowid),0)+1 from WMS_NotShelfList where ProductCode=@ProductCode and Barcode=@Barcode),TaskNo,Weight from WCS_TASK
+      where BillID=@BillID and ProductCode=@ProductCode and Barcode=@BarCode and TaskNo=(select MIN(TaskNo) from WCS_TASK where BillID=@BillID and ProductCode=@ProductCode and Barcode=@BarCode and TaskNo not in (select TaskNo from WMS_NotShelfList where TaskNo!=''))
+    </CommandString>
+  </Command>
   
 </SqlCommand>

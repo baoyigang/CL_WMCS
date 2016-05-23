@@ -42,7 +42,7 @@ namespace App.View.Dispatcher
             CellCode = dr["CellCode"].ToString();
             AreaCode = dr["AreaCode"].ToString();
             this.txtCellCode.Text = CellCode;
-
+            this.txtBarcode.Text = dr["BarCode"].ToString();
             this.txtBillNo.Text = dr["BillNo"].ToString();
             this.txtProductCode.Text = dr["ProductCode"].ToString();
             BillTypeCode = dr["BillTypeCode"].ToString();
@@ -135,7 +135,10 @@ namespace App.View.Dispatcher
                         sql += string.Format(",BillNo='{0}'", this.txtBillNo.Text.Trim());
 
                     if (this.dtpInDate.Checked)
-                        sql += string.Format(",InDate='{0}'", this.dtpInDate.Value);                    
+                        sql += string.Format(",InDate='{0}'", this.dtpInDate.Value);
+
+
+                    sql += string.Format(",Barcode='{0}'", this.txtBarcode.Text.Trim());
 
                     param = new DataParameter[] { new DataParameter("{0}", sql), new DataParameter("{1}", string.Format("CellCode='{0}'", this.txtCellCode.Text)) };
                     bll.ExecNonQuery("WCS.UpdateCellByFilter", param);                    

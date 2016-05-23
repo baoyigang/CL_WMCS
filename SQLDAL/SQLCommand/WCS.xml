@@ -192,4 +192,75 @@
       update WMS_BillMaster set BillTypeCode=@Checker,CheckDate={0},State=@State where BillID=@BillID
     </CommandString>
   </Command>
+  <Command ID="UpdateBillUpErp">
+    <CommandString>
+      update WMS_BillMaster set IsUpERP=@IsUpERP,ErpMSG=@ErpMSG where {0}
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectWmsBillID">
+    <CommandString>
+      Select main.*,billtype.TaskType ,case when billtype.TaskType=11 then '入库'  when billtype.TaskType=12 then '出库' when billtype.TaskType=14 then '盘点' end as BillType from  WMS_BillMaster main
+      left join CMD_BillType Billtype on main.BillTypeCode=BillType.BillTypeCode   where {0}
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectUpErpTable">
+    <CommandString>
+      select B.SourceBillNo as BillNo,T.Barcode as BatchNo,T.AreaCode
+      from WCS_TASK T
+      left join WMS_BillMaster B on T.BillID=B.BillID
+      where T.BillID=@BillID
+    </CommandString>
+  </Command>
+  <Command ID="SelectUpErpCheck">
+    <CommandString>
+      select T.BillID as BillNo,P.ProductNo as ProductCode ,P.Spec as Size,T.Barcode as BatchNo,-t.Weight as Weight,T.AreaCode
+      from WCS_TASK T
+      left join CMD_Product P on T.ProductCode=P.ProductCode
+      where T.BillID=@BillID and T.Barcode not in(select CheckBarcode from WCS_TASK where BillID=@BillID)
+      union all
+      select T.BillID as BillNo,P.ProductNo as ProductCode ,P.Spec as Size,T.Barcode as BatchNo,t.Weight as Weight,T.AreaCode
+      from WCS_TASK T
+      left join CMD_Product P on T.ProductCode=P.ProductCode
+      where T.BillID=@BillID and T.CheckBarcode not in(select Barcode from WCS_TASK where BillID=@BillID) and T.CheckBarcode!=''
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateTaskAreaCodeByTaskNo">
+    <CommandString>
+      update WCS_TASK set AreaCode=@AreaCode where TaskNo=@TaskNo
+    </CommandString>
+  </Command>
+  <Command ID="Sp_TaskProcessNoShelf">
+    <CommandString>
+      Sp_TaskProcessNoShelf
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectCacheInventor">
+    <CommandString>
+      select * from  WCS_TASK  where State=0 and CheckBarcode='' and CellCode='' and  TaskType='14' and AreaCode=@AreaCode
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateCacheInventorBarCode">
+    <CommandString>
+      update WCS_TASK set State=7,FinishDate=GETDATE(),CheckBarcode=@BarCode where State=0 and CellCode='' and CheckBarcode='' and  TaskType='14' and AreaCode=@AreaCode  and Barcode=@BarCode
+    </CommandString>
+  </Command>
+  
+  
+  <Command ID="UpdateCacheInventorFinished">
+    <CommandString>
+      update WCS_TASK set State=7,FinishDate=GETDATE() where State=0 and CheckBarcode='' and  TaskType='14' and AreaCode=@AreaCode
+    </CommandString>
+  </Command>
+  <Command ID="Sp_TaskProcessNoShelf">
+    <CommandString>
+      Sp_TaskProcessNoShelf
+    </CommandString>
+  </Command>
+  
+
 </SqlCommand>

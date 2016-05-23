@@ -67,7 +67,7 @@ namespace App.View.Task
         }
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType='12'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType in ('12','15') And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") }); 
             bsMain.DataSource = dt;
         }
 
@@ -124,13 +124,31 @@ namespace App.View.Task
             {
                 BLL.BLLBase bll = new BLL.BLLBase();
                 string TaskNo = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[0].Value.ToString();
+                string CellCode = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[6].Value.ToString();
                 bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", State), new DataParameter("@TaskNo", TaskNo) });
 
                 //堆垛机完成执行
                 if (State == "7")
                 {
-                    DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
-                    bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
+                    if (CellCode != "")
+                    {
+                        DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
+                        bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
+                    }
+                    else
+                    {
+                        DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcessNoShelf", new DataParameter[] { new DataParameter("@TaskNo", TaskNo) });
+                        if (dtXml.Rows.Count > 0)
+                        {
+                            string BillNo = dtXml.Rows[0][0].ToString();
+                            if (BillNo.Trim().Length > 0)
+                            {
+                                string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, "BatchOutStock");
+                                Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
+                                MCP.Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
+                            }
+                        }
+                    }
                 }
                 BindData();
             }

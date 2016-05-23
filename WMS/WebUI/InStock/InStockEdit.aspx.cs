@@ -43,7 +43,7 @@ public partial class WebUI_InStock_InStockEdit : BasePage
 
         ScriptManager.RegisterStartupScript(this.updatePanel1, this.updatePanel1.GetType(), "Resize", "resize();BindEvent();", true);
         writeJsvar(FormID, SqlCmd, strID);
-        SetTextReadOnly(this.txtTotalQty, this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate);
+        SetTextReadOnly(this.txtTotalQty, this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate,this.txtSourceBillNo);
 
 
     }
@@ -143,6 +143,8 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             dr["ModelNo"] = dt1.Rows[i]["ModelNo"];
             dr["StandardNo"] = dt1.Rows[i]["StandardNo"];
             dr["PartNo"] = dt1.Rows[i]["PartNo"];
+            dr["Weight"] = dt1.Rows[i]["Weight"];
+            dr["BarCode"] = dt1.Rows[i]["BarCode"];
             dr["Quantity"] = 1;
 
         }
@@ -243,6 +245,8 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             dr["Propertity"] = dt1.Rows[i]["Propertity"];
             dr["ModelNo"] = dt1.Rows[i]["ModelNo"];
             dr["StandardNo"] = dt1.Rows[i]["StandardNo"];
+            dr["BarCode"] = dt1.Rows[i]["BarCode"];
+            dr["Weight"] = dt1.Rows[i]["Weight"];
             dr["PartNo"] = dt1.Rows[i]["PartNo"];
             dr["Quantity"] = 1;
 
@@ -296,6 +300,45 @@ public partial class WebUI_InStock_InStockEdit : BasePage
         string[] Commands = new string[3];
         DataParameter[] para;
 
+        //判断是否在缓存中
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
+        if (this.ddlBillTypeCode.SelectedValue == "002")
+        {
+          
+            DataTable dtProduct = dt.DefaultView.ToTable("Product", true, new string[] { "ProductCode", "ProductName", "BarCode" });
+            for (int i = 0; i < dtProduct.Rows.Count; i++)
+            {
+                object o = dt.Compute("Sum(Quantity)", string.Format("ProductCode='{0}' and BarCode='{1}'", dtProduct.Rows[i]["ProductCode"], dtProduct.Rows[i]["BarCode"]));
+                if (o != null)
+                {
+                    int Qty = int.Parse(o.ToString());
+                    DataTable dtProductQty = bll.FillDataTable("WMS.SelectProductCacheQty", new DataParameter[] { new DataParameter("@BillID", this.txtID.Text), new DataParameter("@ProductCode", dtProduct.Rows[i]["ProductCode"].ToString()), new DataParameter("@BarCode", dtProduct.Rows[i]["BarCode"].ToString()) });
+                    int StockQty = 0;
+                    bool blnvalue = false;
+                    if (dtProductQty.Rows.Count == 0)
+                    {
+                        blnvalue = true;
+                    }
+                    else
+                    {
+                        StockQty = int.Parse(dtProductQty.Rows[0]["StockQty"].ToString());
+                        if (Qty > StockQty)
+                            blnvalue = true;
+                    }
+                    if (blnvalue)
+                    {
+                        JScript.Instance.ShowMessage(this.updatePanel1, dtProduct.Rows[i]["ProductName"].ToString() + "现有缓存库存数量为：" + StockQty.ToString() + ", 库存不足，请修改入库数量。");
+                        return;
+
+                    }
+                }
+
+            }
+           
+        }
+
+
+
         if (strID == "") //新增
         {
             int Count = bll.GetRowCount("WMS_BillMaster", string.Format("BillID='{0}'", this.txtID.Text.Trim()));
@@ -336,7 +379,6 @@ public partial class WebUI_InStock_InStockEdit : BasePage
         }
         try
         {
-            DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
             Commands[1] = "WMS.DeleteBillDetail";
             Commands[2] = "WMS.InsertInStockDetail";
             bll.ExecTran(Commands, para, "BillID", new DataTable[] { dt });

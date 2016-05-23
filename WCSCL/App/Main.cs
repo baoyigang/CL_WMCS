@@ -40,6 +40,12 @@ namespace App
                 ContextInitialize initialize = new ContextInitialize();
                 initialize.InitializeContext(context);
 
+                if (BLL.Server.GetTaskTest() == "0")
+                {
+                    this.toolStripButton1.Visible = false;
+                }
+
+
                 View.frmMonitor f = new View.frmMonitor();
                 ShowForm(f);
 
@@ -362,5 +368,13 @@ namespace App
             App.View.Task.frmInStockTask f = new App.View.Task.frmInStockTask();
             f.ShowDialog();
         }
+
+        private void toolStripButton_UpERP_Click(object sender, EventArgs e)
+        {
+            App.View.frmBillUpERP f = new App.View.frmBillUpERP();
+            ShowForm(f);
+        }
+
+        
     }
 }

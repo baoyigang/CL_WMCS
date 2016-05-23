@@ -78,7 +78,7 @@ namespace App.View.Task
         }
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType='11'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType='11' And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
             bsMain.DataSource = dt;
         }
 
@@ -113,7 +113,14 @@ namespace App.View.Task
         }
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            UpdatedgvMainState("0");       
+            if (this.dgvMain.CurrentCell != null)
+            {
+                BLL.BLLBase bll = new BLL.BLLBase();
+                string TaskNo = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[0].Value.ToString();
+                DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo), new DataParameter("@State", 0) };
+                bll.ExecNonQueryTran("WCS.Sp_UpdateTaskState", param);
+                BindData();
+            }     
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
