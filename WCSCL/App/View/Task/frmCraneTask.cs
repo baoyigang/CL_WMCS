@@ -388,5 +388,13 @@ namespace App.View.Task
         {
             Context.ProcessDispatcher.WriteToService("ERP", "SED", this.textBox1.Text);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataParameter[] param = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskNo='{0}'", "1606010004")) };
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", param);
+            View.CheckScan frm = new CheckScan(6, dt);
+            frm.ShowDialog();
+        }
     }
 }

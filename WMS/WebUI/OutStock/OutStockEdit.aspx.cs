@@ -310,7 +310,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             if (o != null)
             {
                 int Qty = int.Parse(o.ToString());
-                DataTable dtProductQty = bll.FillDataTable("WMS.SelectProductQty", new DataParameter[] { new DataParameter("@BillID", this.txtID.Text), new DataParameter("@ProductCode", dtProduct.Rows[i]["ProductCode"].ToString()), new DataParameter("@BarCode", dtProduct.Rows[i]["BarCode"].ToString()) });
+                DataTable dtProductQty = bll.FillDataTable("WMS.SelectProductQty", new DataParameter[] { new DataParameter("@BillID", this.txtID.Text), new DataParameter("@ProductCode", dtProduct.Rows[i]["ProductCode"].ToString()), new DataParameter("{0}", " BarCode like '%" + dtProduct.Rows[i]["BarCode"].ToString() + "%'") });
                 int StockQty = 0;
                 bool blnvalue = false;
                 if (dtProductQty.Rows.Count == 0)

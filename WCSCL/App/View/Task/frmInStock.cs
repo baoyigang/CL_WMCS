@@ -78,7 +78,7 @@ namespace App.View.Task
         }
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType='11' And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType='11'") });
             bsMain.DataSource = dt;
         }
 
@@ -143,14 +143,14 @@ namespace App.View.Task
             {
                 BLL.BLLBase bll = new BLL.BLLBase();
                 string TaskNo = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[0].Value.ToString();
-                bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", State), new DataParameter("@TaskNo", TaskNo) });
-
-                //堆垛机完成执行
-                if (State == "7")
-                {
-                    DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
-                    bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
-                }
+                DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo), new DataParameter("@State", State) };
+                bll.ExecNonQueryTran("WCS.Sp_UpdateTaskState", param);
+                ////堆垛机完成执行
+                //if (State == "7")
+                //{
+                //    DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
+                //    bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
+                //}
                 BindData();
             }
         }

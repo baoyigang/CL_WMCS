@@ -190,12 +190,35 @@ namespace ServiceHost
                         strResult = "<RESULT>" + result + "</RESULT>";
                         return strXML1 + strResult + strXML2;
                     }
-                    
                     DataRow[] drs = dt.Select(string.Format("BillNo='{0}'", BillNo));
 
                     for (int i = 0; i < drs.Length; i++)
                     {
+                        //判断该熔次卷号是否在库存中
                         DataRow dr = drs[i];
+                        HasCount = bll.GetRowCount("CMD_CELL", string.Format("Barcode like '%{0}%'", dr["BatchNo"].ToString()));
+                        if (HasCount > 0)
+                        {
+                            bln = "N";
+                            Msg = "熔次卷号" + dr["BatchNo"].ToString() + "已经传入WMS，不能再次传递！";
+                            result = bln + "," + Msg;
+                            strResult = "<RESULT>" + result + "</RESULT>";
+                            return strXML1 + strResult + strXML2;
+                        }
+                        //判断是否有在未执行的入库任务中
+
+                        HasCount = bll.GetRowCount("WCS_Task", string.Format("TaskType='11' and Barcode like '%{0}%' and state<7", dr["BatchNo"].ToString()));
+                        if (HasCount > 0)
+                        {
+                            bln = "N";
+                            Msg = "熔次卷号" + dr["BatchNo"].ToString() + "已经传入WMS，不能再次传递！";
+                            result = bln + "," + Msg;
+                            strResult = "<RESULT>" + result + "</RESULT>";
+                            return strXML1 + strResult + strXML2;
+                        }
+
+
+                       
                         list.Add("WMSServices.InsertBillTemp");
                         para = new DataParameter[] { new DataParameter("@BillType","IS"), 
                                                      new DataParameter("@BillNo",dr["BillNo"]),
@@ -326,7 +349,7 @@ namespace ServiceHost
                     {
                         DataRow dr = drs[i];
 
-                        HasCount = bll.GetRowCount("View_ProductQty", string.Format("Barcode='{0}' and (InstockQty-UnStockQty)>0 ", dr["BatchNo"]));
+                        HasCount = bll.GetRowCount("CMD_CELL", string.Format("Barcode like '%{0}%' and IsLock=0", dr["BatchNo"].ToString()));
                         if (HasCount == 0)
                         {
                             bln = "N";

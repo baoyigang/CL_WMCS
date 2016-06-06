@@ -34,18 +34,31 @@ namespace App.View
             this.txtProductName.Text = dr["ProductName"].ToString();
             this.txtSpec.Text = dr["Spec"].ToString();
             this.txtAreaCode.Text = dr["AreaCode"].ToString();
-
+            BindAisleNo();
             CraneNo = dr["CraneNo"].ToString();
 
+            //DataParameter[] param = new DataParameter[] 
+            //{ 
+            //    new DataParameter("{0}", string.Format("CraneNo='{0}' and AreaCode='{1}' and AisleNo='{2}'", CraneNo,this.txtAreaCode.Text,this.txtAisleNo.Text))
+            //};
+            //DataTable dt = bll.FillDataTable("CMD.SelectCellShelf", param);
+            //this.cbRow.DataSource = dt.DefaultView;
+            //this.cbRow.ValueMember = "shelfcode";
+            //this.cbRow.DisplayMember = "shelfcode";
+        }
+
+        private void BindAisleNo()
+        {
             DataParameter[] param = new DataParameter[] 
             { 
-                new DataParameter("{0}", string.Format("CraneNo='{0}' and AreaCode='{1}' and AisleNo='{2}'", CraneNo,this.txtAreaCode.Text,this.txtAisleNo.Text))
+                new DataParameter("{0}", string.Format("CraneNo='{0}'",CraneNo))
             };
-            DataTable dt = bll.FillDataTable("CMD.SelectCellShelf", param);
-            this.cbRow.DataSource = dt.DefaultView;
-            this.cbRow.ValueMember = "shelfcode";
-            this.cbRow.DisplayMember = "shelfcode";
-        }
+
+            DataTable dt = bll.FillDataTable("CMD.SelectAisle", param);
+            this.cmbAisleNo.DataSource = dt.DefaultView;
+            this.cmbAisleNo.ValueMember = "AisleNo";
+            this.cmbAisleNo.DisplayMember = "AisleNo";
+        }   
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (this.radioButton1.Checked)
@@ -53,12 +66,14 @@ namespace App.View
                 this.cbRow.Enabled = false;
                 this.cbColumn.Enabled = false;
                 this.cbHeight.Enabled = false;
+                this.cmbAisleNo.Enabled = false;
             }
             else
             {
                 this.cbRow.Enabled = true;
                 this.cbColumn.Enabled = true;
                 this.cbHeight.Enabled = true;
+                this.cmbAisleNo.Enabled = true;
             }
         }
         private void btnSearch_Click(object sender, EventArgs e)
@@ -72,6 +87,23 @@ namespace App.View
                 strWhere += string.Format("AND CELL_ROW='{0}'", this.cbHeight.Text);
 
         }
+
+
+        private void cmbAisleNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbAisleNo.Text == "System.Data.DataRowView")
+                return;
+
+            DataParameter[] param = new DataParameter[] 
+            { 
+                new DataParameter("{0}", string.Format("CraneNo='{0}' and AisleNo='{1}'",this.CraneNo,this.cmbAisleNo.Text))
+            };
+            DataTable dt = bll.FillDataTable("CMD.SelectCellShelf", param);
+            this.cbRow.DataSource = dt.DefaultView;
+            this.cbRow.ValueMember = "shelfcode";
+            this.cbRow.DisplayMember = "shelfcode";
+        }     
+
         private void cbRow_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.cbRow.Text == "System.Data.DataRowView")

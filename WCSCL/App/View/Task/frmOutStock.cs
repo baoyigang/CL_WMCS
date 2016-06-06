@@ -122,34 +122,33 @@ namespace App.View.Task
         {
             if (this.dgvMain.CurrentCell != null)
             {
-                BLL.BLLBase bll = new BLL.BLLBase();
                 string TaskNo = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[0].Value.ToString();
-                string CellCode = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[6].Value.ToString();
-                bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", State), new DataParameter("@TaskNo", TaskNo) });
+                DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo), new DataParameter("@State", State) };
+                bll.ExecNonQueryTran("WCS.Sp_UpdateTaskState", param);
 
                 //堆垛机完成执行
-                if (State == "7")
-                {
-                    if (CellCode != "")
-                    {
-                        DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
-                        bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
-                    }
-                    else
-                    {
-                        DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcessNoShelf", new DataParameter[] { new DataParameter("@TaskNo", TaskNo) });
-                        if (dtXml.Rows.Count > 0)
-                        {
-                            string BillNo = dtXml.Rows[0][0].ToString();
-                            if (BillNo.Trim().Length > 0)
-                            {
-                                string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, "BatchOutStock");
-                                Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
-                                MCP.Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
-                            }
-                        }
-                    }
-                }
+                //if (State == "7")
+                //{
+                //    if (CellCode != "")
+                //    {
+                //        DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
+                //        bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
+                //    }
+                //    else
+                //    {
+                //        DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcessNoShelf", new DataParameter[] { new DataParameter("@TaskNo", TaskNo) });
+                //        if (dtXml.Rows.Count > 0)
+                //        {
+                //            string BillNo = dtXml.Rows[0][0].ToString();
+                //            if (BillNo.Trim().Length > 0)
+                //            {
+                //                string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, "BatchOutStock");
+                //                Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
+                //                MCP.Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
+                //            }
+                //        }
+                //    }
+                //}
                 BindData();
             }
         }

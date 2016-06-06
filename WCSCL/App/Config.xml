@@ -4,7 +4,7 @@
   <Attributes>
     <Attribute Name="ScanPortName" Value="COM2" />
     <Attribute Name="ScanBaudRate" Value="19200" />
-    <Attribute Name="TaskTest" Value="0" />
+    <Attribute Name="TaskTest" Value="1" />
     <Attribute Name="AreaCode" Value="001" />
   </Attributes>
   <Services>
