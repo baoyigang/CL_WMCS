@@ -308,7 +308,7 @@ namespace App.Dispatching.Process
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
             DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14','15') and WCS_Task.State='0' and WCS_Task.CellCode!='' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
+            DataTable dt = bll.FillDataTable("WCS.SelectOutTask", parameter);
 
             //出库
             if (dt.Rows.Count>0)

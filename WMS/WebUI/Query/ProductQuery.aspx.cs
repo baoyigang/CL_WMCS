@@ -33,32 +33,12 @@ public partial class WebUI_Query_ProductQuery : BasePage
             int H = int.Parse(hdnwh.Split('#')[1]);
             WebReport1.Width = W - 60;
             WebReport1.Height = H - 55;
-            if (this.HdnProduct.Value.Length > 0)
-                this.btnProduct.Text = "取消指定";
-            else
-                this.btnProduct.Text = "指定";
-
-
-
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "", "BindEvent();", true);
         }
-        SetTextReadOnly(this.txtProductName);
-
     }
     private void BindOther()
     {
-        BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory", new DataParameter[] { new DataParameter("{0}", " IsFixed<>'1'") });
-        DataRow dr = ProductType.NewRow();
-        dr["CategoryCode"] = "";
-        dr["CategoryName"] = "请选择";
-        ProductType.Rows.InsertAt(dr, 0);
-        ProductType.AcceptChanges();
-
-        this.ddlProductType.DataValueField = "CategoryCode";
-        this.ddlProductType.DataTextField = "CategoryName";
-        this.ddlProductType.DataSource = ProductType;
-        this.ddlProductType.DataBind();
+       
 
     }
     protected void WebReport1_StartReport(object sender, EventArgs e)
@@ -74,22 +54,12 @@ public partial class WebUI_Query_ProductQuery : BasePage
     private void GetStrWhere()
     {
         strWhere = "1=1";
-        if (this.ddlProductType.SelectedValue != "")
-        {
-            strWhere += string.Format(" and Product.CategoryCode='{0}'", this.ddlProductType.SelectedValue);
-        }
-
-
-        if (this.HdnProduct.Value.Length == 0)
-        {
-            if (this.txtProductCode.Text.Trim().Length > 0)
-                strWhere += string.Format(" and Product.ProductCode='{0}'", this.txtProductCode.Text);
-        }
-        else
-        {
-            strWhere += " and Product.ProductCode in (" + this.HdnProduct.Value + ") ";
-        }
         
+            if (this.txtSpec.Text.Trim().Length > 0)
+                strWhere += string.Format(" and Spec like '%{0}%'", this.txtSpec.Text);
+
+            if (this.txtBarCode.Text.Trim().Length > 0)
+                strWhere += string.Format(" and Product.BarCode like '%{0}%'", this.txtBarCode.Text);
 
     }
     private bool LoadRpt()

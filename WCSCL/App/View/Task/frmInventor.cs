@@ -111,16 +111,10 @@ namespace App.View.Task
         {
             if (this.dgvMain.CurrentCell != null)
             {
-                BLL.BLLBase bll = new BLL.BLLBase();
                 string TaskNo = this.dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].Cells[0].Value.ToString();
-                bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", State), new DataParameter("@TaskNo", TaskNo) });
+                DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo), new DataParameter("@State", State) };
+                bll.ExecNonQueryTran("WCS.Sp_UpdateTaskState", param);
 
-                //堆垛机完成执行
-                if (State == "7")
-                {
-                    DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
-                    bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
-                }
                 BindData();
             }
         }

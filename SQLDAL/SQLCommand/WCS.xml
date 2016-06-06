@@ -18,9 +18,29 @@
       left join CMD_BillType On CMD_BillType.BillTypeCode=WCS_TASK.BillTypeCode
       LEFT JOIN  Sys_TableState on Sys_TableState.TableName='WCS_TASK' and Sys_TableState.FieldName='State' and WCS_TASK.State=Sys_TableState.State
       Where {0}
-      ORDER BY WCS_TASK.TaskLevel DESC, WCS_TASK.RequestDate,WCS_TASK.StartDate
+      ORDER BY WCS_TASK.TaskLevel DESC, WCS_TASK.RequestDate,WCS_TASK.StartDate,AisleNo
     </CommandString>
-  </Command>  
+  </Command>
+  <Command ID="SelectOutTask">
+    <CommandString>
+      SELECT top 1 WCS_TASK.*, CMD_BillType.BillTypeName,CMD_Product.ProductName,CMD_Product.Spec, Sys_TableState.StateDesc,S1.StationAddtess,
+      (case when WCS_TASK.TaskType='11' or (WCS_TASK.TaskType='14' and WCS_TASK.State in('5','6'))
+      then S1.StationAddtess when WCS_TASK.TaskType in('12','13') or (WCS_TASK.TaskType='14' and
+      WCS_TASK.State in('0','1','2','3','4','7','9'))  then WCS_TASK.CellCode else '' end) FromStation,
+      (case when WCS_TASK.TaskType='11' or (WCS_TASK.TaskType='14' and WCS_TASK.State in('5','6','7','9'))
+      then WCS_TASK.CellCode when WCS_TASK.TaskType in('12') or (WCS_TASK.TaskType='14'
+      and WCS_TASK.State in('0','1','2','3','4')) then S1.StationAddtess when WCS_TASK.TaskType='13'
+      then WCS_TASK.ToCellCode else '' end) ToStation,S1.AisleNo,C1.BillNo,C1.InDate
+      FROM WCS_TASK
+      left join CMD_Cell C1 on WCS_TASK.CellCode=C1.CellCode
+      left join CMD_Shelf S1 On C1.ShelfCode=S1.ShelfCode
+      Left join CMD_Product ON WCS_TASK.ProductCode=CMD_Product.ProductCode
+      left join CMD_BillType On CMD_BillType.BillTypeCode=WCS_TASK.BillTypeCode
+      LEFT JOIN  Sys_TableState on Sys_TableState.TableName='WCS_TASK' and Sys_TableState.FieldName='State' and WCS_TASK.State=Sys_TableState.State
+      Where {0}
+      ORDER BY AisleNo
+    </CommandString>
+  </Command>
   <Command ID="sp_GetCell">
     <CommandString>
       sp_GetCell
@@ -215,15 +235,15 @@
   </Command>
   <Command ID="SelectUpErpCheck">
     <CommandString>
-      select T.BillID as BillNo,P.ProductNo as ProductCode ,P.Spec as Size,T.Barcode as BatchNo,-t.Weight as Weight,T.AreaCode
-      from WCS_TASK T
+      select t.BillID as BillNo,  P.ProductNo as ProductCode ,P.Spec as Size,T.Barcode as BatchNo,-CAST( t.Weight as numeric(18,2)) as Weight  ,T.AreaCode
+      from WMS_CheckDetail T
       left join CMD_Product P on T.ProductCode=P.ProductCode
-      where T.BillID=@BillID and T.Barcode not in(select CheckBarcode from WCS_TASK where BillID=@BillID)
+      where T.BillID=@BillID and T.Barcode not in(select CheckBarcode from WMS_CheckDetail where BillID=@BillID)
       union all
-      select T.BillID as BillNo,P.ProductNo as ProductCode ,P.Spec as Size,T.Barcode as BatchNo,t.Weight as Weight,T.AreaCode
-      from WCS_TASK T
+      select t.BillID as BillNo, P.ProductNo as ProductCode ,P.Spec as Size,T.Barcode as BatchNo,CAST( t.Weight as numeric(18,2)) as Weight ,T.AreaCode
+      from WMS_CheckDetail T
       left join CMD_Product P on T.ProductCode=P.ProductCode
-      where T.BillID=@BillID and T.CheckBarcode not in(select Barcode from WCS_TASK where BillID=@BillID) and T.CheckBarcode!=''
+      where T.BillID=@BillID and T.CheckBarcode not in(select Barcode from WMS_CheckDetail where BillID=@BillID)
     </CommandString>
   </Command>
 
@@ -261,6 +281,26 @@
       Sp_TaskProcessNoShelf
     </CommandString>
   </Command>
-  
+
+  <Command ID="SelectCheckDetail">
+    <CommandString>
+      select detail.*,ProductName,ProductEName,ModelNo,ProductNo,Spec,Propertity,StandardNo,PartNo  from WMS_CheckDetail Detail left join CMD_Product product
+      on Detail.ProductCode=product.ProductCode
+      where TaskNo=@TaskNo
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectCheckScanDetail">
+    <CommandString>
+      select detail.*,ProductName,ProductEName,ModelNo,ProductNo,Spec,Propertity,StandardNo,PartNo  from WMS_CheckDetail Detail left join CMD_Product product
+      on Detail.ProductCode=product.ProductCode
+      where CheckTaskNo=@TaskNo
+    </CommandString>
+  </Command>
+  <Command ID="updateCheckScanDetail">
+    <CommandString>
+      update WMS_CheckDetail set CheckBarcode=@BarCode,CheckTaskNo=@TaskNo where Barcode=@BarCode and BillID=@BillID
+    </CommandString>
+  </Command>
 
 </SqlCommand>

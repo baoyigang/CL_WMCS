@@ -18,42 +18,12 @@
                $(window).resize(function () {
                    resize();
                });
-               BindEvent();
+               
            });
            function resize() {
                var h = document.documentElement.clientHeight - 60;
                $("#rptview").css("height", h);
            }
-           function ProductClick() {
-               var where = GetWhere();
-               getMultiItems("CMD_Product", "ProductCode", $('#btnProduct'), '#HdnProduct', where);
-               return false;
-           }
-           function BindEvent() {
-               $("#txtProductCode").bind("dblclick", function () {
-                   var where = GetWhere();
-                   GetOtherValue("CMD_Product", "txtProductName,txtProductCode", "ProductName,ProductCode", where);
-                   return false;
-               });
-               $("#txtProductCode").bind("change", function () {
-                   var where = GetWhere();
-                   where += " and ProductCode='" + $('#txtProductCode').val() + "'";
-                   getWhereBaseData('CMD_Product', "txtProductName,txtProductCode", "ProductName,ProductCode", where);
-               });
-           }
-
-           function GetWhere() {
-               var where = "ProductCode not in ('0001','0002')";
-               if ($("#ddlProductType").val() != "") {
-                   where += escape(" and ProductTypeCode='" + $('#ddlProductType').val() + "'");
-               }
-               if ($("#ddlArea").val() != "") {
-                   where += escape(" and AreaCode='" + $('#ddlArea').val() + "'");
-               }
-               return where;
-           }
-
-
            function PrintClick() {
                $('#HdnWH').val(document.documentElement.clientWidth + "#" + document.documentElement.clientHeight);
                return true;
@@ -81,61 +51,72 @@
                         <td align="left"   style="width:115px;" >
                              <uc1:Calendar ID="txtEndDate" runat="server" />
                          </td>
-                         
-                        <td align="center" class="musttitle" style=" width:6%">
+
+                       <td align="center" class="musttitle" style=" width:6%">
                             任务类型 
                         </td>
-                        <td align="left" style="width:10%;">
+                        <td align="left" style="width:15%;">
                             <asp:DropDownList ID="ddlBillType" runat="server" Width="96%">
                             </asp:DropDownList>
                         </td>
                              
                         <td align="center" class="musttitle" style=" width:6%">
                             任务状态</td>
-                        <td align="left" style="width:10%;">
+                        <td align="left" style="width:15%;">
                            
                             <asp:DropDownList ID="ddlState" runat="server" Width="96%">
-                                <asp:ListItem Selected="True" Value="0">请选择</asp:ListItem>
+                                <asp:ListItem  Value="0">请选择</asp:ListItem>
                                 <asp:ListItem Value="1">未完成</asp:ListItem>
-                                <asp:ListItem Value="2">完成</asp:ListItem>
+                                <asp:ListItem Selected="True" Value="2">完成</asp:ListItem>
                                 <asp:ListItem Value="3">取消</asp:ListItem>
                             </asp:DropDownList>
                            
                         </td>
                          <td align="center" class="musttitle" style=" width:6%">
                              库区</td>
-                        <td align="left" style="width:10%;">
+                        <td align="left" style="width:auto;">
                            
                             <asp:DropDownList ID="ddlArea" runat="server" Width="96%" AutoPostBack="True" 
                                 onselectedindexchanged="ddlAreaCode_SelectedIndexChanged">
                             </asp:DropDownList>
                            
                         </td>
-                        <td align="center" class="musttitle" style=" width:6%">  
-                            产品类型
-                        </td>
-                            
-                        <td align="left"  >
-                            <asp:DropDownList ID="ddlProductType" runat="server" Width="96%">
-                            </asp:DropDownList>
-                           
-                        </td>                                         
+                                                              
                     </tr>
                     <tr>
-                        <td   align="center" class="musttitle">
-                            产品
+                        <td   align="center" class="musttitle" style=" width:6%" >
+                            完成日期 
                         </td>
-                         <td colspan="3">
-                             <asp:TextBox ID="txtProductCode" runat="server" CssClass="TextBox" Width="30%"></asp:TextBox>
-                            <asp:TextBox ID="txtProductName" runat="server" CssClass="TextRead" 
-                                tabIndex="1" Width="63%"></asp:TextBox>
+                        <td align="left"   style="width:115px;" >
+                            <uc1:Calendar ID="txtFinishStartDate" runat="server"  /> 
+                        </td> 
+                        <td align="center" style=" width:3%">
+                        至
+                        </td> 
+                        
+                                                       
+                        <td align="left"   style="width:115px;" >
+                             <uc1:Calendar ID="txtFinishEndDate" runat="server" />
                          </td>
-                         
-                        <td  >
-                             <asp:Button ID="btnProduct" runat="server" CssClass="ButtonOption" 
-                                Height="23px" OnClientClick="return ProductClick();" Text="指定" Width="70px" />
+
+                           <td   align="center" class="musttitle" style="width:6%;">
+                             产品规格 
                         </td>
-                        <td align="center"  colspan="5" >
+                        <td align="left"   style="width:15%;" >
+                         <asp:textbox id="txtSpec"   runat="server"  Width="98%" 
+                                CssClass="TextBox" ></asp:textbox>
+                        </td>
+                        
+                        <td   align="center" class="musttitle" style="width:6%;">
+                            熔次卷号
+                        </td>
+                        <td align="left"   style="width:15%;" >
+                         <asp:textbox id="txtBarCode"   runat="server"  Width="98%" CssClass="TextBox" ></asp:textbox>
+                        </td>
+
+                          
+                        
+                        <td align="center"  colspan="3" >
                              &nbsp;<asp:Button ID="btnSearch" runat="server" CssClass="ButtonQuery" 
                                 onclick="btnPreview_Click" onclientclick="return PrintClick();" tabIndex="2" 
                                 Text="查询" Width="58px" />
@@ -143,8 +124,8 @@
                             <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonReset" 
                                 OnClientClick="return Refresh()" tabIndex="2" Text="重新过滤" Width="80px" />
                         </td>
-                        <td colspan="2">
-                        </td>
+                        
+                         
                              
                                             
                     </tr>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TABLE name="CMD_Product" ChineseName="产品信息" PrimaryKey="ProductCode" OrderBy="CategoryName,ProductCode" ViewName="VCMD_ProductInstock">
+<TABLE name="CMD_Product" ChineseName="产品信息" PrimaryKey="BarCode" OrderBy="CategoryName,BarCode" ViewName="VCMD_ProductInstock">
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="3">
     <FieldName>CategoryName</FieldName>
     <FieldTitle>产品类型</FieldTitle>

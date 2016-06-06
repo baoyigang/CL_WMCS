@@ -24,8 +24,8 @@ public partial class WebUI_Query_TaskQuery : BasePage
         {
             rptview.Visible = false;
             BindOther();
-            this.txtEndDate.DateValue = DateTime.Now;
-            this.txtStartDate.DateValue = DateTime.Now.AddMonths(-1);
+            this.txtFinishEndDate.DateValue = DateTime.Now;
+            this.txtFinishStartDate.DateValue = DateTime.Now.AddMonths(-1);
             writeJsvar("", "", "");
 
 
@@ -40,34 +40,18 @@ public partial class WebUI_Query_TaskQuery : BasePage
                 WebReport1.Width = W - 30;
                 WebReport1.Height = H - 65;
             }
-            if (this.HdnProduct.Value.Length > 0)
-                this.btnProduct.Text = "取消指定";
-            else
-                this.btnProduct.Text = "指定";
-
+            
 
 
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "", "BindEvent();", true);
         }
-        SetTextReadOnly(this.txtProductName);
+       
 
     }
     private void BindOther()
     {
         BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' AND IsFixed !='1'") });
-        DataRow dr = ProductType.NewRow();
-        dr["CategoryCode"] = "";
-        dr["CategoryName"] = "请选择";
-        ProductType.Rows.InsertAt(dr, 0);
-        ProductType.AcceptChanges();
-
-        this.ddlProductType.DataValueField = "CategoryCode";
-        this.ddlProductType.DataTextField = "CategoryName";
-        this.ddlProductType.DataSource = ProductType;
-        this.ddlProductType.DataBind();
-
-
+        DataRow dr;
         DataTable dtArea = bll.FillDataTable("Cmd.SelectArea");
         dr = dtArea.NewRow();
         dr["AreaCode"] = "";
@@ -96,20 +80,7 @@ public partial class WebUI_Query_TaskQuery : BasePage
 
     protected void ddlAreaCode_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string AreaCode = ddlArea.SelectedValue;
-        BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable ProductType = bll.FillDataTable("Cmd.SelectProductCategory", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='" + AreaCode + "' AND IsFixed !='1'") });
-
-        DataRow dr = ProductType.NewRow();
-        dr["CategoryCode"] = "";
-        dr["CategoryName"] = "请选择";
-        ProductType.Rows.InsertAt(dr, 0);
-        ProductType.AcceptChanges();
-
-        this.ddlProductType.DataValueField = "CategoryCode";
-        this.ddlProductType.DataTextField = "CategoryName";
-        this.ddlProductType.DataSource = ProductType;
-        this.ddlProductType.DataBind();
+         
 
     }
 
@@ -133,6 +104,14 @@ public partial class WebUI_Query_TaskQuery : BasePage
         if (this.txtEndDate.tDate.Text != "")
         {
             strWhere += string.Format(" and CONVERT(nvarchar(10),TaskDate,111)<='{0}'", this.txtEndDate.tDate.Text);
+        }
+        if (this.txtFinishStartDate.tDate.Text != "")
+        {
+            strWhere += string.Format(" and CONVERT(nvarchar(10),FinishDate,111)>='{0}'", this.txtFinishStartDate.tDate.Text);
+        }
+        if (this.txtFinishEndDate.tDate.Text != "")
+        {
+            strWhere += string.Format(" and CONVERT(nvarchar(10),FinishDate,111)<='{0}'", this.txtFinishEndDate.tDate.Text);
         }
         //任务类型
         if (this.ddlBillType.SelectedValue != "")
@@ -162,22 +141,13 @@ public partial class WebUI_Query_TaskQuery : BasePage
             strWhere += string.Format(" and Task.AreaCode='{0}'", this.ddlArea.SelectedValue);
         }
 
+        if (this.txtSpec.Text.Trim().Length > 0)
+            strWhere += string.Format(" and Spec like '%{0}%'", this.txtSpec.Text);
+        if (this.txtBarCode.Text.Trim().Length > 0)
+            strWhere += string.Format(" and Task.BarCode like '%{0}%'", this.txtBarCode.Text);
+      
 
-        if (this.ddlProductType.SelectedValue != "")
-        {
-            strWhere += string.Format(" and Product.CategoryCode='{0}'", this.ddlProductType.SelectedValue);
-        }
-
-
-        if (this.HdnProduct.Value.Length == 0)
-        {
-            if (this.txtProductCode.Text.Trim().Length > 0)
-                strWhere += string.Format(" and Task.ProductCode='{0}'", this.txtProductCode.Text);
-        }
-        else
-        {
-            strWhere += "and Task.ProductCode in (" + this.HdnProduct.Value + ") ";
-        }
+ 
 
     }
     private bool LoadRpt()

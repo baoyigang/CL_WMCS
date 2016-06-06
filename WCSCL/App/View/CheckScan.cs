@@ -21,6 +21,8 @@ namespace App.View
         private DataTable dtProductInfo;
         BLL.BLLBase bll = new BLL.BLLBase();
         private string TaskNo;
+        private string BillID;
+        private int CheckCount = 0;
      
         StringBuilder builder = new StringBuilder();
 
@@ -33,18 +35,42 @@ namespace App.View
             InitializeComponent();
             Flag = flag;
             dtProductInfo = dtInfo;
+            CheckCount = 0;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            //更新实物盘点的条码到TASK表
-            bll.ExecNonQuery("WCS.UpdateTaskBarcode", new DataParameter[] { new DataParameter("@CheckBarcode", this.txtScanCode.Text.Trim()), new DataParameter("@TaskNo", TaskNo) });
-            if (this.txtBarCode.Text.Trim() != this.txtScanCode.Text.Trim())
+            if (CheckCount == 0)
             {
-                strValue = this.txtScanCode.Text.Trim();
+                MCP.Logger.Error("请扫描条码后再确认！");
+                return;
             }
-            else
+            bool chk = true;
+            for (int i = 0; i < dgvMain.Rows.Count; i++)
+            {
+                string BarCode = dgvMain.Rows[i].Cells["colBarCode"].Value.ToString();
+                string TaskNo = dgvMain.Rows[i].Cells["colTaskNo"].Value.ToString();
+                bool blnExists = false;
+                for (int j = 0; j < dgvCheck.Rows.Count; j++)
+                {
+                    if ((BarCode + "#" + TaskNo).Equals(dgvCheck.Rows[j].Cells["colChkBarCode"].Value.ToString() + "#" + dgvCheck.Rows[j].Cells["colChkTaskNo"].Value.ToString()))
+                    {
+                        blnExists = true;
+                        break;
+                    }
+                    
+                }
+                if (!blnExists)
+                {
+                    chk = false;
+                    break;
+                }
+            }
+
+            if (chk)
                 strValue = "1";
+            else
+                strValue = "0";
             this.DialogResult = DialogResult.OK;
 
         }
@@ -53,18 +79,13 @@ namespace App.View
         {
             if (e.KeyCode == Keys.Enter)
             {
-                DataTable dt = bll.FillDataTable("CMD.SelecCellInfoByBarcode", new DataParameter[] { new DataParameter("@Barcode", this.txtCode.Text.Trim()) });
-                this.txtCode.Text = "";
-                if (dt.Rows.Count > 0)
-                {
-                    DataRow dr = dt.Rows[0];
-                    this.txtBillNo1.Text = dr["BillNo"].ToString();
-                    this.txtProductCode1.Text = dr["ProductCode"].ToString();
-                    this.txtProductName1.Text = dr["ProductName"].ToString();
-                    this.txtSpec1.Text = dr["Spec"].ToString();
-                    this.txtScanCode.Text = dr["Barcode"].ToString();
-                    this.txtInDate1.Text = dr["InDate"].ToString();
-                }
+                if (this.txtCode.Text.Trim().Length == 0)
+                    return;
+                CheckCount++;
+
+                bll.ExecNonQuery("WCS.updateCheckScanDetail", new DataParameter[] { new DataParameter("@BarCode", this.txtCode.Text.Trim()), new DataParameter("@TaskNo", TaskNo), new DataParameter("@BillID", BillID) });
+                DataTable dt = bll.FillDataTable("WCS.SelectCheckScanDetail", new DataParameter[] { new DataParameter("@TaskNo", TaskNo) });
+                this.bsCheck.DataSource = dt;
             }            
         }
 
@@ -72,13 +93,15 @@ namespace App.View
         {
             DataRow dr = dtProductInfo.Rows[0];
             this.txtCellCode.Text = dr["CellCode"].ToString();
-            this.txtBillNo.Text = dr["BillNo"].ToString();
-            this.txtBarCode.Text = dr["Barcode"].ToString();
-            this.txtProductCode.Text = dr["ProductCode"].ToString();
-            this.txtProductName.Text = dr["ProductName"].ToString();
-            this.txtSpec.Text = dr["Spec"].ToString();
-            this.txtInDate.Text = dr["InDate"].ToString();
+            BillID = dr["BillID"].ToString();
+           
+             
             TaskNo = dr["TaskNo"].ToString();
+
+            DataTable dt = bll.FillDataTable("WCS.SelectCheckDetail", new DataParameter[] { new DataParameter("@TaskNo", TaskNo) });
+
+            this.bsMain.DataSource = dt;
+
 
 
             //THOK.MCP.Config.Configuration conf = new MCP.Config.Configuration();

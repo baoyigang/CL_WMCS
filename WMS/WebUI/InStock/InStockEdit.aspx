@@ -181,7 +181,7 @@
                 </table> 
                 <div id="Sub-container" style="overflow: auto; width: 100%; height: 280px" >
                     <asp:GridView ID="dgViewSub1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin"
-                        AllowPaging="True" Width="100%" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
+                        AllowPaging="True" Width="1400px" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
                         <Columns>
                             <asp:TemplateField  >
                                 <HeaderTemplate>
@@ -213,7 +213,7 @@
                                     <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="15%" />
+                                <HeaderStyle  Width="13%" />
                             </asp:TemplateField>
                            
                              <asp:TemplateField HeaderText="规格">
@@ -221,7 +221,23 @@
                                     <asp:TextBox ID="Spec" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="10%" />
+                                <HeaderStyle  Width="25%" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="熔次卷号">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Barcode" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="13%" />
+                            </asp:TemplateField>
+                              <asp:TemplateField HeaderText="重量">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Weight" runat="server" Width="100%" CssClass="TextBox" style="text-align:right;" 
+                                    onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))" 	onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))" 
+                                    ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox>  
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="5%" />
                             </asp:TemplateField>
                              <asp:TemplateField HeaderText="牌号状态">
                                 <ItemTemplate>
@@ -260,22 +276,8 @@
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="5%" />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="熔次卷号">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="Barcode" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="10%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="重量">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="Weight" runat="server" Width="100%" CssClass="TextBox" style="text-align:right;" 
-                                    onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))" 	onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))" 
-                                    ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox>  
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="5%" />
-                            </asp:TemplateField>
+                            
+                          
                              
                             <asp:TemplateField HeaderText="备注">
                                 <ItemTemplate>
