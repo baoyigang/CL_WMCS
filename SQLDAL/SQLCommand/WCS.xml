@@ -220,17 +220,17 @@
 
   <Command ID="SelectWmsBillID">
     <CommandString>
-      Select main.*,billtype.TaskType ,case when billtype.TaskType=11 then '入库'  when billtype.TaskType=12 then '出库' when billtype.TaskType=14 then '盘点' end as BillType from  WMS_BillMaster main
+      Select main.*,billtype.TaskType ,BillTypeName as BillType from  WMS_BillMaster main
       left join CMD_BillType Billtype on main.BillTypeCode=BillType.BillTypeCode   where {0}
     </CommandString>
   </Command>
 
   <Command ID="SelectUpErpTable">
     <CommandString>
-      select B.SourceBillNo as BillNo,T.Barcode as BatchNo,T.AreaCode
+      select B.SourceBillNo as BillNo,T.Barcode as BatchNo,T.AreaCode,T.CellCode
       from WCS_TASK T
       left join WMS_BillMaster B on T.BillID=B.BillID
-      where T.BillID=@BillID
+      where T.BillID=@BillID and T.State=7
     </CommandString>
   </Command>
   <Command ID="SelectUpErpCheck">

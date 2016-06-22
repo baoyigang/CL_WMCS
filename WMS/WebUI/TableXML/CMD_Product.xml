@@ -10,6 +10,11 @@
     <FieldTitle>产品编号</FieldTitle>
     <DataType>double</DataType>
   </FIELD>
+ <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
+    <FieldName>Spec</FieldName>
+    <FieldTitle>规格</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
     <FieldName>ProductName</FieldName>
     <FieldTitle>品名</FieldTitle>
@@ -25,11 +30,7 @@
     <FieldTitle>ERP编码</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
-    <FieldName>Spec</FieldName>
-    <FieldTitle>规格</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
+  
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="7">
     <FieldName>ModelNo</FieldName>
     <FieldTitle>产品型号</FieldTitle>

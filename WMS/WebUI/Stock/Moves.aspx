@@ -190,12 +190,21 @@
                                 <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProductName" HeaderText="品名" SortExpression="ProductName">
-                                <ItemStyle HorizontalAlign="Left" Width="12%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
+                           
                            <asp:BoundField DataField="Spec" HeaderText="规格" SortExpression="Spec">
                                 <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                             <asp:BoundField DataField="Barcode" HeaderText="熔次卷号" SortExpression="Barcode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Quantity" HeaderText="数量" SortExpression="Quantity">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                             <asp:BoundField DataField="ProductName" HeaderText="品名" SortExpression="ProductName">
+                                <ItemStyle HorizontalAlign="Left" Width="12%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="Propertity" HeaderText="牌号状态" SortExpression="Propertity">
@@ -214,14 +223,7 @@
                                 <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Barcode" HeaderText="熔次卷号" SortExpression="Barcode">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="Quantity" HeaderText="数量" SortExpression="Quantity">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
+                           
                             <asp:BoundField DataField="CellCode" HeaderText="货位" SortExpression="CellCode">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />

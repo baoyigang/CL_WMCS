@@ -51,6 +51,24 @@
             this.pnlMain = new System.Windows.Forms.Panel();
             this.splitContainer_Main = new System.Windows.Forms.SplitContainer();
             this.dgvMain = new System.Windows.Forms.DataGridView();
+            this.Column5 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column1 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column11 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column4 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.colBarCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column12 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column6 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column7 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.colCraneNo = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column8 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column3 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column13 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column14 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column15 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column2 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.colErrCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.colErrDesc = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.colTaskType = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.picCar = new System.Windows.Forms.PictureBox();
             this.picCrane = new System.Windows.Forms.PictureBox();
@@ -78,24 +96,6 @@
             this.txtColumn1 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtTaskNo1 = new System.Windows.Forms.TextBox();
-            this.Column5 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column1 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column11 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column4 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.colBarCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column12 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column6 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column7 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.colCraneNo = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column8 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column3 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column13 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column14 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column15 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column2 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.colErrCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.colErrDesc = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.colTaskType = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             this.pnlMain.SuspendLayout();
@@ -123,13 +123,14 @@
             this.ToolStripMenuItemReassign,
             this.ToolStripMenuItemStateChange});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 114);
             // 
             // ToolStripMenuItemDelCraneTask
             // 
             this.ToolStripMenuItemDelCraneTask.Name = "ToolStripMenuItemDelCraneTask";
             this.ToolStripMenuItemDelCraneTask.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemDelCraneTask.Text = "删除堆垛机任务";
+            this.ToolStripMenuItemDelCraneTask.Visible = false;
             this.ToolStripMenuItemDelCraneTask.Click += new System.EventHandler(this.ToolStripMenuItemDelCraneTask_Click);
             // 
             // ToolStripMenuItemCellCode
@@ -232,7 +233,7 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1284, 750);
+            this.pnlMain.Size = new System.Drawing.Size(1284, 742);
             this.pnlMain.TabIndex = 3;
             // 
             // splitContainer_Main
@@ -249,8 +250,8 @@
             // splitContainer_Main.Panel2
             // 
             this.splitContainer_Main.Panel2.Controls.Add(this.splitContainer1);
-            this.splitContainer_Main.Size = new System.Drawing.Size(1284, 750);
-            this.splitContainer_Main.SplitterDistance = 237;
+            this.splitContainer_Main.Size = new System.Drawing.Size(1284, 742);
+            this.splitContainer_Main.SplitterDistance = 234;
             this.splitContainer_Main.TabIndex = 0;
             // 
             // dgvMain
@@ -305,9 +306,175 @@
             this.dgvMain.RowHeadersWidth = 40;
             this.dgvMain.RowTemplate.Height = 23;
             this.dgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMain.Size = new System.Drawing.Size(1284, 237);
+            this.dgvMain.Size = new System.Drawing.Size(1284, 234);
             this.dgvMain.TabIndex = 6;
             this.dgvMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMain_CellMouseClick);
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "TaskNo";
+            this.Column5.FilteringEnabled = false;
+            this.Column5.Frozen = true;
+            this.Column5.HeaderText = "任务号";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "BillTypeName";
+            this.Column1.FilteringEnabled = false;
+            this.Column1.Frozen = true;
+            this.Column1.HeaderText = "任务类型";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column1.Width = 80;
+            // 
+            // Column11
+            // 
+            this.Column11.DataPropertyName = "StateDesc";
+            this.Column11.FilteringEnabled = false;
+            this.Column11.Frozen = true;
+            this.Column11.HeaderText = "状态";
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column11.Width = 80;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Spec";
+            this.Column4.FilteringEnabled = false;
+            this.Column4.HeaderText = "产品规格";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column4.Width = 200;
+            // 
+            // colBarCode
+            // 
+            this.colBarCode.DataPropertyName = "BarCode";
+            this.colBarCode.FilteringEnabled = false;
+            this.colBarCode.HeaderText = "熔次卷号";
+            this.colBarCode.Name = "colBarCode";
+            this.colBarCode.ReadOnly = true;
+            // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "ToStation";
+            this.Column12.FilteringEnabled = false;
+            this.Column12.HeaderText = "目标地址";
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "ProductCode";
+            this.Column6.FilteringEnabled = false;
+            this.Column6.HeaderText = "产品编号";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "ProductName";
+            this.Column7.FilteringEnabled = false;
+            this.Column7.HeaderText = "产品名称";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column7.Width = 120;
+            // 
+            // colCraneNo
+            // 
+            this.colCraneNo.DataPropertyName = "CraneNo";
+            this.colCraneNo.FilteringEnabled = false;
+            this.colCraneNo.HeaderText = "堆垛机";
+            this.colCraneNo.Name = "colCraneNo";
+            this.colCraneNo.ReadOnly = true;
+            this.colCraneNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "AisleNo";
+            this.Column8.FilteringEnabled = false;
+            this.Column8.HeaderText = "巷道编号";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "FromStation";
+            this.Column3.FilteringEnabled = false;
+            this.Column3.HeaderText = "起始地址";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "RequestDate";
+            this.Column13.FilteringEnabled = false;
+            this.Column13.HeaderText = "请求时间";
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column14
+            // 
+            this.Column14.DataPropertyName = "StartDate";
+            this.Column14.FilteringEnabled = false;
+            this.Column14.HeaderText = "开始时间";
+            this.Column14.Name = "Column14";
+            this.Column14.ReadOnly = true;
+            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column15
+            // 
+            this.Column15.DataPropertyName = "FinishDate";
+            this.Column15.FilteringEnabled = false;
+            this.Column15.HeaderText = "结束时间";
+            this.Column15.Name = "Column15";
+            this.Column15.ReadOnly = true;
+            this.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "BillID";
+            this.Column2.FilteringEnabled = false;
+            this.Column2.HeaderText = "单据号码";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colErrCode
+            // 
+            this.colErrCode.DataPropertyName = "CraneErrCode";
+            this.colErrCode.FilteringEnabled = false;
+            this.colErrCode.HeaderText = "错误代码";
+            this.colErrCode.Name = "colErrCode";
+            this.colErrCode.ReadOnly = true;
+            this.colErrCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colErrDesc
+            // 
+            this.colErrDesc.DataPropertyName = "CraneErrDesc";
+            this.colErrDesc.FilteringEnabled = false;
+            this.colErrDesc.HeaderText = "错误描述";
+            this.colErrDesc.Name = "colErrDesc";
+            this.colErrDesc.ReadOnly = true;
+            this.colErrDesc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colTaskType
+            // 
+            this.colTaskType.DataPropertyName = "TaskType";
+            this.colTaskType.FilteringEnabled = false;
+            this.colTaskType.HeaderText = "类型编号";
+            this.colTaskType.Name = "colTaskType";
+            this.colTaskType.ReadOnly = true;
             // 
             // splitContainer1
             // 
@@ -325,7 +492,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox4);
-            this.splitContainer1.Size = new System.Drawing.Size(1284, 509);
+            this.splitContainer1.Size = new System.Drawing.Size(1284, 504);
             this.splitContainer1.SplitterDistance = 1079;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -358,7 +525,7 @@
             this.pictureBox1.Image = global::App.Properties.Resources._12;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1079, 509);
+            this.pictureBox1.Size = new System.Drawing.Size(1079, 504);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
@@ -391,7 +558,7 @@
             this.groupBox4.ForeColor = System.Drawing.Color.Red;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(201, 509);
+            this.groupBox4.Size = new System.Drawing.Size(201, 504);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "堆垛机";
@@ -640,177 +807,11 @@
             this.txtTaskNo1.Size = new System.Drawing.Size(126, 26);
             this.txtTaskNo1.TabIndex = 0;
             // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "TaskNo";
-            this.Column5.FilteringEnabled = false;
-            this.Column5.Frozen = true;
-            this.Column5.HeaderText = "任务号";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "BillTypeName";
-            this.Column1.FilteringEnabled = false;
-            this.Column1.Frozen = true;
-            this.Column1.HeaderText = "任务类型";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.Width = 80;
-            // 
-            // Column11
-            // 
-            this.Column11.DataPropertyName = "StateDesc";
-            this.Column11.FilteringEnabled = false;
-            this.Column11.Frozen = true;
-            this.Column11.HeaderText = "状态";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column11.Width = 80;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "Spec";
-            this.Column4.FilteringEnabled = false;
-            this.Column4.HeaderText = "产品规格";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column4.Width = 200;
-            // 
-            // colBarCode
-            // 
-            this.colBarCode.DataPropertyName = "BarCode";
-            this.colBarCode.FilteringEnabled = false;
-            this.colBarCode.HeaderText = "熔次卷号";
-            this.colBarCode.Name = "colBarCode";
-            this.colBarCode.ReadOnly = true;
-            // 
-            // Column12
-            // 
-            this.Column12.DataPropertyName = "ToStation";
-            this.Column12.FilteringEnabled = false;
-            this.Column12.HeaderText = "目标地址";
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "ProductCode";
-            this.Column6.FilteringEnabled = false;
-            this.Column6.HeaderText = "产品编号";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "ProductName";
-            this.Column7.FilteringEnabled = false;
-            this.Column7.HeaderText = "产品名称";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column7.Width = 120;
-            // 
-            // colCraneNo
-            // 
-            this.colCraneNo.DataPropertyName = "CraneNo";
-            this.colCraneNo.FilteringEnabled = false;
-            this.colCraneNo.HeaderText = "堆垛机";
-            this.colCraneNo.Name = "colCraneNo";
-            this.colCraneNo.ReadOnly = true;
-            this.colCraneNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "AisleNo";
-            this.Column8.FilteringEnabled = false;
-            this.Column8.HeaderText = "巷道编号";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "FromStation";
-            this.Column3.FilteringEnabled = false;
-            this.Column3.HeaderText = "起始地址";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column13
-            // 
-            this.Column13.DataPropertyName = "RequestDate";
-            this.Column13.FilteringEnabled = false;
-            this.Column13.HeaderText = "请求时间";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column14
-            // 
-            this.Column14.DataPropertyName = "StartDate";
-            this.Column14.FilteringEnabled = false;
-            this.Column14.HeaderText = "开始时间";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column15
-            // 
-            this.Column15.DataPropertyName = "FinishDate";
-            this.Column15.FilteringEnabled = false;
-            this.Column15.HeaderText = "结束时间";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            this.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "BillID";
-            this.Column2.FilteringEnabled = false;
-            this.Column2.HeaderText = "单据号码";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colErrCode
-            // 
-            this.colErrCode.DataPropertyName = "CraneErrCode";
-            this.colErrCode.FilteringEnabled = false;
-            this.colErrCode.HeaderText = "错误代码";
-            this.colErrCode.Name = "colErrCode";
-            this.colErrCode.ReadOnly = true;
-            this.colErrCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colErrDesc
-            // 
-            this.colErrDesc.DataPropertyName = "CraneErrDesc";
-            this.colErrDesc.FilteringEnabled = false;
-            this.colErrDesc.HeaderText = "错误描述";
-            this.colErrDesc.Name = "colErrDesc";
-            this.colErrDesc.ReadOnly = true;
-            this.colErrDesc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colTaskType
-            // 
-            this.colTaskType.DataPropertyName = "TaskType";
-            this.colTaskType.FilteringEnabled = false;
-            this.colTaskType.HeaderText = "类型编号";
-            this.colTaskType.Name = "colTaskType";
-            this.colTaskType.ReadOnly = true;
-            // 
             // frmMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 750);
+            this.ClientSize = new System.Drawing.Size(1284, 742);
             this.ControlBox = false;
             this.Controls.Add(this.pnlMain);
             this.Name = "frmMonitor";

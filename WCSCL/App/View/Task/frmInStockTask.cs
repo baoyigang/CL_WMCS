@@ -51,6 +51,7 @@ namespace App.View.Task
         private void cmbStation_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindAisleNo();
+            this.txtBarcode.Focus();
         }
         private void BindAisleNo()
         {
@@ -79,6 +80,8 @@ namespace App.View.Task
             this.cbColumn.DataSource = dt.DefaultView;
             this.cbColumn.ValueMember = "CellColumn";
             this.cbColumn.DisplayMember = "CellColumn";
+
+            this.txtBarcode.Focus();
         }
 
         private void cbColumn_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,6 +101,7 @@ namespace App.View.Task
             this.cbHeight.DataSource = dv;
             this.cbHeight.ValueMember = "CellRow";
             this.cbHeight.DisplayMember = "CellRow";
+            this.txtBarcode.Focus();
         }
 
 
@@ -115,11 +119,19 @@ namespace App.View.Task
         {
             if (dtSource == null || dtSource.Rows.Count == 0)
             {
-                MessageBox.Show("熔次卷号不能为空,请扫码或输入！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MCP.Logger.Info("熔次卷号不能为空,请扫码或输入！");
                 this.txtBarcode.Focus();
                 return;
             }
-            
+
+            int count = bll.GetRowCount("WCS_Task", string.Format("TaskType='11' and State=1 and AreaCode='{0}'",this.AreaCode));
+             if (count > 0)
+             {
+                 MCP.Logger.Info("已经存在一个入库任务为请求状态，请稍后再执行此动作！");
+                 return;
+             }
+
+
             DataTable dt;
             DataParameter[] param;
 
@@ -132,6 +144,18 @@ namespace App.View.Task
             for (int i = 0; i < dtSource.Rows.Count; i++)
             {
                 strTaskNo += "'" + dtSource.Rows[i]["TaskNo"] + "'";
+                string BarCode = dtSource.Rows[i]["BarCode"].ToString();
+
+                for (int j = i + 1; j < dtSource.Rows.Count; j++)
+                {
+                    if (BarCode.ToLower() == dtSource.Rows[j]["BarCode"].ToString().ToLower())
+                    {
+                        MCP.Logger.Info("熔次卷号重复不能入库，请检查后重新执行！");
+                        return;
+                    }
+
+                }
+
                 if (i < dtSource.Rows.Count - 1)
                     strTaskNo += ",";
 
@@ -260,6 +284,7 @@ namespace App.View.Task
             this.cbRow.DataSource = dt.DefaultView;
             this.cbRow.ValueMember = "shelfcode";
             this.cbRow.DisplayMember = "shelfcode";
+            this.txtBarcode.Focus();
         }
 
         private void btnDeleteRow_Click(object sender, EventArgs e)
@@ -272,6 +297,7 @@ namespace App.View.Task
                 if (drs.Length > 0)
                     dtSource.Rows.Remove(drs[0]);
             }
+            this.txtBarcode.Focus();
         }
 
         private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
@@ -288,12 +314,42 @@ namespace App.View.Task
                 }
                 else
                 {
-                    MCP.Logger.Error("此熔次卷号 " + this.txtBarcode.Text.Trim() + " 不存在，或已经扫描入库！");
+                    int count = bll.GetRowCount("CMD_Cell", string.Format("BarCode='{0}'", this.txtBarcode.Text.Trim()));
+                    if (count > 0)
+                    {
+                        MCP.Logger.Error("此熔次卷号 " + this.txtBarcode.Text.Trim() + "已经入库完成！");
+                    }
+                    else
+                    {
+                        count = bll.GetRowCount("WCS_Task", string.Format("BarCode='{0}' and State>0 and State<7", this.txtBarcode.Text.Trim()));
+                        if (count > 0)
+                        {
+                            MCP.Logger.Error("此熔次卷号 " + this.txtBarcode.Text.Trim() + " 已经扫描，正在执行中!");
+                        }
+                        else
+                        {
+                            MCP.Logger.Error("此熔次卷号 " + this.txtBarcode.Text.Trim() + " 还未产生入库任务，请查询后再入库！");
+                        }
+                    }
+
+
+
+                   
                     this.txtBarcode.Text = "";
                 }
  
             }
 
+        }
+
+        private void cbHeight_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.txtBarcode.Focus();
+        }
+
+        private void dgvMain_Click(object sender, EventArgs e)
+        {
+            this.txtBarcode.Focus();
         }       
     }
 }

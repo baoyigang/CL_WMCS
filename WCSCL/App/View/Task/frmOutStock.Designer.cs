@@ -46,18 +46,20 @@
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemState = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.colTaskNo = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column1 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.colState = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column8 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.ColBarCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColBarCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column3 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.colAsisID = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column6 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column7 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column3 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column4 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column14 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column15 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
@@ -119,9 +121,10 @@
             this.colState,
             this.Column8,
             this.ColBarCode,
+            this.Column3,
+            this.colAsisID,
             this.Column6,
             this.Column7,
-            this.Column3,
             this.Column4,
             this.Column14,
             this.Column15,
@@ -241,39 +244,47 @@
             // ToolStripMenuItemState
             // 
             this.ToolStripMenuItemState.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem8,
             this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
+            this.ToolStripMenuItem3,
             this.toolStripMenuItem4,
             this.toolStripMenuItem5});
             this.ToolStripMenuItemState.Name = "ToolStripMenuItemState";
             this.ToolStripMenuItemState.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItemState.Text = "状态切换";
             // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem8.Text = "暂停";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem2.Text = "等待";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
-            // toolStripMenuItem3
+            // ToolStripMenuItem3
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(100, 22);
-            this.toolStripMenuItem3.Text = "执行";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.ToolStripMenuItem3.Name = "ToolStripMenuItem3";
+            this.ToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem3.Text = "执行";
+            this.ToolStripMenuItem3.Click += new System.EventHandler(this.ToolStripMenuItem3_Click_1);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem4.Text = "完成";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem5.Text = "取消";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
@@ -317,9 +328,28 @@
             // ColBarCode
             // 
             this.ColBarCode.DataPropertyName = "BarCode";
+            this.ColBarCode.FilteringEnabled = false;
             this.ColBarCode.HeaderText = "熔次卷号";
             this.ColBarCode.Name = "ColBarCode";
             this.ColBarCode.ReadOnly = true;
+            this.ColBarCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "CellCode";
+            this.Column3.FilteringEnabled = false;
+            this.Column3.HeaderText = "货位编号";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colAsisID
+            // 
+            this.colAsisID.DataPropertyName = "AisleNo";
+            this.colAsisID.FilteringEnabled = false;
+            this.colAsisID.HeaderText = "巷道号";
+            this.colAsisID.Name = "colAsisID";
+            this.colAsisID.ReadOnly = true;
             // 
             // Column6
             // 
@@ -339,15 +369,6 @@
             this.Column7.ReadOnly = true;
             this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column7.Width = 120;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "CellCode";
-            this.Column3.FilteringEnabled = false;
-            this.Column3.HeaderText = "货位编号";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Column4
             // 
@@ -461,17 +482,19 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemState;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem3;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colTaskNo;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column1;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colState;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColBarCode;
+        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn ColBarCode;
+        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column3;
+        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colAsisID;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column6;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column7;
-        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column3;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column4;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column14;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column15;

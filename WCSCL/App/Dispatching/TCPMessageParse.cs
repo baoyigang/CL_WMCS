@@ -14,20 +14,31 @@ namespace App.Dispatching
 
             try
             {
-                string[] msgs = msg.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-                if (msgs.Length < 4)
-                {
-                    msgs = new string[4];
-                    msgs[0] = "";
-                    msgs[1] = "";
-                    msgs[2] = "";
-                    msgs[3] = "";
-                }
+                
+                string Comd = "";
+                string[] Rows = msg.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                string Comd = msgs[0];
-                dictionary.Add("BillNo", msgs[1]);
-                dictionary.Add("Result", msgs[2]);
-                dictionary.Add("MSG", msgs[3]);
+                for (int i = 0; i < Rows.Length; i++)
+                {
+
+                    string[] msgs = Rows[i].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                    if (msgs.Length < 4)
+                    {
+                        msgs = new string[4];
+                        msgs[0] = "";
+                        msgs[1] = "";
+                        msgs[2] = "";
+                        msgs[3] = "";
+                    }
+
+                    Comd = msgs[0];
+                    dictionary.Add("BillNo" + i.ToString(), msgs[1]);
+                    dictionary.Add("Result" + i.ToString(), msgs[2]);
+                    dictionary.Add("MSG" + i.ToString(), msgs[3]);
+
+
+                }
+
                 result = new Message(true, msg, Comd, dictionary);
             }
             catch

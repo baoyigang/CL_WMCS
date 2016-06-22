@@ -192,6 +192,14 @@ public partial class WebUI_InStock_InStockEdit : BasePage
 
             }
         }
+
+        DataRow[] drExists = dt.Select("", "RowID");
+        for (int i = 0; i < drExists.Length; i++)
+        {
+            drExists[i]["RowID"] = i + 1;
+        }
+
+
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         ViewState[FormID + "_Edit_" + dgViewSub1.ID] = dt;

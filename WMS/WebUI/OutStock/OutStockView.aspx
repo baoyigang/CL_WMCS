@@ -146,7 +146,7 @@
                 </table>
                  <div id="Sub-container" style="overflow: auto; width: 100%; height: 280px" >
                     <asp:GridView ID="dgViewSub1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin"
-                        AllowPaging="True" Width="100%" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
+                        AllowPaging="True" Width="1400px" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
                         <Columns>
                             
 
@@ -158,14 +158,23 @@
                                 <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
+                             <asp:BoundField DataField="Spec" HeaderText="规格" SortExpression="Spec">
+                                <ItemStyle HorizontalAlign="Left" Width="20%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Barcode" HeaderText="熔次卷号" SortExpression="Barcode">
+                                <ItemStyle HorizontalAlign="Left" Width="12%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Weight" HeaderText="重量" SortExpression="Weight">
+                                <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="ProductName" HeaderText="品名" SortExpression="ProductName">
                                 <ItemStyle HorizontalAlign="Left" Width="12%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Spec" HeaderText="规格" SortExpression="Spec">
-                                <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
+                          
                             <asp:BoundField DataField="Propertity" HeaderText="牌号状态" SortExpression="Propertity">
                                 <ItemStyle HorizontalAlign="Left" Width="8%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
@@ -186,14 +195,7 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Barcode" HeaderText="熔次卷号" SortExpression="Barcode">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="Weight" HeaderText="重量" SortExpression="Weight">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
+                            
                             <asp:BoundField DataField="Memo" HeaderText="备注" SortExpression="Memo">
                                 <ItemStyle HorizontalAlign="Left" Width="18%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
@@ -205,10 +207,16 @@
                 <table  class=" maintable" style="width:100%; height:25px" > 
                     <tr>
                         <td align="center"  style="width:7%;" class="smalltitle">
-                            数量统计
+                            数量
                         </td>
                         <td style="width:9%">
                             &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
+                        </td>
+                         <td align="center"  style="width:7%;" class="smalltitle">
+                            重量
+                        </td>
+                        <td style="width:9%">
+                            &nbsp;<asp:TextBox ID="txtTotalWeight" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
                         </td>
                        
                         <td align="right">

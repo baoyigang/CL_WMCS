@@ -58,7 +58,7 @@
             this.Column1 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.colState = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column9 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBarcode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column6 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column7 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.Column8 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
@@ -362,9 +362,11 @@
             // colBarcode
             // 
             this.colBarcode.DataPropertyName = "BarCode";
+            this.colBarcode.FilteringEnabled = false;
             this.colBarcode.HeaderText = "熔次卷号";
             this.colBarcode.Name = "colBarcode";
             this.colBarcode.ReadOnly = true;
+            this.colBarcode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Column6
             // 
@@ -524,7 +526,7 @@
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column1;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colState;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
+        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colBarcode;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column6;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column7;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column8;

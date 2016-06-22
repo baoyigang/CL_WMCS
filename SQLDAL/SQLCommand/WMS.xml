@@ -107,7 +107,7 @@
 
   <Command ID="SelectProductQty">
     <CommandString>
-      select ProductCode,(InstockQty-isnull((select SUM(UnStockQty) from View_ProductQty  where billid!=@BillID and  ProductCode=tmp.ProductCode ),0)) as StockQty from View_ProductQTy tmp
+      select ProductCode,(InstockQty-isnull((select SUM(UnStockQty) from View_ProductQty  where billid!=@BillID and  ProductCode=tmp.ProductCode and Barcode=tmp.Barcode),0)) as StockQty from View_ProductQTy tmp
       where ProductCode=@ProductCode and {0}
     </CommandString>
   </Command>
@@ -198,37 +198,20 @@
     <CommandString>
       select AreaCode,AreaName,ShelfCode,ShelfName,CellCode,CellName,CellRow,CellColumn,IsLock,
       PalletBarcode,BarCode,ProductCode,ProductName,CategoryCode, CategoryName,Unit,
-      BillNo,Quantity,InDate,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName,Weight
+      BillNo,Quantity,InDate,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName,WeightSum as Weight
       from View_CMD_CELL_ALL Product
       where InDate is not null and {0}
-      union all
-      select Main.AreaCode,AreaName,'' as ShelfCode,'' as ShelfName,'' as CellCode,'' as CellName,0 as CellRow,0 as CellColumn ,
-      islock,'' as PalletBarcode,product.BarCode,product.ProductCode,ProductName,main.CategoryCode, CategoryName,Unit,
-      BillNo,1 as Quantity,InDate ,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName,product.Weight
-      from WMS_NotShelfList product
-      left join CMD_Area on product.AreaCode=CMD_Area.AreaCode
-      left join CMD_Product main on Main.ProductCode=Product.ProductCode
-      left join CMD_ProductCategory Categroy on main.CategoryCode=Categroy.CategoryCode
-      where {0}
-
     </CommandString>
   </Command>
 
   <Command ID="SelectProductTotalQuery">
     <CommandString>
       select  AreaName, ProductCode,ProductName,CategoryCode, CategoryName,Unit,SUM(Qty) as Qty,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName,SUM(weight) as weight from (
-      select AreaName, ProductCode,ProductName,CategoryCode, CategoryName,Unit,COUNT(1) as Qty,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName,SUM(Weight) as weight
+      select AreaName, ProductCode,ProductName,CategoryCode, CategoryName,Unit,COUNT(1) as Qty,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName,SUM(WeightSum) as weight
       from View_CMD_CELL_ALL Product
       where  InDate is not null and {0}
       group by AreaName,ProductCode,ProductName,CategoryCode, CategoryName,Unit,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName
-      union all
-      select AreaName, Product.ProductCode,ProductName,main.CategoryCode, CategoryName,Unit,COUNT(1) as Qty ,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName,SUM(product.Weight) as weight
-      from WMS_NotShelfList Product
-      left join CMD_Area on Product.AreaCode=CMD_Area.AreaCode
-      left join CMD_Product Main on Main.ProductCode=Product.ProductCode
-      left join CMD_ProductCategory Categroy on main.CategoryCode=Categroy.CategoryCode
-      where {0}
-      group by AreaName,Product.ProductCode,ProductName,main.CategoryCode, CategoryName,Unit,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName)
+      )
       tmp
       group by AreaName,ProductCode,ProductName,CategoryCode, CategoryName,Unit,ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName
     </CommandString>
@@ -236,7 +219,7 @@
 
   <Command ID="SelectTaskQuery">
     <CommandString>
-      SELECT TaskNo,BillID,task.Barcode,task.Quantity, task.Weight,TaskDate,FinishDate,BillType.BillTypeName,ProductName, ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName,
+      SELECT TaskNo,BillID,task.Barcode,task.Quantity,  CAST( (case when  task.Weight='' then '1' else task.Weight end) as numeric(18,2)) as Weight,TaskDate,FinishDate,BillType.BillTypeName,ProductName, ModelNo, Spec, Propertity, ValidPeriod,PartNo, StandardNo, ProductNo, ProductEName,
       (case when Task.TaskType in('11','12','14') then TASK.CellCode when Task.TaskType in('13') then Task.ToCellCode end) FromStation,StateDesc,CraneName
       FROM WCS_TASK  Task
       left join CMD_Crane Crane on Task.CraneNo=crane.CraneNo
