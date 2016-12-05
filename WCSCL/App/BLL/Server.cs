@@ -62,5 +62,6 @@ namespace BLL
             confg.Release();
             return AreaCode;
         }
+       
     }
 }

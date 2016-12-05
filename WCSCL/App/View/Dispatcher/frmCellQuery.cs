@@ -30,10 +30,14 @@ namespace App.View.Dispatcher
         private int left = 5;
         string CellCode = "";
         private bool IsWheel = true;
+        private string CellEdit = "0";
 
         public frmCellQuery()
         {
             InitializeComponent();
+
+            CellEdit = GetCellEdit();
+
             //设置双缓冲
             SetStyle(ControlStyles.DoubleBuffer |
                 ControlStyles.UserPaint |
@@ -47,7 +51,7 @@ namespace App.View.Dispatcher
             pnlChart.Dock = DockStyle.Fill;
 
             pnlChart.MouseWheel += new MouseEventHandler(pnlChart_MouseWheel);
-
+           
             this.PColor.Visible = false;
         }
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -335,11 +339,22 @@ namespace App.View.Dispatcher
                 }
                 else if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
-                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+                    if (CellEdit == "1")
+                        contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
                 }
             }
 
         }
+
+        private string GetCellEdit()
+        {
+            MCP.Config.Configuration confg = new MCP.Config.Configuration();
+            confg.Load("Config.xml");
+            string AreaCode = confg.Attributes["ShowCellEdit"];
+            confg.Release();
+            return AreaCode;
+        }
+
         private void pnlChart_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int i = e.Y < top[1] ? 0 : 1;

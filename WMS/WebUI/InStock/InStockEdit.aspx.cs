@@ -344,6 +344,11 @@ public partial class WebUI_InStock_InStockEdit : BasePage
             }
            
         }
+        DataRow[] drs = dt.Select(string.Format("BillID<>'{0}'", this.txtID.Text));
+        for (int i = 0; i < drs.Length; i++)
+        {
+            drs[i]["BillID"] = this.txtID.Text.Trim();
+        }
 
 
 

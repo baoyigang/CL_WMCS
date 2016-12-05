@@ -131,11 +131,21 @@ namespace App.Dispatching.Process
                                 }
                             }
 
+
+
                             string[] str = new string[3];
                             str[0] = "6";
                             string strValue = "";
                             if (TaskType == "14" && strState == "4")
                             {
+                                if (Column == 1 && Height == 1)
+                                {
+                                    MoveCrane(Row);
+                                    Logger.Info(stateItem.ItemName + "完成标志,盘库出库完成，任务号:" + TaskNo);
+
+                                }
+
+
                                 while ((strValue = FormDialog.ShowDialog(str, dt)) != "")
                                 {
                                     if (strValue != "1")
@@ -149,27 +159,15 @@ namespace App.Dispatching.Process
                                     break;
                                 }
                             }
+
+
                             //清除堆垛机任务号
 
                             if (Column == 1 && Height == 1)
                             {
-                                int[] cellAddr = new int[9];
-                                cellAddr[0] = 0;
-                                cellAddr[1] = 0;
-                                cellAddr[2] = 0;
-
-                                cellAddr[3] = 1;
-                                cellAddr[4] = 1;
-                                cellAddr[5] = Row * 2 - 1;
-                                cellAddr[6] = 1;
-                                cellAddr[7] = 2;
-                                cellAddr[8] = Row * 2 - 1;
-                                Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
-                                Context.ProcessDispatcher.WriteToService("CranePLC1", "TaskAddress", cellAddr);
-                                Context.ProcessDispatcher.WriteToService("CranePLC1", "TaskNo", taskNo);
-                                Context.ProcessDispatcher.WriteToService("CranePLC1", "WriteFinished", 2);
+                                MoveCrane(Row);
                                 Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
-                                return;
+                                
                             }
                             else
                             {
@@ -177,8 +175,6 @@ namespace App.Dispatching.Process
                                 WriteToService(stateItem.Name, "TaskNo", taskNo);
                                 Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
                             }
-                           
-                           
                         }
                     }
                     catch (Exception ex1)
@@ -205,6 +201,25 @@ namespace App.Dispatching.Process
             
             
             return;
+        }
+        private void MoveCrane(int Row)
+        {
+            int[] cellAddr = new int[9];
+            cellAddr[0] = 0;
+            cellAddr[1] = 0;
+            cellAddr[2] = 0;
+
+            cellAddr[3] = 1;
+            cellAddr[4] = 1;
+            cellAddr[5] = Row * 2 - 1;
+            cellAddr[6] = 1;
+            cellAddr[7] = 2;
+            cellAddr[8] = Row * 2 - 1;
+            sbyte[] taskNo = new sbyte[10];
+            Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
+            Context.ProcessDispatcher.WriteToService("CranePLC1", "TaskAddress", cellAddr);
+            Context.ProcessDispatcher.WriteToService("CranePLC1", "TaskNo", taskNo);
+            Context.ProcessDispatcher.WriteToService("CranePLC1", "WriteFinished", 2);
         }
         /// <summary>
         /// 

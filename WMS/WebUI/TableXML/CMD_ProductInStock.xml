@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TABLE name="CMD_Product" ChineseName="产品信息" PrimaryKey="BarCode" OrderBy="CategoryName,BarCode" ViewName="VCMD_ProductInstock">
+<TABLE name="CMD_Product" ChineseName="产品信息" PrimaryKey="BarCode" OrderBy="CellCode" ViewName="VCMD_ProductInstock">
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="3">
     <FieldName>CategoryName</FieldName>
     <FieldTitle>产品类型</FieldTitle>
@@ -18,6 +18,11 @@
  <FIELD ShowInFieldQuery="1" ShowQueryIndex="2">
     <FieldName>BarCode</FieldName>
     <FieldTitle>熔次卷号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+<FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
+    <FieldName>ShelfCode</FieldName>
+    <FieldTitle>货架</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
  <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
@@ -75,6 +80,11 @@
   <FIELD ShowInFieldQuery="0" ShowQueryIndex="15">
     <FieldName>CellCode</FieldName>
     <FieldTitle>货位</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="16">
+    <FieldName>CellColumn</FieldName>
+    <FieldTitle>列</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
   

@@ -357,6 +357,13 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             }
 
         }
+
+        DataRow[] drs = dt.Select(string.Format("BillID<>'{0}'", this.txtID.Text));
+        for (int i = 0; i < drs.Length; i++)
+        {
+            drs[i]["BillID"] = this.txtID.Text.Trim();
+        }
+
         if (strID == "") //新增
         {
             int Count = bll.GetRowCount("WMS_BillMaster", string.Format("BillID='{0}'", this.txtID.Text.Trim()));
