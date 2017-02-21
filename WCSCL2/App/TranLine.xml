@@ -1,0 +1,46 @@
+﻿<?xml version='1.0' ?>
+<Config>
+  <OPCServer ConnectionString="OPC.SimaticNET">
+    <!--<OPCGroup GroupName="PLCGroup" GroupString="S7:[@LOCALSERVER]" UpdateRate="350">-->
+    <OPCGroup GroupName="PLCGroup" GroupString="S7:[PLCTranLine]" UpdateRate="350">
+      <!--读取信号-->
+      <OPCItem ItemName="ReadBarcode" ClientHandler="1" OPCItemName="DB1,X4.0,1"  ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="StockRequest" ClientHandler="2" OPCItemName="DB1,X5.0,1" ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="OutFinish" ClientHandler="3" OPCItemName="DB1,X6.0,1" ItemType="READ" IsActive="true"/>
+
+
+      <OPCItem ItemName="InFinish1" ClientHandler="21" OPCItemName="DB1,X1.0,1" ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="InTaskNo1" ClientHandler="22" OPCItemName="DB1,CHAR220,20" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="InFinish2" ClientHandler="23" OPCItemName="DB1,X2.0,1" ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="InTaskNo2" ClientHandler="24" OPCItemName="DB1,CHAR240,20" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="InFinish3" ClientHandler="25" OPCItemName="DB1,X3.0,1" ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="InTaskNo3" ClientHandler="26" OPCItemName="DB1,CHAR260,20" ItemType="READ" IsActive="false"/>
+
+      <OPCItem ItemName="TranLineInfo1" ClientHandler="31" OPCItemName="DB1,INT102,1"  ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="TranLineTaskNo1" ClientHandler="32" OPCItemName="DB1,CHAR280,20"  ItemType="READ" IsActive="false"/>
+
+      <OPCItem ItemName="TranLineInfo2" ClientHandler="33" OPCItemName="DB1,INT104,1"  ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="TranLineTaskNo2" ClientHandler="34" OPCItemName="DB1,CHAR300,20"  ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="TranLineInfo3" ClientHandler="35" OPCItemName="DB1,INT106,1"  ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="TranLineTaskNo3" ClientHandler="36" OPCItemName="DB1,CHAR320,20"  ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="TranLineInfo4" ClientHandler="37" OPCItemName="DB1,INT108,1"  ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="TranLineTaskNo4" ClientHandler="38" OPCItemName="DB1,CHAR340,20"  ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="TranLineInfo5" ClientHandler="39" OPCItemName="DB1,INT110,1"  ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="TranLineTaskNo5" ClientHandler="40" OPCItemName="DB1,CHAR360,20"  ItemType="READ" IsActive="false"/>
+      
+      <!--写入信号-->
+      <OPCItem ItemName="OutTaskNo1" ClientHandler="101" OPCItemName="DB1,CHAR720,20"  ItemType="WRITE"/>
+      <OPCItem ItemName="OutFinish1" ClientHandler="102" OPCItemName="DB1,INT160,1" ItemType="WRITE"/>
+
+      <OPCItem ItemName="OutTaskNo2" ClientHandler="103" OPCItemName="DB1,CHAR740,20"  ItemType="WRITE"/>
+      <OPCItem ItemName="OutFinish2" ClientHandler="104" OPCItemName="DB1,INT162,1" ItemType="WRITE"/>
+
+      <OPCItem ItemName="OutTaskNo3" ClientHandler="105" OPCItemName="DB1,CHAR760,20"  ItemType="WRITE"/>
+      <OPCItem ItemName="OutFinish3" ClientHandler="106" OPCItemName="DB1,INT164,1" ItemType="WRITE"/>
+
+      <OPCItem ItemName="SlideNum" ClientHandler="111" OPCItemName="DB1,INT100,1"  ItemType="WRITE"/>
+      <OPCItem ItemName="BarCode" ClientHandler="112" OPCItemName="DB1,CHAR200,20" ItemType="WRITE" />
+
+    </OPCGroup>
+  </OPCServer>
+</Config>

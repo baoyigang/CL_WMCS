@@ -52,7 +52,7 @@
   <!--货架信息-->
   <Command ID="SelectStation">
     <CommandString>
-      SELECT distinct StationNo FROM CMD_Shelf ORDER BY StationNo
+      SELECT distinct StationNo FROM CMD_Shelf where {0} ORDER BY StationNo
     </CommandString>
   </Command>
   <Command ID="SelectShelf">
@@ -429,4 +429,21 @@
     </CommandString>
   </Command>
 
+  <Command ID="SelectCraneAisleCell">
+    <CommandString>
+      select COUNT(*) from CMD_Shelf
+      left join CMD_Cell on CMD_Cell.ShelfCode=CMD_Shelf.ShelfCode
+      where CMD_Shelf.AisleNo={0} and Cmd_Shelf.AreaCode='002' and CMD_Cell.PalletBarcode='' and Barcode=''
+    </CommandString>
+  </Command>
+  <Command ID="SelectAllAisleCell">
+    <CommandString>
+      select CMD_Shelf.AisleNo,COUNT(*) qty from CMD_Shelf
+      left join CMD_Cell on CMD_Cell.ShelfCode=CMD_Shelf.ShelfCode
+      where  Cmd_Shelf.AreaCode='002' and CMD_Cell.PalletBarcode='' and Barcode='' and CMD_Shelf.AisleNo!='01'
+      group by CMD_Shelf.AisleNo
+      order by qty desc
+    </CommandString>
+  </Command>
+  
 </SqlCommand>
