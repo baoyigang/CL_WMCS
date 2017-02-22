@@ -55,7 +55,7 @@ namespace App.View.Task
         }
         private void BindAisleNo()
         {
-            if (this.cmbStationNo.Text=="01")
+            if (this.cmbStationNo.SelectedIndex==0)
             {
                 CraneNo = "02";
             }
@@ -238,13 +238,13 @@ namespace App.View.Task
             bll.ExecNonQueryTran("WCS.Sp_ExecuteInStockTask", param);
             sbyte[] taskNo = new sbyte[20];
             Util.ConvertStringChar.stringToBytes(strTaskNo, 20).CopyTo(taskNo, 0);
-            if (this.cmbStationNo.Text!="01")
+            if (this.cmbStationNo.SelectedIndex != 0)
             {
-                Context.ProcessDispatcher.WriteToService("TranLine", "BarCode", taskNo);
+                Context.ProcessDispatcher.WriteToService("TranLine", "TranLineInfo1", taskNo);
             }
             else
             {
-                bll.ExecNonQuery("WCS.UpdateTaskInStockRequest", new DataParameter[] { new DataParameter("@StationNo", "01"), new DataParameter("@TaskNo", taskNo) });
+                Context.ProcessDispatcher.WriteToService("TranLine", "TranLineInfo2", taskNo);
             }
 
             this.dtSource = null;

@@ -365,7 +365,12 @@
   </Command>
   <Command ID="SelcetWcsState">
     <CommandString>
-      select * from WCS_TASK where WCS_TASK.State='2'
+      select * from WCS_TASK where WCS_TASK.State='{1}' and CraneNo={0}
+    </CommandString>
+  </Command>
+  <Command ID="SelectReadTaskByTaskNo">
+    <CommandString>
+      SELECT * FROM WCS_TASK Where TaskNo=@TaskNo and (TaskType in ('12','15','14')) and State=10
     </CommandString>
   </Command>
 </SqlCommand>

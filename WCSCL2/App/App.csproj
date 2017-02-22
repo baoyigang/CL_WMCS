@@ -94,6 +94,7 @@
     <Compile Include="Crane.cs" />
     <Compile Include="Dispatching\Process\CraneProcess.cs" />
     <Compile Include="Dispatching\Process\ErpProcess.cs" />
+    <Compile Include="Dispatching\Process\OutStockFinishProcess.cs" />
     <Compile Include="Dispatching\Process\StockRequestProcess.cs" />
     <Compile Include="Dispatching\TCPMessageParse.cs" />
     <Compile Include="Main.cs">
@@ -385,6 +386,7 @@
     <Content Include="Resources\up.png" />
     <Content Include="TranLine.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="ViewConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

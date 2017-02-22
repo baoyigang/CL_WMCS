@@ -29,13 +29,13 @@ namespace App.Dispatching.Process
                    
                     int SlideNum = 2;
                     string StationNo = "02";
-                    DataParameter[] param = new DataParameter[] { new DataParameter("{0}", string.Format("(TaskNo='{0}' and ((WCS_TASK.TaskType in  ('11','16') and  WCS_TASK.State='1') or (WCS_TASK.TaskType='14' and  WCS_TASK.State='8'))) and AreaCode='002'", taskNo)) };
+                    DataParameter[] param = new DataParameter[] { new DataParameter("{0}", string.Format("(TaskNo='{0}' and ((WCS_TASK.TaskType in  ('11','16') and  WCS_TASK.State='1') or (WCS_TASK.TaskType='14' and  WCS_TASK.State='11'))) and AreaCode='002'", taskNo)) };
                     DataTable dt = bll.FillDataTable("WCS.SelectTask", param);
                     if (dt.Rows.Count > 0)
                     {
                         taskNo = dt.Rows[0]["TaskNo"].ToString();
                         //如果是盘点任务,因为盘点回原库位，所以按照库位指定入库站台
-                        if (dt.Rows[0]["TaskType"].ToString() == "14" && dt.Rows[0]["State"].ToString() == "8")
+                        if (dt.Rows[0]["TaskType"].ToString() == "14" && dt.Rows[0]["State"].ToString() == "11")
                         {
                             string CellCode = dt.Rows[0]["CellCode"].ToString();
                             if (CellCode.Length > 0)

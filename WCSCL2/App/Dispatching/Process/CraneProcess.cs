@@ -115,10 +115,16 @@ namespace App.Dispatching.Process
                                 TaskType = dt.Rows[0]["TaskType"].ToString();
                                 CellCode = dt.Rows[0]["CellCode"].ToString();
                                 strState = dt.Rows[0]["State"].ToString();
+
                                 if (TaskType == "12")
                                     Flag = "BatchOutStock";
                                 else if (TaskType == "14")
                                     Flag = "BatchCheckStock";
+                            }
+                            if (strState=="10")
+                            {
+                                WriteToService("TranLine", "OutTaskNo2", TaskNo);
+                                WriteToService("TranLine", "OutFinish2", 1);
                             }
                             if (dtXml.Rows.Count > 0)
                             {
@@ -144,7 +150,7 @@ namespace App.Dispatching.Process
                                         //更新货位信息
                                         bll.ExecNonQuery("WCS.UpdateErrCell", new DataParameter[] { new DataParameter("@CellCode", CellCode) });
                                     }
-                                    bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 5), new DataParameter("@TaskNo", TaskNo) });
+                                    bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 10), new DataParameter("@TaskNo", TaskNo) });
 
                                     //线程继续。
                                     break;
@@ -358,12 +364,10 @@ namespace App.Dispatching.Process
 
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
-            DataParameter[] parameter;
-            if (CraneNo!="02")
-            {
-                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState");
 
-                if (dtState.Rows.Count > 0)
+                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState",new DataParameter[]{new DataParameter("{0}",craneNo),new DataParameter("{1}",2)});
+                DataParameter[] parameter;
+                if (dtState.Rows.Count == 0)
                 {
                     parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14','15') and WCS_Task.State='0' and                                                     WCS_Task.CellCode!='' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
                 }
@@ -371,11 +375,7 @@ namespace App.Dispatching.Process
                 {
                     parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14','15') and WCS_Task.State='0' and                                                     WCS_Task.CellCode!='' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and taskNo=null", CraneNo, AreaCode)) };
                 }
-            }
-            else
-            {
-                parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14','15') and WCS_Task.State='0' and                                                     WCS_Task.CellCode!='' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
-            }
+
             DataTable dt = bll.FillDataTable("WCS.SelectOutTask", parameter);
 
             //出库
@@ -456,9 +456,17 @@ namespace App.Dispatching.Process
 
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
-            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='2') or (WCS_Task.TaskType='14' and WCS_Task.State='5')) and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!=''", CraneNo, AreaCode)) };
+            DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState", new DataParameter[] { new DataParameter("{0}", craneNo), new DataParameter("{1}", 10) });
+            DataParameter[] parameter;
+            if (dtState.Rows.Count == 0)
+            {
+                parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='2') or (WCS_Task.TaskType='14' and WCS_Task.State='5'))                  and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!=''", CraneNo, AreaCode)) };
+            }
+            else
+            {
+                parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='2') or (WCS_Task.TaskType='14' and WCS_Task.State='5'))                  and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!='' and taskNo=null", CraneNo, AreaCode)) };
+            }
             DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
-
             //入库
             if (dt.Rows.Count > 0)
             {

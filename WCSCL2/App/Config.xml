@@ -26,6 +26,10 @@
     <Process Name="StockRequestProcess" Type="App.exe, App.Dispatching.Process.StockRequestProcess">
       <Item ServiceName="TranLine" ItemName="StockRequest" />
     </Process>
+    <!--//输送线Process,到达出库口-->
+    <Process Name="OutStockFinishProcess" Type="App.exe, App.Dispatching.Process.OutStockFinishProcess">
+      <Item ServiceName="TranLine" ItemName="OutFinish" />
+    </Process>
     <!--<Process Name="ErpProcess" Type="App.exe, App.Dispatching.Process.ErpProcess">
       <Item ServiceName="ERP" ItemName="InStock" />
       <Item ServiceName="ERP" ItemName="OutStock" />
