@@ -295,7 +295,7 @@ namespace App.View
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger.Error("2号堆垛机监控故障:"+ex.Message);
             }
             finally
             {
@@ -334,7 +334,7 @@ namespace App.View
             catch (Exception ex)
             {
 
-                Logger.Error(ex.Message);
+                Logger.Error("3号堆垛机监控故障:"+ex.Message);
             }
             finally 
             {
@@ -483,7 +483,7 @@ namespace App.View
 
         private void btnClearAlarm_Click(object sender, EventArgs e)
         {
-            Context.ProcessDispatcher.WriteToService("CranePLC2", "Reset", 1);
+
         }
 
         private void btnReset_Click(object sender, EventArgs e)

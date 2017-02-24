@@ -365,7 +365,7 @@
   </Command>
   <Command ID="SelcetWcsState">
     <CommandString>
-      select * from WCS_TASK where WCS_TASK.State='{1}' and CraneNo={0}
+      select * from WCS_TASK where WCS_TASK.State='{1}' or WCS_TASK.State='{2}' and CraneNo={0}
     </CommandString>
   </Command>
   <Command ID="SelectReadTaskByTaskNo">

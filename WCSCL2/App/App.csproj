@@ -364,6 +364,7 @@
     <None Include="Resources\Barcode_32.png" />
     <Content Include="CranePLC2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="CranePLC3.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

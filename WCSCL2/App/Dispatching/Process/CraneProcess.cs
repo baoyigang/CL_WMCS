@@ -275,29 +275,30 @@ namespace App.Dispatching.Process
                 tmWorkTimer.Stop();
 
                 DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "CraneNo>'01'") });
-                for (int i = 2; i <= dt.Rows.Count+1; i++)
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     if (!dCrnStatus.ContainsKey(i))
                     {
-                        dCrnStatus[i].Status = int.Parse(dt.Rows[i - 1]["State"].ToString());
+                        dCrnStatus[i].Status = int.Parse(dt.Rows[i]["State"].ToString());
                     }
                 }
 
-                for (int i = 2; i <= 3; i++)
+                for (int j = 0; j < 2; j++)
                 {
-                    if (dCrnStatus[i].Status != 1)
+                    if (dCrnStatus[j].Status != 1)
                         continue;
-                    if (dCrnStatus[i].io_flag == 0)
+                    if (dCrnStatus[j].io_flag == 0)
                     {
-                        CraneOut(i);
+                        CraneOut(j + 2);
                     }
                     else
                     {
-                        CraneIn(i);
+                        CraneIn(j + 2);
                     }
                 }
                 
             }
+
             finally
             {
                 tmWorkTimer.Start();
@@ -365,7 +366,7 @@ namespace App.Dispatching.Process
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
 
-                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState",new DataParameter[]{new DataParameter("{0}",craneNo),new DataParameter("{1}",2)});
+                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState",new DataParameter[]{new DataParameter("{0}",craneNo),new DataParameter("{1}",2),new DataParameter("{2}",1)});
                 DataParameter[] parameter;
                 if (dtState.Rows.Count == 0)
                 {
@@ -456,16 +457,11 @@ namespace App.Dispatching.Process
 
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
-            DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState", new DataParameter[] { new DataParameter("{0}", craneNo), new DataParameter("{1}", 10) });
+           
             DataParameter[] parameter;
-            if (dtState.Rows.Count == 0)
-            {
+            
                 parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='2') or (WCS_Task.TaskType='14' and WCS_Task.State='5'))                  and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!=''", CraneNo, AreaCode)) };
-            }
-            else
-            {
-                parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='2') or (WCS_Task.TaskType='14' and WCS_Task.State='5'))                  and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!='' and taskNo=null", CraneNo, AreaCode)) };
-            }
+          
             DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
             //入库
             if (dt.Rows.Count > 0)

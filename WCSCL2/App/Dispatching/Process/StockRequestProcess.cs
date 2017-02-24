@@ -23,8 +23,8 @@ namespace App.Dispatching.Process
                 try
                 {
                     string AreaCode = "002";
-                    string taskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(WriteToService(stateItem.Name,"BarCode")));
-                    //string taskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(WriteToService(stateItem.Name, stateItem.ItemName)));
+                    string taskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(WriteToService(stateItem.Name, stateItem.ItemName)));
+                    //string taskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(WriteToService(stateItem.Name, "BarCode")));
                     sbyte[] staskNo = new sbyte[20];
                    
                     int SlideNum = 2;

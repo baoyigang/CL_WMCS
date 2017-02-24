@@ -145,7 +145,7 @@ namespace App
         }
         private DataTable GetMonitorData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "((WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('2','3')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('2','3','4','5','6'))) And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "((WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('0','3')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('0','3','4','5','6'))) And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
             return dt;
         }
 
@@ -462,11 +462,12 @@ namespace App
                     if (TaskType == "11")
                     {
                         this.ToolStripMenuItem11.Visible = true;
-                        this.ToolStripMenuItem12.Visible = false;
+                        this.ToolStripMenuItem12.Visible = true;
                         this.ToolStripMenuItem13.Visible = true;
                         this.ToolStripMenuItem14.Visible = false;
                         this.ToolStripMenuItem15.Visible = false;
                         this.ToolStripMenuItem16.Visible = false;
+                        this.ToolStripMenuItem18.Visible = false;
                     }
                     else if (TaskType == "12" || TaskType == "13")
                     {
@@ -476,6 +477,7 @@ namespace App
                         this.ToolStripMenuItem14.Visible = false;
                         this.ToolStripMenuItem15.Visible = false;
                         this.ToolStripMenuItem16.Visible = false;
+                        this.ToolStripMenuItem18.Visible = true;
                     }
                     else if (TaskType == "14")
                     {
@@ -486,6 +488,7 @@ namespace App
                         this.ToolStripMenuItem14.Visible = false;
                         this.ToolStripMenuItem15.Visible = true;
                         this.ToolStripMenuItem16.Visible = true;
+                        this.ToolStripMenuItem18.Visible = true;
                     }
                     //弹出操作菜单
                     contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
@@ -627,7 +630,10 @@ namespace App
         {
             string ItemName = ((ToolStripMenuItem)sender).Name;
             string State = ItemName.Substring(ItemName.Length - 1, 1);
-
+            if (State=="8")
+            {
+                State = "10";
+            }
             if (this.dgvMain.CurrentCell != null)
             {
                 BLL.BLLBase bll = new BLL.BLLBase();
@@ -635,7 +641,7 @@ namespace App
 
                 DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo), new DataParameter("@State", State) };
                 bll.ExecNonQueryTran("WCS.Sp_UpdateTaskState", param);
-
+                
                 //bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", State), new DataParameter("@TaskNo", TaskNo) });
 
                 ////堆垛机完成执行

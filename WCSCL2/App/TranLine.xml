@@ -4,17 +4,17 @@
     <!--<OPCGroup GroupName="PLCGroup" GroupString="S7:[@LOCALSERVER]" UpdateRate="350">-->
     <OPCGroup GroupName="PLCGroup" GroupString="S7:[PLCTranLine]" UpdateRate="350">
       <!--读取信号-->
-      <OPCItem ItemName="ReadBarcode" ClientHandler="1" OPCItemName="DB1,X4.0,1"  ItemType="READ" IsActive="true"/>
+      <!--<OPCItem ItemName="ReadBarcode" ClientHandler="1" OPCItemName="DB1,X4.0,1"  ItemType="READ" IsActive="true"/>-->
       <OPCItem ItemName="StockRequest" ClientHandler="2" OPCItemName="DB1,X5.0,1" ItemType="READ" IsActive="true"/>
       <OPCItem ItemName="OutFinish" ClientHandler="3" OPCItemName="DB1,X6.0,1" ItemType="READ" IsActive="true"/>
 
 
-      <OPCItem ItemName="InFinish1" ClientHandler="21" OPCItemName="DB1,X1.0,1" ItemType="READ" IsActive="true"/>
+      <!--<OPCItem ItemName="InFinish1" ClientHandler="21" OPCItemName="DB1,X1.0,1" ItemType="READ" IsActive="true"/>
       <OPCItem ItemName="InTaskNo1" ClientHandler="22" OPCItemName="DB1,CHAR220,20" ItemType="READ" IsActive="false"/>
       <OPCItem ItemName="InFinish2" ClientHandler="23" OPCItemName="DB1,X2.0,1" ItemType="READ" IsActive="true"/>
       <OPCItem ItemName="InTaskNo2" ClientHandler="24" OPCItemName="DB1,CHAR240,20" ItemType="READ" IsActive="false"/>
       <OPCItem ItemName="InFinish3" ClientHandler="25" OPCItemName="DB1,X3.0,1" ItemType="READ" IsActive="true"/>
-      <OPCItem ItemName="InTaskNo3" ClientHandler="26" OPCItemName="DB1,CHAR260,20" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="InTaskNo3" ClientHandler="26" OPCItemName="DB1,CHAR260,20" ItemType="READ" IsActive="false"/>-->
 
       <OPCItem ItemName="TranLineInfo1" ClientHandler="31" OPCItemName="DB1,INT102,1"  ItemType="READ" IsActive="false"/>
       <OPCItem ItemName="TranLineTaskNo1" ClientHandler="32" OPCItemName="DB1,CHAR280,20"  ItemType="READ" IsActive="false"/>

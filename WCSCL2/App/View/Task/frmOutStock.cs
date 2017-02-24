@@ -114,6 +114,11 @@ namespace App.View.Task
             UpdatedgvMainState("7");
         }
 
+        private void ToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            UpdatedgvMainState("10");
+        }      
+
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
             UpdatedgvMainState("9");
@@ -156,6 +161,8 @@ namespace App.View.Task
         private void frmOutStock_Activated(object sender, EventArgs e)
         {
             this.BindData();
-        }        
+        }
+
+         
     }
 }
