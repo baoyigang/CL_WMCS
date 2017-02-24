@@ -30,8 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.bsMain = new System.Windows.Forms.BindingSource(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlMain = new System.Windows.Forms.Panel();
             this.splitContainer_Main = new System.Windows.Forms.SplitContainer();
+            this.btnConveyor07 = new System.Windows.Forms.Button();
             this.btnConveyor06 = new System.Windows.Forms.Button();
             this.btnConveyor05 = new System.Windows.Forms.Button();
             this.btnConveyor04 = new System.Windows.Forms.Button();
@@ -88,7 +90,6 @@
             this.txtHeight3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtForkStatus3 = new System.Windows.Forms.TextBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).BeginInit();
@@ -120,6 +121,7 @@
             // 
             // splitContainer_Main.Panel1
             // 
+            this.splitContainer_Main.Panel1.Controls.Add(this.btnConveyor07);
             this.splitContainer_Main.Panel1.Controls.Add(this.btnConveyor06);
             this.splitContainer_Main.Panel1.Controls.Add(this.btnConveyor05);
             this.splitContainer_Main.Panel1.Controls.Add(this.btnConveyor04);
@@ -136,6 +138,20 @@
             this.splitContainer_Main.Size = new System.Drawing.Size(1813, 812);
             this.splitContainer_Main.SplitterDistance = 1457;
             this.splitContainer_Main.TabIndex = 0;
+            // 
+            // btnConveyor07
+            // 
+            this.btnConveyor07.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnConveyor07.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnConveyor07.ForeColor = System.Drawing.Color.Blue;
+            this.btnConveyor07.Location = new System.Drawing.Point(67, 324);
+            this.btnConveyor07.Margin = new System.Windows.Forms.Padding(2);
+            this.btnConveyor07.Name = "btnConveyor07";
+            this.btnConveyor07.Size = new System.Drawing.Size(32, 58);
+            this.btnConveyor07.TabIndex = 90;
+            this.btnConveyor07.Tag = "2";
+            this.btnConveyor07.Text = "↓";
+            this.btnConveyor07.UseVisualStyleBackColor = false;
             // 
             // btnConveyor06
             // 
@@ -224,7 +240,7 @@
             // picCrane2
             // 
             this.picCrane2.Image = global::App.Properties.Resources.Crane2;
-            this.picCrane2.Location = new System.Drawing.Point(0, 111);
+            this.picCrane2.Location = new System.Drawing.Point(0, 136);
             this.picCrane2.Margin = new System.Windows.Forms.Padding(2);
             this.picCrane2.Name = "picCrane2";
             this.picCrane2.Size = new System.Drawing.Size(57, 21);
@@ -235,7 +251,7 @@
             // picCrane1
             // 
             this.picCrane1.Image = global::App.Properties.Resources.Crane11;
-            this.picCrane1.Location = new System.Drawing.Point(0, 33);
+            this.picCrane1.Location = new System.Drawing.Point(0, 42);
             this.picCrane1.Margin = new System.Windows.Forms.Padding(2);
             this.picCrane1.Name = "picCrane1";
             this.picCrane1.Size = new System.Drawing.Size(55, 25);
@@ -922,5 +938,6 @@
         private System.Windows.Forms.Button btnConveyor03;
         private System.Windows.Forms.Button btnConveyor02;
         private System.Windows.Forms.Button btnConveyor01;
+        private System.Windows.Forms.Button btnConveyor07;
     }
 }

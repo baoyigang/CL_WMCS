@@ -131,7 +131,6 @@ namespace App.Dispatching.Process
                                 string BillNo = dtXml.Rows[0][0].ToString();
                                 if (BillNo.Trim().Length > 0)
                                 {
-
                                     string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, Flag);
                                     WriteToService("ERP", "ACK", xml);
                                     Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
