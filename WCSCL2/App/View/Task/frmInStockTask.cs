@@ -150,7 +150,7 @@ namespace App.View.Task
         {
             try
             {
-                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState", new DataParameter[] { new DataParameter("{0}", (this.cmbStationNo.SelectedIndex + 2).ToString()), new DataParameter("{1}", 10), new DataParameter("{2}", 3) });
+                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState", new DataParameter[] { new DataParameter("{0}", (this.cmbStationNo.SelectedIndex + 2).ToString()), new DataParameter("{1}", 10), new DataParameter("{2}", "(WCS_TASK.State='3' and (WCS_TASK.TaskType='12' or WCS_TASK.TaskType='14'))") });
                 if (dtState.Rows.Count == 0)
                 {
                     if (dtSource == null || dtSource.Rows.Count == 0)

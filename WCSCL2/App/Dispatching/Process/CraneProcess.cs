@@ -131,6 +131,7 @@ namespace App.Dispatching.Process
                                 string BillNo = dtXml.Rows[0][0].ToString();
                                 if (BillNo.Trim().Length > 0)
                                 {
+
                                     string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, Flag);
                                     WriteToService("ERP", "ACK", xml);
                                     Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
@@ -365,7 +366,7 @@ namespace App.Dispatching.Process
             string CraneNo = "0" + craneNo.ToString();
             //获取任务，排序优先等级、任务时间
 
-                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState",new DataParameter[]{new DataParameter("{0}",craneNo),new DataParameter("{1}",2),new DataParameter("{2}",1)});
+                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState",new DataParameter[]{new DataParameter("{0}",craneNo),new DataParameter("{1}",2),new DataParameter("{2}","WCS_TASK.State=1")});
                 DataParameter[] parameter;
                 if (dtState.Rows.Count == 0)
                 {
