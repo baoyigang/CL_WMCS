@@ -333,8 +333,8 @@ namespace App.Dispatching.Process
                 string BillID = dr["BillID"].ToString();
                 byte taskType = byte.Parse(dt.Rows[0]["TaskType"].ToString().Substring(1, 1));
 
-                string fromStation = dt.Rows[0]["FromStation"].ToString();
-                string toStation = dt.Rows[0]["ToStation"].ToString();
+                string fromStation = dt.Rows[0]["FromStation"].ToString().Substring(1);
+                string toStation = dt.Rows[0]["ToStation"].ToString().Substring(1);
                 string stationNo = dt.Rows[0]["StationNo"].ToString();
 
                 if (taskType != 3)
@@ -415,8 +415,8 @@ namespace App.Dispatching.Process
 
                 string BillID = dr["BillID"].ToString();
                 byte taskType = byte.Parse(dt.Rows[0]["TaskType"].ToString().Substring(1, 1));
-                string fromStation = dt.Rows[0]["FromStation"].ToString();
-                string toStation = dt.Rows[0]["ToStation"].ToString();
+                string fromStation = dt.Rows[0]["FromStation"].ToString().Substring(1);
+                string toStation = dt.Rows[0]["ToStation"].ToString().Substring(1);
 
                 int[] cellAddr = new int[9];
                 cellAddr[0] = 0;

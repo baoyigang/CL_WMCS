@@ -641,7 +641,7 @@ namespace App.View
             Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
             Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 0);
 
-            MCP.Logger.Info("已给堆垛机下发取消任务指令");           
+            MCP.Logger.Info("已给堆垛机下发取消任务指令");
         }
 
         private void btnClearAlarm_Click(object sender, EventArgs e)

@@ -88,10 +88,11 @@ namespace BLL
         {
             return bll.FillDataTable(commandID, parameters);
         }
-        public DataSet FillDataSet(string commandID, params object[] parameters)
+        public DataSet FillDataSet(string commandID, params DataParameter[] parameters)
         {
             return bll.FillDataSet(commandID, parameters);
         }
+
 
         /// <summary>
         /// 使用指定连接名，执行指定命令ID的查询SQL语句，并返回第一行第一列
