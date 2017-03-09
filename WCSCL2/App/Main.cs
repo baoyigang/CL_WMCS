@@ -36,7 +36,6 @@ namespace App
         {
             try
             {
-               
                 lbLog.Scrollable = true;
                 Logger.OnLog += new LogEventHandler(Logger_OnLog);
                 FormDialog.OnDialog += new DialogEventHandler(FormDialog_OnDialog);
@@ -145,7 +144,7 @@ namespace App
         }
         private DataTable GetMonitorData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "((WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('0','3')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('0','3','4','5','6'))) And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "((WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3','12')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('0','3','10','13')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('0','3','4','5','6'))) And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
             return dt;
         }
 
@@ -432,7 +431,7 @@ namespace App
         private void toolStripButton_Scan_Click(object sender, EventArgs e)
         {
             App.View.Task.frmInStockTask f = new App.View.Task.frmInStockTask();
-            f.ShowDialog();
+            ShowForm(f);
         }
 
         private void toolStripButton_UpERP_Click(object sender, EventArgs e)

@@ -34,12 +34,13 @@ namespace App.View.Task
         private void toolStripButton_Request_Click(object sender, EventArgs e)
         {
             frmInStockTask f = new frmInStockTask();
-            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                //string TaskNo = this.dgvMain.SelectedRows[0].Cells["colTaskNo"].Value.ToString();
-                //bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
-                this.BindData();
-            }
+            
+            //if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    //string TaskNo = this.dgvMain.SelectedRows[0].Cells["colTaskNo"].Value.ToString();
+            //    //bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
+            //    this.BindData();
+            //}
         }
 
         private void toolStripButton_Cancel_Click(object sender, EventArgs e)
@@ -170,5 +171,6 @@ namespace App.View.Task
         {
             this.BindData();
         }
+
     }
 }

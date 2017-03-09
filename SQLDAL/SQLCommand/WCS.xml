@@ -328,7 +328,7 @@
   </Command>
   <Command ID="updateCrane">
     <CommandString>
-      update WCS_Task set CraneNo='{0}'  Where BarCode='{1}'
+      update WCS_Task set CraneNo='{0}'  Where TaskNo={1}
     </CommandString>
   </Command>
   <Command ID="UpdateTaskInStockRequest">
@@ -371,6 +371,16 @@
   <Command ID="SelectReadTaskByTaskNo">
     <CommandString>
       SELECT * FROM WCS_TASK Where TaskNo=@TaskNo and (TaskType in ('12','15','14')) and State=10
+    </CommandString>
+  </Command>
+  <Command ID="UpdateInStockStation">
+    <CommandString>
+      update WCS_TASK set State=12 where TaskNo=@TaskNo and State=2
+    </CommandString>
+  </Command>
+  <Command ID="SelectWcsTaskByTaskNo">
+    <CommandString>
+      select * from wcs_task where TaskNo='{0}'
     </CommandString>
   </Command>
 </SqlCommand>

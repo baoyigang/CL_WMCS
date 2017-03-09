@@ -309,8 +309,8 @@ namespace App.View.Task
             cellAddr[7] = int.Parse(this.cbToHeight.Text);
             cellAddr[8] = int.Parse(this.cbToRow.Text.Substring(3, 3));
 
-            sbyte[] taskNo = new sbyte[10];
-            Util.ConvertStringChar.stringToBytes(this.txtTaskNo1.Text, 10).CopyTo(taskNo, 0);
+            int taskNo = int.Parse(this.txtTaskNo1.Text);
+            
 
             Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);            
             Context.ProcessDispatcher.WriteToService(serviceName, "TaskNo", taskNo);

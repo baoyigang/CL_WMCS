@@ -254,7 +254,7 @@
             this.picCrane1.Location = new System.Drawing.Point(0, 42);
             this.picCrane1.Margin = new System.Windows.Forms.Padding(2);
             this.picCrane1.Name = "picCrane1";
-            this.picCrane1.Size = new System.Drawing.Size(55, 25);
+            this.picCrane1.Size = new System.Drawing.Size(73, 30);
             this.picCrane1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picCrane1.TabIndex = 1;
             this.picCrane1.TabStop = false;

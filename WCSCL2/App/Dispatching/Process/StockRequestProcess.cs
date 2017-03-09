@@ -22,18 +22,20 @@ namespace App.Dispatching.Process
             {
                 try
                 {
-                    string AreaCode = "002";
-                    string taskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(WriteToService(stateItem.Name, stateItem.ItemName)));
+                    string taskNo = "";
+                    string AreaCode = BLL.Server.GetAreaCode();
+                    //string taskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(WriteToService(stateItem.Name, stateItem.ItemName)));
                     //string taskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(WriteToService(stateItem.Name, "BarCode")));
-                    sbyte[] staskNo = new sbyte[20];
                    
                     int SlideNum = 2;
                     string StationNo = "02";
-                    DataParameter[] param = new DataParameter[] { new DataParameter("{0}", string.Format("(TaskNo='{0}' and ((WCS_TASK.TaskType in  ('11','16') and  WCS_TASK.State='1') or (WCS_TASK.TaskType='14' and  WCS_TASK.State='11'))) and AreaCode='002'", taskNo)) };
+                    DataParameter[] param = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_TASK.TaskType in  ('11','16') and  WCS_TASK.State='1') or (WCS_TASK.TaskType='14' and  WCS_TASK.State='11')) and WCS_Task.AreaCode='{1}'", AreaCode)) };
                     DataTable dt = bll.FillDataTable("WCS.SelectTask", param);
                     if (dt.Rows.Count > 0)
                     {
                         taskNo = dt.Rows[0]["TaskNo"].ToString();
+                        SlideNum = int.Parse(dt.Rows[0]["AisleNo"].ToString());
+                        StationNo = dt.Rows[0]["StationNo"].ToString();
                         //如果是盘点任务,因为盘点回原库位，所以按照库位指定入库站台
                         if (dt.Rows[0]["TaskType"].ToString() == "14" && dt.Rows[0]["State"].ToString() == "11")
                         {
@@ -70,7 +72,7 @@ namespace App.Dispatching.Process
                         else
                         {
                             //判断此条码有没有在库位上存在或在途
-                            if (BarcodeIsExist(taskNo, staskNo))
+                            //if (BarcodeIsExist(taskNo, staskNo))
                                 return;
                             //判断有没有可用货位
                             //dt = bll.FillDataTable("WCS.SelectHasCell", new DataParameter[] { new DataParameter("@AreaCode", AreaCode) });
@@ -87,17 +89,20 @@ namespace App.Dispatching.Process
                     }
                     else
                     {
-                        if (BarcodeIsExist(taskNo, staskNo))
+                        //if (BarcodeIsExist(taskNo, staskNo))
                             return;
-                        //产生空周转箱入库任务
+                        //产生空托盘入库任务
                         
                     }
 
-                    Util.ConvertStringChar.stringToBytes(taskNo , 20).CopyTo(staskNo, 0);
-                    SlideNum = int.Parse(dt.Rows[0]["AisleNo"].ToString());
-                    StationNo = dt.Rows[0]["StationNo"].ToString();
-                    WriteToService("TranLine", "Barcode", staskNo);
-                    WriteToService("TranLine", "SlideNum", SlideNum);
+                    double staskNo = double.Parse(taskNo);
+                    //SlideNum = int.Parse(dt.Rows[0]["AisleNo"].ToString());
+                    //StationNo = dt.Rows[0]["StationNo"].ToString();
+                    Context.ProcessDispatcher.WriteToService("TranLine", "TaskNo", staskNo);
+                    Context.ProcessDispatcher.WriteToService("TranLine", "SlideNum", SlideNum);
+
+                    Context.ProcessDispatcher.WriteToService("TranLine", "TaskType", 1);
+                    Context.ProcessDispatcher.WriteToService("TranLine", "NewTask", 1);
 
                     //更新状态
                     param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskNo", taskNo) };
