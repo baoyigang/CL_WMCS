@@ -51,6 +51,15 @@ namespace App.Dispatching.Process
                         {
                             string TaskType = dt.Rows[0]["TaskType"].ToString();
                             string strState = dt.Rows[0]["State"].ToString();
+                            string StationNo = dt.Rows[0]["StationNo"].ToString();
+                            if (TaskType=="11")
+                            {
+                                DataParameter[] param;
+                                param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskNo", taskNo) };
+                                bll.ExecNonQuery("WCS.UpdateTaskInStockRequest", param);
+                                Logger.Info("任务号:" + taskNo + " 托盘:" + " 开始入库,到达入库口:" + StationNo);
+                            }
+
                             if (TaskType == "12" || TaskType == "15" || TaskType == "14") //出库,托盘出库,盘点
                             {
                                 DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", taskNo) };
@@ -76,8 +85,7 @@ namespace App.Dispatching.Process
                                 }
                                     //盘点入库
                                     if (TaskType=="14")
-                                    {
-                                        string StationNo = "01";
+                                    {;
                                         int SlideNum = 1;
                                         string CellCode = dt.Rows[0]["CellCode"].ToString();
                                         if (CellCode.Length > 0)

@@ -151,164 +151,167 @@ namespace App.View.Task
         {
             try
             {
-                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState", new DataParameter[] { new DataParameter("{0}", "0"+(this.cmbStationNo.SelectedIndex + 2).ToString()), new DataParameter("{1}", 10), new DataParameter("{2}", "(WCS_TASK.State='10' and (WCS_TASK.TaskType='12' or WCS_TASK.TaskType='14'))") });
+                DataTable dtState = bll.FillDataTable("WCS.SelcetWcsState", new DataParameter[] { new DataParameter("{0}", "0"+(this.cmbStationNo.SelectedIndex + 2).ToString()), new DataParameter("{1}", 10), new DataParameter("{2}", "(WCS_TASK.State='13' and (WCS_TASK.TaskType='12' or WCS_TASK.TaskType='14'))") });
                 if (dtState.Rows.Count == 0)
                 {
-                    DataTable dtState1 = bll.FillDataTable("WCS.SelcetWcsState", new DataParameter[] { new DataParameter("{0}", "0"+(this.cmbStationNo.SelectedIndex + 2).ToString()), new DataParameter("{1}", 2), new DataParameter("{2}", "(WCS_TASK.State='10')") });
+                    DataTable dtState1 = new DataTable();
+                     dtState1 = bll.FillDataTable("WCS.SelcetWcsState", new DataParameter[] { new DataParameter("{0}", "0" + (this.cmbStationNo.SelectedIndex + 2).ToString()), new DataParameter("{1}", 1), new DataParameter("{2}", "(WCS_TASK.State='10')") });
+                    
+                    
                     if (dtState1.Rows.Count == 0)
                     {
-                    if (dtSource == null || dtSource.Rows.Count == 0)
-                    {
-                        MessageBox.Show("熔次卷号不能为空,请扫码或输入！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.txtBarcode.Focus();
-                        return;
-                    }
+                        if (dtSource == null || dtSource.Rows.Count == 0)
+                        {
+                            MessageBox.Show("熔次卷号不能为空,请扫码或输入！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.txtBarcode.Focus();
+                            return;
+                        }
 
-                    DataTable dt;
-                    DataParameter[] param;
+                        DataTable dt;
+                        DataParameter[] param;
 
 
-                    param = new DataParameter[] 
+                        param = new DataParameter[] 
                     { 
                       new DataParameter("@AreaCode", AreaCode) ,
                       new DataParameter("@AisleNo",this.cmbAisleNo.Text)
                     };
-                    string strTaskNo = "";
-                    for (int i = 0; i < dtSource.Rows.Count; i++)
-                    {
-                        strTaskNo += "'" + dtSource.Rows[i]["TaskNo"] + "'";
-                        if (i < dtSource.Rows.Count - 1)
-                            strTaskNo += ",";
+                        string strTaskNo = "";
+                        for (int i = 0; i < dtSource.Rows.Count; i++)
+                        {
+                            strTaskNo += "'" + dtSource.Rows[i]["TaskNo"] + "'";
+                            if (i < dtSource.Rows.Count - 1)
+                                strTaskNo += ",";
 
-                    }
-                    bll.ExecNonQuery("WCS.updateCrane", new DataParameter[] { new DataParameter("{0}", this.CraneNo), new DataParameter("{1}", strTaskNo) });
+                        }
+                        bll.ExecNonQuery("WCS.updateCrane", new DataParameter[] { new DataParameter("{0}", this.CraneNo), new DataParameter("{1}", strTaskNo) });
 
-                    if (this.radioButton1.Checked)
-                    {
-                        dt = bll.FillDataTable("WCS.sp_GetCellByAisle", param);
-                        if (dt.Rows.Count > 0)
-                            this.txtCellCode.Text = dt.Rows[0][0].ToString();
+                        if (this.radioButton1.Checked)
+                        {
+                            dt = bll.FillDataTable("WCS.sp_GetCellByAisle", param);
+                            if (dt.Rows.Count > 0)
+                                this.txtCellCode.Text = dt.Rows[0][0].ToString();
+                            else
+                                this.txtCellCode.Text = "";
+                        }
+                        else if (this.radioButton2.Checked)
+                        {
+                            this.txtCellCode.Text = this.cbRow.Text.Substring(2, 4) + (1000 + int.Parse(this.cbColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbHeight.Text)).ToString().Substring(1, 3);
+                        }
                         else
-                            this.txtCellCode.Text = "";
-                    }
-                    else if (this.radioButton2.Checked)
-                    {
-                        this.txtCellCode.Text = this.cbRow.Text.Substring(2, 4) + (1000 + int.Parse(this.cbColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbHeight.Text)).ToString().Substring(1, 3);
-                    }
-                    else
-                    {
-                        if (dtSource.Rows.Count > 1)
                         {
-                            MCP.Logger.Info("缓存区只能处理单个熔次卷号！");
-                            return;
-                        }
-
-                        strTaskNo = dtSource.Rows[0]["TaskNo"].ToString();
-                        bll.ExecNonQuery("WCS.UpdateTaskAreaCodeByTaskNo", new DataParameter[] { new DataParameter("@AreaCode", AreaCode), new DataParameter("@TaskNo", strTaskNo) });
-                        param = new DataParameter[] { new DataParameter("@TaskNo", strTaskNo) };
-
-                        DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcessNoShelf", param);
-                        if (dtXml.Rows.Count > 0)
-                        {
-                            string BillNo = dtXml.Rows[0][0].ToString();
-                            if (BillNo.Trim().Length > 0)
+                            if (dtSource.Rows.Count > 1)
                             {
-                                string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, "BatchInStock");
-                                Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
-                                MCP.Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
+                                MCP.Logger.Info("缓存区只能处理单个熔次卷号！");
+                                return;
                             }
+
+                            strTaskNo = dtSource.Rows[0]["TaskNo"].ToString();
+                            bll.ExecNonQuery("WCS.UpdateTaskAreaCodeByTaskNo", new DataParameter[] { new DataParameter("@AreaCode", AreaCode), new DataParameter("@TaskNo", strTaskNo) });
+                            param = new DataParameter[] { new DataParameter("@TaskNo", strTaskNo) };
+
+                            DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcessNoShelf", param);
+                            if (dtXml.Rows.Count > 0)
+                            {
+                                string BillNo = dtXml.Rows[0][0].ToString();
+                                if (BillNo.Trim().Length > 0)
+                                {
+                                    string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, "BatchInStock");
+                                    Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
+                                    MCP.Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
+                                }
+                            }
+                            SetControlEmpty();
+                            this.txtBarcode.Focus();
+                            return;
+
                         }
-                        SetControlEmpty();
-                        this.txtBarcode.Focus();
-                        return;
-
-                    }
 
 
-                    //判断货位是否为空
-                    param = new DataParameter[] 
+                        //判断货位是否为空
+                        param = new DataParameter[] 
                     { 
                       new DataParameter("{0}", string.Format("CellCode='{0}' and ProductCode='' and IsActive='1' and IsLock='0' and AreaCode='{1}'", this.txtCellCode.Text,AreaCode))
                     };
-                    dt = bll.FillDataTable("CMD.SelectCell", param);
-                    if (dt.Rows.Count <= 0)
-                    {
-                        MessageBox.Show("自动获取的货位或指定的货位非空货位,请确认！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
-                    //锁定货位
+                        dt = bll.FillDataTable("CMD.SelectCell", param);
+                        if (dt.Rows.Count <= 0)
+                        {
+                            MessageBox.Show("自动获取的货位或指定的货位非空货位,请确认！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                        //锁定货位
 
 
 
-                    param = new DataParameter[] 
+                        param = new DataParameter[] 
                     {             
                         new DataParameter("@CellCode", this.txtCellCode.Text),                    
                         new DataParameter("@TaskNo", strTaskNo),
                         new DataParameter("@StationNo", this.cmbAisleNo.Text)
                     };
-       
-                    bll.ExecNonQueryTran("WCS.Sp_ExecuteInStockTask", param);
 
-                    int SlideNum = 2;
-                    string StationNo = "02";
-                    DataParameter[] paramStock = new DataParameter[] { new DataParameter("{0}", string.Format("(TaskNo={0} and ((WCS_TASK.TaskType in  ('11','16') and  WCS_TASK.State='1') or (WCS_TASK.TaskType='14' and  WCS_TASK.State='11'))) and WCS_TASK.AreaCode='{1}'", strTaskNo, AreaCode)) };
-                    DataTable dtTask = bll.FillDataTable("WCS.SelectTask", paramStock);
-                    string sTaskNo = "";
-                    if (dtTask.Rows.Count > 0)
-                    {
-                        sTaskNo = dtTask.Rows[0]["TaskNo"].ToString();
-                        SlideNum = int.Parse(dtTask.Rows[0]["AisleNo"].ToString());
-                        StationNo = dtTask.Rows[0]["StationNo"].ToString();
-    
-                    }
-                    else
-                    {
-                        //if (BarcodeIsExist(taskNo, staskNo))
-                        return;
-                        //产生空托盘入库任务
+                        bll.ExecNonQueryTran("WCS.Sp_ExecuteInStockTask", param);
 
-                    }
-                    int staskNo = int.Parse(sTaskNo);
-                    //SlideNum = int.Parse(dt.Rows[0]["AisleNo"].ToString());
-                    //StationNo = dt.Rows[0]["StationNo"].ToString(); 
-                    if (StationNo=="01")
-                    {
-                        Context.ProcessDispatcher.WriteToService("TranLine", "TaskNo", staskNo);
-                        Context.ProcessDispatcher.WriteToService("TranLine", "SlideNum", SlideNum);
+                        int SlideNum = 2;
+                        string StationNo = "02";
+                        DataParameter[] paramStock = new DataParameter[] { new DataParameter("{0}", string.Format("(TaskNo={0} and ((WCS_TASK.TaskType in  ('11','16') and  WCS_TASK.State='1') or (WCS_TASK.TaskType='14' and  WCS_TASK.State='11'))) and WCS_TASK.AreaCode='{1}'", strTaskNo, AreaCode)) };
+                        DataTable dtTask = bll.FillDataTable("WCS.SelectTask", paramStock);
+                        string sTaskNo = "";
+                        if (dtTask.Rows.Count > 0)
+                        {
+                            sTaskNo = dtTask.Rows[0]["TaskNo"].ToString();
+                            SlideNum = int.Parse(dtTask.Rows[0]["AisleNo"].ToString());
+                            StationNo = dtTask.Rows[0]["StationNo"].ToString();
 
-                        Context.ProcessDispatcher.WriteToService("TranLine", "TaskType", 1);
-                        Context.ProcessDispatcher.WriteToService("TranLine", "NewTask", 1);
-                    }
-                    else
-                    {
-                        Context.ProcessDispatcher.WriteToService("TranLine", "TaskNo1", staskNo);
-                        Context.ProcessDispatcher.WriteToService("TranLine", "SlideNum1", SlideNum);
+                        }
+                        else
+                        {
+                            //if (BarcodeIsExist(taskNo, staskNo))
+                            return;
+                            //产生空托盘入库任务
 
-                        Context.ProcessDispatcher.WriteToService("TranLine", "TaskType1", 1);
-                        Context.ProcessDispatcher.WriteToService("TranLine", "NewTask1", 1);
-                    }
-                    //param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskNo", sTaskNo) };
-                    //bll.ExecNonQuery("WCS.UpdateTaskInStockRequest", param);
-                    //string c =ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService("TranLine", "NewTaskOK")).ToString();
-                    //if (c=="1")
-                    //{
-                    //    Context.ProcessDispatcher.WriteToService("TranLine", "NewTaskOK", 0);
-                    //}
-                    //else
-                    //{
+                        }
+                        int staskNo = int.Parse(sTaskNo);
+                        //SlideNum = int.Parse(dt.Rows[0]["AisleNo"].ToString());
+                        //StationNo = dt.Rows[0]["StationNo"].ToString(); 
+                        if (StationNo == "01")
+                        {
+                            Context.ProcessDispatcher.WriteToService("TranLine", "TaskNo", staskNo);
+                            Context.ProcessDispatcher.WriteToService("TranLine", "SlideNum", SlideNum);
 
-                    //}
-                    //更新状态
+                            Context.ProcessDispatcher.WriteToService("TranLine", "TaskType", 1);
+                            Context.ProcessDispatcher.WriteToService("TranLine", "NewTask", 1);
+                        }
+                        else
+                        {
+                            Context.ProcessDispatcher.WriteToService("TranLine", "TaskNo1", staskNo);
+                            Context.ProcessDispatcher.WriteToService("TranLine", "SlideNum1", SlideNum);
 
-                    param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskNo", sTaskNo) };
-                    bll.ExecNonQuery("WCS.UpdateTaskInStockRequest", param);
-                    Logger.Info("任务号:" + sTaskNo + " 托盘:" + " 开始入库,到达入库口:" + StationNo);
+                            Context.ProcessDispatcher.WriteToService("TranLine", "TaskType1", 1);
+                            Context.ProcessDispatcher.WriteToService("TranLine", "NewTask1", 1);
+                        }
+                        //param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskNo", sTaskNo) };
+                        //bll.ExecNonQuery("WCS.UpdateTaskInStockRequest", param);
+                        //string c =ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService("TranLine", "NewTaskOK")).ToString();
+                        //if (c=="1")
+                        //{
+                        //    Context.ProcessDispatcher.WriteToService("TranLine", "NewTaskOK", 0);
+                        //}
+                        //else
+                        //{
+
+                        //}
+                        //更新状态
+
+                        //param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskNo", sTaskNo) };
+                        //bll.ExecNonQuery("WCS.UpdateTaskInStockRequest", param);
+                        //Logger.Info("任务号:" + sTaskNo + " 托盘:" + " 开始入库,到达入库口:" + StationNo);
 
 
-                    this.dtSource = null;
-                    this.bsMain.DataSource = null;
-                    SetControlEmpty();
-                    this.txtBarcode.Focus();
+                        this.dtSource = null;
+                        this.bsMain.DataSource = null;
+                        SetControlEmpty();
+                        this.txtBarcode.Focus();
 
                     }
                     else

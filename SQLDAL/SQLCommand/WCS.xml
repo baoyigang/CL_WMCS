@@ -370,7 +370,7 @@
   </Command>
   <Command ID="SelectReadTaskByTaskNo">
     <CommandString>
-      SELECT * FROM WCS_TASK Where TaskNo=@TaskNo and (TaskType in ('12','15','14')) and State=10
+      SELECT * FROM WCS_TASK Where TaskNo=@TaskNo and (TaskType in ('11','12','15','14')) and (State=10 or State=1)
     </CommandString>
   </Command>
   <Command ID="UpdateInStockStation">

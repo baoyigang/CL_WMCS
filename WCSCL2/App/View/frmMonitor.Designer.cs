@@ -90,6 +90,9 @@
             this.txtHeight3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtForkStatus3 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).BeginInit();
@@ -121,6 +124,9 @@
             // 
             // splitContainer_Main.Panel1
             // 
+            this.splitContainer_Main.Panel1.Controls.Add(this.button3);
+            this.splitContainer_Main.Panel1.Controls.Add(this.button2);
+            this.splitContainer_Main.Panel1.Controls.Add(this.button1);
             this.splitContainer_Main.Panel1.Controls.Add(this.btnConveyor07);
             this.splitContainer_Main.Panel1.Controls.Add(this.btnConveyor06);
             this.splitContainer_Main.Panel1.Controls.Add(this.btnConveyor05);
@@ -144,10 +150,10 @@
             this.btnConveyor07.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnConveyor07.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnConveyor07.ForeColor = System.Drawing.Color.Blue;
-            this.btnConveyor07.Location = new System.Drawing.Point(67, 324);
+            this.btnConveyor07.Location = new System.Drawing.Point(67, 318);
             this.btnConveyor07.Margin = new System.Windows.Forms.Padding(2);
             this.btnConveyor07.Name = "btnConveyor07";
-            this.btnConveyor07.Size = new System.Drawing.Size(32, 58);
+            this.btnConveyor07.Size = new System.Drawing.Size(32, 25);
             this.btnConveyor07.TabIndex = 90;
             this.btnConveyor07.Tag = "2";
             this.btnConveyor07.Text = "↓";
@@ -158,10 +164,10 @@
             this.btnConveyor06.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnConveyor06.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnConveyor06.ForeColor = System.Drawing.Color.Blue;
-            this.btnConveyor06.Location = new System.Drawing.Point(67, 271);
+            this.btnConveyor06.Location = new System.Drawing.Point(67, 258);
             this.btnConveyor06.Margin = new System.Windows.Forms.Padding(2);
             this.btnConveyor06.Name = "btnConveyor06";
-            this.btnConveyor06.Size = new System.Drawing.Size(32, 58);
+            this.btnConveyor06.Size = new System.Drawing.Size(32, 62);
             this.btnConveyor06.TabIndex = 89;
             this.btnConveyor06.Tag = "2";
             this.btnConveyor06.Text = "↓";
@@ -172,10 +178,10 @@
             this.btnConveyor05.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnConveyor05.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnConveyor05.ForeColor = System.Drawing.Color.Blue;
-            this.btnConveyor05.Location = new System.Drawing.Point(67, 216);
+            this.btnConveyor05.Location = new System.Drawing.Point(67, 236);
             this.btnConveyor05.Margin = new System.Windows.Forms.Padding(2);
             this.btnConveyor05.Name = "btnConveyor05";
-            this.btnConveyor05.Size = new System.Drawing.Size(32, 58);
+            this.btnConveyor05.Size = new System.Drawing.Size(32, 26);
             this.btnConveyor05.TabIndex = 88;
             this.btnConveyor05.Tag = "2";
             this.btnConveyor05.Text = "↓";
@@ -186,10 +192,10 @@
             this.btnConveyor04.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnConveyor04.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnConveyor04.ForeColor = System.Drawing.Color.Blue;
-            this.btnConveyor04.Location = new System.Drawing.Point(67, 159);
+            this.btnConveyor04.Location = new System.Drawing.Point(67, 177);
             this.btnConveyor04.Margin = new System.Windows.Forms.Padding(2);
             this.btnConveyor04.Name = "btnConveyor04";
-            this.btnConveyor04.Size = new System.Drawing.Size(32, 58);
+            this.btnConveyor04.Size = new System.Drawing.Size(32, 63);
             this.btnConveyor04.TabIndex = 87;
             this.btnConveyor04.Tag = "2";
             this.btnConveyor04.Text = "↓";
@@ -200,10 +206,10 @@
             this.btnConveyor03.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnConveyor03.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnConveyor03.ForeColor = System.Drawing.Color.Blue;
-            this.btnConveyor03.Location = new System.Drawing.Point(67, 109);
+            this.btnConveyor03.Location = new System.Drawing.Point(67, 157);
             this.btnConveyor03.Margin = new System.Windows.Forms.Padding(2);
             this.btnConveyor03.Name = "btnConveyor03";
-            this.btnConveyor03.Size = new System.Drawing.Size(32, 58);
+            this.btnConveyor03.Size = new System.Drawing.Size(32, 25);
             this.btnConveyor03.TabIndex = 86;
             this.btnConveyor03.Tag = "2";
             this.btnConveyor03.Text = "↓";
@@ -214,10 +220,10 @@
             this.btnConveyor02.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnConveyor02.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnConveyor02.ForeColor = System.Drawing.Color.Blue;
-            this.btnConveyor02.Location = new System.Drawing.Point(67, 56);
+            this.btnConveyor02.Location = new System.Drawing.Point(67, 99);
             this.btnConveyor02.Margin = new System.Windows.Forms.Padding(2);
             this.btnConveyor02.Name = "btnConveyor02";
-            this.btnConveyor02.Size = new System.Drawing.Size(32, 58);
+            this.btnConveyor02.Size = new System.Drawing.Size(32, 60);
             this.btnConveyor02.TabIndex = 85;
             this.btnConveyor02.Tag = "2";
             this.btnConveyor02.Text = "↓";
@@ -228,10 +234,10 @@
             this.btnConveyor01.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnConveyor01.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnConveyor01.ForeColor = System.Drawing.Color.Blue;
-            this.btnConveyor01.Location = new System.Drawing.Point(67, 0);
+            this.btnConveyor01.Location = new System.Drawing.Point(67, 42);
             this.btnConveyor01.Margin = new System.Windows.Forms.Padding(2);
             this.btnConveyor01.Name = "btnConveyor01";
-            this.btnConveyor01.Size = new System.Drawing.Size(32, 58);
+            this.btnConveyor01.Size = new System.Drawing.Size(32, 60);
             this.btnConveyor01.TabIndex = 84;
             this.btnConveyor01.Tag = "2";
             this.btnConveyor01.Text = "↓";
@@ -847,6 +853,45 @@
             this.txtForkStatus3.Size = new System.Drawing.Size(122, 26);
             this.txtForkStatus3.TabIndex = 25;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.Color.Blue;
+            this.button1.Location = new System.Drawing.Point(97, 157);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 25);
+            this.button1.TabIndex = 91;
+            this.button1.Tag = "2";
+            this.button1.Text = "→";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.Color.Blue;
+            this.button2.Location = new System.Drawing.Point(96, 237);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(42, 25);
+            this.button2.TabIndex = 92;
+            this.button2.Tag = "2";
+            this.button2.Text = "→";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.ForeColor = System.Drawing.Color.Blue;
+            this.button3.Location = new System.Drawing.Point(97, 318);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(41, 25);
+            this.button3.TabIndex = 93;
+            this.button3.Tag = "2";
+            this.button3.Text = "→";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
             // frmMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -939,5 +984,8 @@
         private System.Windows.Forms.Button btnConveyor02;
         private System.Windows.Forms.Button btnConveyor01;
         private System.Windows.Forms.Button btnConveyor07;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
