@@ -165,7 +165,7 @@ namespace App.View
             }
             else
             {
-                this.txtNewCellCode.Text = this.cbRow.Text.Substring(3, 3) + (1000 + int.Parse(this.cbColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbHeight.Text)).ToString().Substring(1, 3);
+                this.txtNewCellCode.Text = this.cbRow.Text.Substring(2, 4) + (1000 + int.Parse(this.cbColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbHeight.Text)).ToString().Substring(1, 3);
             }
 
             //判断货位是否空闲，且只有空托盘

@@ -146,7 +146,7 @@ namespace App.View
 
                 txt = GetTextBox("txtRow", crane.CraneNo);
                 if (txt != null)
-                    txt.Text = crane.Row.ToString();
+                    txt.Text = "1";
 
                 txt = GetTextBox("txtColumn", crane.CraneNo);
                 if (txt != null)
@@ -162,7 +162,7 @@ namespace App.View
                     else
                         P1.X=1090;// = picCar.Location.X+15;
 
-                    P1.Y = P1.Y + (int)(rowDis1 * (crane.Row - 1));
+                    P1.Y = P1.Y;
                     this.picCrane1.Location = P1;
 
                     //Point P2 = InitialP2;
@@ -171,18 +171,22 @@ namespace App.View
                 }
                 if (crane.CraneNo==3)
                 {
+                    txt = GetTextBox("txtRow", crane.CraneNo);
+                    if (txt != null)
+                        txt.Text = crane.Row.ToString();
+
                     this.picCrane2.Visible = true;
                     Point P2 = InitialP2;
                     if (crane.Column < 37)
                     {
-                        P2.X = P2.X + (int)((crane.Column - 1) * colDis2);
+                        P2.X = P2.X + (int)((crane.Column ) * colDis2);
                     }
                     else 
                     {
                         P2.X = 1090; 
                     }
 
-                    P2.Y = P2.Y + (int)(rowDis2 * (crane.Row - 1));
+                    P2.Y = P2.Y + (int)(rowDis2 * (crane.Row - 2));
                     this.picCrane2.Location = P2;
                 }
 
@@ -273,7 +277,7 @@ namespace App.View
                 string binary = Convert.ToString(255, 2).PadLeft(8, '0');
                 
                 string serviceName = "CranePLC2";
-                string plcTaskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo")));
+                string plcTaskNo = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo")).ToString();
 
                 string craneMode = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneMode")).ToString();
                 string craneFork = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneFork")).ToString();
@@ -289,7 +293,7 @@ namespace App.View
                 crane1.TaskType = int.Parse(obj[1].ToString());
                 crane1.ErrCode = int.Parse(obj[0].ToString());
                 crane1.PalletCode = "";
-                crane1.TaskNo = plcTaskNo;
+                crane1.TaskNo =  plcTaskNo ;
 
                 Cranes.CraneInfo(crane1);
             }
@@ -311,7 +315,7 @@ namespace App.View
 
                 string serviceName = "CranePLC3";
 
-                string plcTaskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo")));
+                string plcTaskNo = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo")).ToString();
 
                 string craneMode = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneMode")).ToString();
                 string craneFork = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneFork")).ToString();
@@ -334,7 +338,7 @@ namespace App.View
             catch (Exception ex)
             {
 
-                Logger.Error("3号堆垛机监控故障:"+ex.Message);
+                Logger.Error("3号堆垛机监控故障:" + ex.Message);
             }
             finally 
             {
@@ -483,7 +487,7 @@ namespace App.View
 
         private void btnClearAlarm_Click(object sender, EventArgs e)
         {
-
+            Context.ProcessDispatcher.WriteToService("CranePLC2", "Reset", 1);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
