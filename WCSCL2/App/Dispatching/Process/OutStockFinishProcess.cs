@@ -85,7 +85,7 @@ namespace App.Dispatching.Process
                                 }
                                     //盘点入库
                                     if (TaskType=="14")
-                                    {;
+                                    {
                                         int SlideNum = 1;
                                         string CellCode = dt.Rows[0]["CellCode"].ToString();
                                         if (CellCode.Length > 0)
@@ -132,6 +132,8 @@ namespace App.Dispatching.Process
                                             Context.ProcessDispatcher.WriteToService("TranLine", "NewTask1", 1);
                                             Context.ProcessDispatcher.WriteToService("TranLine", "TaskType1", 1);
                                         }
+
+                                        bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 2), new DataParameter("@TaskNo", taskNo) });
                                     }
                                 
                                 //string strValue = "";

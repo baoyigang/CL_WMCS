@@ -20,12 +20,9 @@
       <Item ServiceName="CranePLC3" ItemName="CraneTaskFinished" />
       <Item ServiceName="CranePLC2" ItemName="CraneAlarmCode"/>
       <Item ServiceName="CranePLC3" ItemName="CraneAlarmCode"/>
+
     </Process>
 
-    <!--输送线Process,入库请求-->
-    <!--<Process Name="StockRequestProcess" Type="App.exe, App.Dispatching.Process.StockRequestProcess">
-      <Item ServiceName="TranLine" ItemName="StockRequest" />
-    </Process>-->
     <!--输送线Process,到达出库口-->
     <Process Name="OutStockFinishProcess" Type="App.exe, App.Dispatching.Process.OutStockFinishProcess">
       <Item ServiceName="TranLine" ItemName="OutFinish1" />

@@ -27,10 +27,10 @@ namespace App.View.Task
         {
 
             AreaCode = BLL.Server.GetAreaCode();
-            DataTable dt = bll.FillDataTable("WCS.SelectStationNoByArea",new DataParameter("{0}","AreaCode="+this.AreaCode));
+            DataTable dt = bll.FillDataTable("WCS.SelectInStationByArea", new DataParameter("{0}", "AreaCode=" + this.AreaCode));
             this.cmbStationNo.DataSource = dt.DefaultView;
-            this.cmbStationNo.ValueMember = "StationNo";
-            this.cmbStationNo.DisplayMember = "StationNo";
+            this.cmbStationNo.ValueMember = "InStation";
+            this.cmbStationNo.DisplayMember = "InStation";
 
            
         }
@@ -67,7 +67,7 @@ namespace App.View.Task
 
             DataParameter[] param = new DataParameter[] 
             { 
-                new DataParameter("{0}", string.Format("CraneNo='{0}' and StationNo='{1}' and AreaCode={2}",CraneNo, this.cmbStationNo.Text,this.AreaCode))
+                new DataParameter("{0}", string.Format("CraneNo='{0}' and InStation='{1}' and AreaCode={2}",CraneNo, this.cmbStationNo.Text,this.AreaCode))
             };
 
             DataTable dt = bll.FillDataTable("CMD.SelectAisle", param);
@@ -79,7 +79,7 @@ namespace App.View.Task
                 try
                 {
                     object[] objRow = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService("CranePLC3", "CraneAlarmCode"));
-                    int CraneAisle = int.Parse(objRow[2].ToString());
+                    int CraneAisle = int.Parse(objRow[4].ToString());
                     DataTable dtAisleCell = bll.FillDataTable("CMD.SelectCraneAisleCell", new DataParameter("{0}", CraneAisle.ToString()));
                     if (int.Parse(dtAisleCell.Rows[0][0].ToString()) > 0)
                     {
@@ -290,23 +290,7 @@ namespace App.View.Task
                             Context.ProcessDispatcher.WriteToService("TranLine", "TaskType1", 1);
                             Context.ProcessDispatcher.WriteToService("TranLine", "NewTask1", 1);
                         }
-                        //param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskNo", sTaskNo) };
-                        //bll.ExecNonQuery("WCS.UpdateTaskInStockRequest", param);
-                        //string c =ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService("TranLine", "NewTaskOK")).ToString();
-                        //if (c=="1")
-                        //{
-                        //    Context.ProcessDispatcher.WriteToService("TranLine", "NewTaskOK", 0);
-                        //}
-                        //else
-                        //{
-
-                        //}
-                        //更新状态
-
-                        //param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskNo", sTaskNo) };
-                        //bll.ExecNonQuery("WCS.UpdateTaskInStockRequest", param);
-                        //Logger.Info("任务号:" + sTaskNo + " 托盘:" + " 开始入库,到达入库口:" + StationNo);
-
+       
 
                         this.dtSource = null;
                         this.bsMain.DataSource = null;
@@ -375,7 +359,7 @@ namespace App.View.Task
 
             DataParameter[] param = new DataParameter[] 
             { 
-                new DataParameter("{0}", string.Format("CraneNo='{0}' and  StationNo='{1}' and AisleNo='{2}' and AreaCode='{3}'",this.CraneNo, this.cmbStationNo.Text,this.cmbAisleNo.Text,this.AreaCode))
+                new DataParameter("{0}", string.Format("CraneNo='{0}' and  StationNo='{1}' and AisleNo='{2}' and AreaCode='{3}'",this.CraneNo, this.cmbAisleNo.Text,this.cmbAisleNo.Text,this.AreaCode))
             };
             DataTable dt = bll.FillDataTable("CMD.SelectCellShelf", param);
             this.cbRow.DataSource = dt.DefaultView;

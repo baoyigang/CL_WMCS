@@ -33,6 +33,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlMain = new System.Windows.Forms.Panel();
             this.splitContainer_Main = new System.Windows.Forms.SplitContainer();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnConveyor07 = new System.Windows.Forms.Button();
             this.btnConveyor06 = new System.Windows.Forms.Button();
             this.btnConveyor05 = new System.Windows.Forms.Button();
@@ -90,9 +93,6 @@
             this.txtHeight3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtForkStatus3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).BeginInit();
@@ -144,6 +144,45 @@
             this.splitContainer_Main.Size = new System.Drawing.Size(1813, 812);
             this.splitContainer_Main.SplitterDistance = 1457;
             this.splitContainer_Main.TabIndex = 0;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.ForeColor = System.Drawing.Color.Blue;
+            this.button3.Location = new System.Drawing.Point(97, 318);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(41, 25);
+            this.button3.TabIndex = 93;
+            this.button3.Tag = "2";
+            this.button3.Text = "→";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.Color.Blue;
+            this.button2.Location = new System.Drawing.Point(96, 237);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(42, 25);
+            this.button2.TabIndex = 92;
+            this.button2.Tag = "2";
+            this.button2.Text = "→";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.Color.Blue;
+            this.button1.Location = new System.Drawing.Point(97, 157);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 25);
+            this.button1.TabIndex = 91;
+            this.button1.Tag = "2";
+            this.button1.Text = "→";
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // btnConveyor07
             // 
@@ -249,7 +288,7 @@
             this.picCrane2.Location = new System.Drawing.Point(0, 136);
             this.picCrane2.Margin = new System.Windows.Forms.Padding(2);
             this.picCrane2.Name = "picCrane2";
-            this.picCrane2.Size = new System.Drawing.Size(57, 21);
+            this.picCrane2.Size = new System.Drawing.Size(57, 30);
             this.picCrane2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picCrane2.TabIndex = 2;
             this.picCrane2.TabStop = false;
@@ -852,45 +891,6 @@
             this.txtForkStatus3.ReadOnly = true;
             this.txtForkStatus3.Size = new System.Drawing.Size(122, 26);
             this.txtForkStatus3.TabIndex = 25;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.ForeColor = System.Drawing.Color.Blue;
-            this.button1.Location = new System.Drawing.Point(97, 157);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 25);
-            this.button1.TabIndex = 91;
-            this.button1.Tag = "2";
-            this.button1.Text = "→";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.ForeColor = System.Drawing.Color.Blue;
-            this.button2.Location = new System.Drawing.Point(96, 237);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(42, 25);
-            this.button2.TabIndex = 92;
-            this.button2.Tag = "2";
-            this.button2.Text = "→";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.ForeColor = System.Drawing.Color.Blue;
-            this.button3.Location = new System.Drawing.Point(97, 318);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(41, 25);
-            this.button3.TabIndex = 93;
-            this.button3.Tag = "2";
-            this.button3.Text = "→";
-            this.button3.UseVisualStyleBackColor = false;
             // 
             // frmMonitor
             // 

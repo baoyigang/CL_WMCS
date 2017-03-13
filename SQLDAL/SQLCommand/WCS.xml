@@ -341,16 +341,6 @@
       select * from Sys_CraneError
     </CommandString>
   </Command>
-  <Command ID="InsertTestWCSTask">
-    <CommandString>
-      Insert into bao Values(@taskNo,@taskType)
-    </CommandString>
-  </Command>
-  <Command ID="UpdateTestWCSTask">
-    <CommandString>
-      Update bao set taskType=@taskType where taskNo=@taskNo
-    </CommandString>
-  </Command>
   <Command ID="SelectTestAisle">
     <CommandString>
       select Aisle,COUNT(*) task  from WCS_TASK where State!=7 and State!=8 and State!=9 and AreaCode=@AreaCode
@@ -383,4 +373,10 @@
       select * from wcs_task where TaskNo='{0}'
     </CommandString>
   </Command>
+  <Command ID="SelectInStationByArea">
+    <CommandString>
+      SELECT distinct InStation from CMD_Shelf where AreaCode='002' order by InStation
+    </CommandString>
+  </Command>
+  
 </SqlCommand>

@@ -31,7 +31,7 @@
       <OPCItem ItemName="TaskState3" ClientHandler="35" OPCItemName="DB541,INT6,1" ItemType="READ" IsActive="true"/>
       <OPCItem ItemName="TaskState4" ClientHandler="37" OPCItemName="DB541,INT8,1" ItemType="READ" IsActive="true"/>-->
 
-      <!--<OPCItem ItemName="TranLineInfo1" ClientHandler="31" OPCItemName="DB1,INT102,1"  ItemType="READ" IsActive="false"/>
+      <!--<OPCItem ItemName="TranLineInfo1" ClientHandler="31" OPCItemName="DB1,INT102,1"  ItemT ype="READ" IsActive="false"/>
       <OPCItem ItemName="TranLineTaskNo1" ClientHandler="32" OPCItemName="DB1,CHAR280,20"  ItemType="READ" IsActive="false"/>
 
       <OPCItem ItemName="TranLineInfo2" ClientHandler="33" OPCItemName="DB1,INT104,1"  ItemType="READ" IsActive="false"/>
@@ -60,6 +60,8 @@
       <OPCItem ItemName="TaskType1" ClientHandler="116" OPCItemName="DB542,INT4,1" ItemType="WRITE" />
       <OPCItem ItemName="SlideNum1" ClientHandler="117" OPCItemName="DB542,INT6,1"  ItemType="WRITE"/>
       <OPCItem ItemName="NewTask1" ClientHandler="118" OPCItemName="DB542,INT8,1" ItemType="WRITE"/>
+
+      <OPCItem ItemName="TranInFinish4" ClientHandler="128" OPCItemName="DB542,X10.4,1" ItemType="WRITE"/>
       
     </OPCGroup>
   </OPCServer>

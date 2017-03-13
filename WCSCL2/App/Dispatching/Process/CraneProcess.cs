@@ -5,6 +5,7 @@ using MCP;
 using System.Data;
 using Util;
 using System.Timers;
+using System.Threading;
 
 namespace App.Dispatching.Process
 {
@@ -32,7 +33,7 @@ namespace App.Dispatching.Process
         // 记录堆垛机当前状态及任务相关信息
         BLL.BLLBase bll = new BLL.BLLBase();
         private Dictionary<int, rCrnStatus> dCrnStatus = new Dictionary<int, rCrnStatus>();
-        private Timer tmWorkTimer = new Timer();
+        private System.Timers.Timer tmWorkTimer = new System.Timers.Timer();
         private bool blRun = false;
         private string AreaCode;
         private DataTable dtCraneErr;
@@ -74,7 +75,7 @@ namespace App.Dispatching.Process
         }
         protected override void StateChanged(StateItem stateItem, IProcessDispatcher dispatcher)
         {
-            //object obj = ObjectUtil.GetObject(stateItem.State);            
+            //object obj = ObjectUtil.GetObject(stateItem.State);
             //if (obj == null)
             //    return;
 
@@ -121,17 +122,17 @@ namespace App.Dispatching.Process
                                 else if (TaskType == "14")
                                     Flag = "BatchCheckStock";
                             }
-                            //if (dtXml.Rows.Count > 0)
-                            //{
-                            //    string BillNo = dtXml.Rows[0][0].ToString();
-                            //    if (BillNo.Trim().Length > 0)
-                            //    {
+                            if (dtXml.Rows.Count > 0)
+                            {
+                                string BillNo = dtXml.Rows[0][0].ToString();
+                                if (BillNo.Trim().Length > 0)
+                                {
 
-                            //        string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, Flag);
-                            //        WriteToService("ERP", "ACK", xml);
-                            //        Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
-                            //    }
-                            //}
+                                    string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, Flag);
+                                    WriteToService("ERP", "ACK", xml);
+                                    Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
+                                }
+                            }
 
                             string[] str = new string[3];
                             str[0] = "6";
@@ -151,18 +152,10 @@ namespace App.Dispatching.Process
                                     break;
                                 }
                             }
-                 
-                            //WriteToService("TranLine", "OutTaskFinish", 1);
+
                             if (strState == "13")
                             {
-                                if (stationNo != "01")
-                                {
-                                    
-                                        WriteToService("TranLine", "TaskNo1", TaskNo);
-                                        WriteToService("TranLine", "SlideNum1", int.Parse(stationNo.Substring(1)));
-                                        WriteToService("TranLine", "TaskType1", 2);
-                                        WriteToService("TranLine", "NewTask1", 1);
-                                }
+
                                 bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 10), new DataParameter("@TaskNo", TaskNo) });
                             }
                             
@@ -257,6 +250,7 @@ namespace App.Dispatching.Process
                 //    }
                 //    break;
                 #endregion
+
                 case "Run":
                     blRun = (int)stateItem.State == 1;
                     if (blRun)
@@ -330,10 +324,11 @@ namespace App.Dispatching.Process
             try
             {
                 string serviceName = "CranePLC" + craneNo;
-                if (serviceName=="CranePLC3")
+                if (serviceName=="CranePLC2")
                 {
                     return false;
                 }
+
                 string plcTaskNo = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo")).ToString();
 
                 string craneMode = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneMode")).ToString();
@@ -404,14 +399,13 @@ namespace App.Dispatching.Process
                 {
                     parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14','15') and WCS_Task.State='0' and                                                     WCS_Task.CellCode!='' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and taskNo=null", CraneNo, AreaCode)) };
                 }
-
             DataTable dt = bll.FillDataTable("WCS.SelectOutTask", parameter);
 
             //出库
             if (dt.Rows.Count>0)
             {
 
-
+                Thread.Sleep(5000);
                 DataRow dr = dt.Rows[0];
                 string TaskNo = dr["TaskNo"].ToString();
                 string BillID = dr["BillID"].ToString();
@@ -421,7 +415,7 @@ namespace App.Dispatching.Process
                 string toStation = dt.Rows[0]["ToStation"].ToString().Substring(1);
                 string stationNo = dt.Rows[0]["StationNo"].ToString();
 
-                if (taskType != 3)
+                if (taskType != 3 && stationNo!="02")
                 {
                     string StationLoad = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService("TranLine", "StationLoad" + stationNo)).ToString();
                     //判断出库站台无货
@@ -461,28 +455,38 @@ namespace App.Dispatching.Process
                     string TaskType = "";
                     string strState = "";
                     string stationNo1 = "";
+                    string AisleNo = "";
                     if (dt1.Rows.Count > 0)
                     {
                         TaskType = dt1.Rows[0]["TaskType"].ToString();
                         strState = dt1.Rows[0]["State"].ToString();
                         stationNo1 = dt1.Rows[0]["StationNo"].ToString();
+                        AisleNo = dt1.Rows[0]["AisleNo"].ToString().Substring(1);
                     }
-                    if (stationNo1 == "01")
+                    try
                     {
-                        try
+                        int TaskNo1 = int.Parse(TaskNo);
+                        int aisleNo = int.Parse(AisleNo);
+                 
+                        if (stationNo1 == "01")
                         {
-                            WriteToService("TranLine", "TaskNo", TaskNo);
-                            WriteToService("TranLine", "SlideNum", 1);
+                            WriteToService("TranLine", "TaskNo", TaskNo1);
                             WriteToService("TranLine", "TaskType", 2);
+                            WriteToService("TranLine", "SlideNum", 1);                           
                             WriteToService("TranLine", "NewTask", 1);
-                        }
-                        catch (Exception ex)
+                         }
+                         else
                         {
-                            
-                            throw;
+                            WriteToService("TranLine", "TaskNo1", TaskNo);
+                            WriteToService("TranLine", "TaskType1", 2);
+                            WriteToService("TranLine", "SlideNum1", aisleNo);
+                            WriteToService("TranLine", "NewTask1", 1);
                         }
+                    }
+                    catch (Exception ex)
+                    {
 
-                        //bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 10), new DataParameter("@TaskNo", TaskNo) });
+                        Logger.Error(ex.Message);
                     }
                        
                 }
@@ -521,7 +525,7 @@ namespace App.Dispatching.Process
            
             DataParameter[] parameter;
             
-                parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='12') or (WCS_Task.TaskType='14' and WCS_Task.State='5'))                  and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!=''", CraneNo, AreaCode)) };
+                parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='12') or (WCS_Task.TaskType='14' and WCS_Task.State='12'))                  and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!=''", CraneNo, AreaCode)) };
           
             DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
             //入库
