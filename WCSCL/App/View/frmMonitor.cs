@@ -528,9 +528,9 @@ namespace App.View
                     cellAddr[5] = 1;
                     Flag = 3;
                 }
-                cellAddr[6] = byte.Parse(toStation.Substring(3, 3));
-                cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
-                cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
+                cellAddr[6] = byte.Parse(toStation.Substring(4, 3));
+                cellAddr[7] = byte.Parse(toStation.Substring(7, 3));
+                cellAddr[8] = byte.Parse(toStation.Substring(1, 3));
 
                
                 Util.ConvertStringChar.stringToBytes(TaskNo, 10).CopyTo(taskNo, 0);

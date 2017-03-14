@@ -353,12 +353,12 @@ namespace App.Dispatching.Process
                 cellAddr[1] = 0;
                 cellAddr[2] = 0;
                 
-                cellAddr[3] = byte.Parse(fromStation.Substring(3, 3));
-                cellAddr[4] = byte.Parse(fromStation.Substring(6, 3));
-                cellAddr[5] = byte.Parse(fromStation.Substring(0, 3));                
-                cellAddr[6] = byte.Parse(toStation.Substring(3, 3));
-                cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
-                cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
+                cellAddr[3] = byte.Parse(fromStation.Substring(4, 3));
+                cellAddr[4] = byte.Parse(fromStation.Substring(7, 3));
+                cellAddr[5] = byte.Parse(fromStation.Substring(1, 3));                
+                cellAddr[6] = byte.Parse(toStation.Substring(4, 3));
+                cellAddr[7] = byte.Parse(toStation.Substring(7, 3));
+                cellAddr[8] = byte.Parse(toStation.Substring(1, 3));
 
                 sbyte[] taskNo = new sbyte[10];
                 Util.ConvertStringChar.stringToBytes(dr["TaskNo"].ToString(), 10).CopyTo(taskNo, 0);
@@ -423,12 +423,12 @@ namespace App.Dispatching.Process
                 cellAddr[1] = 0;
                 cellAddr[2] = 0;
 
-                cellAddr[3] = byte.Parse(fromStation.Substring(3, 3));
-                cellAddr[4] = byte.Parse(fromStation.Substring(6, 3));
-                cellAddr[5] = byte.Parse(fromStation.Substring(0, 3));
-                cellAddr[6] = byte.Parse(toStation.Substring(3, 3));
-                cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
-                cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
+                cellAddr[3] = byte.Parse(fromStation.Substring(4, 3));
+                cellAddr[4] = byte.Parse(fromStation.Substring(7, 3));
+                cellAddr[5] = byte.Parse(fromStation.Substring(1, 3));
+                cellAddr[6] = byte.Parse(toStation.Substring(4, 3));
+                cellAddr[7] = byte.Parse(toStation.Substring(7, 3));
+                cellAddr[8] = byte.Parse(toStation.Substring(1, 3));
 
                 sbyte[] taskNo = new sbyte[10];
                 Util.ConvertStringChar.stringToBytes(dr["TaskNo"].ToString(), 10).CopyTo(taskNo, 0);
