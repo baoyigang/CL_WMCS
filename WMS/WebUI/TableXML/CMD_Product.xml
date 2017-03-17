@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TABLE name="CMD_Product" ChineseName="产品信息" PrimaryKey="ProductCode" OrderBy="CategoryName,ProductCode" ViewName="VCMD_PRODUCT">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
+    <FieldName>Spec</FieldName>
+    <FieldTitle>规格</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="2">
     <FieldName>CategoryName</FieldName>
     <FieldTitle>产品类型</FieldTitle>
@@ -9,11 +14,6 @@
     <FieldName>ProductCode</FieldName>
     <FieldTitle>产品编号</FieldTitle>
     <DataType>double</DataType>
-  </FIELD>
- <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
-    <FieldName>Spec</FieldName>
-    <FieldTitle>规格</FieldTitle>
-    <DataType>string</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
     <FieldName>ProductName</FieldName>
