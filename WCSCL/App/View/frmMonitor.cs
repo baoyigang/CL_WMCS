@@ -28,7 +28,7 @@ namespace App.View
         Dictionary<int, string> dicCraneAction = new Dictionary<int, string>();
         Dictionary<int, string> dicCraneError = new Dictionary<int, string>();
         Dictionary<int, string> dicCraneOver = new Dictionary<int, string>();
-
+        string serviceName = "CranePLC1";
         public frmMonitor()
         {
             InitializeComponent();
@@ -287,7 +287,7 @@ namespace App.View
                 tmCrane1.Stop();
                 string binary = Convert.ToString(255, 2).PadLeft(8, '0');
 
-                string serviceName = "CranePLC1";
+              
                 string plcTaskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo")));
 
                 string craneMode = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneMode")).ToString();
@@ -488,12 +488,20 @@ namespace App.View
         {
             if (this.dgvMain.CurrentCell != null)
             {
-                string serviceName = "CranePLC1";
+                
 
                 int[] cellAddr = new int[9];
                 cellAddr[0] = 0;
                 cellAddr[1] = 1;
+                sbyte[] taskNo = new sbyte[10];
+                Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
 
+                Context.ProcessDispatcher.WriteToService(serviceName, "TaskNo", taskNo);
+                int i=0;
+                while (i < 1000)
+                {
+                    i++;
+                }
                 Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
                 Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 0);
 
@@ -524,7 +532,7 @@ namespace App.View
                 cellAddr[7] = byte.Parse(toStation.Substring(7, 3));
                 cellAddr[8] = byte.Parse(toStation.Substring(1, 3));
 
-                sbyte[] taskNo = new sbyte[10];
+               
                 Util.ConvertStringChar.stringToBytes(TaskNo, 10).CopyTo(taskNo, 0);
 
                 Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
@@ -579,15 +587,56 @@ namespace App.View
                 //    bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
                 //}
                 BindData();
+                if (State == "9")
+                {
+                    string PLCTaskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo"))); ;
+                    if (TaskNo == PLCTaskNo)
+                    {
+                        
+                        int[] cellAddr = new int[9];
+                        cellAddr[0] = 0;
+                        cellAddr[1] = 1;
+
+                        sbyte[] taskNo = new sbyte[10];
+                        Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
+
+                        Context.ProcessDispatcher.WriteToService(serviceName, "TaskNo", taskNo);
+
+                        int i = 0;
+                        while (i < 1000)
+                        {
+                            i++;
+                        }
+
+                        Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
+                        Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 0);
+
+                        MCP.Logger.Info("已给堆垛机下发取消任务指令");           
+                    }
+                }
+
+
+                MCP.Logger.Info("任务号：" + TaskNo + "手动更新为：" + State);
             }
         }
 
         private void ToolStripMenuItemDelCraneTask_Click(object sender, EventArgs e)
         {
-            string serviceName = "CranePLC1";
+            
             int[] cellAddr = new int[9];
             cellAddr[0] = 0;
             cellAddr[1] = 1;
+
+            sbyte[] taskNo = new sbyte[10];
+            Util.ConvertStringChar.stringToBytes("", 10).CopyTo(taskNo, 0);
+
+            Context.ProcessDispatcher.WriteToService(serviceName, "TaskNo", taskNo);
+
+            int i = 0;
+            while (i < 1000)
+            {
+                i++;
+            }
 
             Context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
             Context.ProcessDispatcher.WriteToService(serviceName, "WriteFinished", 0);
@@ -597,12 +646,12 @@ namespace App.View
 
         private void btnClearAlarm_Click(object sender, EventArgs e)
         {
-            Context.ProcessDispatcher.WriteToService("CranePLC1", "Reset", 1);
+            Context.ProcessDispatcher.WriteToService(serviceName, "Reset", 1);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            Context.ProcessDispatcher.WriteToService("CranePLC1", "Reset", 2);
+            Context.ProcessDispatcher.WriteToService(serviceName, "Reset", 2);
         }        
     }
 }

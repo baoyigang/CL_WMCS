@@ -6,6 +6,7 @@
     <Attribute Name="ScanBaudRate" Value="19200" />
     <Attribute Name="TaskTest" Value="1" />
     <Attribute Name="AreaCode" Value="001" />
+    <Attribute Name="ShowCellEdit" Value="0" />
   </Attributes>
   <Services>
     <Service Name="CranePLC1" Type="MCP.Service.Siemens.dll, MCP.Service.Siemens.OPCService" ConfigFile="CranePLC1.xml" />

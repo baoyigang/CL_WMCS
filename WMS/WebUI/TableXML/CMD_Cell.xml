@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TABLE name="CMD_Cell" ChineseName="货位信息" PrimaryKey="CellCode" OrderBy="CellCode" ViewName="VMoveCMD_Cell">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
+    <FieldName>Spec</FieldName>
+    <FieldTitle>规格</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="2">
+    <FieldName>Barcode</FieldName>
+    <FieldTitle>熔次卷号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="3">
     <FieldName>ShelfName</FieldName>
     <FieldTitle>货架</FieldTitle>
@@ -25,11 +35,7 @@
     <FieldTitle>品名</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
-    <FieldName>Spec</FieldName>
-    <FieldTitle>规格</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
+  
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="8">
     <FieldName>ModelNo</FieldName>
     <FieldTitle>产品型号</FieldTitle>
@@ -50,11 +56,7 @@
     <FieldTitle>部品号</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="2">
-    <FieldName>Barcode</FieldName>
-    <FieldTitle>熔次卷号</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
+ 
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="12">
     <FieldName>Unit</FieldName>
     <FieldTitle>单位</FieldTitle>

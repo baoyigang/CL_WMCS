@@ -29,13 +29,12 @@ namespace App.View
         private void toolStripButton_Refresh_Click(object sender, EventArgs e)
         {
             BindData();
-            
         }
 
         
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectWmsBillID", new DataParameter[] { new DataParameter("{0}", "State=4 and IsUpERP=0 and TaskType in('11','14')") });
+            DataTable dt = bll.FillDataTable("WCS.SelectWmsBillID", new DataParameter[] { new DataParameter("{0}", "(State=4 and IsUpERP=0 and TaskType in('11','12') and SourceBillNo!='') or (State=4 and IsUpERP=0 and TaskType in('14'))") });
             bsMain.DataSource = dt;
         }
 

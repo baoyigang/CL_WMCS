@@ -141,6 +141,13 @@ public partial class WebUI_OutStock_OutStockView : BasePage
         this.dgViewSub1.DataBind();
         object o = dt.Compute("SUM(Quantity)", "");
         this.txtTotalQty.Text = o.ToString();
+
+        System.Data.DataColumn column = new DataColumn("exp1", typeof(float));
+        dt.Columns.Add(column);
+        column.Expression = "substring(Weight,1,len(Weight)-1)";
+
+        o = dt.Compute("SUM(exp1)", "");
+        this.txtTotalWeight.Text = o.ToString();
         MovePage("View", this.dgViewSub1, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
 
     }

@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TABLE name="CMD_Product" ChineseName="产品信息" PrimaryKey="BarCode" OrderBy="CategoryName,BarCode" ViewName="VCMD_ProductInstock">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
+    <FieldName>Spec</FieldName>
+    <FieldTitle>规格</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="2">
+    <FieldName>BarCode</FieldName>
+    <FieldTitle>熔次卷号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="14">
+    <FieldName>Weight</FieldName>
+    <FieldTitle>重量</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="3">
     <FieldName>CategoryName</FieldName>
     <FieldTitle>产品类型</FieldTitle>
@@ -15,21 +30,13 @@
     <FieldTitle>品名</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="2">
-    <FieldName>BarCode</FieldName>
-    <FieldTitle>熔次卷号</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
+  
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="6">
     <FieldName>ProductNo</FieldName>
     <FieldTitle>ERP编码</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
-    <FieldName>Spec</FieldName>
-    <FieldTitle>规格</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
+  
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="7">
     <FieldName>ModelNo</FieldName>
     <FieldTitle>产品型号</FieldTitle>
@@ -70,9 +77,5 @@
     <FieldTitle>货位</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="0" ShowQueryIndex="14">
-    <FieldName>Weight</FieldName>
-    <FieldTitle>重量</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
+  
 </TABLE>

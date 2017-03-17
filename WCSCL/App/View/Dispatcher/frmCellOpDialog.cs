@@ -9,7 +9,7 @@ using Util;
 
 namespace App.View.Dispatcher
 {
-    public partial class frmCellOpDialog : Form
+    public partial class frmCellOpDialog :Form
     {
         string BillTypeCode = "";
         string CellCode = "";
@@ -45,6 +45,7 @@ namespace App.View.Dispatcher
             this.txtBarcode.Text = dr["BarCode"].ToString();
             this.txtBillNo.Text = dr["BillNo"].ToString();
             this.txtProductCode.Text = dr["ProductCode"].ToString();
+            this.txtWeight.Text = dr["Weight"].ToString();
             BillTypeCode = dr["BillTypeCode"].ToString();
             this.checkBox1.Checked = dr["IsLock"].ToString() == "1";
             this.checkBox2.Checked = dr["IsActive"].ToString() == "0";
@@ -123,6 +124,28 @@ namespace App.View.Dispatcher
                     string IsLock = this.checkBox1.Checked ? "1" : "0";
                     string IsActive = this.checkBox2.Checked ? "0" : "1";
                     string ErrorFlag = this.checkBox3.Checked ? "1" : "0";
+                    if (this.txtWeight.Text.Trim().Length == 0)
+                    {
+                        this.txtWeight.Text = "0";
+                    }
+                    double Weight = 0;
+                    try
+                    {
+                        string[] strWeight = this.txtWeight.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                        for (int i = 0; i < strWeight.Length; i++)
+                        {
+                            Weight += double.Parse(strWeight[i]);
+                        }
+                    }
+                    catch
+                    {
+                        MCP.Logger.Info("请输入正确的重量！");
+                        this.txtWeight.Focus();
+                        return;
+                    }
+
+                    
 
                     string sql = string.Format("IsLock='{0}'", IsLock);
                     sql += string.Format(",IsActive='{0}'", IsActive);
@@ -140,8 +163,12 @@ namespace App.View.Dispatcher
 
                     sql += string.Format(",Barcode='{0}'", this.txtBarcode.Text.Trim());
 
+                    sql += string.Format(",Weight='{0}',WeightSum={1}", this.txtWeight.Text.Trim(),Weight);
+
                     param = new DataParameter[] { new DataParameter("{0}", sql), new DataParameter("{1}", string.Format("CellCode='{0}'", this.txtCellCode.Text)) };
-                    bll.ExecNonQuery("WCS.UpdateCellByFilter", param);                    
+                    bll.ExecNonQuery("WCS.UpdateCellByFilter", param);    
+                
+                   
                 }
 
                 

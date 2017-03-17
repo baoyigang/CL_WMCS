@@ -175,7 +175,7 @@
                 </table> 
                 <div id="Sub-container" style="overflow: auto; width: 100%; height: 320px" >
                     <asp:GridView ID="dgViewSub1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin"
-                        AllowPaging="True" Width="100%" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
+                        AllowPaging="True" Width="1400px" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
                         <Columns>
                             <asp:TemplateField  >
                                 <HeaderTemplate>
@@ -202,6 +202,29 @@
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="12%"  />
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="规格">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Spec" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="25%" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="熔次卷号">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Barcode" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="15%" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="重量">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="Weight" runat="server" Width="100%" CssClass="TextBox" style="text-align:right;" 
+                                    onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))" 	onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))" 
+                                    ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox>  
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="10%" />
+                            </asp:TemplateField>
                                 
                             <asp:TemplateField HeaderText="品名">
                                 <ItemTemplate>
@@ -210,13 +233,7 @@
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle  Width="12%" />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="规格">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="Spec" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="10%" />
-                            </asp:TemplateField>
+                            
                              <asp:TemplateField HeaderText="牌号状态">
                                 <ItemTemplate>
                                     <asp:TextBox ID="Propertity" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
@@ -254,22 +271,7 @@
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="8%" />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="熔次卷号">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="Barcode" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="10%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="重量">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="Weight" runat="server" Width="100%" CssClass="TextBox" style="text-align:right;" 
-                                    onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))" 	onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))" 
-                                    ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox>  
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="10%" />
-                            </asp:TemplateField>
+                           
 
                             
                             <asp:TemplateField HeaderText="备注">
@@ -290,6 +292,12 @@
                         </td>
                         <td style="width:17%">
                             &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
+                        </td>
+                        <td align="center"  style="width:8%;" class="smalltitle">
+                            重量合计
+                        </td>
+                        <td style="width:17%">
+                            &nbsp;<asp:TextBox ID="txtTotalWeight" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
                         </td>
                           
                         <td align="right">

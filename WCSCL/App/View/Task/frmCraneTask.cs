@@ -391,10 +391,12 @@ namespace App.View.Task
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DataParameter[] param = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskNo='{0}'", "1606010004")) };
+            DataParameter[] param = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskNo='{0}'", "1608160087")) };
             DataTable dt = bll.FillDataTable("WCS.SelectTask", param);
             View.CheckScan frm = new CheckScan(6, dt);
             frm.ShowDialog();
+            string s = frm.strValue;
         }
+
     }
 }

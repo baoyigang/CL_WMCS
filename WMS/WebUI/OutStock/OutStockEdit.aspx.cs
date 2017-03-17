@@ -148,10 +148,14 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             dr["Quantity"] = 1;
 
         }
-
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         ViewState[FormID + "_Edit_dgViewSub1"] = dt;
+
+     
+
+
+
         MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
 
 
@@ -196,6 +200,13 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
             }
         }
+
+        DataRow[] drExists = dt.Select("", "RowID");
+        for (int i = 0; i < drExists.Length; i++)
+        {
+            drExists[i]["RowID"] = i + 1;
+        }
+       
         this.dgViewSub1.DataSource = dt;
         this.dgViewSub1.DataBind();
         ViewState[FormID + "_Edit_" + dgViewSub1.ID] = dt;
@@ -282,16 +293,30 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             dr["ProductCode"] = ((TextBox)dgv.Rows[i].FindControl("ProductCode")).Text;
             dr["ProductName"] = ((TextBox)dgv.Rows[i].FindControl("ProductName")).Text;
             dr["Quantity"] = ((TextBox)dgv.Rows[i].FindControl("Quantity")).Text;
-            dr["Weight"] = ((TextBox)dgv.Rows[i].FindControl("Weight")).Text.Trim() == "" ? 0 : decimal.Parse(((TextBox)dgv.Rows[i].FindControl("Weight")).Text.Trim());
+            dr["Weight"] = ((TextBox)dgv.Rows[i].FindControl("Weight")).Text.Trim();
             dr["Barcode"] = ((TextBox)dgv.Rows[i].FindControl("Barcode")).Text;
             dr["Memo"] = ((TextBox)dgv.Rows[i].FindControl("SubMemo")).Text;
             dr.EndEdit();
         }
         dt1.AcceptChanges();
-         
 
         object o = dt1.Compute("SUM(Quantity)", "");
         this.txtTotalQty.Text = o.ToString();
+        if (!dt1.Columns.Contains("exp1"))
+        {
+            System.Data.DataColumn column = new DataColumn("exp1", typeof(float));
+            dt1.Columns.Add(column);
+            column.Expression = "substring(Weight,1,len(Weight)-1)";
+        }
+        else
+        {
+            dt1.Columns["exp1"].Expression = "substring(Weight,1,len(Weight)-1)";
+        }
+
+        o = dt1.Compute("SUM(exp1)", "");
+        this.txtTotalWeight.Text = o.ToString();
+
+
         ViewState[FormID + "_Edit_" + dgv.ID] = dt1;
     }
 
@@ -303,7 +328,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
         //判断库存
         DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
-        DataTable dtProduct = dt.DefaultView.ToTable("Product", true, new string[] { "ProductCode", "ProductName","BarCode" });
+        DataTable dtProduct = dt.DefaultView.ToTable("Product", true, new string[] { "ProductCode", "Spec","ProductName","BarCode" });
         for (int i = 0; i < dtProduct.Rows.Count; i++)
         {
             object o = dt.Compute("Sum(Quantity)", string.Format("ProductCode='{0}' and BarCode='{1}'", dtProduct.Rows[i]["ProductCode"], dtProduct.Rows[i]["BarCode"]));
@@ -325,13 +350,20 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
                 }
                 if (blnvalue)
                 {
-                    JScript.Instance.ShowMessage(this.updatePanel1, dtProduct.Rows[i]["ProductName"].ToString() + "现有库存数量为：" + StockQty.ToString() + ", 库存不足，请修改出库数量。");
+                    JScript.Instance.ShowMessage(this.updatePanel1, dtProduct.Rows[i]["Spec"].ToString() + " 熔次卷号："+dtProduct.Rows[i]["BarCode"]+" 数量为：" + StockQty.ToString() + ", 库存不足，请修改出库数量。");
                     return;
 
                 }
             }
 
         }
+
+        DataRow[] drs = dt.Select(string.Format("BillID<>'{0}'", this.txtID.Text));
+        for (int i = 0; i < drs.Length; i++)
+        {
+            drs[i]["BillID"] = this.txtID.Text.Trim();
+        }
+
         if (strID == "") //新增
         {
             int Count = bll.GetRowCount("WMS_BillMaster", string.Format("BillID='{0}'", this.txtID.Text.Trim()));
