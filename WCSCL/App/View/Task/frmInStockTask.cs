@@ -146,7 +146,7 @@ namespace App.View.Task
             }
             else if (this.radioButton2.Checked)
             {
-                this.txtCellCode.Text = this.cbRow.Text.Substring(3, 3) + (1000 + int.Parse(this.cbColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbHeight.Text)).ToString().Substring(1, 3);
+                this.txtCellCode.Text = this.cbRow.Text.Substring(2, 4) + (1000 + int.Parse(this.cbColumn.Text)).ToString().Substring(1, 3) + (1000 + int.Parse(this.cbHeight.Text)).ToString().Substring(1, 3);
             }
             else
             {

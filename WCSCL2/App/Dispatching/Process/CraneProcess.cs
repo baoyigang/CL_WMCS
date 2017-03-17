@@ -324,11 +324,7 @@ namespace App.Dispatching.Process
             try
             {
                 string serviceName = "CranePLC" + craneNo;
-                if (serviceName=="CranePLC2")
-                {
-                    return false;
-                }
-
+                
                 string plcTaskNo = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo")).ToString();
 
                 string craneMode = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "CraneMode")).ToString();

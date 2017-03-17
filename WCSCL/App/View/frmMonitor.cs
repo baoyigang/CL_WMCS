@@ -509,9 +509,9 @@ namespace App.View
                 int Flag = 1;
                 if (CraneLoad.Equals("0") || CraneLoad.Equals("False"))
                 {
-                    cellAddr[3] = byte.Parse(fromStation.Substring(3, 3));
-                    cellAddr[4] = byte.Parse(fromStation.Substring(6, 3));
-                    cellAddr[5] = byte.Parse(fromStation.Substring(0, 3));
+                    cellAddr[3] = byte.Parse(fromStation.Substring(4, 3));
+                    cellAddr[4] = byte.Parse(fromStation.Substring(7, 3));
+                    cellAddr[5] = byte.Parse(fromStation.Substring(1, 3));
                 }
                 else
                 {
@@ -520,9 +520,9 @@ namespace App.View
                     cellAddr[5] = 1;
                     Flag = 3;
                 }
-                cellAddr[6] = byte.Parse(toStation.Substring(3, 3));
-                cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
-                cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
+                cellAddr[6] = byte.Parse(toStation.Substring(4, 3));
+                cellAddr[7] = byte.Parse(toStation.Substring(7, 3));
+                cellAddr[8] = byte.Parse(toStation.Substring(1, 3));
 
                 sbyte[] taskNo = new sbyte[10];
                 Util.ConvertStringChar.stringToBytes(TaskNo, 10).CopyTo(taskNo, 0);

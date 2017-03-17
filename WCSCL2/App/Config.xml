@@ -23,20 +23,26 @@
 
     </Process>
 
-    <!--输送线Process,到达出库口-->
-    <Process Name="OutStockFinishProcess" Type="App.exe, App.Dispatching.Process.OutStockFinishProcess">
+    <!--输送线Process,入库请求-->
+    <Process Name="StockRequestProcess" Type="App.exe, App.Dispatching.Process.StockRequestProcess">
       <Item ServiceName="TranLine" ItemName="OutFinish1" />
       <Item ServiceName="TranLine" ItemName="OutFinish2" />
     </Process>
    
     
-    <!--输送线Process,到达入库口-->
+    <!--输送线Process,到达入库站台-->
     <Process Name="InStockToStationProcess" Type="App.exe, App.Dispatching.Process.InStockToStationProcess">
       <Item ServiceName="TranLine" ItemName="InFinish1" />
       <Item ServiceName="TranLine" ItemName="InFinish2" />
       <Item ServiceName="TranLine" ItemName="InFinish3" />
       <Item ServiceName="TranLine" ItemName="InFinish4" />
 
+    </Process>
+    <!--输送线Process,到达出库口-->
+    <Process Name="OutFinishProcess" Type="App.exe, App.Dispatching.Process.OutFinishProcess">
+      <Item ServiceName="TranLine" ItemName="ReadTaskNo1" />
+      <Item ServiceName="TranLine" ItemName="ReadTaskNo2" />
+     
     </Process>
     <!--<Process Name="ErpProcess" Type="App.exe, App.Dispatching.Process.ErpProcess">
       <Item ServiceName="ERP" ItemName="InStock" />

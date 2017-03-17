@@ -217,7 +217,7 @@ namespace App.Dispatching.Process
             {
                 tmWorkTimer.Stop();
 
-                DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "1=1") });
+                DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "CraneNo='01'") });
                 for (int i = 1; i <= dt.Rows.Count; i++)
                 {
                     if (!dCrnStatus.ContainsKey(i))
@@ -301,62 +301,70 @@ namespace App.Dispatching.Process
                 Logger.Debug("Crane out 状态检查错误:" + e.Message.ToString());
                 return;
             }
-
-            string serviceName = "CranePLC" + craneNo;
-
-
-            string CraneNo = "0" + craneNo.ToString();
-            //获取任务，排序优先等级、任务时间
-            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14','15') and WCS_Task.State='0' and WCS_Task.CellCode!='' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
-            DataTable dt = bll.FillDataTable("WCS.SelectOutTask", parameter);
-
-            //出库
-            if (dt.Rows.Count>0)
+            try
             {
-                DataRow dr = dt.Rows[0];
-                string TaskNo = dr["TaskNo"].ToString();
-                string BillID = dr["BillID"].ToString();
-                byte taskType = byte.Parse(dt.Rows[0]["TaskType"].ToString().Substring(1, 1));
 
-                string fromStation = dt.Rows[0]["FromStation"].ToString().Substring(1);
-                string toStation = dt.Rows[0]["ToStation"].ToString().Substring(1);
-                string stationNo = dt.Rows[0]["StationNo"].ToString();
+                string serviceName = "CranePLC" + craneNo;
 
-                if (taskType != 3)
+
+                string CraneNo = "0" + craneNo.ToString();
+                //获取任务，排序优先等级、任务时间
+                DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskType in ('12','13','14','15') and WCS_Task.State='0' and WCS_Task.CellCode!='' and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}'", CraneNo, AreaCode)) };
+                DataTable dt = bll.FillDataTable("WCS.SelectOutTask", parameter);
+
+                //出库
+                if (dt.Rows.Count > 0)
                 {
-                    string StationLoad = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "StationLoad" + stationNo)).ToString();
-                    //判断出库站台无货
-                    if (StationLoad.Equals("True") || StationLoad.Equals("1"))
+                    DataRow dr = dt.Rows[0];
+                    string TaskNo = dr["TaskNo"].ToString();
+                    string BillID = dr["BillID"].ToString();
+                    byte taskType = byte.Parse(dt.Rows[0]["TaskType"].ToString().Substring(1, 1));
+
+                    string fromStation = dt.Rows[0]["FromStation"].ToString().Substring(1);
+                    string toStation = dt.Rows[0]["ToStation"].ToString().Substring(1);
+                    string stationNo = dt.Rows[0]["StationNo"].ToString();
+
+                    if (taskType != 3)
                     {
-                        Logger.Info("站台状态不符合堆垛机出库");
-                        return;
+                        string StationLoad = ObjectUtil.GetObject(Context.ProcessDispatcher.WriteToService(serviceName, "StationLoad" + stationNo)).ToString();
+                        //判断出库站台无货
+                        if (StationLoad.Equals("True") || StationLoad.Equals("1"))
+                        {
+                            Logger.Info("站台状态不符合堆垛机出库");
+                            return;
+                        }
                     }
-                }
-                
-                int[] cellAddr = new int[9];
-                cellAddr[0] = 0;
-                cellAddr[1] = 0;
-                cellAddr[2] = 0;
-                
-                cellAddr[3] = byte.Parse(fromStation.Substring(3, 3));
-                cellAddr[4] = byte.Parse(fromStation.Substring(6, 3));
-                cellAddr[5] = byte.Parse(fromStation.Substring(0, 3));                
-                cellAddr[6] = byte.Parse(toStation.Substring(3, 3));
-                cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
-                cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
 
-                sbyte[] taskNo = new sbyte[10];
-                Util.ConvertStringChar.stringToBytes(dr["TaskNo"].ToString(), 10).CopyTo(taskNo, 0);
-                
-                WriteToService(serviceName, "TaskAddress", cellAddr);
-                WriteToService(serviceName, "TaskNo", taskNo);
-                if (WriteToService(serviceName, "WriteFinished", 1))
-                {
-                    //更新任务状态为执行中
-                    bll.ExecNonQuery("WCS.UpdateTaskTimeByTaskNo", new DataParameter[] { new DataParameter("@State", 3), new DataParameter("@TaskNo", TaskNo) });
-                    bll.ExecNonQuery("WCS.UpdateBillStateByBillID", new DataParameter[] { new DataParameter("@State", 3), new DataParameter("@BillID", BillID) });
+                    int[] cellAddr = new int[9];
+                    cellAddr[0] = 0;
+                    cellAddr[1] = 0;
+                    cellAddr[2] = 0;
+
+                    cellAddr[3] = byte.Parse(fromStation.Substring(3, 3));
+                    cellAddr[4] = byte.Parse(fromStation.Substring(6, 3));
+                    cellAddr[5] = byte.Parse(fromStation.Substring(0, 3));
+                    cellAddr[6] = byte.Parse(toStation.Substring(3, 3));
+                    cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
+                    cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
+
+                    sbyte[] taskNo = new sbyte[10];
+                    Util.ConvertStringChar.stringToBytes(dr["TaskNo"].ToString(), 10).CopyTo(taskNo, 0);
+
+                    WriteToService(serviceName, "TaskAddress", cellAddr);
+                    WriteToService(serviceName, "TaskNo", taskNo);
+                    if (WriteToService(serviceName, "WriteFinished", 1))
+                    {
+                        //更新任务状态为执行中
+                        bll.ExecNonQuery("WCS.UpdateTaskTimeByTaskNo", new DataParameter[] { new DataParameter("@State", 3), new DataParameter("@TaskNo", TaskNo) });
+                        bll.ExecNonQuery("WCS.UpdateBillStateByBillID", new DataParameter[] { new DataParameter("@State", 3), new DataParameter("@BillID", BillID) });
+                    }
+                    Logger.Info("任务:" + dr["TaskNo"].ToString() + "已下发给" + craneNo + "堆垛机;起始地址:" + fromStation + ",目标地址:" + toStation);
                 }
-                Logger.Info("任务:" + dr["TaskNo"].ToString() + "已下发给" + craneNo + "堆垛机;起始地址:" + fromStation + ",目标地址:" + toStation);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Error(ex.Message);
             }
         }
         /// <summary>
@@ -377,59 +385,69 @@ namespace App.Dispatching.Process
             }
             catch (Exception e)
             {
-                //Logger.Debug("Crane out 状态检查错误:" + e.Message.ToString());
+                Logger.Debug("Crane out 状态检查错误:" + e.Message.ToString());
                 return;
             }
 
-            string serviceName = "CranePLC" + craneNo;
-
-            object[] obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo"));
-            string plcTaskNo = Util.ConvertStringChar.BytesToString(obj);
-
-            string CraneNo = "0" + craneNo.ToString();
-            //获取任务，排序优先等级、任务时间
-            DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='1') or (WCS_Task.TaskType='14' and WCS_Task.State='5')) and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!=''", CraneNo, AreaCode)) };
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
-
-            //出库
-            if (dt.Rows.Count > 0)
+            try
             {
-                DataRow dr = dt.Rows[0];
 
-                string TaskNo = dr["TaskNo"].ToString();
 
-                string BillID = dr["BillID"].ToString();
-                byte taskType = byte.Parse(dt.Rows[0]["TaskType"].ToString().Substring(1, 1));
-                string fromStation = dt.Rows[0]["FromStation"].ToString().Substring(1);
-                string toStation = dt.Rows[0]["ToStation"].ToString().Substring(1);
+                string serviceName = "CranePLC" + craneNo;
 
-                int[] cellAddr = new int[9];
-                cellAddr[0] = 0;
-                cellAddr[1] = 0;
-                cellAddr[2] = 0;
+                object[] obj = ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo"));
+                string plcTaskNo = Util.ConvertStringChar.BytesToString(obj);
 
-                cellAddr[3] = byte.Parse(fromStation.Substring(3, 3));
-                cellAddr[4] = byte.Parse(fromStation.Substring(6, 3));
-                cellAddr[5] = byte.Parse(fromStation.Substring(0, 3));
-                cellAddr[6] = byte.Parse(toStation.Substring(3, 3));
-                cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
-                cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
+                string CraneNo = "0" + craneNo.ToString();
+                //获取任务，排序优先等级、任务时间
+                DataParameter[] parameter = new DataParameter[] { new DataParameter("{0}", string.Format("((WCS_Task.TaskType='11' and WCS_Task.State='1') or (WCS_Task.TaskType='14' and WCS_Task.State='5')) and WCS_Task.CraneNo='{0}' and WCS_TASK.AreaCode='{1}' and WCS_TASK.CellCode!=''", CraneNo, AreaCode)) };
+                DataTable dt = bll.FillDataTable("WCS.SelectTask", parameter);
 
-                sbyte[] taskNo = new sbyte[10];
-                Util.ConvertStringChar.stringToBytes(dr["TaskNo"].ToString(), 10).CopyTo(taskNo, 0);
-
-                WriteToService(serviceName, "TaskAddress", cellAddr);
-                WriteToService(serviceName, "TaskNo", taskNo);
-                if (WriteToService(serviceName, "WriteFinished", 1))
+                //出库
+                if (dt.Rows.Count > 0)
                 {
-                    string State = "3";
-                    if (taskType == 4)
-                        State = "6";
-                    //更新任务状态为执行中
-                    bll.ExecNonQuery("WCS.UpdateTaskTimeByTaskNo", new DataParameter[] { new DataParameter("@State", State), new DataParameter("@TaskNo", TaskNo) });
-                    bll.ExecNonQuery("WCS.UpdateBillStateByBillID", new DataParameter[] { new DataParameter("@State", 3), new DataParameter("@BillID", BillID) });
+                    DataRow dr = dt.Rows[0];
+
+                    string TaskNo = dr["TaskNo"].ToString();
+
+                    string BillID = dr["BillID"].ToString();
+                    byte taskType = byte.Parse(dt.Rows[0]["TaskType"].ToString().Substring(1, 1));
+                    string fromStation = dt.Rows[0]["FromStation"].ToString().Substring(1);
+                    string toStation = dt.Rows[0]["ToStation"].ToString().Substring(1);
+
+                    int[] cellAddr = new int[9];
+                    cellAddr[0] = 0;
+                    cellAddr[1] = 0;
+                    cellAddr[2] = 0;
+
+                    cellAddr[3] = byte.Parse(fromStation.Substring(3, 3));
+                    cellAddr[4] = byte.Parse(fromStation.Substring(6, 3));
+                    cellAddr[5] = byte.Parse(fromStation.Substring(0, 3));
+                    cellAddr[6] = byte.Parse(toStation.Substring(3, 3));
+                    cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
+                    cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
+
+                    sbyte[] taskNo = new sbyte[10];
+                    Util.ConvertStringChar.stringToBytes(dr["TaskNo"].ToString(), 10).CopyTo(taskNo, 0);
+
+                    WriteToService(serviceName, "TaskAddress", cellAddr);
+                    WriteToService(serviceName, "TaskNo", taskNo);
+                    if (WriteToService(serviceName, "WriteFinished", 1))
+                    {
+                        string State = "3";
+                        if (taskType == 4)
+                            State = "6";
+                        //更新任务状态为执行中
+                        bll.ExecNonQuery("WCS.UpdateTaskTimeByTaskNo", new DataParameter[] { new DataParameter("@State", State), new DataParameter("@TaskNo", TaskNo) });
+                        bll.ExecNonQuery("WCS.UpdateBillStateByBillID", new DataParameter[] { new DataParameter("@State", 3), new DataParameter("@BillID", BillID) });
+                    }
+                    Logger.Info("任务:" + dr["TaskNo"].ToString() + "已下发给" + craneNo + "堆垛机;起始地址:" + fromStation + ",目标地址:" + toStation);
                 }
-                Logger.Info("任务:" + dr["TaskNo"].ToString() + "已下发给" + craneNo + "堆垛机;起始地址:" + fromStation + ",目标地址:" + toStation);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Error(ex.Message);
             }
         }
     }

@@ -35,6 +35,7 @@ namespace App
         private void Main_Shown(object sender, EventArgs e)
         {
             try
+            
             {
                 lbLog.Scrollable = true;
                 Logger.OnLog += new LogEventHandler(Logger_OnLog);
@@ -431,7 +432,8 @@ namespace App
         private void toolStripButton_Scan_Click(object sender, EventArgs e)
         {
             App.View.Task.frmInStockTask f = new App.View.Task.frmInStockTask();
-            ShowForm(f);
+            ((View.BaseForm)f).Context = context;
+            f.ShowDialog();
         }
 
         private void toolStripButton_UpERP_Click(object sender, EventArgs e)
@@ -467,6 +469,8 @@ namespace App
                         this.ToolStripMenuItem15.Visible = false;
                         this.ToolStripMenuItem16.Visible = false;
                         this.ToolStripMenuItem18.Visible = false;
+                        this.ToolStripMenuItem20.Visible = true;
+                        this.ToolStripMenuItem21.Visible = false;
                     }
                     else if (TaskType == "12" || TaskType == "13")
                     {
@@ -477,6 +481,8 @@ namespace App
                         this.ToolStripMenuItem15.Visible = false;
                         this.ToolStripMenuItem16.Visible = false;
                         this.ToolStripMenuItem18.Visible = true;
+                        this.ToolStripMenuItem20.Visible = false;
+                        this.ToolStripMenuItem21.Visible = false;
                     }
                     else if (TaskType == "14")
                     {
@@ -488,6 +494,8 @@ namespace App
                         this.ToolStripMenuItem15.Visible = true;
                         this.ToolStripMenuItem16.Visible = true;
                         this.ToolStripMenuItem18.Visible = true;
+                        this.ToolStripMenuItem20.Visible = true;
+                        this.ToolStripMenuItem21.Visible = true;
                     }
                     //弹出操作菜单
                     contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
@@ -555,7 +563,7 @@ namespace App
         {
             if (this.dgvMain.CurrentCell != null)
             {
-                string CraneNo = dgvMain.CurrentRow.Cells["CraneNo"].ToString();
+                string CraneNo = dgvMain.CurrentRow.Cells["colCraneNo"].Value.ToString();
                 string serviceName = "CranePLC" + CraneNo.Substring(1, 1);
 
                 int[] cellAddr = new int[9];
@@ -567,8 +575,8 @@ namespace App
 
                 DataRow dr = ((DataRowView)dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].DataBoundItem).Row;
                 string TaskNo = dr["TaskNo"].ToString();
-                string fromStation = dr["FromStation"].ToString();
-                string toStation = dr["ToStation"].ToString();
+                string fromStation = dr["FromStation"].ToString().Substring(1);
+                string toStation = dr["ToStation"].ToString().Substring(1);
                 string CraneLoad = ObjectUtil.GetObject(context.ProcessDispatcher.WriteToService(serviceName, "CraneLoad")).ToString();
 
                 cellAddr[0] = 0;
@@ -592,8 +600,7 @@ namespace App
                 cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
                 cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
 
-                sbyte[] taskNo = new sbyte[10];
-                Util.ConvertStringChar.stringToBytes(TaskNo, 10).CopyTo(taskNo, 0);
+                int taskNo = int.Parse(TaskNo);
 
                 context.ProcessDispatcher.WriteToService(serviceName, "TaskAddress", cellAddr);
                 context.ProcessDispatcher.WriteToService(serviceName, "TaskNo", taskNo);
@@ -632,6 +639,15 @@ namespace App
             if (State=="8")
             {
                 State = "10";
+            }
+            string newState = ItemName.Substring(ItemName.Length - 2, 2);
+            if (newState=="20")
+            {
+                State = "12";
+            }
+            if (newState=="21")
+            {
+                State = "13";
             }
             if (this.dgvMain.CurrentCell != null)
             {

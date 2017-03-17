@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.bsMain = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlMain = new System.Windows.Forms.Panel();
             this.splitContainer_Main = new System.Windows.Forms.SplitContainer();
@@ -43,9 +42,6 @@
             this.btnConveyor03 = new System.Windows.Forms.Button();
             this.btnConveyor02 = new System.Windows.Forms.Button();
             this.btnConveyor01 = new System.Windows.Forms.Button();
-            this.picCrane2 = new System.Windows.Forms.PictureBox();
-            this.picCrane1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnClearAlarm = new System.Windows.Forms.Button();
@@ -93,18 +89,22 @@
             this.txtHeight3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtForkStatus3 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
+            this.picCrane2 = new System.Windows.Forms.PictureBox();
+            this.picCrane1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bsMain = new System.Windows.Forms.BindingSource(this.components);
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).BeginInit();
             this.splitContainer_Main.Panel1.SuspendLayout();
             this.splitContainer_Main.Panel2.SuspendLayout();
             this.splitContainer_Main.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCrane2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCrane1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -281,38 +281,6 @@
             this.btnConveyor01.Tag = "2";
             this.btnConveyor01.Text = "↓";
             this.btnConveyor01.UseVisualStyleBackColor = false;
-            // 
-            // picCrane2
-            // 
-            this.picCrane2.Image = global::App.Properties.Resources.Crane2;
-            this.picCrane2.Location = new System.Drawing.Point(0, 136);
-            this.picCrane2.Margin = new System.Windows.Forms.Padding(2);
-            this.picCrane2.Name = "picCrane2";
-            this.picCrane2.Size = new System.Drawing.Size(57, 30);
-            this.picCrane2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picCrane2.TabIndex = 2;
-            this.picCrane2.TabStop = false;
-            // 
-            // picCrane1
-            // 
-            this.picCrane1.Image = global::App.Properties.Resources.Crane11;
-            this.picCrane1.Location = new System.Drawing.Point(0, 42);
-            this.picCrane1.Margin = new System.Windows.Forms.Padding(2);
-            this.picCrane1.Name = "picCrane1";
-            this.picCrane1.Size = new System.Drawing.Size(73, 30);
-            this.picCrane1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picCrane1.TabIndex = 1;
-            this.picCrane1.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::App.Properties.Resources._54库古里立库;
-            this.pictureBox1.Location = new System.Drawing.Point(100, 45);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1209, 559);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // tabControl
             // 
@@ -892,6 +860,38 @@
             this.txtForkStatus3.Size = new System.Drawing.Size(122, 26);
             this.txtForkStatus3.TabIndex = 25;
             // 
+            // picCrane2
+            // 
+            this.picCrane2.Image = global::App.Properties.Resources.Crane2;
+            this.picCrane2.Location = new System.Drawing.Point(0, 136);
+            this.picCrane2.Margin = new System.Windows.Forms.Padding(2);
+            this.picCrane2.Name = "picCrane2";
+            this.picCrane2.Size = new System.Drawing.Size(57, 30);
+            this.picCrane2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picCrane2.TabIndex = 2;
+            this.picCrane2.TabStop = false;
+            // 
+            // picCrane1
+            // 
+            this.picCrane1.Image = global::App.Properties.Resources.Crane11;
+            this.picCrane1.Location = new System.Drawing.Point(0, 42);
+            this.picCrane1.Margin = new System.Windows.Forms.Padding(2);
+            this.picCrane1.Name = "picCrane1";
+            this.picCrane1.Size = new System.Drawing.Size(73, 30);
+            this.picCrane1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picCrane1.TabIndex = 1;
+            this.picCrane1.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::App.Properties.Resources._54库古里立库;
+            this.pictureBox1.Location = new System.Drawing.Point(100, 45);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1209, 559);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -903,20 +903,20 @@
             this.Name = "frmMonitor";
             this.Text = "监控";
             this.Load += new System.EventHandler(this.frmMonitor_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.bsMain)).EndInit();
             this.pnlMain.ResumeLayout(false);
             this.splitContainer_Main.Panel1.ResumeLayout(false);
             this.splitContainer_Main.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).EndInit();
             this.splitContainer_Main.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCrane2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCrane1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMain)).EndInit();
             this.ResumeLayout(false);
 
         }

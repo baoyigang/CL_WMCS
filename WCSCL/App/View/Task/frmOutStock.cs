@@ -74,8 +74,8 @@ namespace App.View.Task
         private void frmOutStock_Load(object sender, EventArgs e)
         {
             //this.BindData();
-            for (int i = 0; i < this.dgvMain.Columns.Count - 1; i++)
-                ((DataGridViewAutoFilterTextBoxColumn)this.dgvMain.Columns[i]).FilteringEnabled = true;
+            //for (int i = 0; i < this.dgvMain.Columns.Count - 1; i++)
+            //    ((DataGridViewAutoFilterTextBoxColumn)this.dgvMain.Columns[i]).FilteringEnabled = true;
         }
         private void dgvMain_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

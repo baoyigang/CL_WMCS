@@ -31,7 +31,7 @@ namespace App.View.Task
             this.cmbStationNo.DataSource = dt.DefaultView;
             this.cmbStationNo.ValueMember = "InStation";
             this.cmbStationNo.DisplayMember = "InStation";
-
+            
            
         }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.taskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,6 +94,8 @@
             this.ToolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem20 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem21 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemDelCraneTask1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemDelCraneTask2 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -204,18 +206,18 @@
             // 
             this.dgvMain.AllowUserToAddRows = false;
             this.dgvMain.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvMain.AutoGenerateColumns = false;
             this.dgvMain.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5,
@@ -426,7 +428,7 @@
             this.lbLog.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbLog.FullRowSelect = true;
             this.lbLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.lbLog.LabelWrap = false;
             this.lbLog.Location = new System.Drawing.Point(0, 0);
             this.lbLog.Name = "lbLog";
@@ -640,6 +642,8 @@
             this.ToolStripMenuItem13,
             this.ToolStripMenuItem14,
             this.ToolStripMenuItem15,
+            this.ToolStripMenuItem20,
+            this.ToolStripMenuItem21,
             this.ToolStripMenuItem16,
             this.ToolStripMenuItem17,
             this.ToolStripMenuItem19});
@@ -650,21 +654,21 @@
             // ToolStripMenuItem10
             // 
             this.ToolStripMenuItem10.Name = "ToolStripMenuItem10";
-            this.ToolStripMenuItem10.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem10.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem10.Text = "等待";
             this.ToolStripMenuItem10.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem11
             // 
             this.ToolStripMenuItem11.Name = "ToolStripMenuItem11";
-            this.ToolStripMenuItem11.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem11.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem11.Text = "请求";
             this.ToolStripMenuItem11.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem12
             // 
             this.ToolStripMenuItem12.Name = "ToolStripMenuItem12";
-            this.ToolStripMenuItem12.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem12.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem12.Text = "输送线入库";
             this.ToolStripMenuItem12.Visible = false;
             this.ToolStripMenuItem12.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
@@ -672,51 +676,65 @@
             // ToolStripMenuItem18
             // 
             this.ToolStripMenuItem18.Name = "ToolStripMenuItem18";
-            this.ToolStripMenuItem18.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem18.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem18.Text = "输送线出库";
             this.ToolStripMenuItem18.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem13
             // 
             this.ToolStripMenuItem13.Name = "ToolStripMenuItem13";
-            this.ToolStripMenuItem13.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem13.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem13.Text = "执行";
             this.ToolStripMenuItem13.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem14
             // 
             this.ToolStripMenuItem14.Name = "ToolStripMenuItem14";
-            this.ToolStripMenuItem14.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem14.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem14.Text = "盘点出库";
             this.ToolStripMenuItem14.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem15
             // 
             this.ToolStripMenuItem15.Name = "ToolStripMenuItem15";
-            this.ToolStripMenuItem15.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem15.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem15.Text = "盘点入库";
             this.ToolStripMenuItem15.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem16
             // 
             this.ToolStripMenuItem16.Name = "ToolStripMenuItem16";
-            this.ToolStripMenuItem16.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem16.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem16.Text = "执行";
             this.ToolStripMenuItem16.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem17
             // 
             this.ToolStripMenuItem17.Name = "ToolStripMenuItem17";
-            this.ToolStripMenuItem17.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem17.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem17.Text = "完成";
             this.ToolStripMenuItem17.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem19
             // 
             this.ToolStripMenuItem19.Name = "ToolStripMenuItem19";
-            this.ToolStripMenuItem19.Size = new System.Drawing.Size(136, 22);
+            this.ToolStripMenuItem19.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem19.Text = "取消";
             this.ToolStripMenuItem19.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            // 
+            // ToolStripMenuItem20
+            // 
+            this.ToolStripMenuItem20.Name = "ToolStripMenuItem20";
+            this.ToolStripMenuItem20.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem20.Text = "到达入库站台";
+            this.ToolStripMenuItem20.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            // 
+            // ToolStripMenuItem21
+            // 
+            this.ToolStripMenuItem21.Name = "ToolStripMenuItem21";
+            this.ToolStripMenuItem21.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem21.Text = "到达出库站台";
+            this.ToolStripMenuItem21.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItemDelCraneTask1
             // 
@@ -736,7 +754,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -757,7 +775,7 @@
             this.panel1.Controls.Add(this.splitContainer1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 173);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1284, 387);
             this.panel1.TabIndex = 18;
@@ -865,5 +883,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem18;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem20;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem21;
     }
 }

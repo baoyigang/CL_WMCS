@@ -62,9 +62,9 @@ namespace App.View.Task
         private void frmMoveStock_Load(object sender, EventArgs e)
         {
             //this.BindData();
-            for (int i = 0; i < this.dgvMain.Columns.Count - 1; i++)
-                ((DataGridViewAutoFilterTextBoxColumn)this.dgvMain.Columns[i]).FilteringEnabled = true;
-            this.txtBarCode.Focus();
+            //for (int i = 0; i < this.dgvMain.Columns.Count - 1; i++)
+            //    ((DataGridViewAutoFilterTextBoxColumn)this.dgvMain.Columns[i]).FilteringEnabled = true;
+            //this.txtBarCode.Focus();
         }
         private void dgvMain_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

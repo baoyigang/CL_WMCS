@@ -19,8 +19,8 @@
       <OPCItem ItemName="InFinish4" ClientHandler="27" OPCItemName="DB543,X0.2,1" ItemType="READ" IsActive="true"/>
       <OPCItem ItemName="InTaskNo4" ClientHandler="28" OPCItemName="DB543,DINT10,1" ItemType="READ" IsActive="false"/>
       
-      <OPCItem ItemName="ReadTaskNo1" ClientHandler="31" OPCItemName="DB541,DINT2,1" ItemType="READ" IsActive="false"/>
-      <OPCItem ItemName="ReadTaskNo2" ClientHandler="33" OPCItemName="DB543,DINT14,1" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="ReadTaskNo1" ClientHandler="31" OPCItemName="DB541,DINT2,1" ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="ReadTaskNo2" ClientHandler="33" OPCItemName="DB543,DINT14,1" ItemType="READ" IsActive="true"/>
 
       <OPCItem ItemName="StationLoad01" ClientHandler="35" OPCItemName="DB541,X0.3,1" ItemType="READ" IsActive="false"/>
       <OPCItem ItemName="StationLoad02" ClientHandler="37" OPCItemName="DB543,X18.0,1" ItemType="READ" IsActive="false"/>
