@@ -208,13 +208,7 @@
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="10%"  />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="品名">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="13%" />
-                            </asp:TemplateField>
+                           
                            
                              <asp:TemplateField HeaderText="规格">
                                 <ItemTemplate>
@@ -238,6 +232,13 @@
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle  Width="5%" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="品名">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="13%" />
                             </asp:TemplateField>
                              <asp:TemplateField HeaderText="牌号状态">
                                 <ItemTemplate>
