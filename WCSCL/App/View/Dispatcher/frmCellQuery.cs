@@ -72,7 +72,7 @@ namespace App.View.Dispatcher
                 }
                 ShelfCode.Clear();
 
-                DataTable dtShelf = bll.FillDataTable("CMD.SelectShelf");
+                DataTable dtShelf = bll.FillDataTable("CMD.SelectShelf", new DataParameter("{0}", "Areacode='001'"));
                 for (int i = 0; i < dtShelf.Rows.Count; i++)
                 {
                     ShelfCode.Add(i + 1, dtShelf.Rows[i]["ShelfCode"].ToString());
@@ -86,7 +86,7 @@ namespace App.View.Dispatcher
                 pnlProgress.Visible = true;
                 Application.DoEvents();
 
-                cellTable = bll.FillDataTable("WCS.SelectCell");
+                cellTable = bll.FillDataTable("WCS.SelectCell1", new DataParameter("{0}", "CMD_Area.AreaCode='001'"));
                 bsMain.DataSource = cellTable;
 
                 pnlProgress.Visible = false;

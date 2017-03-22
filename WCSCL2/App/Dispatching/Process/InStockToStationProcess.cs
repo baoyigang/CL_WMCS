@@ -53,11 +53,11 @@ namespace App.Dispatching.Process
              
                     BLL.BLLBase bll = new BLL.BLLBase();
                     DataTable dt = bll.FillDataTable("WCS.SelectWcsTaskByTaskNo", new DataParameter("{0}", TaskNo));
-                    if (dt.Rows[0]["TaskType"].ToString() =="12")
+                    if (dt.Rows[0]["TaskType"].ToString() =="12" || (dt.Rows[0]["TaskType"].ToString()=="14" && dt.Rows[0]["State"] != "2"))
                     {
                         return;
                     }
-                    
+                  
 
                     DataParameter[] param = new DataParameter[] {  new DataParameter("@TaskNo", TaskNo) };
                     bll.ExecNonQueryTran("WCS.UpdateInStockStation", param);

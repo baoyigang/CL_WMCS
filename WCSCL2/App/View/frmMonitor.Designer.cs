@@ -42,6 +42,9 @@
             this.btnConveyor03 = new System.Windows.Forms.Button();
             this.btnConveyor02 = new System.Windows.Forms.Button();
             this.btnConveyor01 = new System.Windows.Forms.Button();
+            this.picCrane2 = new System.Windows.Forms.PictureBox();
+            this.picCrane1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnClearAlarm = new System.Windows.Forms.Button();
@@ -89,21 +92,18 @@
             this.txtHeight3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtForkStatus3 = new System.Windows.Forms.TextBox();
-            this.picCrane2 = new System.Windows.Forms.PictureBox();
-            this.picCrane1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bsMain = new System.Windows.Forms.BindingSource(this.components);
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).BeginInit();
             this.splitContainer_Main.Panel1.SuspendLayout();
             this.splitContainer_Main.Panel2.SuspendLayout();
             this.splitContainer_Main.SuspendLayout();
-            this.tabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCrane2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCrane1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -282,6 +282,38 @@
             this.btnConveyor01.Text = "↓";
             this.btnConveyor01.UseVisualStyleBackColor = false;
             // 
+            // picCrane2
+            // 
+            this.picCrane2.Image = global::App.Properties.Resources.Crane2;
+            this.picCrane2.Location = new System.Drawing.Point(0, 136);
+            this.picCrane2.Margin = new System.Windows.Forms.Padding(2);
+            this.picCrane2.Name = "picCrane2";
+            this.picCrane2.Size = new System.Drawing.Size(57, 30);
+            this.picCrane2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picCrane2.TabIndex = 2;
+            this.picCrane2.TabStop = false;
+            // 
+            // picCrane1
+            // 
+            this.picCrane1.Image = global::App.Properties.Resources.Crane11;
+            this.picCrane1.Location = new System.Drawing.Point(0, 42);
+            this.picCrane1.Margin = new System.Windows.Forms.Padding(2);
+            this.picCrane1.Name = "picCrane1";
+            this.picCrane1.Size = new System.Drawing.Size(73, 30);
+            this.picCrane1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picCrane1.TabIndex = 1;
+            this.picCrane1.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::App.Properties.Resources._54库古里立库;
+            this.pictureBox1.Location = new System.Drawing.Point(100, 45);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1209, 559);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPage1);
@@ -332,12 +364,13 @@
             this.btnClearAlarm.BackColor = System.Drawing.Color.Orange;
             this.btnClearAlarm.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnClearAlarm.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClearAlarm.Location = new System.Drawing.Point(31, 280);
+            this.btnClearAlarm.Location = new System.Drawing.Point(126, 314);
             this.btnClearAlarm.Name = "btnClearAlarm";
             this.btnClearAlarm.Size = new System.Drawing.Size(75, 30);
             this.btnClearAlarm.TabIndex = 22;
             this.btnClearAlarm.Text = "解警";
             this.btnClearAlarm.UseVisualStyleBackColor = false;
+            this.btnClearAlarm.Visible = false;
             this.btnClearAlarm.Click += new System.EventHandler(this.btnClearAlarm_Click);
             // 
             // txtCraneAction2
@@ -448,7 +481,7 @@
             this.btnStop1.BackColor = System.Drawing.Color.Red;
             this.btnStop1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnStop1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnStop1.Location = new System.Drawing.Point(126, 312);
+            this.btnStop1.Location = new System.Drawing.Point(31, 279);
             this.btnStop1.Name = "btnStop1";
             this.btnStop1.Size = new System.Drawing.Size(75, 30);
             this.btnStop1.TabIndex = 9;
@@ -615,12 +648,13 @@
             this.btnClearAlarm2.BackColor = System.Drawing.Color.Orange;
             this.btnClearAlarm2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnClearAlarm2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClearAlarm2.Location = new System.Drawing.Point(29, 278);
+            this.btnClearAlarm2.Location = new System.Drawing.Point(124, 314);
             this.btnClearAlarm2.Name = "btnClearAlarm2";
             this.btnClearAlarm2.Size = new System.Drawing.Size(75, 30);
             this.btnClearAlarm2.TabIndex = 44;
             this.btnClearAlarm2.Text = "解警";
             this.btnClearAlarm2.UseVisualStyleBackColor = false;
+            this.btnClearAlarm2.Visible = false;
             this.btnClearAlarm2.Click += new System.EventHandler(this.btnClearAlarm2_Click);
             // 
             // txtCraneAction3
@@ -713,6 +747,7 @@
             this.btnBack2.TabIndex = 38;
             this.btnBack2.Text = "召回";
             this.btnBack2.UseVisualStyleBackColor = false;
+            this.btnBack2.Visible = false;
             this.btnBack2.Click += new System.EventHandler(this.btnBack2_Click);
             // 
             // label11
@@ -731,7 +766,7 @@
             this.btnStop2.BackColor = System.Drawing.Color.Red;
             this.btnStop2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnStop2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnStop2.Location = new System.Drawing.Point(124, 310);
+            this.btnStop2.Location = new System.Drawing.Point(29, 278);
             this.btnStop2.Name = "btnStop2";
             this.btnStop2.Size = new System.Drawing.Size(75, 30);
             this.btnStop2.TabIndex = 31;
@@ -860,38 +895,6 @@
             this.txtForkStatus3.Size = new System.Drawing.Size(122, 26);
             this.txtForkStatus3.TabIndex = 25;
             // 
-            // picCrane2
-            // 
-            this.picCrane2.Image = global::App.Properties.Resources.Crane2;
-            this.picCrane2.Location = new System.Drawing.Point(0, 136);
-            this.picCrane2.Margin = new System.Windows.Forms.Padding(2);
-            this.picCrane2.Name = "picCrane2";
-            this.picCrane2.Size = new System.Drawing.Size(57, 30);
-            this.picCrane2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picCrane2.TabIndex = 2;
-            this.picCrane2.TabStop = false;
-            // 
-            // picCrane1
-            // 
-            this.picCrane1.Image = global::App.Properties.Resources.Crane11;
-            this.picCrane1.Location = new System.Drawing.Point(0, 42);
-            this.picCrane1.Margin = new System.Windows.Forms.Padding(2);
-            this.picCrane1.Name = "picCrane1";
-            this.picCrane1.Size = new System.Drawing.Size(73, 30);
-            this.picCrane1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picCrane1.TabIndex = 1;
-            this.picCrane1.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::App.Properties.Resources._54库古里立库;
-            this.pictureBox1.Location = new System.Drawing.Point(100, 45);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1209, 559);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // frmMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -908,14 +911,14 @@
             this.splitContainer_Main.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Main)).EndInit();
             this.splitContainer_Main.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picCrane2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCrane1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCrane1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsMain)).EndInit();
             this.ResumeLayout(false);
 
@@ -946,12 +949,10 @@
         private System.Windows.Forms.TextBox txtHeight2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtRow2;
-        private System.Windows.Forms.Button btnClearAlarm;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button btnClearAlarm2;
         private System.Windows.Forms.TextBox txtCraneAction3;
         private System.Windows.Forms.Button btnReset2;
         private System.Windows.Forms.TextBox txtTaskNo3;
@@ -987,5 +988,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnClearAlarm2;
+        private System.Windows.Forms.Button btnClearAlarm;
     }
 }

@@ -100,7 +100,7 @@ namespace App.Dispatching.Process
                             //更新任务状态
                             DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
                             //bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
-                            DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcess", param);
+                            DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcess1", param);
 
                             //判断任务号是什么类型，如果是盘点另外处理
                             param = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskNo='{0}'", TaskNo)) };
@@ -162,35 +162,35 @@ namespace App.Dispatching.Process
 
                             //清除堆垛机任务号
 
-                            if (Column == 1 && Height == 1)
-                            {
-                                if (Row<0)
-                                {
-                                    Row = 1;
-                                }
-                                int[] cellAddr = new int[9];
-                                cellAddr[0] = 0;
-                                cellAddr[1] = 0;
-                                cellAddr[2] = 0;
+                            //if (Column == 1 && Height == 1)
+                            //{
+                            //    if (Row<0)
+                            //    {
+                            //        Row = 1;
+                            //    }
+                            //    int[] cellAddr = new int[9];
+                            //    cellAddr[0] = 0;
+                            //    cellAddr[1] = 0;
+                            //    cellAddr[2] = 0;
 
-                                cellAddr[3] = 1;
-                                cellAddr[4] = 1;
-                                cellAddr[5] = Row * 2 - 1;
-                                cellAddr[6] = 1;
-                                cellAddr[7] = 1;
-                                cellAddr[8] = Row * 2 - 1;
+                            //    cellAddr[3] = 1;
+                            //    cellAddr[4] = 1;
+                            //    cellAddr[5] = Row * 2 - 1;
+                            //    cellAddr[6] = 1;
+                            //    cellAddr[7] = 1;
+                            //    cellAddr[8] = Row * 2 - 1;
                                 
-                                Context.ProcessDispatcher.WriteToService(stateItem.Name, "TaskAddress", cellAddr);
-                                Context.ProcessDispatcher.WriteToService(stateItem.Name, "TaskNo", 0);
-                                Context.ProcessDispatcher.WriteToService(stateItem.Name, "WriteFinished", 2);
-                                Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
-                                return;
-                            }
-                            else
-                            {
+                            //    Context.ProcessDispatcher.WriteToService(stateItem.Name, "TaskAddress", cellAddr);
+                            //    Context.ProcessDispatcher.WriteToService(stateItem.Name, "TaskNo", 0);
+                            //    Context.ProcessDispatcher.WriteToService(stateItem.Name, "WriteFinished", 2);
+                            //    Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
+                            //    return;
+                            //}
+                            //else
+                            //{
                                 WriteToService(stateItem.Name, "TaskNo", 0);
                                 Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
-                            }
+                            //}
                            
                            
                         }
@@ -374,6 +374,7 @@ namespace App.Dispatching.Process
 
 
             string CraneNo = "0" + craneNo.ToString();
+
             //获取任务，排序优先等级、任务时间
             DataTable dtState;
             if (CraneNo=="02")

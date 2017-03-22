@@ -55,7 +55,7 @@ namespace App.View.Task
 
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3','4','5','6') and WCS_TASK.TaskType='14' And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3','4','5','6','10','11','12','13') and WCS_TASK.TaskType='14' And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
             bsMain.DataSource = dt;
         }
 
@@ -105,6 +105,14 @@ namespace App.View.Task
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
+            DataRow dr = ((DataRowView)dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].DataBoundItem).Row;
+            string State = dr["State"].ToString();
+            if (State != "0" && State != "8")
+            {
+                string TaskNo = dr["TaskNo"].ToString();
+                MCP.Logger.Info("任务号：" + TaskNo + "正在执行中请在监控界面变更状态为取消!");
+                return;
+            }
             UpdatedgvMainState("9");
         }
         private void UpdatedgvMainState(string State)

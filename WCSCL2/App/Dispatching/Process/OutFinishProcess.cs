@@ -12,7 +12,7 @@ namespace App.Dispatching.Process
         protected override void StateChanged(StateItem stateItem, IProcessDispatcher dispatcher)
         {
             object obj = ObjectUtil.GetObject(stateItem.State);
-            if (obj == null)
+            if (obj == null || obj.ToString() == "0")
                 return;
             BLL.BLLBase bll=new BLL.BLLBase();
             string taskNo = obj.ToString();
@@ -23,7 +23,7 @@ namespace App.Dispatching.Process
                 if (TaskType=="12" || TaskType=="14" )
                 {
                      DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", taskNo) };
-                                DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcess", param);
+                                DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcess1", param);
                                 Logger.Info("出库任务完成,任务号:" + taskNo );
 
                   

@@ -365,7 +365,7 @@ namespace App.View
         {
             if (MessageBox.Show("是否要召回1号堆垛机到初始位置?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                PutCommand("2", 0);
+                Context.ProcessDispatcher.WriteToService("CranePLC2", "Reset", 1);
                 Logger.Info("1号堆垛机下发召回命令");
             }
         }
@@ -492,7 +492,7 @@ namespace App.View
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            Context.ProcessDispatcher.WriteToService("CranePLC2", "Reset", 2);
+            PutCommand("2", 0);
         }
 
         private void btnClearAlarm2_Click(object sender, EventArgs e)
@@ -502,7 +502,7 @@ namespace App.View
 
         private void btnReset2_Click(object sender, EventArgs e)
         {
-            Context.ProcessDispatcher.WriteToService("CranePLC3", "Reset", 2);
+            PutCommand("2", 0);
         }
 
         private void btnBack2_Click(object sender, EventArgs e)

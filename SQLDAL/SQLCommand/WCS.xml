@@ -61,6 +61,11 @@
       Sp_TaskProcess
     </CommandString>
   </Command>
+  <Command ID="Sp_TaskProcess1">
+    <CommandString>
+      Sp_TaskProcess1
+    </CommandString>
+  </Command>
   <Command ID="Sp_TaskCancelProcess">
     <CommandString>
       Sp_TaskCancelProcess

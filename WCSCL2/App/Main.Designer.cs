@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.taskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,11 +91,11 @@
             this.ToolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem20 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem21 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem20 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem21 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemDelCraneTask1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemDelCraneTask2 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -206,18 +206,18 @@
             // 
             this.dgvMain.AllowUserToAddRows = false;
             this.dgvMain.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMain.AutoGenerateColumns = false;
             this.dgvMain.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5,
@@ -428,7 +428,7 @@
             this.lbLog.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbLog.FullRowSelect = true;
             this.lbLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem1});
             this.lbLog.LabelWrap = false;
             this.lbLog.Location = new System.Drawing.Point(0, 0);
             this.lbLog.Name = "lbLog";
@@ -639,11 +639,11 @@
             this.ToolStripMenuItem11,
             this.ToolStripMenuItem12,
             this.ToolStripMenuItem18,
+            this.ToolStripMenuItem20,
+            this.ToolStripMenuItem21,
             this.ToolStripMenuItem13,
             this.ToolStripMenuItem14,
             this.ToolStripMenuItem15,
-            this.ToolStripMenuItem20,
-            this.ToolStripMenuItem21,
             this.ToolStripMenuItem16,
             this.ToolStripMenuItem17,
             this.ToolStripMenuItem19});
@@ -701,6 +701,20 @@
             this.ToolStripMenuItem15.Text = "盘点入库";
             this.ToolStripMenuItem15.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
+            // ToolStripMenuItem20
+            // 
+            this.ToolStripMenuItem20.Name = "ToolStripMenuItem20";
+            this.ToolStripMenuItem20.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem20.Text = "到达入库站台";
+            this.ToolStripMenuItem20.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            // 
+            // ToolStripMenuItem21
+            // 
+            this.ToolStripMenuItem21.Name = "ToolStripMenuItem21";
+            this.ToolStripMenuItem21.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem21.Text = "到达出库站台";
+            this.ToolStripMenuItem21.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            // 
             // ToolStripMenuItem16
             // 
             this.ToolStripMenuItem16.Name = "ToolStripMenuItem16";
@@ -721,20 +735,6 @@
             this.ToolStripMenuItem19.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem19.Text = "取消";
             this.ToolStripMenuItem19.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
-            // 
-            // ToolStripMenuItem20
-            // 
-            this.ToolStripMenuItem20.Name = "ToolStripMenuItem20";
-            this.ToolStripMenuItem20.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItem20.Text = "到达入库站台";
-            this.ToolStripMenuItem20.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
-            // 
-            // ToolStripMenuItem21
-            // 
-            this.ToolStripMenuItem21.Name = "ToolStripMenuItem21";
-            this.ToolStripMenuItem21.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItem21.Text = "到达出库站台";
-            this.ToolStripMenuItem21.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItemDelCraneTask1
             // 

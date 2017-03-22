@@ -67,7 +67,6 @@ namespace App.View.Dispatcher
                     }
                 }
                 ShelfCode.Clear();
-
                 DataTable dtShelf = bll.FillDataTable("CMD.SelectShelf", new DataParameter("{0}", "Areacode='002'"));
                 for (int i = 0; i < dtShelf.Rows.Count; i++)
                 {

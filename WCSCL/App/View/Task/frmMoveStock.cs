@@ -108,7 +108,7 @@ namespace App.View.Task
         {
             DataRow dr = ((DataRowView)dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].DataBoundItem).Row;
             string State = dr["State"].ToString();
-            if (State != "0" || State != "8")
+            if (State != "0" && State != "8")
             {
                 string TaskNo = dr["TaskNo"].ToString();
                 MCP.Logger.Info("任务号：" + TaskNo + "正在执行中请在监控界面变更状态为取消!");

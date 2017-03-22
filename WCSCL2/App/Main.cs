@@ -666,6 +666,7 @@ namespace App
                 //    bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
                 //}
                 BindData();
+                MCP.Logger.Info("任务号：" + TaskNo + "手动更新为：" + State);
             }
         }
 

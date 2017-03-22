@@ -14,7 +14,7 @@ namespace App.View.Task
     public partial class frmInStock : BaseForm
     {
         BLL.BLLBase bll = new BLL.BLLBase();
-
+        string AreaCode;
         public frmInStock()
         {
             InitializeComponent();
@@ -78,7 +78,7 @@ namespace App.View.Task
         }
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType='11'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType='11' ") });
             bsMain.DataSource = dt;
         }
 

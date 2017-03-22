@@ -8,13 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using Util;
 using DataGridViewAutoFilter;
+using MCP;
 
 namespace App.View.Task
 {
     public partial class frmInStock : BaseForm
     {
         BLL.BLLBase bll = new BLL.BLLBase();
-        string AreaCode;
+        private Context context = null;
         public frmInStock()
         {
             InitializeComponent();
@@ -34,7 +35,8 @@ namespace App.View.Task
         private void toolStripButton_Request_Click(object sender, EventArgs e)
         {
             frmInStockTask f = new frmInStockTask();
-            
+            ((View.BaseForm)f).Context = context;
+            f.ShowDialog();
             //if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             //{
             //    //string TaskNo = this.dgvMain.SelectedRows[0].Cells["colTaskNo"].Value.ToString();
@@ -79,13 +81,16 @@ namespace App.View.Task
         }
         private void BindData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", string.Format("WCS_TASK.State in('0','1','2','3') and WCS_TASK.TaskType='11' and WCS_TASK.AreaCode='{0}'",this.AreaCode)) });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "WCS_TASK.State in('0','1','2','3','12') and WCS_TASK.TaskType='11' ") });
             bsMain.DataSource = dt;
         }
 
         private void frmInStock_Load(object sender, EventArgs e)
         {
-             AreaCode = BLL.Server.GetAreaCode();
+            context = new Context();
+
+            ContextInitialize initialize = new ContextInitialize();
+            initialize.InitializeContext(context);
             //this.BindData();
             for (int i = 0; i < this.dgvMain.Columns.Count - 1; i++)
                 ((DataGridViewAutoFilterTextBoxColumn)this.dgvMain.Columns[i]).FilteringEnabled = true;
@@ -122,6 +127,7 @@ namespace App.View.Task
                 DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo), new DataParameter("@State", 0) };
                 bll.ExecNonQueryTran("WCS.Sp_UpdateTaskState", param);
                 BindData();
+                MCP.Logger.Info("任务号：" + TaskNo + "手动更新为：0");
             }     
         }
 
@@ -137,6 +143,14 @@ namespace App.View.Task
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
+            DataRow dr = ((DataRowView)dgvMain.Rows[this.dgvMain.CurrentCell.RowIndex].DataBoundItem).Row;
+            string State = dr["State"].ToString();
+            if (State != "0" && State != "8")
+            {
+                string TaskNo = dr["TaskNo"].ToString();
+                MCP.Logger.Info("任务号：" + TaskNo + "正在执行中请在监控界面变更状态为取消!");
+                return;
+            }
             UpdatedgvMainState("9");
         }
         private void UpdatedgvMainState(string State)
@@ -154,6 +168,7 @@ namespace App.View.Task
                 //    bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
                 //}
                 BindData();
+                MCP.Logger.Info("任务号：" + TaskNo + "手动更新为：" + State);
             }
         }
 
@@ -171,6 +186,13 @@ namespace App.View.Task
         {
             this.BindData();
         }
+
+        private void ToolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            UpdatedgvMainState("12");
+        }
+
+
 
     }
 }
