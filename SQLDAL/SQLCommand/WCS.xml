@@ -154,6 +154,11 @@
       update WCS_TASK set State=@State,StartDate=getdate() where TaskNo=@TaskNo
     </CommandString>
   </Command>
+  <Command ID="UpdateTaskTimeByTaskID">
+    <CommandString>
+      update WCS_TASK set State=@State,StartDate=getdate() where TaskID=@TaskID
+    </CommandString>
+  </Command>
   <Command ID="UpdateBillStateByBillID">
     <CommandString>
       update WMS_BillMaster set State=@State where BillID=@BillID
@@ -333,12 +338,12 @@
   </Command>
   <Command ID="updateCrane">
     <CommandString>
-      update WCS_Task set CraneNo='{0}'  Where TaskNo={1}
+      update WCS_Task set CraneNo='{0}'  Where TaskNo in {1}
     </CommandString>
   </Command>
   <Command ID="UpdateTaskInStockRequest">
     <CommandString>
-      update  WCS_TASK set State=2,RequestDate=GETDATE(),StationNo=@StationNo where TaskNo=@TaskNo
+      update  WCS_TASK set State=2,RequestDate=GETDATE(),StationNo=@StationNo where TaskID=@TaskID
     </CommandString>
   </Command>
   <Command ID="SelectCraneError">
@@ -365,12 +370,12 @@
   </Command>
   <Command ID="SelectReadTaskByTaskNo">
     <CommandString>
-      SELECT * FROM WCS_TASK Where TaskNo=@TaskNo and (TaskType in ('11','12','15','14')) and (State=10 or State=1)
+      SELECT * FROM WCS_TASK Where TaskNo=@TaskNo and (TaskType in ('11','12','15','14')) and (State=10 or State=1 or State=11)
     </CommandString>
   </Command>
   <Command ID="UpdateInStockStation">
     <CommandString>
-      update WCS_TASK set State=12 where TaskNo=@TaskNo and State=2
+      update WCS_TASK set State=12 where TaskID=@TaskID and State=2
     </CommandString>
   </Command>
   <Command ID="SelectWcsTaskByTaskNo">

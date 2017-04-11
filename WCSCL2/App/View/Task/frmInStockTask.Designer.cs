@@ -36,12 +36,6 @@
             this.bsMain = new System.Windows.Forms.BindingSource(this.components);
             this.btnDeleteRow = new System.Windows.Forms.Button();
             this.dgvMain = new System.Windows.Forms.DataGridView();
-            this.colTaskNo = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column9 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.colBarCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column2 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.colProductCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.Column7 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.cmbAisleNo = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -63,6 +57,13 @@
             this.btnRequest = new System.Windows.Forms.Button();
             this.txtCellCode = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.colTaskNo = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column9 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.colBarCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Weight = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column2 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.colProductCode = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.Column7 = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bsMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -101,6 +102,7 @@
             this.colTaskNo,
             this.Column9,
             this.colBarCode,
+            this.Weight,
             this.Column2,
             this.colProductCode,
             this.Column7});
@@ -130,61 +132,6 @@
             this.dgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMain.Size = new System.Drawing.Size(685, 151);
             this.dgvMain.TabIndex = 99;
-            // 
-            // colTaskNo
-            // 
-            this.colTaskNo.DataPropertyName = "TaskNo";
-            this.colTaskNo.FilteringEnabled = false;
-            this.colTaskNo.HeaderText = "任务号";
-            this.colTaskNo.Name = "colTaskNo";
-            this.colTaskNo.ReadOnly = true;
-            this.colTaskNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "Spec";
-            this.Column9.FilteringEnabled = false;
-            this.Column9.HeaderText = "产品规格";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column9.Width = 280;
-            // 
-            // colBarCode
-            // 
-            this.colBarCode.DataPropertyName = "BarCode";
-            this.colBarCode.FilteringEnabled = false;
-            this.colBarCode.HeaderText = "熔次卷号";
-            this.colBarCode.Name = "colBarCode";
-            this.colBarCode.ReadOnly = true;
-            this.colBarCode.Width = 150;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "BillID";
-            this.Column2.FilteringEnabled = false;
-            this.Column2.HeaderText = "单据号码";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colProductCode
-            // 
-            this.colProductCode.DataPropertyName = "ProductCode";
-            this.colProductCode.FilteringEnabled = false;
-            this.colProductCode.HeaderText = "产品编码";
-            this.colProductCode.Name = "colProductCode";
-            this.colProductCode.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "ProductName";
-            this.Column7.FilteringEnabled = false;
-            this.Column7.HeaderText = "产品名称";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column7.Width = 120;
             // 
             // cmbAisleNo
             // 
@@ -432,6 +379,70 @@
             this.label2.TabIndex = 41;
             this.label2.Text = "货位代码";
             // 
+            // colTaskNo
+            // 
+            this.colTaskNo.DataPropertyName = "TaskNo";
+            this.colTaskNo.FilteringEnabled = false;
+            this.colTaskNo.HeaderText = "任务号";
+            this.colTaskNo.Name = "colTaskNo";
+            this.colTaskNo.ReadOnly = true;
+            this.colTaskNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "Spec";
+            this.Column9.FilteringEnabled = false;
+            this.Column9.HeaderText = "产品规格";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column9.Width = 280;
+            // 
+            // colBarCode
+            // 
+            this.colBarCode.DataPropertyName = "BarCode";
+            this.colBarCode.FilteringEnabled = false;
+            this.colBarCode.HeaderText = "熔次卷号";
+            this.colBarCode.Name = "colBarCode";
+            this.colBarCode.ReadOnly = true;
+            this.colBarCode.Width = 150;
+            // 
+            // Weight
+            // 
+            this.Weight.DataPropertyName = "Weight";
+            this.Weight.FilteringEnabled = false;
+            this.Weight.HeaderText = "重量";
+            this.Weight.Name = "Weight";
+            this.Weight.ReadOnly = true;
+            this.Weight.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "BillID";
+            this.Column2.FilteringEnabled = false;
+            this.Column2.HeaderText = "单据号码";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colProductCode
+            // 
+            this.colProductCode.DataPropertyName = "ProductCode";
+            this.colProductCode.FilteringEnabled = false;
+            this.colProductCode.HeaderText = "产品编码";
+            this.colProductCode.Name = "colProductCode";
+            this.colProductCode.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "ProductName";
+            this.Column7.FilteringEnabled = false;
+            this.Column7.HeaderText = "产品名称";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column7.Width = 120;
+            // 
             // frmInStockTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -498,6 +509,7 @@
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colTaskNo;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column9;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colBarCode;
+        private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Weight;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column2;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn colProductCode;
         private DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn Column7;

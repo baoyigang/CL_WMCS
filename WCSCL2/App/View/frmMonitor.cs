@@ -70,11 +70,11 @@ namespace App.View
             //tmWorkTimer.Elapsed += new System.Timers.ElapsedEventHandler(tmWorker);
             //tmWorkTimer.Start();
 
-            tmCrane1.Interval = 3000;
+            tmCrane1.Interval = 3007;
             tmCrane1.Elapsed += new System.Timers.ElapsedEventHandler(tmCraneWorker1);
             tmCrane1.Start();
 
-            tmCrane2.Interval = 3000;
+            tmCrane2.Interval = 3007;
             tmCrane2.Elapsed += new System.Timers.ElapsedEventHandler(tmCraneWorker2);
             tmCrane2.Start();
         }
@@ -394,86 +394,8 @@ namespace App.View
                 Logger.Info("1号堆垛机下发急停命令");
             }
         }
-        #region 输送线监控
-        private Dictionary<string, Conveyor> dicConveyor = new Dictionary<string, Conveyor>();
-
-        void Conveyor_OnDataChanged(object sender, DataChangedEventArgs e)
-        {
-            try
-            {
-                if (e.State == null)
-                    return;
-
-                string txt = e.ItemName.Split('_')[0];
-                Conveyor conveyor = GetConveyorByID(txt);
-                conveyor.value = e.State.ToString();
-
-                conveyor.ID = txt;
 
 
-                Conveyors.ConveyorInfo(conveyor);
-
-            }
-            catch (Exception ex)
-            {
-                MCP.Logger.Error("输送线监控界面中Conveyor_OnDataChanged出现异常" + ex.Message);
-            }
-        }
-        private Conveyor GetConveyorByID(string ID)
-        {
-            Conveyor conveyor = null;
-            if (dicConveyor.ContainsKey(ID))
-            {
-                conveyor = dicConveyor[ID];
-            }
-            else
-            {
-                conveyor = new Conveyor();
-                conveyor.ID = ID;
-                dicConveyor.Add(ID, conveyor);
-            }
-            return conveyor;
-        }
-
-        void Monitor_OnConveyor(ConveyorEventArgs args)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new ConveyorEventHandler(Monitor_OnConveyor), args);
-            }
-            else
-            {
-                try
-                {
-                    Conveyor conveyor = args.conveyor;
-                    Button btn = GetButton(conveyor.ID);
-
-                    if (btn == null)
-                        return;
-
-                    if (conveyor.value == "0" && conveyor.ID.IndexOf("Conveyor") >= 0)
-                        btn.Text = "";
-                    else if (conveyor.value == "1" && conveyor.ID.IndexOf("Conveyor") >= 0) //有货未转
-                        btn.Text = "■";
-                    else if (conveyor.value == "2") //无货未转
-                        btn.Text = "";
-                    else if (conveyor.value == "3") //入库
-                        btn.Text = "↓";
-                    else if (conveyor.value == "4") //出库
-                        btn.Text = "↑";
-                    else if (conveyor.value == "5")
-                        btn.BackColor = Color.Red;
-                    else
-                        btn.Text = "";
-
-                }
-                catch (Exception ex)
-                {
-                    MCP.Logger.Error("监控界面中Monitor_OnConveyor出现异常" + ex.Message);
-                }
-            }
-        }
-        #endregion
         Button GetButton(string CraneNo)
         {
             Control[] ctl = this.Controls.Find("btn" + CraneNo, true);
@@ -502,7 +424,7 @@ namespace App.View
 
         private void btnReset2_Click(object sender, EventArgs e)
         {
-            PutCommand("2", 0);
+            PutCommand("3", 0);
         }
 
         private void btnBack2_Click(object sender, EventArgs e)

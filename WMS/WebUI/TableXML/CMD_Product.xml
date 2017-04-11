@@ -16,29 +16,29 @@
     <DataType>double</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>Propertity</FieldName>
+    <FieldTitle>牌号状态</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
     <FieldName>ProductName</FieldName>
     <FieldTitle>品名</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="6">
     <FieldName>ProductEName</FieldName>
     <FieldTitle>英文品名</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="6">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="7">
     <FieldName>ProductNo</FieldName>
     <FieldTitle>ERP编码</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
   
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="7">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="8">
     <FieldName>ModelNo</FieldName>
     <FieldTitle>产品型号</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="8">
-    <FieldName>Propertity</FieldName>
-    <FieldTitle>牌号状态</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="9">

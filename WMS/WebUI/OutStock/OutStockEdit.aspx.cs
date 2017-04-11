@@ -17,6 +17,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
     {
         strID = Request.QueryString["ID"] + "";
         this.dgViewSub1.PageSize = pageSubSize;
+        this.txtBarCode.Focus();
         if (!IsPostBack)
         {
             BindDropDownList();
@@ -41,6 +42,8 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
                 this.txtUpdateDate.Text = ToYMD(DateTime.Now);
             }
         }
+        txtBarCode.Attributes.Add("onkeydown", "if(event.keyCode==13){document.all." + btnBarCode.ClientID + ".click(); return false}");
+
 
         ScriptManager.RegisterStartupScript(this.updatePanel1, this.updatePanel1.GetType(), "Resize", "resize();BindEvent();", true);
         writeJsvar(FormID, SqlCmd, strID);
@@ -214,7 +217,53 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
     }
 
+    protected void btnAddBarCode_Click(object sender, EventArgs e)
+    {
 
+        UpdateTempSub(this.dgViewSub1);
+        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
+        DataTable dt1 = bll.FillDataTable("WMS.SelectProductDetailQuery", new DataParameter("{0}", string.Format("BarCode like '%{0}%'", this.txtBarCode.Text)));
+
+        DataView dv = dt.DefaultView;
+        dv.Sort = "RowID";
+        dt = dv.ToTable();
+
+        DataRow dr = dt.NewRow();
+        int cur = dt.Rows.Count;
+
+
+            DataRow[] drs = dt.Select("Barcode='" + dt1.Rows[0]["BarCode"].ToString() + "'");
+            if (drs.Length > 0)
+            {
+                return;
+            }
+
+ 
+        dt.Rows.InsertAt(dr, cur);
+        dr["RowID"] = cur;
+        dr["BillID"] = this.txtID.Text.Trim();
+        dr["ProductCode"] = dt1.Rows[0]["ProductCode"];
+        dr["ProductName"] = dt1.Rows[0]["ProductName"];
+        dr["Spec"] = dt1.Rows[0]["Spec"];
+        dr["Propertity"] = dt1.Rows[0]["Propertity"];
+        dr["ModelNo"] = dt1.Rows[0]["ModelNo"];
+        dr["StandardNo"] = dt1.Rows[0]["StandardNo"];
+        dr["PartNo"] = dt1.Rows[0]["PartNo"];
+        dr["Barcode"] = dt1.Rows[0]["Barcode"];
+        dr["Weight"] = dt1.Rows[0]["Weight"];
+        dr["Quantity"] = 1;
+
+        this.dgViewSub1.DataSource = dt;
+        this.dgViewSub1.DataBind();
+        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
+
+
+        this.txtBarCode.Text = "";
+        this.txtBarCode.Focus();
+
+
+        
+    }
 
 
 

@@ -49,7 +49,13 @@
                             熔次卷号
                         </td>
                         <td align="left"   style="width:18%;" >
-                         <asp:textbox id="txtBarCode"   runat="server"  Width="98%" CssClass="TextBox" ></asp:textbox>
+                         <asp:textbox id="txtBarCode"   runat="server"  Width="97%" CssClass="TextBox" ></asp:textbox>
+                        </td>
+                        <td   align="center" class="musttitle" style="width:5%;">
+                            库区
+                        </td>
+                        <td align="left"   style="width:18%;" >
+                         <asp:textbox id="txtAreaCode"   runat="server"  Width="95%" CssClass="TextBox" ></asp:textbox>
                         </td>
                         
                         <td class="musttitle" align="center" style="width:5%;" >

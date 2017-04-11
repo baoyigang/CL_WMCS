@@ -5,7 +5,7 @@ using MCP;
 using System.Data;
 using Util;
 using System.Timers;
-using System.Threading;
+using System.Diagnostics;
 
 namespace App.Dispatching.Process
 {
@@ -62,7 +62,7 @@ namespace App.Dispatching.Process
                     }
                 }
 
-                tmWorkTimer.Interval = 1000;
+                tmWorkTimer.Interval = 2001;
                 tmWorkTimer.Elapsed += new ElapsedEventHandler(tmWorker);
                 
 
@@ -148,6 +148,9 @@ namespace App.Dispatching.Process
                                     }
                                     bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 13), new DataParameter("@TaskNo", TaskNo) });
 
+                                    param = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_TASK.TaskNo={0}", TaskNo)) };
+                                    dt = bll.FillDataTable("WCS.SelectTask", param);
+                                    strState = dt.Rows[0]["State"].ToString();
                                     //线程继续。
                                     break;
                                 }
@@ -158,39 +161,10 @@ namespace App.Dispatching.Process
 
                                 bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 10), new DataParameter("@TaskNo", TaskNo) });
                             }
-                            
-
-                            //清除堆垛机任务号
-
-                            //if (Column == 1 && Height == 1)
-                            //{
-                            //    if (Row<0)
-                            //    {
-                            //        Row = 1;
-                            //    }
-                            //    int[] cellAddr = new int[9];
-                            //    cellAddr[0] = 0;
-                            //    cellAddr[1] = 0;
-                            //    cellAddr[2] = 0;
-
-                            //    cellAddr[3] = 1;
-                            //    cellAddr[4] = 1;
-                            //    cellAddr[5] = Row * 2 - 1;
-                            //    cellAddr[6] = 1;
-                            //    cellAddr[7] = 1;
-                            //    cellAddr[8] = Row * 2 - 1;
-                                
-                            //    Context.ProcessDispatcher.WriteToService(stateItem.Name, "TaskAddress", cellAddr);
-                            //    Context.ProcessDispatcher.WriteToService(stateItem.Name, "TaskNo", 0);
-                            //    Context.ProcessDispatcher.WriteToService(stateItem.Name, "WriteFinished", 2);
-                            //    Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
-                            //    return;
-                            //}
-                            //else
-                            //{
+                                           
                                 WriteToService(stateItem.Name, "TaskNo", 0);
                                 Logger.Info(stateItem.ItemName + "完成标志,任务号:" + TaskNo);
-                            //}
+                            
                            
                            
                         }
@@ -200,57 +174,6 @@ namespace App.Dispatching.Process
                         Logger.Info("CraneProcess中CraneTaskFinished出错：" + ex1.Message);
                     }
                     break;
-                #region
-                //case "CraneAlarmCode":
-                //    object objCrane = ObjectUtil.GetObject(stateItem.State);
-                //    if (objCrane==null)
-                //    {
-                //        return;
-                //    }
-                //    if (objCrane.ToString()!="0")
-                //    {
-
-                //        if (objCrane.ToString() == "120")//空取
-                //        {
-                //            Logger.Error("取货后载货台无货");
-                //            string TaskNo = Util.ConvertStringChar.BytesToString(ObjectUtil.GetObjects(Context.ProcessDispatcher.WriteToService                                         (stateItem.Name, "CraneTaskNo")));
-
-                //            if (TaskNo.Length <= 0)
-                //                return;
-
-                //            dta = bll.FillDataTable("WCS.SelectTask", new DataParameter("TaskNo='{0}'", TaskNo));
-                //            string CellCode = dta.Rows[0]["CellCode"].ToString();
-                //            string sql="IsLock='0',IsActive='1',ProductCode='',BarCode='' and BillNo=''";
-
-                //            bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[]{new DataParameter("@State",9),new DataParameter                                         ("@TaskNo",TaskNo)});
-
-                //            bll.ExecNonQuery("WCS.UpdateCellByFilter", new DataParameter[] { new DataParameter("{0}", sql), new DataParameter("{1}",                                    string.Format("CellCode={0}", CellCode)) });
-                //        }
-                //        else if (objCrane.ToString() == "121")//重入
-                //        {
-                            
-                //        }
-                //        else
-                //        {
-                //            string strError = "";
-                //            DataRow[] drs = dtCraneErr.Select(string.Format("CraneErrCode={0}", objCrane.ToString()));
-                //            if (drs.Length > 0)
-                //            {
-                //                strError = drs[0]["CraneErrDesc"].ToString();
-                //            }
-                //            else
-                //            {
-                //                strError = "堆垛机未知错误";
-                //                Logger.Error(strError);
-                //            }
-                //        }
-                        
-
-                        
-                //    }
-                //    break;
-                #endregion
-
                 case "Run":
                     blRun = (int)stateItem.State == 1;
                     if (blRun)
@@ -287,7 +210,7 @@ namespace App.Dispatching.Process
               
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    if (!dCrnStatus.ContainsKey(i))
+                    if (dCrnStatus.ContainsKey(i))
                     {
                         dCrnStatus[i].Status = int.Parse(dt.Rows[i]["State"].ToString());
                     }
@@ -377,14 +300,8 @@ namespace App.Dispatching.Process
 
             //获取任务，排序优先等级、任务时间
             DataTable dtState;
-            if (CraneNo=="02")
-	        {
-                dtState = bll.FillDataTable("WCS.SelcetWcsState", new DataParameter[] { new DataParameter("{0}", CraneNo), new DataParameter("{1}", 2), new DataParameter("{2}", "WCS_TASK.State=1 or WCS_TASK.State=12 or WCS_Task.State=10") });
-	        }
-            else
-	        {
-                dtState = bll.FillDataTable("WCS.SelcetWcsState",new DataParameter[]{new DataParameter("{0}",CraneNo),new DataParameter("{1}",2),new DataParameter("{2}","WCS_TASK.State=1 or WCS_TASK.State=12")});
-	        }
+
+            dtState = bll.FillDataTable("WCS.SelcetWcsState",new DataParameter[]{new DataParameter("{0}",CraneNo),new DataParameter("{1}",2),new DataParameter("{2}","WCS_TASK.State=1 or WCS_TASK.State=12")});
 
               
                 DataParameter[] parameter;
@@ -402,7 +319,7 @@ namespace App.Dispatching.Process
             if (dt.Rows.Count>0)
             {
 
-                Thread.Sleep(5000);
+
                 DataRow dr = dt.Rows[0];
                 string TaskNo = dr["TaskNo"].ToString();
                 string BillID = dr["BillID"].ToString();
@@ -467,15 +384,15 @@ namespace App.Dispatching.Process
                  
                         if (stationNo1 == "01")
                         {
-                            WriteToService("TranLine", "TaskNo", TaskNo1);
                             WriteToService("TranLine", "TaskType", 2);
+                            WriteToService("TranLine", "TaskNo", TaskNo1);
                             WriteToService("TranLine", "SlideNum", 1);                           
                             WriteToService("TranLine", "NewTask", 1);
                          }
                          else
                         {
-                            WriteToService("TranLine", "TaskNo1", TaskNo);
                             WriteToService("TranLine", "TaskType1", 2);
+                            WriteToService("TranLine", "TaskNo1", TaskNo);
                             WriteToService("TranLine", "SlideNum1", aisleNo);
                             WriteToService("TranLine", "NewTask1", 1);
                         }
@@ -536,6 +453,7 @@ namespace App.Dispatching.Process
                 byte taskType = byte.Parse(dt.Rows[0]["TaskType"].ToString().Substring(1, 1));
                 string fromStation = dt.Rows[0]["FromStation"].ToString().Substring(1);
                 string toStation = dt.Rows[0]["ToStation"].ToString().Substring(1);
+                string TaskID = dr["taskid"].ToString();
 
                 int[] cellAddr = new int[9];
                 cellAddr[0] = 0;
@@ -558,7 +476,7 @@ namespace App.Dispatching.Process
                     if (taskType == 4)
                         State = "6";
                     //更新任务状态为执行中
-                    bll.ExecNonQuery("WCS.UpdateTaskTimeByTaskNo", new DataParameter[] { new DataParameter("@State", State), new DataParameter("@TaskNo", TaskNo) });
+                    bll.ExecNonQuery("WCS.UpdateTaskTimeByTaskID", new DataParameter[] { new DataParameter("@State", State), new DataParameter("@TaskID", TaskID) });
                     bll.ExecNonQuery("WCS.UpdateBillStateByBillID", new DataParameter[] { new DataParameter("@State", 3), new DataParameter("@BillID", BillID) });
 
                     

@@ -93,7 +93,19 @@ public partial class WebUI_Query_WarehouseCell : BasePage
 
         int Rows = int.Parse(ShelfCell.Rows[0]["Rows"].ToString());
         int Columns = 45;
+        string Col = ShelfCell.Rows[0]["Columns"].ToString();
         string Width = "2%";
+        if (Col=="28" || Col=="29")
+        {
+            Columns = 29;
+            Width = "3.1%";
+        }
+        else if (Col=="36" || Col=="37")
+        {
+            Columns = 37;
+            Width = "2.4%";
+        }
+        
          
 
 

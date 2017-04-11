@@ -184,7 +184,7 @@ namespace App.View.Task
                                 strTaskNo += ",";
 
                         }
-                        bll.ExecNonQuery("WCS.updateCrane", new DataParameter[] { new DataParameter("{0}", this.CraneNo), new DataParameter("{1}", strTaskNo) });
+                        bll.ExecNonQuery("WCS.updateCrane", new DataParameter[] { new DataParameter("{0}", this.CraneNo), new DataParameter("{1}","(" + strTaskNo + ")") });
 
                         if (this.radioButton1.Checked)
                         {
@@ -254,7 +254,7 @@ namespace App.View.Task
 
                         int SlideNum = 2;
                         string StationNo = "02";
-                        DataParameter[] paramStock = new DataParameter[] { new DataParameter("{0}", string.Format("(TaskNo={0} and ((WCS_TASK.TaskType in  ('11','16') and  WCS_TASK.State='1') or (WCS_TASK.TaskType='14' and  WCS_TASK.State='11'))) and WCS_TASK.AreaCode='{1}'", strTaskNo, AreaCode)) };
+                        DataParameter[] paramStock = new DataParameter[] { new DataParameter("{0}", string.Format("(TaskNo={0} and ((WCS_TASK.TaskType in  ('11','16') and  WCS_TASK.State='1') or (WCS_TASK.TaskType='14' and  WCS_TASK.State='11'))) and WCS_TASK.AreaCode='{1}'", strTaskNo.Substring(0,12), AreaCode)) };
                         DataTable dtTask = bll.FillDataTable("WCS.SelectTask", paramStock);
                         string sTaskNo = "";
                         if (dtTask.Rows.Count > 0)
@@ -276,6 +276,7 @@ namespace App.View.Task
                         //StationNo = dt.Rows[0]["StationNo"].ToString(); 
                         if (StationNo == "01")
                         {
+                           
                             Context.ProcessDispatcher.WriteToService("TranLine", "TaskNo", staskNo);
                             Context.ProcessDispatcher.WriteToService("TranLine", "SlideNum", SlideNum);
 
@@ -284,6 +285,7 @@ namespace App.View.Task
                         }
                         else
                         {
+                            
                             Context.ProcessDispatcher.WriteToService("TranLine", "TaskNo1", staskNo);
                             Context.ProcessDispatcher.WriteToService("TranLine", "SlideNum1", SlideNum);
 

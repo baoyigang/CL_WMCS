@@ -8,14 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using Util;
 using DataGridViewAutoFilter;
-using MCP;
 
 namespace App.View.Task
 {
     public partial class frmInStock : BaseForm
     {
         BLL.BLLBase bll = new BLL.BLLBase();
-        private Context context = null;
         public frmInStock()
         {
             InitializeComponent();
@@ -30,19 +28,6 @@ namespace App.View.Task
         {
             BindData();
             
-        }
-
-        private void toolStripButton_Request_Click(object sender, EventArgs e)
-        {
-            frmInStockTask f = new frmInStockTask();
-            ((View.BaseForm)f).Context = context;
-            f.ShowDialog();
-            //if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            //{
-            //    //string TaskNo = this.dgvMain.SelectedRows[0].Cells["colTaskNo"].Value.ToString();
-            //    //bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 1), new DataParameter("@TaskNo", TaskNo) });
-            //    this.BindData();
-            //}
         }
 
         private void toolStripButton_Cancel_Click(object sender, EventArgs e)
@@ -87,10 +72,6 @@ namespace App.View.Task
 
         private void frmInStock_Load(object sender, EventArgs e)
         {
-            context = new Context();
-
-            ContextInitialize initialize = new ContextInitialize();
-            initialize.InitializeContext(context);
             //this.BindData();
             for (int i = 0; i < this.dgvMain.Columns.Count - 1; i++)
                 ((DataGridViewAutoFilterTextBoxColumn)this.dgvMain.Columns[i]).FilteringEnabled = true;

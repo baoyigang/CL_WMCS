@@ -463,6 +463,7 @@
             this.btnBack1.TabIndex = 16;
             this.btnBack1.Text = "召回";
             this.btnBack1.UseVisualStyleBackColor = false;
+            this.btnBack1.Visible = false;
             this.btnBack1.Click += new System.EventHandler(this.btnBack1_Click);
             // 
             // label2

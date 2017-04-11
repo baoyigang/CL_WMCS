@@ -44,7 +44,7 @@ namespace App.Dispatching.Process
             {
                 AreaCode = BLL.Server.GetAreaCode();
                 //获取堆垛机信息
-                DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "1=1") });
+                DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "CraneNo='01'") });
                 for (int i = 1; i <= dt.Rows.Count; i++)
                 {
                     if (!dCrnStatus.ContainsKey(i))

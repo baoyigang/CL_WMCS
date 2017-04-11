@@ -163,6 +163,12 @@
                 <table style="width:100%; height:25px">
                     <tr>
                         <td class="table_titlebgcolor" height="25px">
+                            <asp:Label ID="lblBarcode" runat="server" Text="熔次卷号" Width="55px" font-size="13px"/>
+                            <asp:TextBox ID="txtBarCode" runat="server" Width="210px"/>
+                            &nbsp;&nbsp;
+                            <asp:Button ID="btnBarCode" runat="server" Text="确定" 
+                                CssClass="ButtonOk" Height="20px" OnClick="btnAddBarCode_Click" />
+                             &nbsp;&nbsp;
                             <asp:Button  id="btnAddDetail" CssClass=" ButtonCreate" runat="server" 
                                 Text="新增明细" onclick="btnAddDetail_Click" OnClientClick="return SelectProduct();"  Width="75px" Height="16px"  />  
                                 &nbsp;&nbsp;

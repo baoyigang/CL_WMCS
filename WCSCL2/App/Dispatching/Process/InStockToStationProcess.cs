@@ -49,17 +49,21 @@ namespace App.Dispatching.Process
                     string TaskInfo = ObjectUtil.GetObject(WriteToService(stateItem.Name, ReadName)).ToString();
                     if (TaskInfo == "0")
                         return;
-                    string TaskNo = TaskInfo.Substring(0, 10).Trim();
-             
+                    string TaskNo = TaskInfo.Trim();
+                    string TaskID = "";             
                     BLL.BLLBase bll = new BLL.BLLBase();
                     DataTable dt = bll.FillDataTable("WCS.SelectWcsTaskByTaskNo", new DataParameter("{0}", TaskNo));
-                    if (dt.Rows[0]["TaskType"].ToString() =="12" || (dt.Rows[0]["TaskType"].ToString()=="14" && dt.Rows[0]["State"] != "2"))
+                    if (dt.Rows.Count>0)
                     {
-                        return;
-                    }
+                        TaskID = dt.Rows[0]["taskid"].ToString();
+                        if (dt.Rows[0]["TaskType"].ToString() == "12" || (dt.Rows[0]["TaskType"].ToString() == "14" && dt.Rows[0]["State"].ToString() != "2") || dt.Rows[0]["State"].ToString() == "7")
+                        {
+                            return;
+                        }
                   
-
-                    DataParameter[] param = new DataParameter[] {  new DataParameter("@TaskNo", TaskNo) };
+                    }
+                    
+                    DataParameter[] param = new DataParameter[] {  new DataParameter("@TaskID", TaskID) };
                     bll.ExecNonQueryTran("WCS.UpdateInStockStation", param);
 
                     Logger.Info("任务号:" + TaskNo + ",到达入库站台:" + StationNo);

@@ -60,6 +60,10 @@ public partial class WebUI_Query_ProductQuery : BasePage
 
             if (this.txtBarCode.Text.Trim().Length > 0)
                 strWhere += string.Format(" and Product.BarCode like '%{0}%'", this.txtBarCode.Text);
+            if (this.txtAreaCode.Text.Trim().Length > 0)
+            {
+                strWhere += string.Format(" and AreaName like '%{0}%'", this.txtAreaCode.Text);
+            }
 
     }
     private bool LoadRpt()

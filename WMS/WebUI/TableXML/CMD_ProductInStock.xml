@@ -25,6 +25,11 @@
     <FieldTitle>产品编号</FieldTitle>
     <DataType>double</DataType>
   </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="8">
+    <FieldName>Propertity</FieldName>
+    <FieldTitle>牌号状态</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
     <FieldName>ProductName</FieldName>
     <FieldTitle>品名</FieldTitle>
@@ -40,11 +45,6 @@
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="7">
     <FieldName>ModelNo</FieldName>
     <FieldTitle>产品型号</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="8">
-    <FieldName>Propertity</FieldName>
-    <FieldTitle>牌号状态</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="9">

@@ -60,8 +60,6 @@
       <OPCItem ItemName="TaskType1" ClientHandler="116" OPCItemName="DB542,INT4,1" ItemType="WRITE" />
       <OPCItem ItemName="SlideNum1" ClientHandler="117" OPCItemName="DB542,INT6,1"  ItemType="WRITE"/>
       <OPCItem ItemName="NewTask1" ClientHandler="118" OPCItemName="DB542,INT8,1" ItemType="WRITE"/>
-
-      <OPCItem ItemName="TranInFinish4" ClientHandler="128" OPCItemName="DB542,X10.4,1" ItemType="WRITE"/>
       
     </OPCGroup>
   </OPCServer>

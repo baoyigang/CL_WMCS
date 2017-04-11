@@ -54,12 +54,12 @@ namespace App.Dispatching.Process
                             string StationNo = dt.Rows[0]["StationNo"].ToString();
                             if (TaskType=="11")
                             {
+                                string TaskID = dt.Rows[0]["taskid"].ToString();
                                 DataParameter[] param;
-                                param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskNo", taskNo) };
+                                param = new DataParameter[] { new DataParameter("@StationNo", StationNo), new DataParameter("@TaskID", TaskID) };
                                 bll.ExecNonQuery("WCS.UpdateTaskInStockRequest", param);
                                 Logger.Info("任务号:" + taskNo + " 托盘:" + " 开始入库,到达入库口:" + StationNo);
                             }
-
                             if (  TaskType == "14" && strState=="11") //盘点
                             {
                                 
@@ -100,35 +100,25 @@ namespace App.Dispatching.Process
 
                                         if (StationNo=="01")
                                         {
+                                            
                                             Context.ProcessDispatcher.WriteToService("TranLine", "TaskNo", staskNo);
                                             Context.ProcessDispatcher.WriteToService("TranLine", "SlideNum", SlideNum);
-                                            Context.ProcessDispatcher.WriteToService("TranLine", "NewTask", 1);
                                             Context.ProcessDispatcher.WriteToService("TranLine", "TaskType", 1);
+                                            Context.ProcessDispatcher.WriteToService("TranLine", "NewTask", 1);                                           
                                         }
                                         else
                                         {
+                                            
                                             Context.ProcessDispatcher.WriteToService("TranLine", "TaskNo1", staskNo);
                                             Context.ProcessDispatcher.WriteToService("TranLine", "SlideNum1", SlideNum);
-                                            Context.ProcessDispatcher.WriteToService("TranLine", "NewTask1", 1);
                                             Context.ProcessDispatcher.WriteToService("TranLine", "TaskType1", 1);
+                                            Context.ProcessDispatcher.WriteToService("TranLine", "NewTask1", 1);
+                                           
                                         }
 
                                         bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 2), new DataParameter("@TaskNo", taskNo) });
                                     }
                                 
-                                //string strValue = "";
-                                //string[] str = new string[3];
-                                //if (TaskType == "12" || TaskType == "14")//显示拣货信息.
-                                //{
-                                //    str[0] = "1";
-                                //    if (TaskType == "14")
-                                //        str[0] = "2";
-
-                                //    while ((strValue = FormDialog.ShowDialog(str, dt)) != "")
-                                //    {
-                                //        break;
-                                //    }
-                                //}
                             }
                         }                        
                     }

@@ -2,7 +2,7 @@
 <Configuration>
   <Servers>
     <Server Name="TranLineServer" ConnectionString="OPC.SimaticNET" GroupName="PLCGroup" GroupString="S7:[PLCTranLine]" UpdateRate="350">
-      <OPCItem ItemName="TranLineInfo_1" ClientHandler="31" OPCItemName="DB1,INT102,1"  />
+      <!--<OPCItem ItemName="TranLineInfo_1" ClientHandler="31" OPCItemName="DB1,INT102,1"  />
       <OPCItem ItemName="TranLineTaskNo_1" ClientHandler="32" OPCItemName="DB1,CHAR280,20"  />
 
       <OPCItem ItemName="TranLineInfo_2" ClientHandler="33" OPCItemName="DB1,INT104,1"  />
@@ -38,7 +38,7 @@
       <OPCItem ItemName="TranLineInfo_17" ClientHandler="63" OPCItemName="DB1,INT134,1"  />
       <OPCItem ItemName="TranLineTaskNo_17" ClientHandler="64" OPCItemName="DB1,CHAR600,20"  />
       <OPCItem ItemName="TranLineInfo_18" ClientHandler="65" OPCItemName="DB1,INT136,1"  />
-      <OPCItem ItemName="TranLineTaskNo_18" ClientHandler="66" OPCItemName="DB1,CHAR620,20"  />
+      <OPCItem ItemName="TranLineTaskNo_18" ClientHandler="66" OPCItemName="DB1,CHAR620,20"  />-->
 
     </Server>
 

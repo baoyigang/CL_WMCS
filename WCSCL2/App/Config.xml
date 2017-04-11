@@ -17,10 +17,9 @@
     <!--堆垛机Process-->
     <Process Name="CraneProcess" Type="App.exe, App.Dispatching.Process.CraneProcess">
       <Item ServiceName="CranePLC2" ItemName="CraneTaskFinished" />
-      <Item ServiceName="CranePLC3" ItemName="CraneTaskFinished" />
       <Item ServiceName="CranePLC2" ItemName="CraneAlarmCode"/>
+      <Item ServiceName="CranePLC3" ItemName="CraneTaskFinished" />
       <Item ServiceName="CranePLC3" ItemName="CraneAlarmCode"/>
-
     </Process>
 
     <!--输送线Process,入库请求-->
