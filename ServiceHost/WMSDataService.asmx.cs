@@ -181,15 +181,8 @@ namespace ServiceHost
                     }
 
                     string BillNo=dtCode.Rows[k]["BillNo"].ToString().Replace("'", "''");
-                    int HasCount = bll.GetRowCount("WMS_BillMaster", string.Format("SourceBillNo='{0}' and BillID like 'IS%' and SourceBillNo!=''", BillNo));
-                    if (HasCount > 0)
-                    {
-                        bln = "N";
-                        Msg = "单号" + BillNo + "已经传入WMS，不能再次传递！";
-                        result = bln + "," + Msg;
-                        strResult = "<RESULT>" + result + "</RESULT>";
-                        return strXML1 + strResult + strXML2;
-                    }
+                    int HasCount = 0;
+                   
                     DataRow[] drs = dt.Select(string.Format("BillNo='{0}'", BillNo));
 
                     for (int i = 0; i < drs.Length; i++)
@@ -222,7 +215,7 @@ namespace ServiceHost
                         list.Add("WMSServices.InsertBillTemp");
                         para = new DataParameter[] { new DataParameter("@BillType","IS"), 
                                                      new DataParameter("@BillNo",dr["BillNo"]),
-                                                     new DataParameter("@BillDate",dr["BillDate"]),
+                                                     new DataParameter("@BillDate",DateTime.Now),
                                                      new DataParameter("@BatchNo",dr["BatchNo"]),
                                                      new DataParameter("@ProductCode",dr["ProductCode"]),
                                                      new DataParameter("@Size",dr["Size"]),
