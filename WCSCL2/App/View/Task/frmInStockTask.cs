@@ -88,7 +88,7 @@ namespace App.View.Task
                     else
                     {
                         dtAisleCell = bll.FillDataTable("CMD.SelectAllAisleCell");
-                        this.cmbAisleNo.SelectedIndex = int.Parse(dtAisleCell.Rows[0][0].ToString().Substring(1));
+                        this.cmbAisleNo.SelectedIndex = int.Parse(dtAisleCell.Rows[0][0].ToString().Substring(1)) - 2;
                     }
                 }
                 catch(Exception ex)

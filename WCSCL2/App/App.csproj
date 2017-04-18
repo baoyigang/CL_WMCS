@@ -394,6 +394,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\54库古里立库.png" />
+    <None Include="Resources\Car.png" />
+    <None Include="Resources\Car1.png" />
     <Content Include="Resources\down.png" />
     <None Include="Resources\monitor.png" />
     <Content Include="Resources\next.png" />

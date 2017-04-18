@@ -703,5 +703,52 @@ namespace App
             MCP.Logger.Info("已给堆垛机下发取消任务指令");
         }
 
+        private void toolStripButton_Move_Click(object sender, EventArgs e)
+        {
+            if (Check_Crane_Status_IsOk(3))
+            {
+                string btnName = ((ToolStripButton)sender).Name;
+                int[] cellAddr = new int[9];
+                cellAddr[0] = 0;
+                cellAddr[1] = 0;
+                cellAddr[2] = 0;
+
+                cellAddr[3] = 1;
+                cellAddr[4] = 1;
+                cellAddr[5] = 1;
+                cellAddr[6] = 1;
+                cellAddr[7] = 1;
+                cellAddr[8] = int.Parse(btnName.Substring(btnName.Length - 1, 1));
+
+
+                context.ProcessDispatcher.WriteToService("CranePLC3", "TaskAddress", cellAddr);
+                context.ProcessDispatcher.WriteToService("CranePLC3", "WriteFinished", 2);
+            }
+        }
+
+        private bool Check_Crane_Status_IsOk(int craneNo)
+        {
+            try
+            {
+                string serviceName = "CranePLC" + craneNo;
+
+                string plcTaskNo = ObjectUtil.GetObject(context.ProcessDispatcher.WriteToService(serviceName, "CraneTaskNo")).ToString();
+
+                string craneMode = ObjectUtil.GetObject(context.ProcessDispatcher.WriteToService(serviceName, "CraneMode")).ToString();
+                object[] obj = ObjectUtil.GetObjects(context.ProcessDispatcher.WriteToService(serviceName, "CraneAlarmCode"));
+                int CraneState = int.Parse(obj[1].ToString());
+                int CraneAlarmCode = int.Parse(obj[0].ToString());
+
+                if (plcTaskNo == "0" && craneMode == "1" && CraneAlarmCode == 0 && CraneState == 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+                return false;
+            }
+        }   
     }
 }

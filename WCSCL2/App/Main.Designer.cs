@@ -77,6 +77,9 @@
             this.toolStripButton_StartCrane = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_MoveStock = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_UpERP = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Move3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Move5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Move7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.pnlTab = new System.Windows.Forms.Panel();
             this.tabForm = new System.Windows.Forms.TabControl();
@@ -467,6 +470,9 @@
             this.toolStripButton_StartCrane,
             this.toolStripButton_MoveStock,
             this.toolStripButton_UpERP,
+            this.toolStripButton_Move3,
+            this.toolStripButton_Move5,
+            this.toolStripButton_Move7,
             this.toolStripButton_Close});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
@@ -573,6 +579,39 @@
             this.toolStripButton_UpERP.Text = "上传ERP";
             this.toolStripButton_UpERP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton_UpERP.Click += new System.EventHandler(this.toolStripButton_UpERP_Click);
+            // 
+            // toolStripButton_Move3
+            // 
+            this.toolStripButton_Move3.AutoSize = false;
+            this.toolStripButton_Move3.Image = global::App.Properties.Resources.Car1;
+            this.toolStripButton_Move3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Move3.Name = "toolStripButton_Move3";
+            this.toolStripButton_Move3.Size = new System.Drawing.Size(60, 50);
+            this.toolStripButton_Move3.Text = "第二巷道";
+            this.toolStripButton_Move3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_Move3.Click += new System.EventHandler(this.toolStripButton_Move_Click);
+            // 
+            // toolStripButton_Move5
+            // 
+            this.toolStripButton_Move5.AutoSize = false;
+            this.toolStripButton_Move5.Image = global::App.Properties.Resources.Car1;
+            this.toolStripButton_Move5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Move5.Name = "toolStripButton_Move5";
+            this.toolStripButton_Move5.Size = new System.Drawing.Size(60, 50);
+            this.toolStripButton_Move5.Text = "第三巷道";
+            this.toolStripButton_Move5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_Move5.Click += new System.EventHandler(this.toolStripButton_Move_Click);
+            // 
+            // toolStripButton_Move7
+            // 
+            this.toolStripButton_Move7.AutoSize = false;
+            this.toolStripButton_Move7.Image = global::App.Properties.Resources.Car1;
+            this.toolStripButton_Move7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Move7.Name = "toolStripButton_Move7";
+            this.toolStripButton_Move7.Size = new System.Drawing.Size(60, 50);
+            this.toolStripButton_Move7.Text = "第四巷道";
+            this.toolStripButton_Move7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_Move7.Click += new System.EventHandler(this.toolStripButton_Move_Click);
             // 
             // toolStripButton_Close
             // 
@@ -886,5 +925,8 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem18;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem20;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem21;
+        private System.Windows.Forms.ToolStripButton toolStripButton_Move3;
+        private System.Windows.Forms.ToolStripButton toolStripButton_Move5;
+        private System.Windows.Forms.ToolStripButton toolStripButton_Move7;
     }
 }
