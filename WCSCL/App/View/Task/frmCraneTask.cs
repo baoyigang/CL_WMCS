@@ -386,7 +386,40 @@ namespace App.View.Task
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Context.ProcessDispatcher.WriteToService("ERP", "SED", this.textBox1.Text);
+            string TaskNo = this.textBox1.Text;
+            DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
+            //bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
+            DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcess", param);
+
+            //判断任务号是什么类型，如果是盘点另外处理
+            param = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskNo='{0}'", TaskNo)) };
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", param);
+
+            string Flag = "BatchInStock";
+            string TaskType = "";
+            string CellCode = "";
+            string strState = "";
+            if (dt.Rows.Count > 0)
+            {
+                TaskType = dt.Rows[0]["TaskType"].ToString();
+                CellCode = dt.Rows[0]["CellCode"].ToString();
+                strState = dt.Rows[0]["State"].ToString();
+                if (TaskType == "12")
+                    Flag = "BatchOutStock";
+                else if (TaskType == "14")
+                    Flag = "BatchCheckStock";
+            }
+            if (dtXml.Rows.Count > 0)
+            {
+                string BillNo = dtXml.Rows[0][0].ToString();
+                if (BillNo.Trim().Length > 0)
+                {
+
+                    string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, Flag);
+                    Context.ProcessDispatcher.WriteToService("ERP", "ACK", xml);
+                   // Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
+                }
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
