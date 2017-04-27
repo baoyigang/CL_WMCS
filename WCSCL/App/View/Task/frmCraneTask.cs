@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Util;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading; 
 
 namespace App.View.Task
 {
@@ -387,8 +390,15 @@ namespace App.View.Task
         private void button2_Click(object sender, EventArgs e)
         {
             string TaskNo = this.textBox1.Text;
+            //DataParameter[] param1 = new DataParameter[] 
+            //        {             
+            //            new DataParameter("@CellCode", this.textBox3.Text),                    
+            //            new DataParameter("@TaskNo", TaskNo),
+            //            new DataParameter("@StationNo", this.cmbStationNo.Text)
+            //        };
+
             DataParameter[] param = new DataParameter[] { new DataParameter("@TaskNo", TaskNo) };
-            //bll.ExecNonQueryTran("WCS.Sp_TaskProcess", param);
+            //bll.ExecNonQueryTran("WCS.Sp_ExecuteInStockTask", param1);
             DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcess", param);
 
             //判断任务号是什么类型，如果是盘点另外处理
@@ -424,11 +434,19 @@ namespace App.View.Task
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DataParameter[] param = new DataParameter[] { new DataParameter("{0}", string.Format("WCS_Task.TaskNo='{0}'", "1608160087")) };
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", param);
-            View.CheckScan frm = new CheckScan(6, dt);
-            frm.ShowDialog();
-            string s = frm.strValue;
+
+            IPAddress ip = IPAddress.Parse("116.168.120.1");
+            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            try
+            {
+                clientSocket.Connect(new IPEndPoint(ip, 6041)); //配置服务器IP与端口  
+                Console.WriteLine("连接服务器成功");
+            }
+            catch
+            {
+                Console.WriteLine("连接服务器失败，请按回车键退出！");
+                return;
+            }  
         }
 
     }

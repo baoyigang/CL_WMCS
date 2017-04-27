@@ -324,7 +324,7 @@ namespace App.View
         }
         private DataTable GetMonitorData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "(WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('2','3')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('2','3','4','5','6')) And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "((WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('2','3')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('2','3','4','5','6'))) And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
             return dt;
         }
         private void btnBack_Click(object sender, EventArgs e)

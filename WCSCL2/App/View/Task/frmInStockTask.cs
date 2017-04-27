@@ -190,7 +190,17 @@ namespace App.View.Task
                         {
                             dt = bll.FillDataTable("WCS.sp_GetCellByAisle", param);
                             if (dt.Rows.Count > 0)
+                            {
+                                //if (cmbStationNo.Text=="01" && "1号光电超高")
+                                //{
+
+                                //}
+                                // else if(cmbStationNo.Text="02" && "2号光电超高")
+                                //{
+
+                                //}
                                 this.txtCellCode.Text = dt.Rows[0][0].ToString();
+                            }
                             else
                                 this.txtCellCode.Text = "";
                         }

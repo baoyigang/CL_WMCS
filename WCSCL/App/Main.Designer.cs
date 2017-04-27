@@ -269,6 +269,7 @@
             this.toolStripButton1.Size = new System.Drawing.Size(60, 50);
             this.toolStripButton1.Text = "任务测试";
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton1.Visible = false;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripButton_CellMonitor

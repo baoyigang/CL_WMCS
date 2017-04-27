@@ -219,6 +219,13 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
     protected void btnAddBarCode_Click(object sender, EventArgs e)
     {
+        if (this.txtBarCode.Text.Trim() == "")
+        {
+            this.txtBarCode.Text = "";
+            this.txtBarCode.Focus();
+            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            return;
+        }
 
         UpdateTempSub(this.dgViewSub1);
         DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];

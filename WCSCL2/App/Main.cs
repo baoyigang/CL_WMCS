@@ -49,10 +49,6 @@ namespace App
                 {
                     this.toolStripButton1.Visible = false;
                 }
-                context.ProcessDispatcher.WriteToService("TranLine", "TaskType", 2);
-                context.ProcessDispatcher.WriteToService("TranLine", "TaskNo", 1704080050);
-                context.ProcessDispatcher.WriteToService("TranLine", "SlideNum", 1);
-                context.ProcessDispatcher.WriteToService("TranLine", "NewTask", 1);
 
                 View.frmMonitor f = new View.frmMonitor();
                 ShowForm(f);

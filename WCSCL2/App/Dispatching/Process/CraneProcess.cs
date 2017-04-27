@@ -352,10 +352,8 @@ namespace App.Dispatching.Process
                 cellAddr[7] = byte.Parse(toStation.Substring(6, 3));
                 cellAddr[8] = byte.Parse(toStation.Substring(0, 3));
 
-                int taskNo = int.Parse(dr["TaskNo"].ToString());
-                
                 WriteToService(serviceName, "TaskAddress", cellAddr);
-                WriteToService(serviceName, "TaskNo", taskNo);
+                WriteToService(serviceName, "TaskNo", TaskNo);
                 if (WriteToService(serviceName, "WriteFinished", 1))
                 {
                     //更新任务状态为执行中
@@ -379,13 +377,12 @@ namespace App.Dispatching.Process
                     }
                     try
                     {
-                        int TaskNo1 = int.Parse(TaskNo);
                         int aisleNo = int.Parse(AisleNo);
                  
                         if (stationNo1 == "01")
                         {
                             WriteToService("TranLine", "TaskType", 2);
-                            WriteToService("TranLine", "TaskNo", TaskNo1);
+                            WriteToService("TranLine", "TaskNo", TaskNo);
                             WriteToService("TranLine", "SlideNum", 1);                           
                             WriteToService("TranLine", "NewTask", 1);
                          }

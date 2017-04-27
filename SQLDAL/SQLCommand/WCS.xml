@@ -388,5 +388,44 @@
       SELECT distinct InStation from CMD_Shelf where AreaCode='002' order by InStation
     </CommandString>
   </Command>
-  
+
+  <Command ID="SelectTodayTask">
+    <CommandString>
+      select COUNT(*) from WCS_TASK where State!=9  and SUBSTRING(taskno,1,6)='{0}' and {1}
+    </CommandString>
+  </Command>
+  <Command ID="SelectTaskGL">
+    <CommandString>
+      select CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date1,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as Task,C3.InTask,C1.InFiniTask,C2.InWaitTask,C4.OutTask,C5.OutFiniTask,C6.OutWaitTask from WCS_TASK
+      left join
+      (select CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date2,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as InTask from WCS_TASK
+      where State!=9 and TaskType=11
+      group by CONVERT(Varchar(10),Wcs_task.Taskdate,120) ) C3 on C3.date2=CONVERT(Varchar(10),Wcs_task.Taskdate,120)
+      left join
+      (select CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date2,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as InFiniTask from WCS_TASK
+      where State=7 and TaskType=11
+      group by CONVERT(Varchar(10),Wcs_task.Taskdate,120) ) C1 on C1.date2=CONVERT(Varchar(10),Wcs_task.Taskdate,120)
+      left join
+      (select CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date2,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as InWaitTask from WCS_TASK
+      where (State!=7 and State!=9) and TaskType=11
+      group by CONVERT(Varchar(10),Wcs_task.Taskdate,120) ) C2 on C2.date2=CONVERT(Varchar(10),Wcs_task.Taskdate,120)
+      left join
+      (select CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date2,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as OutTask from WCS_TASK
+      where State!=9 and TaskType=12
+      group by CONVERT(Varchar(10),Wcs_task.Taskdate,120) ) C4 on C4.date2=CONVERT(Varchar(10),Wcs_task.Taskdate,120)
+      left join
+      (select CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date2,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as OutFiniTask from WCS_TASK
+      where State=7 and TaskType=12
+      group by CONVERT(Varchar(10),Wcs_task.Taskdate,120) ) C5 on C5.date2=CONVERT(Varchar(10),Wcs_task.Taskdate,120)
+      left join
+      (select CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date2,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as OutWaitTask from WCS_TASK
+      where (State!=7 and State!=9) and TaskType=12
+      group by CONVERT(Varchar(10),Wcs_task.Taskdate,120) ) C6 on C6.date2=CONVERT(Varchar(10),Wcs_task.Taskdate,120)
+      where State!=9 and (TaskType=11 or TaskType=12)
+      group by CONVERT(Varchar(10),Wcs_task.Taskdate,120) ,C3.InTask, C1.InFiniTask,c2.InWaitTask,C4.OutTask,c5.OutFiniTask,C6.OutWaitTask
+      order by date1 desc
+
+
+    </CommandString>
+  </Command>
 </SqlCommand>

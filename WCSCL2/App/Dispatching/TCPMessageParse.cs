@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MCP;
- 
+
 
 namespace App.Dispatching
 {
@@ -14,6 +14,11 @@ namespace App.Dispatching
 
             try
             {
+
+                string Comd = "";
+                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+
+
                 string[] msgs = msg.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
                 if (msgs.Length < 4)
                 {
@@ -23,8 +28,8 @@ namespace App.Dispatching
                     msgs[2] = "";
                     msgs[3] = "";
                 }
-                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                string Comd = msgs[0];
+
+                Comd = msgs[0];
                 dictionary.Add("BillNo", msgs[1]);
                 dictionary.Add("Result", msgs[2]);
                 dictionary.Add("MSG", msgs[3]);
