@@ -7,6 +7,7 @@ using System.Data;
 namespace ProductionKB
 {
     public delegate void TaskEventHandler(TaskEventArgs args);
+    public delegate void InStockEventHandler(InStockArgs args);
     public class TaskEventArgs
     {
         private DataTable datatable;
@@ -33,6 +34,35 @@ namespace ProductionKB
             if (OnTask != null)
             {
                 OnTask(new TaskEventArgs(dt));
+            }
+        }
+    }
+    public class InStockArgs
+    {
+        private DataTable datatable;
+
+        public DataTable datatTable
+        {
+            get
+            {
+                return datatable;
+            }
+        }
+
+        public InStockArgs(DataTable dt)
+        {
+            this.datatable = dt;
+        }
+    }
+    public class InStockData
+    {
+        public static event InStockEventHandler InTask = null;
+
+        public static void InStockInfo(DataTable dt)
+        {
+            if (InTask != null)
+            {
+                InTask(new InStockArgs(dt));
             }
         }
     }
