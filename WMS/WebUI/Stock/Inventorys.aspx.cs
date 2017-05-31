@@ -14,15 +14,26 @@ using System.Drawing;
 
 public partial class WebUI_Stock_Inventorys : BasePage
 {
+    BLL.BLLBase bll = new BLL.BLLBase();
     private string Filter = "BillID like 'IN%'";
     protected void Page_Load(object sender, EventArgs e)
     {
         this.GridView2.PageSize = pageSubSize;
         if (!IsPostBack)
         {
-            ViewState["filter"] = Filter;
             ViewState["CurrentPage"] = 1;
+            BindDropDownList();
 
+            string strwhere = "";
+            if (ddlArea.Items.Count == 1)
+            {
+                strwhere = string.Format(" AreaCode ='{0}'", this.ddlArea.SelectedValue);
+            }
+            else
+            {
+                strwhere = string.Format(" AreaCode in (select AreaCode from Sys_UserAreaCode where UserID={0})", Session["UserID"].ToString());
+            }
+            ViewState["filter"] = Filter + "and" + strwhere;
             try
             {
                 DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
@@ -57,13 +68,33 @@ public partial class WebUI_Stock_Inventorys : BasePage
 
         }
     }
-
+    private void BindDropDownList()
+    {
+        DataTable dtArea = bll.FillDataTable("Security.SelectUserAreaByWhere", new DataParameter[] { new DataParameter("{0}", string.Format("UserName='{0}'", Session["G_user"].ToString())) });
+        this.ddlArea.DataTextField = "AreaName";
+        this.ddlArea.DataValueField = "AreaCode";
+        this.ddlArea.DataSource = dtArea;
+        this.ddlArea.DataBind();
+        if (dtArea.Rows.Count > 1)
+            this.ddlArea.Items.Insert(0, new ListItem("", ""));
+        if (this.ddlArea.Items.Count > 0)
+            this.ddlArea.SelectedIndex = 0;
+    }
     protected void btnSearch_Click(object sender, EventArgs e)
     {
 
         try
         {
-            ViewState["filter"] = Filter + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
+            string strwhere = "";
+            if (ddlArea.SelectedValue.Length == 0)
+            {
+                strwhere = string.Format(" AreaCode in (select AreaCode from Sys_UserAreaCode where UserID={0})", Session["UserID"].ToString());
+            }
+            else
+            {
+                strwhere = string.Format(" AreaCode='{0}'", this.ddlArea.SelectedValue);
+            }
+            ViewState["filter"] = Filter + " and " + strwhere + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
             ViewState["CurrentPage"] = 1;
             hdnRowIndex.Value = "0";
             dvscrollX.Value = "0";
@@ -233,6 +264,9 @@ public partial class WebUI_Stock_Inventorys : BasePage
         ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "SetScroll", "GetResultFromServer();", true);
     }
 
-
+    protected void ddlArea_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        btnSearch_Click(null, null);
+    }
 }
  

@@ -52,7 +52,7 @@ public partial class WebUI_Stock_MoveEdit : BasePage
 
     private void BindDropDownList()
     {
-        DataTable dtArea = bll.FillDataTable("Cmd.SelectArea");
+        DataTable dtArea = bll.FillDataTable("Security.SelectUserAreaByWhere", new DataParameter[] { new DataParameter("{0}", string.Format("UserName='{0}'", Session["G_user"].ToString())) });
         this.ddlAreaCode.DataValueField = "AreaCode";
         this.ddlAreaCode.DataTextField = "AreaName";
         this.ddlAreaCode.DataSource = dtArea;

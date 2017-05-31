@@ -54,8 +54,12 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
     private void BindDropDownList()
     {
-        
-        
+
+        DataTable dtArea = bll.FillDataTable("Security.SelectUserAreaByWhere", new DataParameter[] { new DataParameter("{0}", string.Format("UserName='{0}'", Session["G_user"].ToString())) });
+        this.ddlAreaCode.DataTextField = "AreaName";
+        this.ddlAreaCode.DataValueField = "AreaCode";
+        this.ddlAreaCode.DataSource = dtArea;
+        this.ddlAreaCode.DataBind();
 
         DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType", new DataParameter[] { new DataParameter("{0}", "Flag=2") });
         this.ddlBillTypeCode.DataValueField = "BillTypeCode";
@@ -219,24 +223,26 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
 
     protected void btnAddBarCode_Click(object sender, EventArgs e)
     {
-        if (this.txtBarCode.Text.Trim() == "")
+        try
         {
-            this.txtBarCode.Text = "";
-            this.txtBarCode.Focus();
-            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
-            return;
-        }
+            if (this.txtBarCode.Text.Trim() == "")
+            {
+                this.txtBarCode.Text = "";
+                this.txtBarCode.Focus();
+                MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+                return;
+            }
 
-        UpdateTempSub(this.dgViewSub1);
-        DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
-        DataTable dt1 = bll.FillDataTable("WMS.SelectProductDetailQuery", new DataParameter("{0}", string.Format("BarCode like '%{0}%'", this.txtBarCode.Text)));
+            UpdateTempSub(this.dgViewSub1);
+            DataTable dt = (DataTable)ViewState[FormID + "_Edit_dgViewSub1"];
+            DataTable dt1 = bll.FillDataTable("WMS.SelectProductDetailQuery", new DataParameter("{0}", string.Format("BarCode like '%{0}%' And AreaCode={1}", this.txtBarCode.Text, this.ddlAreaCode.SelectedValue)));
 
-        DataView dv = dt.DefaultView;
-        dv.Sort = "RowID";
-        dt = dv.ToTable();
+            DataView dv = dt.DefaultView;
+            dv.Sort = "RowID";
+            dt = dv.ToTable();
 
-        DataRow dr = dt.NewRow();
-        int cur = dt.Rows.Count;
+            DataRow dr = dt.NewRow();
+            int cur = dt.Rows.Count;
 
 
             DataRow[] drs = dt.Select("Barcode='" + dt1.Rows[0]["BarCode"].ToString() + "'");
@@ -245,30 +251,35 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
                 return;
             }
 
- 
-        dt.Rows.InsertAt(dr, cur);
-        dr["RowID"] = cur;
-        dr["BillID"] = this.txtID.Text.Trim();
-        dr["ProductCode"] = dt1.Rows[0]["ProductCode"];
-        dr["ProductName"] = dt1.Rows[0]["ProductName"];
-        dr["Spec"] = dt1.Rows[0]["Spec"];
-        dr["Propertity"] = dt1.Rows[0]["Propertity"];
-        dr["ModelNo"] = dt1.Rows[0]["ModelNo"];
-        dr["StandardNo"] = dt1.Rows[0]["StandardNo"];
-        dr["PartNo"] = dt1.Rows[0]["PartNo"];
-        dr["Barcode"] = dt1.Rows[0]["Barcode"];
-        dr["Weight"] = dt1.Rows[0]["Weight"];
-        dr["Quantity"] = 1;
 
-        this.dgViewSub1.DataSource = dt;
-        this.dgViewSub1.DataBind();
-        ViewState[FormID + "_Edit_dgViewSub1"] = dt;
+            dt.Rows.InsertAt(dr, cur);
+            dr["RowID"] = cur;
+            dr["BillID"] = this.txtID.Text.Trim();
+            dr["ProductCode"] = dt1.Rows[0]["ProductCode"];
+            dr["ProductName"] = dt1.Rows[0]["ProductName"];
+            dr["Spec"] = dt1.Rows[0]["Spec"];
+            dr["Propertity"] = dt1.Rows[0]["Propertity"];
+            dr["ModelNo"] = dt1.Rows[0]["ModelNo"];
+            dr["StandardNo"] = dt1.Rows[0]["StandardNo"];
+            dr["PartNo"] = dt1.Rows[0]["PartNo"];
+            dr["Barcode"] = dt1.Rows[0]["Barcode"];
+            dr["Weight"] = dt1.Rows[0]["Weight"];
+            dr["Quantity"] = 1;
 
-
-        this.txtBarCode.Text = "";
-        this.txtBarCode.Focus();
+            this.dgViewSub1.DataSource = dt;
+            this.dgViewSub1.DataBind();
+            ViewState[FormID + "_Edit_dgViewSub1"] = dt;
 
 
+            this.txtBarCode.Text = "";
+            this.txtBarCode.Focus();
+
+
+        }
+        catch (Exception)
+        {
+
+        }
         
     }
 
@@ -432,7 +443,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
                                              new DataParameter("@BillID", this.txtID.Text.Trim()),
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
-                                             new DataParameter("@AreaCode",""),
+                                             new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
                                              new DataParameter("@SourceBillNo",this.txtSourceBillNo.Text),
                                              new DataParameter("@BatchNo",this.txtBatchNo.Text),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
@@ -447,7 +458,7 @@ public partial class WebUI_OutStock_OutStockEdit : BasePage
             para = new DataParameter[] { 
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
-                                             new DataParameter("@AreaCode",""),
+                                             new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
                                              new DataParameter("@SourceBillNo",this.txtSourceBillNo.Text),
                                              new DataParameter("@BatchNo",this.txtBatchNo.Text),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),

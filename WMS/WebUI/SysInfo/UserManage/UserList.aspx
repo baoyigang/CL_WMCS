@@ -94,7 +94,10 @@
             }
 
         }
-
+        function ShowUserArea(userID) {
+            window.showModalDialog("Temp.aspx?UserID=" + userID, window, "DialogHeight:150px;DialogWidth:400px;help:no;scroll:no");
+            return false;
+        }
         function ClearName() {
             document.getElementById('txtEmployeeCode').value = "";
             document.getElementById('txtEmployeeName').value = "";
@@ -170,9 +173,15 @@
                                 <HeaderStyle Width="120px" />
                             </asp:BoundField>
                             <asp:BoundField DataField="EmployeeCode" HeaderText="用户姓名">
-                                <HeaderStyle Width="100px" />
+                                <HeaderStyle Width="120px" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Memo" HeaderText="备注"></asp:BoundField>
+                            <asp:BoundField DataField="Memo" HeaderText="备注">
+                                 <HeaderStyle Width="200px" />
+                            </asp:BoundField>
+                            <asp:TemplateField HeaderText="库区管理">
+                                 <ItemStyle Width="85px" Wrap="False" />
+                                <HeaderStyle Width="85px" Wrap="False" />
+                                </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                  </div>

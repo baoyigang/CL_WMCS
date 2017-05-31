@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' ?>
+<Config>
+  <OPCServer ConnectionString="OPC.SimaticNET">
+    <!--<OPCGroup GroupName="PLCGroup" GroupString="S7:[@LOCALSERVER]" UpdateRate="350">-->
+    <OPCGroup GroupName="PLCGroup" GroupString="S7:[PLCTranLine]" UpdateRate="350">
+      <!--读取信号-->
+      <!--<OPCItem ItemName="ReadBarcode" ClientHandler="1" OPCItemName="DB1,X4.0,1"  ItemType="READ" IsActive="true"/>-->
+      <!--<OPCItem ItemName="StockRequest" ClientHandler="2" OPCItemName="DB1,X5.0,1" ItemType="READ" IsActive="true"/>-->
+      <OPCItem ItemName="StockRequest" ClientHandler="2" OPCItemName="DB541,X0.5,1" ItemType="READ" IsActive="true"/>
+
+
+
+      <OPCItem ItemName="InFinish1" ClientHandler="21" OPCItemName="DB541,X0.0,1" ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="InTaskNo1" ClientHandler="22" OPCItemName="DB541,DINT2,1" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="InFinish2" ClientHandler="23" OPCItemName="DB541,X0.1,1" ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="InTaskNo2" ClientHandler="24" OPCItemName="DB541,DINT6,1" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="InFinish3" ClientHandler="25" OPCItemName="DB541,X0.2,1" ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="InTaskNo3" ClientHandler="26" OPCItemName="DB541,DINT10,1" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="InFinish4" ClientHandler="27" OPCItemName="DB541,X0.3,1" ItemType="READ" IsActive="true"/>
+      <OPCItem ItemName="InTaskNo4" ClientHandler="28" OPCItemName="DB541,DINT14,1" ItemType="READ" IsActive="false"/>
+      
+      <OPCItem ItemName="ReadTaskNo" ClientHandler="31" OPCItemName="DB541,DINT18,1" ItemType="READ" IsActive="true"/>
+
+
+      <!--<OPCItem ItemName="StationLoad01" ClientHandler="35" OPCItemName="DB541,X0.3,1" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="StationLoad02" ClientHandler="37" OPCItemName="DB541,X18.0,1" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="StationLoad03" ClientHandler="39" OPCItemName="DB541,X18.1,1" ItemType="READ" IsActive="false"/>
+      <OPCItem ItemName="StationLoad04" ClientHandler="41" OPCItemName="DB541,X18.2,1" ItemType="READ" IsActive="false"/>-->
+
+      
+      
+      
+      <OPCItem ItemName="TaskNo" ClientHandler="111" OPCItemName="DB540,DINT0,1" ItemType="WRITE" />
+      <OPCItem ItemName="SlideNum" ClientHandler="113" OPCItemName="DB540,INT4,1"  ItemType="WRITE"/>
+      <OPCItem ItemName="TaskType" ClientHandler="112" OPCItemName="DB540,INT6,1" ItemType="WRITE" />
+      <OPCItem ItemName="Height" ClientHandler="114" OPCItemName="DB540,INT8,1" ItemType="WRITE"/>
+      <OPCItem ItemName="NewTask" ClientHandler="115" OPCItemName="DB540,INT10,1" ItemType="WRITE"/>
+      <OPCItem ItemName="NewHeight" ClientHandler="116" OPCItemName="DB540,INT12,1" ItemType="WRITE"/>
+
+    </OPCGroup>
+  </OPCServer>
+</Config>

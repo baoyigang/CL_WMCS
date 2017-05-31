@@ -37,11 +37,20 @@
             <ContentTemplate>
                 <div>
                     <table  style="width: 100%; height: 20px;">
-                    <tr>
+                     <tr>
+                            <td class="smalltitle" align="center" width="7%" >
+                               库区
+                             </td>
+                            <td  width="12%" height="20">&nbsp;
+                                <asp:dropdownlist id="ddlArea" runat="server" Width="85%" 
+                                    AutoPostBack="True" onselectedindexchanged="ddlArea_SelectedIndexChanged" >
+                                    
+                                </asp:dropdownlist>
+                            </td>
 						    <td class="smalltitle" align="center" width="7%" >
                                 <asp:Literal ID="Literal1" Text="查询栏位" runat="server"  ></asp:Literal>
                              </td>
-						    <td  width="15%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
+						    <td  width="12%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
                                     <asp:ListItem Selected="True" Value="BillTypeName">出库类型</asp:ListItem>
                                     <asp:ListItem Value="FactoryName">工程</asp:ListItem>
                                     <asp:ListItem Value="BillID">出库单号</asp:ListItem>
@@ -51,7 +60,7 @@
 						    <td class="smalltitle" align="center" width="7%">
                                 <asp:Literal ID="Literal2" Text="查询内容" runat="server"></asp:Literal>
                             </td>
-						    <td  width="26%" height="20" valign="middle">&nbsp;<asp:textbox id="txtSearch" 
+						    <td  width="15%" height="20" valign="middle">&nbsp;<asp:textbox id="txtSearch" 
                                     tabIndex="1" runat="server" Width="90%" CssClass="TextBox"  
                                     heigth="16px" ></asp:textbox>
                                
@@ -106,6 +115,8 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="AreaName" HeaderText="库区" 
+                                SortExpression="AreaName" />
                             <asp:BoundField DataField="BillTypeName" HeaderText="出库类型" SortExpression="BillTypeName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />

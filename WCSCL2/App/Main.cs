@@ -144,7 +144,7 @@ namespace App
         }
         private DataTable GetMonitorData()
         {
-            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "((WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3','12')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('0','3','10','13')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('0','3','4','5','6'))) And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
+            DataTable dt = bll.FillDataTable("WCS.SelectTask", new DataParameter[] { new DataParameter("{0}", "((WCS_TASK.TaskType='11' and WCS_TASK.State in('1','2','3','12')) OR (WCS_TASK.TaskType in('12','13') and WCS_TASK.State in('0','3','10','13')) OR (WCS_TASK.TaskType in('14') and WCS_TASK.State in('0','3','4','5','6','2','10','13','12'))) And WCS_TASK.AreaCode='" + BLL.Server.GetAreaCode() + "'") });
             return dt;
         }
 
@@ -584,10 +584,10 @@ namespace App
                 int Flag = 1;
                 //if (CraneLoad.Equals("0") || CraneLoad.Equals("False"))
                 //{
-                if (CraneNo=="02" && (CraneLoad.Equals("1") || CraneLoad.Equals("True"))) 
-                {
-                    Flag = 3;
-                }
+                //if (CraneNo=="02" && (CraneLoad.Equals("1") || CraneLoad.Equals("True"))) 
+                //{
+                //    Flag = 3;
+                //}
 
                     cellAddr[3] = byte.Parse(fromStation.Substring(3, 3));
                     cellAddr[4] = byte.Parse(fromStation.Substring(6, 3));
@@ -745,6 +745,45 @@ namespace App
                 Logger.Error(ex.Message);
                 return false;
             }
-        }   
+        }
+
+        private void ToolStripMenuItemTranLine_Click(object sender, EventArgs e)
+        {
+            if (this.dgvMain.CurrentCell != null)
+            {
+                string TaskNo = dgvMain.CurrentRow.Cells["Column5"].Value.ToString();
+                string CraneNo = dgvMain.CurrentRow.Cells["colCraneNo"].Value.ToString();
+                string AisleNo = dgvMain.CurrentRow.Cells["Column8"].Value.ToString();
+                int aisleNo = int.Parse(AisleNo);
+                string TaskType = dgvMain.CurrentRow.Cells["Column1"].Value.ToString();
+                int TranType;
+                if (TaskType=="调拨入库")
+                {
+                    TranType = 1;
+                }
+                else
+                {
+                    TranType = 2;
+                }
+                if (CraneNo=="02")
+                {
+                    context.ProcessDispatcher.WriteToService("TranLine", "TaskType", TranType);
+                    context.ProcessDispatcher.WriteToService("TranLine", "TaskNo", TaskNo);
+                    context.ProcessDispatcher.WriteToService("TranLine", "SlideNum", 1);
+                    context.ProcessDispatcher.WriteToService("TranLine", "NewTask", 1);
+
+                }
+                else
+                {
+                    context.ProcessDispatcher.WriteToService("TranLine", "TaskType1", TranType);
+                    context.ProcessDispatcher.WriteToService("TranLine", "TaskNo1", TaskNo);
+                    context.ProcessDispatcher.WriteToService("TranLine", "SlideNum1", aisleNo);
+                    context.ProcessDispatcher.WriteToService("TranLine", "NewTask1", 1);
+                }
+
+            }
+        }
+
+
     }
 }

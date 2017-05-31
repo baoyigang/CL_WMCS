@@ -398,21 +398,40 @@ namespace App.View.Task
                 if (this.txtBarcode.Text.Trim().Length == 0)
                     return;
                 //根据熔次卷号获取任务
-                DataTable dt = bll.FillDataTable("WCS.GetTaskByBarcode", new DataParameter[] { new DataParameter("@Barcode", this.txtBarcode.Text.Trim()) });
 
-                //bll.ExecNonQuery("WCS.updateCrane", new DataParameter[] { new DataParameter("{0}", this.CraneNo), new DataParameter("{1}", this.txtBarcode.Text.Trim()) });
-                
-
-                if (dt.Rows.Count > 0)
+                int count = bll.GetRowCount("CMD_Cell", string.Format("BarCode like '% {0} %' or BarCode like '{0} %' or BarCode like '% {0}' or Barcode='{0}'", this.txtBarcode.Text.Trim()));
+                if (count > 0)
                 {
-                    SetDataSource(dt);
+                    MCP.Logger.Error("此熔次卷号 " + this.txtBarcode.Text.Trim() + "在库存中已经存在，不能入库！");
+                    this.txtBarcode.Text = "";
                 }
                 else
                 {
-                    MCP.Logger.Error("此熔次卷号 " + this.txtBarcode.Text.Trim() + " 不存在，或已经扫描入库！");
+                    DataTable dt = bll.FillDataTable("WCS.GetTaskByBarcode", new DataParameter[] { new DataParameter("@Barcode", this.txtBarcode.Text.Trim()) });
+                    if (dt.Rows.Count > 0)
+                    {
+                        SetDataSource(dt);
+                    }
+                    else
+                    {
+
+                        count = bll.GetRowCount("WCS_Task", string.Format("BarCode='{0}' and State>0 and State<7", this.txtBarcode.Text.Trim()));
+                        if (count > 0)
+                        {
+                            MCP.Logger.Error("此熔次卷号 " + this.txtBarcode.Text.Trim() + " 已经扫描，正在执行中!");
+                        }
+                        else
+                        {
+                            MCP.Logger.Error("此熔次卷号 " + this.txtBarcode.Text.Trim() + " 还未产生入库任务，请查询后再入库！");
+                        }
+                    }
+
+
+
+
                     this.txtBarcode.Text = "";
                 }
- 
+
             }
 
         }       

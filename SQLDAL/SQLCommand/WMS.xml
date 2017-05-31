@@ -5,7 +5,7 @@
     <CommandString>
       select  * from View_WMS_BillMaster
       where {0}
-      ORDER BY BillDate DESC, BillID DESC
+      ORDER BY State,BillDate DESC, BillID DESC
     </CommandString>
   </Command>
   <Command ID="DeleteBillMaster">

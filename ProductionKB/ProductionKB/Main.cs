@@ -18,7 +18,6 @@ namespace ProductionKB
         }
         int x;
         byte[] buffer = new byte[3];
-        Random r = new Random();
         BLL.BLLBase bll = new BLL.BLLBase();
         private System.Timers.Timer tmWorkTimer = new System.Timers.Timer();
         private void Form1_Load(object sender, EventArgs e)
@@ -26,10 +25,14 @@ namespace ProductionKB
             //WinControls w = new WinControls();
             //w.Parent = this.splitContainer1.Panel1;
             //w.Size = this.splitContainer1.Panel1.Size;
+            this.pictureBox2.Controls.Add(this.label6);
+            this.label6.BackColor = Color.Transparent;
+            MainData.OnTask += new TaskEventHandler(Data_OnTask);
             bsMain.DataSource = GetMonitorData();
             tmWorkTimer.Interval = 10000;
             tmWorkTimer.Elapsed += new System.Timers.ElapsedEventHandler(tmWorker);
             timer1.Start();
+            tmWorkTimer.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -41,11 +44,8 @@ namespace ProductionKB
                 }
                 else
                 {
-                    this.label6.Left = this.label6.Left + 100;
+                    this.label6.Left = this.label6.Left + 10;
                 }
-                r.NextBytes(buffer);
-                Color c = Color.FromArgb(buffer[0], buffer[1], buffer[2]);
-                label6.ForeColor = c;
 
                
         }
@@ -96,7 +96,8 @@ namespace ProductionKB
             try
             {
                 tmWorkTimer.Stop();
-                bsMain.DataSource = GetMonitorData();
+                DataTable dt = GetMonitorData();
+                MainData.TaskInfo(dt);
             }
             catch (Exception ex)
             {
@@ -107,6 +108,30 @@ namespace ProductionKB
                 tmWorkTimer.Start();
             }
 
+        }
+        void Data_OnTask(TaskEventArgs args)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new TaskEventHandler(Data_OnTask), args);
+            }
+            else
+            {
+                lock (this.dataGridView2)
+                {
+                    DataTable dt = args.datatTable;
+                    this.bsMain.DataSource = dt;          
+                }
+            }
+        }
+
+        private void dataGridView2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TdTask td1 = new TdTask();
+                td1.Show();
+            }
         }
     }
 }

@@ -319,6 +319,29 @@
       select *  from Sys_AutoCode where {0}
     </CommandString>
   </Command>
-  
-  
+  <Command ID="SelectUserAreaByWhere">
+    <CommandString>
+      select a.*,u.UserName,r.AreaName from sys_USERAREACODE a
+      left join SYS_USERLIST u on a.userid=u.UserID
+      left join CMD_Area r on a.areaCode=r.AreaCode
+      where {0}
+    </CommandString>
+  </Command>
+  <Command ID="SelectUserArea">
+    <CommandString>
+      select Sys_UserAreaCode.*,CMD_Area.AreaName from Sys_UserAreaCode
+      left join CMD_Area on Sys_UserAreaCode.AreaCode=CMD_Area.AreaCode
+      where UserID=@UserID
+    </CommandString>
+  </Command>
+  <Command ID="DeleteUserArea">
+    <CommandString>
+      delete from Sys_UserAreaCode where UserID=@UserID
+    </CommandString>
+  </Command>
+  <Command ID="InsertUserArea">
+    <CommandString>
+      insert into Sys_UserAreaCode (UserID,AreaCode) values (@UserID,@AreaCode)
+    </CommandString>
+  </Command>
 </SqlCommand>

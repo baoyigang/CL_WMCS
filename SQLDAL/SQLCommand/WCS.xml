@@ -4,10 +4,10 @@
   <Command ID="SelectTask">
     <CommandString>
       SELECT WCS_TASK.*, CMD_BillType.BillTypeName,CMD_Product.ProductName,CMD_Product.Spec, Sys_TableState.StateDesc,S1.StationAddtess,
-      (case when WCS_TASK.TaskType='11' or (WCS_TASK.TaskType='14' and WCS_TASK.State in('5','6'))
+      (case when WCS_TASK.TaskType='11' or (WCS_TASK.TaskType='14' and WCS_TASK.State in('5','6','12'))
       then S1.StationAddtess when WCS_TASK.TaskType in('12','13') or (WCS_TASK.TaskType='14' and
-      WCS_TASK.State in('0','1','2','3','4','7','9'))  then WCS_TASK.CellCode else '' end) FromStation,
-      (case when WCS_TASK.TaskType='11' or (WCS_TASK.TaskType='14' and WCS_TASK.State in('5','6','7','9'))
+      WCS_TASK.State in('0','1','2','3','4','7','9','10','13'))  then WCS_TASK.CellCode else '' end) FromStation,
+      (case when WCS_TASK.TaskType='11' or (WCS_TASK.TaskType='14' and WCS_TASK.State in('5','6','7','9','12','10'))
       then WCS_TASK.CellCode when WCS_TASK.TaskType in('12') or (WCS_TASK.TaskType='14'
       and WCS_TASK.State in('0','1','2','3','4')) then S1.StationAddtess when WCS_TASK.TaskType='13'
       then WCS_TASK.ToCellCode else '' end) ToStation,S1.AisleNo,C1.BillNo,C1.InDate
@@ -49,6 +49,11 @@
   <Command ID="sp_GetCellByAisle">
     <CommandString>
       sp_GetCellByAisle
+    </CommandString>
+  </Command>
+  <Command ID="sp_GetCellByAisle1">
+    <CommandString>
+      sp_GetCellByAisle1
     </CommandString>
   </Command>
 <Command ID="Sp_ExecuteInStockTask">
@@ -388,7 +393,11 @@
       SELECT distinct InStation from CMD_Shelf where AreaCode='002' order by InStation
     </CommandString>
   </Command>
-
+  <Command ID="SelectInStationByArea1">
+    <CommandString>
+      SELECT distinct InStation from CMD_Shelf where {0} order by InStation
+    </CommandString>
+  </Command>
   <Command ID="SelectTodayTask">
     <CommandString>
       select COUNT(*) from WCS_TASK where State!=9  and SUBSTRING(taskno,1,6)='{0}' and {1}
@@ -396,7 +405,7 @@
   </Command>
   <Command ID="SelectTaskGL">
     <CommandString>
-      select CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date1,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as Task,C3.InTask,C1.InFiniTask,C2.InWaitTask,C4.OutTask,C5.OutFiniTask,C6.OutWaitTask from WCS_TASK
+      select top 10 CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date1,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as Task,C3.InTask,C1.InFiniTask,C2.InWaitTask,C4.OutTask,C5.OutFiniTask,C6.OutWaitTask from WCS_TASK
       left join
       (select CONVERT(Varchar(10),Wcs_task.Taskdate,120)  as date2,COUNT(CONVERT(Varchar(10),Wcs_task.Taskdate,120) )  as InTask from WCS_TASK
       where State!=9 and TaskType=11
@@ -424,8 +433,6 @@
       where State!=9 and (TaskType=11 or TaskType=12)
       group by CONVERT(Varchar(10),Wcs_task.Taskdate,120) ,C3.InTask, C1.InFiniTask,c2.InWaitTask,C4.OutTask,c5.OutFiniTask,C6.OutWaitTask
       order by date1 desc
-
-
     </CommandString>
   </Command>
 </SqlCommand>

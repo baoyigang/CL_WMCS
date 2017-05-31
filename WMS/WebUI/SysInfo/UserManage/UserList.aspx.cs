@@ -102,15 +102,29 @@ public partial class WebUI_SysInfo_UserManage_UserList :BasePage
             }
             e.Row.Cells[0].Controls.Add(chk);
             e.Row.Cells[0].Controls.Add(lkbtn);
+
+            Button btn = new Button();
+            btn.CommandName = "EditUser";
+            DataRowView drv = e.Row.DataItem as DataRowView;
+
+            btn.OnClientClick = "return ShowUserArea('" + drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("UserID")].ToString() + "');";
+            btn.CssClass = "ButtonModify";
+            btn.Text = "仓库管理";
+            e.Row.Cells[4].Controls.Add(btn);
             if (e.Row.Cells[1].Text.Trim() == "admin")
             {
                 chk.Enabled = false;
                 lkbtn.Enabled = false;
+                btn.Enabled = false;
             }
         }
     }
     #endregion
 
+    protected void btnEditUser_Click(object sender, EventArgs e)
+    {
+        ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Edit", "ShowUserArea('" + ((Button)sender).CommandArgument + "');", true);
+    }
     #region 数据编辑
     protected void gvMain_RowEditing(object sender, GridViewEditEventArgs e)
     {

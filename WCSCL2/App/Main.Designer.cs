@@ -101,6 +101,7 @@
             this.ToolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemDelCraneTask1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemDelCraneTask2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemTranLine = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
@@ -465,8 +466,8 @@
             this.toolStripButton_InStockTask,
             this.toolStripButton_OutStock,
             this.toolStripButton_Inventor,
-            this.toolStripButton1,
             this.toolStripButton_CellMonitor,
+            this.toolStripButton1,
             this.toolStripButton_StartCrane,
             this.toolStripButton_MoveStock,
             this.toolStripButton_UpERP,
@@ -654,21 +655,22 @@
             this.ToolStripMenuItemReassign,
             this.ToolStripMenuItemStateChange,
             this.ToolStripMenuItemDelCraneTask1,
-            this.ToolStripMenuItemDelCraneTask2});
+            this.ToolStripMenuItemDelCraneTask2,
+            this.ToolStripMenuItemTranLine});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(185, 136);
             // 
             // ToolStripMenuItemCellCode
             // 
             this.ToolStripMenuItemCellCode.Name = "ToolStripMenuItemCellCode";
-            this.ToolStripMenuItemCellCode.Size = new System.Drawing.Size(179, 22);
+            this.ToolStripMenuItemCellCode.Size = new System.Drawing.Size(184, 22);
             this.ToolStripMenuItemCellCode.Text = "重新分配货位";
             this.ToolStripMenuItemCellCode.Click += new System.EventHandler(this.ToolStripMenuItemCellCode_Click);
             // 
             // ToolStripMenuItemReassign
             // 
             this.ToolStripMenuItemReassign.Name = "ToolStripMenuItemReassign";
-            this.ToolStripMenuItemReassign.Size = new System.Drawing.Size(179, 22);
+            this.ToolStripMenuItemReassign.Size = new System.Drawing.Size(184, 22);
             this.ToolStripMenuItemReassign.Text = "重新下发任务";
             this.ToolStripMenuItemReassign.Click += new System.EventHandler(this.ToolStripMenuItemReassign_Click);
             // 
@@ -688,7 +690,7 @@
             this.ToolStripMenuItem17,
             this.ToolStripMenuItem19});
             this.ToolStripMenuItemStateChange.Name = "ToolStripMenuItemStateChange";
-            this.ToolStripMenuItemStateChange.Size = new System.Drawing.Size(179, 22);
+            this.ToolStripMenuItemStateChange.Size = new System.Drawing.Size(184, 22);
             this.ToolStripMenuItemStateChange.Text = "任务状态切换";
             // 
             // ToolStripMenuItem10
@@ -779,16 +781,23 @@
             // ToolStripMenuItemDelCraneTask1
             // 
             this.ToolStripMenuItemDelCraneTask1.Name = "ToolStripMenuItemDelCraneTask1";
-            this.ToolStripMenuItemDelCraneTask1.Size = new System.Drawing.Size(179, 22);
+            this.ToolStripMenuItemDelCraneTask1.Size = new System.Drawing.Size(184, 22);
             this.ToolStripMenuItemDelCraneTask1.Text = "删除1号堆垛机任务";
             this.ToolStripMenuItemDelCraneTask1.Click += new System.EventHandler(this.ToolStripMenuItemDelCraneTask1_Click);
             // 
             // ToolStripMenuItemDelCraneTask2
             // 
             this.ToolStripMenuItemDelCraneTask2.Name = "ToolStripMenuItemDelCraneTask2";
-            this.ToolStripMenuItemDelCraneTask2.Size = new System.Drawing.Size(179, 22);
+            this.ToolStripMenuItemDelCraneTask2.Size = new System.Drawing.Size(184, 22);
             this.ToolStripMenuItemDelCraneTask2.Text = "删除2号堆垛机任务";
             this.ToolStripMenuItemDelCraneTask2.Click += new System.EventHandler(this.ToolStripMenuItemDelCraneTask2_Click);
+            // 
+            // ToolStripMenuItemTranLine
+            // 
+            this.ToolStripMenuItemTranLine.Name = "ToolStripMenuItemTranLine";
+            this.ToolStripMenuItemTranLine.Size = new System.Drawing.Size(184, 22);
+            this.ToolStripMenuItemTranLine.Text = "重新下发输送机任务";
+            this.ToolStripMenuItemTranLine.Click += new System.EventHandler(this.ToolStripMenuItemTranLine_Click);
             // 
             // splitContainer1
             // 
@@ -928,5 +937,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_Move3;
         private System.Windows.Forms.ToolStripButton toolStripButton_Move5;
         private System.Windows.Forms.ToolStripButton toolStripButton_Move7;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemTranLine;
     }
 }

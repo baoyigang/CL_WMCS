@@ -24,7 +24,7 @@
             }
             function SelectProduct() {
                 var tableName = 'CMD_ProductInStock';
-                var where = " IsFixed='0'";
+                var where = " IsFixed='0' and  AreaCode='" + $("#ddlAreaCode").val() + "'";
 
                 return GetMulSelectValue(tableName, 'hdnMulSelect', where);
             }
@@ -118,9 +118,9 @@
                                     MaxLength="20" ></asp:TextBox> 
                         </td>
                             <td align="center" class="musttitle" style="width:8%;">
-                                出库类型</td>
+                                库区</td>
                         <td width="17%">
-                            &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%">
+                            &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%">
                             </asp:DropDownList>
                     
                         </td>
@@ -140,11 +140,12 @@
                         <td width="17%">
                         &nbsp;<asp:TextBox ID="txtBatchNo" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
                         </td>
-                         <td align="center"   style="width:8%;">
-                           
-                        </td>
+                       <td align="center" class="musttitle" style="width:8%;">
+                                出库类型</td>
                         <td width="17%">
-                         
+                            &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%">
+                            </asp:DropDownList>
+                    
                         </td>
                           
                     </tr>

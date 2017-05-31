@@ -95,14 +95,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
             // 
             // ToolStripMenuItem1
             // 
             this.ToolStripMenuItem1.Name = "ToolStripMenuItem1";
-            this.ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem1.Text = "货位编辑";
-            this.ToolStripMenuItem1.Visible = false;
             this.ToolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuItem1_Click);
             // 
             // toolTip1
@@ -125,7 +124,7 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1057, 505);
+            this.pnlMain.Size = new System.Drawing.Size(1546, 505);
             this.pnlMain.TabIndex = 1;
             // 
             // pnlContent
@@ -135,7 +134,7 @@
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 47);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1057, 458);
+            this.pnlContent.Size = new System.Drawing.Size(1546, 458);
             this.pnlContent.TabIndex = 3;
             // 
             // pnlData
@@ -145,7 +144,7 @@
             this.pnlData.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlData.Location = new System.Drawing.Point(0, 0);
             this.pnlData.Name = "pnlData";
-            this.pnlData.Size = new System.Drawing.Size(1057, 171);
+            this.pnlData.Size = new System.Drawing.Size(1546, 171);
             this.pnlData.TabIndex = 3;
             // 
             // pnlProgress
@@ -224,7 +223,7 @@
             this.dgvMain.RowHeadersWidth = 30;
             this.dgvMain.RowTemplate.Height = 23;
             this.dgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMain.Size = new System.Drawing.Size(1057, 171);
+            this.dgvMain.Size = new System.Drawing.Size(1546, 171);
             this.dgvMain.TabIndex = 10;
             // 
             // Column4
@@ -350,7 +349,7 @@
             this.pnlChart.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlChart.Location = new System.Drawing.Point(0, 377);
             this.pnlChart.Name = "pnlChart";
-            this.pnlChart.Size = new System.Drawing.Size(1057, 81);
+            this.pnlChart.Size = new System.Drawing.Size(1546, 81);
             this.pnlChart.TabIndex = 2;
             this.pnlChart.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlChart_Paint);
             this.pnlChart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlChart_MouseClick);
@@ -363,7 +362,7 @@
             // 
             this.sbShelf.Dock = System.Windows.Forms.DockStyle.Right;
             this.sbShelf.LargeChange = 30;
-            this.sbShelf.Location = new System.Drawing.Point(1038, 0);
+            this.sbShelf.Location = new System.Drawing.Point(1527, 0);
             this.sbShelf.Maximum = 120;
             this.sbShelf.Name = "sbShelf";
             this.sbShelf.Size = new System.Drawing.Size(19, 81);
@@ -383,7 +382,7 @@
             this.pnlTool.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTool.Location = new System.Drawing.Point(0, 0);
             this.pnlTool.Name = "pnlTool";
-            this.pnlTool.Size = new System.Drawing.Size(1057, 47);
+            this.pnlTool.Size = new System.Drawing.Size(1546, 47);
             this.pnlTool.TabIndex = 2;
             // 
             // PColor
