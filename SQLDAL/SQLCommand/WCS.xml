@@ -18,7 +18,7 @@
       left join CMD_BillType On CMD_BillType.BillTypeCode=WCS_TASK.BillTypeCode
       LEFT JOIN  Sys_TableState on Sys_TableState.TableName='WCS_TASK' and Sys_TableState.FieldName='State' and WCS_TASK.State=Sys_TableState.State
       Where {0}
-      ORDER BY WCS_TASK.TaskLevel DESC, WCS_TASK.RequestDate,WCS_TASK.StartDate,AisleNo
+      ORDER BY WCS_TASK.TaskLevel DESC,WCS_TASK.State DESC, WCS_TASK.RequestDate,WCS_TASK.StartDate,AisleNo
     </CommandString>
   </Command>
   <Command ID="SelectOutTask">
@@ -433,6 +433,11 @@
       where State!=9 and (TaskType=11 or TaskType=12)
       group by CONVERT(Varchar(10),Wcs_task.Taskdate,120) ,C3.InTask, C1.InFiniTask,c2.InWaitTask,C4.OutTask,c5.OutFiniTask,C6.OutWaitTask
       order by date1 desc
+    </CommandString>
+  </Command>
+  <Command ID="UpdateInStockCellCode">
+    <CommandString>
+      update WCS_TASK set CellCode=@CellCode where TaskNo=@TaskNo
     </CommandString>
   </Command>
 </SqlCommand>

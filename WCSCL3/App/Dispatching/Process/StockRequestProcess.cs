@@ -55,24 +55,6 @@ namespace App.Dispatching.Process
                             {
                                 DataTable dtXml = bll.FillDataTable("WCS.Sp_TaskProcess1", new DataParameter("@TaskNo", taskNo));
                                 Logger.Info("出库任务完成,任务号:" + taskNo);
-
-
-                                string Flag = "";
-
-                                //if (TaskType == "12")
-                                //    Flag = "BatchOutStock";
-
-                                //if (dtXml.Rows.Count > 0)
-                                //{
-                                //    string BillNo = dtXml.Rows[0][0].ToString();
-                                //    if (BillNo.Trim().Length > 0)
-                                //    {
-
-                                //        string xml = Util.ConvertObj.ConvertDataTableToXmlOperation(dtXml, Flag);
-                                //        WriteToService("ERP", "ACK", xml);
-                                //        Logger.Info("单号" + dtXml.Rows[0][0].ToString() + "已完成，开始上报ERP系统");
-                                //    }
-                                //}
                             }
                             if (  TaskType == "14" && strState=="11") //盘点
                             {

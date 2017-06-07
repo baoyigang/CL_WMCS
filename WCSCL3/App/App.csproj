@@ -145,6 +145,12 @@
     <Compile Include="View\CheckScan.designer.cs">
       <DependentUpon>CheckScan.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\frmHeightOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmHeightOption.Designer.cs">
+      <DependentUpon>frmHeightOption.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Task\frmBillUpERP.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\CheckScan.resx">
       <DependentUpon>CheckScan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmHeightOption.resx">
+      <DependentUpon>frmHeightOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Task\frmBillUpERP.resx">
       <DependentUpon>frmBillUpERP.cs</DependentUpon>

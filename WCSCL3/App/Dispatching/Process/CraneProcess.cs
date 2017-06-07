@@ -156,7 +156,7 @@ namespace App.Dispatching.Process
                                 }
                             }
 
-                            if (strState == "13")
+                            if (strState == "7" && TaskType=="12")
                             {
 
                                 bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 10), new DataParameter("@TaskNo", TaskNo) });

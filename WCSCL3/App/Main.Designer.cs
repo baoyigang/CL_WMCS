@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.taskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,14 +77,12 @@
             this.toolStripButton_StartCrane = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_MoveStock = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_UpERP = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Move1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Move5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Height = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.pnlTab = new System.Windows.Forms.Panel();
             this.tabForm = new System.Windows.Forms.TabControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemCellCode = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemDelCraneTask1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemReassign = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemStateChange = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,8 +97,8 @@
             this.ToolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemDelCraneTask1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemTranLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemHeighSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
@@ -209,18 +207,18 @@
             // 
             this.dgvMain.AllowUserToAddRows = false;
             this.dgvMain.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvMain.AutoGenerateColumns = false;
             this.dgvMain.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5,
@@ -431,7 +429,7 @@
             this.lbLog.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbLog.FullRowSelect = true;
             this.lbLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem3});
             this.lbLog.LabelWrap = false;
             this.lbLog.Location = new System.Drawing.Point(0, 0);
             this.lbLog.Name = "lbLog";
@@ -470,9 +468,6 @@
             this.toolStripButton_StartCrane,
             this.toolStripButton_MoveStock,
             this.toolStripButton_UpERP,
-            this.toolStripButton_Move1,
-            this.toolStripButton_Move5,
-            this.toolStripButton_Height,
             this.toolStripButton_Close});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
@@ -580,39 +575,6 @@
             this.toolStripButton_UpERP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton_UpERP.Click += new System.EventHandler(this.toolStripButton_UpERP_Click);
             // 
-            // toolStripButton_Move1
-            // 
-            this.toolStripButton_Move1.AutoSize = false;
-            this.toolStripButton_Move1.Image = global::App.Properties.Resources.Car1;
-            this.toolStripButton_Move1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Move1.Name = "toolStripButton_Move1";
-            this.toolStripButton_Move1.Size = new System.Drawing.Size(60, 50);
-            this.toolStripButton_Move1.Text = "第一巷道";
-            this.toolStripButton_Move1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_Move1.Click += new System.EventHandler(this.toolStripButton_Move_Click);
-            // 
-            // toolStripButton_Move5
-            // 
-            this.toolStripButton_Move5.AutoSize = false;
-            this.toolStripButton_Move5.Image = global::App.Properties.Resources.Car1;
-            this.toolStripButton_Move5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Move5.Name = "toolStripButton_Move5";
-            this.toolStripButton_Move5.Size = new System.Drawing.Size(60, 50);
-            this.toolStripButton_Move5.Text = "第三巷道";
-            this.toolStripButton_Move5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_Move5.Click += new System.EventHandler(this.toolStripButton_Move_Click);
-            // 
-            // toolStripButton_Height
-            // 
-            this.toolStripButton_Height.AutoSize = false;
-            this.toolStripButton_Height.Image = global::App.Properties.Resources.Car1;
-            this.toolStripButton_Height.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Height.Name = "toolStripButton_Height";
-            this.toolStripButton_Height.Size = new System.Drawing.Size(60, 50);
-            this.toolStripButton_Height.Text = "第四巷道";
-            this.toolStripButton_Height.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_Height.Click += new System.EventHandler(this.toolStripButton_Height_Click);
-            // 
             // toolStripButton_Close
             // 
             this.toolStripButton_Close.AutoSize = false;
@@ -651,12 +613,13 @@
             this.contextMenuStrip1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemCellCode,
+            this.ToolStripMenuItemDelCraneTask1,
             this.ToolStripMenuItemReassign,
             this.ToolStripMenuItemStateChange,
-            this.ToolStripMenuItemDelCraneTask1,
-            this.ToolStripMenuItemTranLine});
+            this.ToolStripMenuItemTranLine,
+            this.ToolStripMenuItemHeighSelect});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 136);
             // 
             // ToolStripMenuItemCellCode
             // 
@@ -664,6 +627,13 @@
             this.ToolStripMenuItemCellCode.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemCellCode.Text = "重新分配货位";
             this.ToolStripMenuItemCellCode.Click += new System.EventHandler(this.ToolStripMenuItemCellCode_Click);
+            // 
+            // ToolStripMenuItemDelCraneTask1
+            // 
+            this.ToolStripMenuItemDelCraneTask1.Name = "ToolStripMenuItemDelCraneTask1";
+            this.ToolStripMenuItemDelCraneTask1.Size = new System.Drawing.Size(160, 22);
+            this.ToolStripMenuItemDelCraneTask1.Text = "删除堆垛机任务";
+            this.ToolStripMenuItemDelCraneTask1.Click += new System.EventHandler(this.ToolStripMenuItemDelCraneTask1_Click);
             // 
             // ToolStripMenuItemReassign
             // 
@@ -776,19 +746,19 @@
             this.ToolStripMenuItem19.Text = "取消";
             this.ToolStripMenuItem19.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
-            // ToolStripMenuItemDelCraneTask1
-            // 
-            this.ToolStripMenuItemDelCraneTask1.Name = "ToolStripMenuItemDelCraneTask1";
-            this.ToolStripMenuItemDelCraneTask1.Size = new System.Drawing.Size(160, 22);
-            this.ToolStripMenuItemDelCraneTask1.Text = "删除堆垛机任务";
-            this.ToolStripMenuItemDelCraneTask1.Click += new System.EventHandler(this.ToolStripMenuItemDelCraneTask1_Click);
-            // 
             // ToolStripMenuItemTranLine
             // 
             this.ToolStripMenuItemTranLine.Name = "ToolStripMenuItemTranLine";
             this.ToolStripMenuItemTranLine.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemTranLine.Text = "重下输送机任务";
             this.ToolStripMenuItemTranLine.Click += new System.EventHandler(this.ToolStripMenuItemTranLine_Click);
+            // 
+            // ToolStripMenuItemHeighSelect
+            // 
+            this.ToolStripMenuItemHeighSelect.Name = "ToolStripMenuItemHeighSelect";
+            this.ToolStripMenuItemHeighSelect.Size = new System.Drawing.Size(160, 22);
+            this.ToolStripMenuItemHeighSelect.Text = "重新指定高度";
+            this.ToolStripMenuItemHeighSelect.Click += new System.EventHandler(this.ToolStripMenuItemHeighSelect_Click);
             // 
             // splitContainer1
             // 
@@ -924,9 +894,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem18;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem20;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem21;
-        private System.Windows.Forms.ToolStripButton toolStripButton_Move1;
-        private System.Windows.Forms.ToolStripButton toolStripButton_Move5;
-        private System.Windows.Forms.ToolStripButton toolStripButton_Height;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemTranLine;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemHeighSelect;
     }
 }

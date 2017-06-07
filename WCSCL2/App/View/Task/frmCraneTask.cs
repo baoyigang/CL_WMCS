@@ -24,7 +24,7 @@ namespace App.View.Task
         private void frmCraneTask_Load(object sender, EventArgs e)
         {
             AreaCode = BLL.Server.GetAreaCode();
-            DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "CMD_Crane.State='1' and Cmd_Crane.CraneNo>'01'") });
+            DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "CMD_Crane.State='1' and Cmd_Crane.CraneNo>'01' and CraneNo<'04'") });
             this.cmbCraneNo.DataSource = dt.DefaultView;
             this.cmbCraneNo.ValueMember = "CraneNo";
             this.cmbCraneNo.DisplayMember = "CraneNo";

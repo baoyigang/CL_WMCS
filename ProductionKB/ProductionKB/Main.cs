@@ -27,7 +27,7 @@ namespace ProductionKB
             //w.Size = this.splitContainer1.Panel1.Size;
             this.pictureBox2.Controls.Add(this.label6);
             this.label6.BackColor = Color.Transparent;
-            MainData.OnTask += new TaskEventHandler(Data_OnTask);
+            MainData.OnTask += Data_OnTask;
             bsMain.DataSource = GetMonitorData();
             tmWorkTimer.Interval = 10000;
             tmWorkTimer.Elapsed += new System.Timers.ElapsedEventHandler(tmWorker);
@@ -113,7 +113,7 @@ namespace ProductionKB
         {
             if (InvokeRequired)
             {
-                BeginInvoke(new TaskEventHandler(Data_OnTask), args);
+                BeginInvoke(new Action<TaskEventArgs>(Data_OnTask), args);
             }
             else
             {

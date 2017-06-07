@@ -105,6 +105,11 @@ public partial class WebUI_Query_WarehouseCell : BasePage
             Columns = 37;
             Width = "2.4%";
         }
+        else if(Col=="34")
+        {
+            Columns = 34;
+            Width = "2.6%";
+        }
         
          
 

@@ -46,7 +46,7 @@ namespace App.Dispatching.Process
                 dtCraneErr = bll.FillDataTable("WCS.SelectCraneError");
                 AreaCode = BLL.Server.GetAreaCode();
                 //获取堆垛机信息
-                DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "CraneNo>'01'") });
+                DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "CraneNo>'01' and CraneNo<'04'") });
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     if (!dCrnStatus.ContainsKey(i))
@@ -156,7 +156,7 @@ namespace App.Dispatching.Process
                                 }
                             }
 
-                            if (strState == "13")
+                            if (strState == "7" && TaskType=="12")
                             {
 
                                 bll.ExecNonQuery("WCS.UpdateTaskStateByTaskNo", new DataParameter[] { new DataParameter("@State", 10), new DataParameter("@TaskNo", TaskNo) });
@@ -206,7 +206,7 @@ namespace App.Dispatching.Process
                 tmWorkTimer.Stop();
 
 
-                DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "CraneNo>'01'") });
+                DataTable dt = bll.FillDataTable("CMD.SelectCrane", new DataParameter[] { new DataParameter("{0}", "CraneNo>'01' and CraneNo<'04'") });
               
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {

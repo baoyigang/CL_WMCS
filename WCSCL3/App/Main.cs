@@ -683,28 +683,6 @@ namespace App
         }
 
 
-        private void toolStripButton_Move_Click(object sender, EventArgs e)
-        {
-            if (Check_Crane_Status_IsOk(4))
-            {
-                string btnName = ((ToolStripButton)sender).Name;
-                int[] cellAddr = new int[9];
-                cellAddr[0] = 0;
-                cellAddr[1] = 0;
-                cellAddr[2] = 0;
-
-                cellAddr[3] = 1;
-                cellAddr[4] = 1;
-                cellAddr[5] = 1;
-                cellAddr[6] = 1;
-                cellAddr[7] = 1;
-                cellAddr[8] = int.Parse(btnName.Substring(btnName.Length - 1, 1));
-
-                context.ProcessDispatcher.WriteToService("CranePLC4", "TaskNo", 0);
-                context.ProcessDispatcher.WriteToService("CranePLC4", "TaskAddress", cellAddr);
-                context.ProcessDispatcher.WriteToService("CranePLC4", "WriteFinished", 2);
-            }
-        }
 
         private bool Check_Crane_Status_IsOk(int craneNo)
         {
@@ -762,7 +740,50 @@ namespace App
 
         private void toolStripButton_Height_Click(object sender, EventArgs e)
         {
-            context.ProcessDispatcher.WriteToService("TranLine", "NewHeight", 1);
-        }   
+            frmHeightOption frm = new frmHeightOption();
+            if (frm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (frm.option == 0)
+                {
+                     
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+
+        private void ToolStripMenuItemHeighSelect_Click(object sender, EventArgs e)
+        {
+            frmHeightOption frm = new frmHeightOption();
+            string CellCode = "";
+            string HTaskNo = dgvMain.CurrentRow.Cells["Column5"].Value.ToString();
+            DataTable dtCellCode;
+            DataParameter[] param = new DataParameter[] 
+                    { 
+                      new DataParameter("@AreaCode", "003") ,
+                      new DataParameter("@AisleNo",dgvMain.CurrentRow.Cells["Column8"].Value.ToString())
+                    };
+            if (frm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (frm.option == 0)
+                {
+                    dtCellCode = bll.FillDataTable("WCS.sp_GetCellByAisle", param);
+                    CellCode = dtCellCode.Rows[0][0].ToString();
+                    bll.ExecNonQuery("WCS.UpdateInStockCellCode", new DataParameter[] { new DataParameter("@CellCode", CellCode), new DataParameter("@TaskNo", HTaskNo) });
+                    context.ProcessDispatcher.WriteToService("TranLine", "NewHeight", 0);
+                }
+                else
+                {
+                    dtCellCode = bll.FillDataTable("WCS.sp_GetCellByAisle1", param);
+                    CellCode = dtCellCode.Rows[0][0].ToString();
+                    bll.ExecNonQuery("WCS.UpdateInStockCellCode", new DataParameter[] { new DataParameter("@CellCode", CellCode), new DataParameter("@TaskNo", HTaskNo) });
+                    context.ProcessDispatcher.WriteToService("TranLine", "NewHeight", 1);
+                }
+            }
+            
+        }
+
     }
 }
