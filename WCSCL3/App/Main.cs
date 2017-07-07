@@ -771,19 +771,20 @@ namespace App
                 {
                     dtCellCode = bll.FillDataTable("WCS.sp_GetCellByAisle", param);
                     CellCode = dtCellCode.Rows[0][0].ToString();
-                    bll.ExecNonQuery("WCS.UpdateInStockCellCode", new DataParameter[] { new DataParameter("@CellCode", CellCode), new DataParameter("@TaskNo", HTaskNo) });
+                    bll.ExecNonQuery("WCS.Sp_UpdateTaskCellCode", new DataParameter[] { new DataParameter("@NewCellCode", CellCode), new DataParameter("@TaskNo", HTaskNo), new DataParameter("@IsTarget", "0") });
                     context.ProcessDispatcher.WriteToService("TranLine", "NewHeight", 0);
                 }
                 else
                 {
                     dtCellCode = bll.FillDataTable("WCS.sp_GetCellByAisle1", param);
                     CellCode = dtCellCode.Rows[0][0].ToString();
-                    bll.ExecNonQuery("WCS.UpdateInStockCellCode", new DataParameter[] { new DataParameter("@CellCode", CellCode), new DataParameter("@TaskNo", HTaskNo) });
+                    bll.ExecNonQuery("WCS.Sp_UpdateTaskCellCode", new DataParameter[] { new DataParameter("@NewCellCode", CellCode), new DataParameter("@TaskNo", HTaskNo), new DataParameter("@IsTarget", "0") });
                     context.ProcessDispatcher.WriteToService("TranLine", "NewHeight", 1);
                 }
             }
             
         }
+
 
     }
 }

@@ -10,7 +10,7 @@
   <Services>
     <Service Name="CranePLC4" Type="MCP.Service.Siemens.dll, MCP.Service.Siemens.OPCService" ConfigFile="CranePLC4.xml" />
     <Service Name="TranLine"  Type="MCP.Service.Siemens.dll, MCP.Service.Siemens.OPCService" ConfigFile="TranLine.xml"/>
-    <!--<Service Name="ERP" Type="MCP.Service.TCP.dll, MCP.Service.TCP.TCPClient" ConfigFile="ERP.xml" />-->
+    <Service Name="ERP" Type="MCP.Service.TCP.dll, MCP.Service.TCP.TCPClient" ConfigFile="ERP.xml" />
   </Services>
   <Processes>
     <!--堆垛机Process-->
@@ -38,11 +38,11 @@
       <Item ServiceName="TranLine" ItemName="ReadTaskNo" />
     
     </Process>
-    <!--<Process Name="ErpProcess" Type="App.exe, App.Dispatching.Process.ErpProcess">
+    <Process Name="ErpProcess" Type="App.exe, App.Dispatching.Process.ErpProcess">
       <Item ServiceName="ERP" ItemName="InStock" />
       <Item ServiceName="ERP" ItemName="OutStock" />
       <Item ServiceName="ERP" ItemName="CheckStock" />
       <Item ServiceName="ERP" ItemName="" />
-    </Process>-->
+    </Process>
   </Processes>
 </Configuration>
